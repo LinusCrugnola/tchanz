@@ -2,6 +2,11 @@
 # Prerequisites
 *.d
 
+#folders
+bin/*
+tests/*
+!tests/*.cpp
+
 # Compiled Object files
 *.slo
 *.lo
