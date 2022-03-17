@@ -32,7 +32,7 @@ depend:
 
 clean:
 	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
-	@/bin/rm -f ./obj/*.o ./bin/* ./src/*.o
+	@/bin/rm -f ./obj/*.o ./bin/* ./src/*.o *.o
 
 #
 # -- Regles de dependances generees automatiquement
