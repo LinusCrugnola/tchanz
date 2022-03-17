@@ -12,11 +12,15 @@ TST_PATH := test
 # compile macros
 TARGET_NAME := prog
 TARGET := $(BIN_PATH)/$(TARGET_NAME)
-TARGET_TEST := $(TST_PATH)/$(TARGET_NAME)
 
 # src files & obj files
 SRC := $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
 OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
+TST := $(foreach x, $(TST_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
+OBJ_TST := $(addsuffix .o, $(basename $(TST)))
+
+TARGET_TST := $(addprefix $(BIN_PATH)/, $(basename $(notdir $(TST))))
+
 
 # clean files list
 DISTCLEAN_LIST := $(OBJ) \
@@ -35,6 +39,14 @@ $(TARGET): $(OBJ)
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
+$(TST_PATH)/%.o: $(TST_PATH)%.c*
+	$(CXX) $(CXXOBJFLAGS) -o $@ $<
+
+bin/test_squarecell : test/test_squarecell.o obj/squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ test/test_squarecell.o obj/squarecell.o
+
+
+
 
 .PHONY: makedir
 makedir:
@@ -44,8 +56,9 @@ makedir:
 all: $(TARGET)
 
 # ADD THIS
-#.PHONY: test
-#test: $(TARGET_DEBUG)
+.PHONY: test
+test: 
+	@make $(TARGET_TST)
 
 .PHONY: clean
 clean:
