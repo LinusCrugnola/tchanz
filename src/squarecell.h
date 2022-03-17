@@ -8,5 +8,5 @@ private :
     unsigned int side;
     vector<vector<bool>> grid(g_max,vector<bool>(g_max));
 public  :
-    void test_validation_square(x,y);
+    void test_validation_centered_square(unsigned x, unsigned y);
 };
