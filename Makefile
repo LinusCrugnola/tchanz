@@ -1,40 +1,57 @@
-CXX     = g++
-CXXFLAGS = -g -Wall -std=c++11
+# macros
+CXX := g++
+CXXFLAGS := -g -Wall -std=c++11
+CXXOBJFLAGS := $(CXXFLAGS) -c
 
-# folders:
-TARGET := bin/prog
-OBJ_DIR := obj
-SRC_DIR := ./src
-TEST_DIR := test
+# path macros
+BIN_PATH := bin
+OBJ_PATH := obj
+SRC_PATH := src
+TST_PATH := test
+
+# compile macros
+TARGET_NAME := prog
+TARGET := $(BIN_PATH)/$(TARGET_NAME)
+TARGET_TEST := $(TST_PATH)/$(TARGET_NAME)
+
+# src files & obj files
+SRC := $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
+OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
+
+# clean files list
+DISTCLEAN_LIST := $(OBJ) \
+                  $(OBJ_DEBUG)
+CLEAN_LIST := $(TARGET) \
+			  $(TARGET_DEBUG) \
+			  $(DISTCLEAN_LIST)
+
+# default rule
+default: makedir all
+
+# non-phony targets
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
+	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
 
-# Chercher les files:
-CXXFILES := $(shell find $(SRC_DIRS) -name '*.cc' -or -name '.cpp')
-OFILES := $(CXXFILES:.cc = .o)
+.PHONY: makedir
+makedir:
+	@mkdir -p $(BIN_PATH) $(OBJ_PATH) $(DBG_PATH)
 
+.PHONY: all
+all: $(TARGET)
 
-# Build le exe:
-$(TARGET): $(OFILES)
-	$(CXX) $(OFILES) -o $(TARGET)
+.PHONY: debug
+debug: $(TARGET_DEBUG)
 
-# Build les obj
-$(OFILES): $(CXXFILES)
-	$(CXX) $(CXXFLAGS) -c $(CXXFILES)
-
-
-depend:
-	@echo " *** MISE A JOUR DES DEPENDANCES ***"
-	@(sed '/^# DO NOT DELETE THIS LINE/q' Makefile && \
-	  $(CXX) -MM $(CXXFLAGS) $(CXXFILES) | \
-	  egrep -v "/usr/include" \
-	 ) >Makefile.new
-	@mv Makefile.new Makefile
-
+.PHONY: clean
 clean:
-	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
-	@/bin/rm -f ./obj/*.o ./bin/* ./src/*.o *.o
+	@echo CLEAN $(CLEAN_LIST)
+	@rm -f $(CLEAN_LIST)
 
-#
-# -- Regles de dependances generees automatiquement
-#
-# DO NOT DELETE THIS LINE
+.PHONY: distclean
+distclean:
+	@echo CLEAN $(DISTCLEAN_LIST)
+	@rm -f $(DISTCLEAN_LIST)
