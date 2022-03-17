@@ -43,8 +43,9 @@ makedir:
 .PHONY: all
 all: $(TARGET)
 
-.PHONY: debug
-debug: $(TARGET_DEBUG)
+# ADD THIS
+#.PHONY: test
+#test: $(TARGET_DEBUG)
 
 .PHONY: clean
 clean:
