@@ -4,16 +4,13 @@ CXXFLAGS = -g -Wall -std=c++11
 # folders:
 TARGET := bin/prog
 OBJ_DIR := obj
-SRC_DIR := src
+SRC_DIR := ./src
 TEST_DIR := test
 
 
 # Chercher les files:
 CXXFILES := $(shell find $(SRC_DIRS) -name '*.cc' -or -name '.cpp')
-OFILES := $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(notdir $(basename $(CXXFILES)))))
-
-INCLUDE_DIR := $(shell find $(SRC_DIR) -type d)
-INCLUDE_FLAGS := $(addprefix -I,$(INCLUDE_DIR))
+OFILES := $(CXXFILES:.cc = .o)
 
 
 # Build le exe:
@@ -21,8 +18,8 @@ $(TARGET): $(OFILES)
 	$(CXX) $(OFILES) -o $(TARGET)
 
 # Build les obj
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c*
-	$(CXX) $(CXXFILES) -c -o $(OFILES)
+$(OFILES): $(CXXFILES)
+	$(CXX) $(CXXFLAGS) -c $(CXXFILES)
 
 
 depend:
@@ -41,7 +38,3 @@ clean:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-error_squarecell.o: src/error_squarecell.cc src/error_squarecell.h
-message.o: src/message.cc src/message.h
-project.o: src/project.cc
-squarecell.o: src/squarecell.cc
