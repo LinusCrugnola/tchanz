@@ -6,9 +6,12 @@
 *****************************************************************/
 
 #include <iostream>
+#include "squarecell.h"
 using namespace std;
 
 int main(){
-    cout << "Hello World" << endl;
-    return 0;
+  Squarecell grid(5);
+  grid.print_grid();
+  uint max = grid.get_gmax();
+  cout<<max<<endl;
 }

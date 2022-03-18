@@ -5,25 +5,13 @@
   \brief    squarecell implementation
 *****************************************************************/
 
-//#include "squarecell.h"
+#include "squarecell.h"
 //#include "error_squarecell.h"
 #include <vector>
 #include <iostream>
 
-// Alternative with class:
-// Squarecell::Squarecell(uint g_max)
-// : g_max(g_max) {
-//     grid = std::vector<(g_max,std::vector<bool>(g_max,false))>;
-// }
-
-//Variables known to the whole module (not very sexy...)
-namespace{
-    unsigned g_max = 16;
-    std::vector<std::vector<bool>> grid(g_max,std::vector<bool>(g_max, false));
-}
-
 //functions
-void square_validation(unsigned x, unsigned y, unsigned side, bool centered){
+void Squarecell::square_validation(unsigned x, unsigned y, unsigned side, bool centered){
     // Check the point
     if(x<0 || x>(g_max-1)){
         //std::cout << error_squarecell::print_index(x, g_max-1);
@@ -60,10 +48,10 @@ void square_validation(unsigned x, unsigned y, unsigned side, bool centered){
     }
 }
 
-bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
+bool Squarecell::square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
     if(centered){
-        for(int i=y+side/2; i>y-side/2; i--){
-            for(int j=x-side/2; j<x+side/2; j++){
+        for(unsigned i=y+side/2; i>y-side/2; i--){
+            for(unsigned j=x-side/2; j<x+side/2; j++){
                 if(!grid[j][i]){
                     return false;
                 }
@@ -71,8 +59,8 @@ bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
         }
     }
     else{
-        for(int i=y; i>y-side; i--){
-            for(int j=x; j<x+side; j++){
+        for(unsigned i=y; i>y-side; i--){
+            for(unsigned j=x; j<x+side; j++){
                 if(!grid[j][i]){
                     return false;
                 }
@@ -83,17 +71,17 @@ bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
 }
 
 //FIXME: Index problem
-bool square_add(unsigned x, unsigned y, unsigned side, bool centered){
+bool Squarecell::square_add(unsigned x, unsigned y, unsigned side, bool centered){
     if(centered){
-        for(int i=y+side/2; i>y-side/2; i--){
-            for(int j=x-side/2; j<x+side/2; j++){
+        for(unsigned i=y+side/2; i>y-side/2; i--){
+            for(unsigned j=x-side/2; j<x+side/2; j++){
                 grid[j][i] = true;
             }
         }
     }
     else{
-        for(int i= g_max-1-y; i>g_max-1-y-side; i--){
-            for(int j=x; j<x+side; j++){
+        for(unsigned i= g_max-1-y; i>g_max-1-y-side; i--){
+            for(unsigned j=x; j<x+side; j++){
                 grid[j][i] = true;
             }
         }
@@ -102,16 +90,16 @@ bool square_add(unsigned x, unsigned y, unsigned side, bool centered){
 }
 
 //TODO: check if there is a square to be deleted
-bool square_delete(unsigned x, unsigned y, unsigned side, bool centered){
+bool Squarecell::square_delete(unsigned x, unsigned y, unsigned side, bool centered){
     return 0;
 }
 
 //print function:
-void print_grid(std::vector<std::vector<bool>> grid){
-    for(int i=g_max; i>0; i--){
+void Squarecell::print_grid(){
+    for(unsigned i=this->g_max; i>0; i--){
         std::cout << std::endl;
-        for(int j=0; j<g_max; j++){
-            if(grid[j][i]){
+        for(unsigned j=0; j<this->g_max; j++){
+            if(this->grid[j][i]){
                 std::cout << "1 ";
             }
             else{
@@ -121,8 +109,6 @@ void print_grid(std::vector<std::vector<bool>> grid){
     }
 }
 
-// Main function for first tests;
-int main(){
-    bool lol = square_add(5,5,3,0);
-    print_grid(grid);
+unsigned Squarecell::get_gmax(){
+    return this->g_max;
 }
