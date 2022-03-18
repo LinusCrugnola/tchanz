@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     error_squarecell.h
+ \author   RB
+ \date     18/03/2022
+ \brief    error_squarecell interface
+*****************************************************************/
+ 
 #ifndef ERROR_SQUARECELL_H_INCLUDED
 #define ERROR_SQUARECELL_H_INCLUDED
 

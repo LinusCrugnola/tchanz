@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     message.cc
+ \author   RB
+ \date     18/03/2022
+ \brief    message implementation
+*****************************************************************/
+ 
 #include "message.h"
 
 #include <string>

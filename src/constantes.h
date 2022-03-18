@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     constantes.h
+ \author   RB
+ \date     18/03/2022
+ \brief    constantes interface
+*****************************************************************/
+ 
 #ifndef CONSTANTES_H_INCLUDED
 #define CONSTANTES_H_INCLUDED
 

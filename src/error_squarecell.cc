@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     error_squarecell.cc
+ \author   RB
+ \date     18/03/2022
+ \brief    error_squarecell implementation
+*****************************************************************/
+ 
 #include "error_squarecell.h"
 
 #include <iostream>

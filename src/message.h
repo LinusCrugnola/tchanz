@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     message.h
+ \author   RB
+ \date     18/03/2022
+ \brief    message interface
+*****************************************************************/
+ 
 #ifndef MESSAGE_H_INCLUDED
 #define MESSAGE_H_INCLUDED
 
