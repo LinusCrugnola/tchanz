@@ -38,11 +38,12 @@ $(TARGET): $(OBJ)
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
-$(TST_PATH)/%.o: $(TST_PATH)%.c*
+$(OBJ_PATH)/%.o: $(TST_PATH)%.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
-test/test_squarecell : test/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
-	$(CXX) $(CXXFLAGS) -o $@ test/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
+# Rules for testfiles
+bin/test_squarecell : test/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ obj/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
 
 
 
@@ -62,6 +63,7 @@ test:
 clean:
 	@echo CLEAN $(CLEAN_LIST)
 	@rm -f $(CLEAN_LIST)
+	@rm -f bin/*
 
 .PHONY: distclean
 distclean:
