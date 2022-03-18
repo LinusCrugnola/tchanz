@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-//#include "squarecell.h"
+#include "squarecell.h"
 using namespace std;
 
 string get_testfile(int argc, char *argv[]){
