@@ -4,6 +4,7 @@
 #include <iostream>
 
 //Variables known to the whole module
+//TODO: Here a class definition would be better in terms of reusability and scalability
 namespace{
     unsigned g_max = 16;
     std::vector<std::vector<bool>> grid(g_max,std::vector<bool>(g_max, false));
@@ -69,7 +70,7 @@ bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
     return true;
 }
 
-//Index problem
+//FIXME: Index problem
 bool square_block(unsigned x, unsigned y, unsigned side, bool centered){
     if(centered){
         for(int i=y+side/2; i>y-side/2; i--){
@@ -107,6 +108,7 @@ void print_grid(std::vector<std::vector<bool>> grid){
     }
 }
 
+// Main function for first tests;
 int main(){
     bool lol = square_block(5,5,3,0);
     print_grid(grid);
