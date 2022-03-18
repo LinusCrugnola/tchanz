@@ -1,3 +1,10 @@
+/****************************************************************!
+  \file     squarecell.cc
+  \author   Léo Brückl, Linus Crugnola
+  \date     date
+  \brief    squarecell implementation
+*****************************************************************/
+
 //#include "squarecell.h"
 //#include "error_squarecell.h"
 #include <vector>

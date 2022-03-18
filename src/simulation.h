@@ -1,14 +1,13 @@
 /****************************************************************!
-  \file     test_squarecell.cc
+  \file     simulation.h
   \author   Léo Brückl, Linus Crugnola
   \date     date
-  \brief    squarecell test
+  \brief    simulation interface
 *****************************************************************/
 
-#include "../src/squarecell.h"
-#include <iostream>
+#ifndef SIMULATION_H
+#define SIMULATION_H
 
 
-int main(){
 
-}
+#endif

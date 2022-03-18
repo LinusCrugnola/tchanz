@@ -1,3 +1,10 @@
+/****************************************************************!
+  \file     squarecell.h
+  \author   Léo Brückl, Linus Crugnola
+  \date     date
+  \brief    squarecell interface
+*****************************************************************/
+
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
