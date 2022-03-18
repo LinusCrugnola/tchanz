@@ -3,8 +3,13 @@
 #include <vector>
 #include <iostream>
 
-//Variables known to the whole module
-//TODO: Here a class definition would be better in terms of reusability and scalability
+// Alternative with class:
+// Squarecell::Squarecell(uint g_max)
+// : g_max(g_max) {
+//     grid = std::vector<(g_max,std::vector<bool>(g_max,false))>;
+// }
+
+//Variables known to the whole module (not very sexy...)
 namespace{
     unsigned g_max = 16;
     std::vector<std::vector<bool>> grid(g_max,std::vector<bool>(g_max, false));
@@ -71,7 +76,7 @@ bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered){
 }
 
 //FIXME: Index problem
-bool square_block(unsigned x, unsigned y, unsigned side, bool centered){
+bool square_add(unsigned x, unsigned y, unsigned side, bool centered){
     if(centered){
         for(int i=y+side/2; i>y-side/2; i--){
             for(int j=x-side/2; j<x+side/2; j++){
@@ -89,7 +94,8 @@ bool square_block(unsigned x, unsigned y, unsigned side, bool centered){
     return true;
 }
 
-bool square_free(unsigned x, unsigned y, unsigned side, bool centered){
+//TODO: check if there is a square to be deleted
+bool square_delete(unsigned x, unsigned y, unsigned side, bool centered){
     return 0;
 }
 
@@ -99,10 +105,10 @@ void print_grid(std::vector<std::vector<bool>> grid){
         std::cout << std::endl;
         for(int j=0; j<g_max; j++){
             if(grid[j][i]){
-                std::cout << "1  ";
+                std::cout << "1 ";
             }
             else{
-                std::cout << "0  ";
+                std::cout << "0 ";
             }
         }
     }
@@ -110,6 +116,6 @@ void print_grid(std::vector<std::vector<bool>> grid){
 
 // Main function for first tests;
 int main(){
-    bool lol = square_block(5,5,3,0);
+    bool lol = square_add(5,5,3,0);
     print_grid(grid);
 }
