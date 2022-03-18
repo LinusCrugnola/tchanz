@@ -1,28 +1,34 @@
 /****************************************************************!
-  \file     project.cc
-  \author   Léo Brückl, Linus Crugnola
-  \date     18.03.2022
-  \brief    main file of tchanz project
+	\file     project.cc
+	\author   Léo Brückl, Linus Crugnola
+	\date     18.03.2022
+	\brief    main file of tchanz project
 *****************************************************************/
 
 #include <iostream>
 #include <string>
-#include "squarecell.h"
+//#include "squarecell.h"
 using namespace std;
 
-string get_testfile(int argc, char *argv[]){
-  string filename;
-  if(argc>0){
-    filename = argv[1];
-  }
+// TODO: replace exit();
+// Function to get name of textfile (ending must be .txt)
+string get_testfile(int argc, char **argv){
+	string filename = "myfile";
+	if(argc>1){
+		filename = argv[1];
+	}
+	else{
+		cout << "False file" << endl;
+		exit(0);
+	}
+	size_t check = filename.rfind(".txt");
+	if(filename.length()-check != 4){
+		cout << "no txt file" << endl;
+		exit(0);
+	}
+	return filename;
 }
 
-int main(int argc, char *argv[]){
-  // Squarecell grid(5);
-  // grid.print_grid();
-  // //grid.set_coordinate(1,4);
-  // grid.square_add(2,2,3,1);
-  // grid.print_grid();
-  // grid.square_validation_test(2,6,3,1);
-  cout << get_testfile(argc, argv) << endl;
+int main(int argc, char **argv){
+
 }
