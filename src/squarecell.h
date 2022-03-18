@@ -1,24 +1,10 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
-#include <vector>
+// Function to check if a square is valid (fits in the grid):
+void square_validation(unsigned x, unsigned y, unsigned side, bool centered);
 
-using namespace std;
-
-class Squarecell
-{
-private:
-    unsigned int g_max;
-    unsigned int x,y;
-    unsigned int side;
-    vector<vector<bool>> grid;
-public:
-    Squarecell(unsigned int max)
-    : g_max(max){
-        vector<vector<bool>> __grid(g_max,vector<bool>(g_max, false));
-        grid = __grid;
-    }
-    void test_validation_centered_square(unsigned x, unsigned y, unsigned side, bool centered);
-};
+// Function to check if a square superposes with existing squares in the grid:
+bool square_superposition(unsigned x, unsigned y, unsigned side, bool centered);
 
 #endif

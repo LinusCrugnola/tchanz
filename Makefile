@@ -23,11 +23,10 @@ TARGET_TST := $(addprefix $(BIN_PATH)/, $(basename $(notdir $(TST))))
 
 
 # clean files list
-DISTCLEAN_LIST := $(OBJ) \
-                  $(OBJ_DEBUG)
+DISTCLEAN_LIST := $(OBJ)
 CLEAN_LIST := $(TARGET) \
-			  $(TARGET_DEBUG) \
-			  $(DISTCLEAN_LIST)
+			  $(DISTCLEAN_LIST) \
+			  $(OBJ_TST)
 
 # default rule
 default: makedir all
@@ -42,9 +41,8 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
 $(TST_PATH)/%.o: $(TST_PATH)%.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
-bin/test_squarecell : test/test_squarecell.o obj/squarecell.o
+test/test_squarecell : test/test_squarecell.o obj/squarecell.o
 	$(CXX) $(CXXFLAGS) -o $@ test/test_squarecell.o obj/squarecell.o
-
 
 
 
