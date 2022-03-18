@@ -12,6 +12,8 @@ using namespace std;
 int main(){
   Squarecell grid(5);
   grid.print_grid();
-  uint max = grid.get_gmax();
-  cout<<max<<endl;
+  //grid.set_coordinate(1,4);
+  grid.square_add(2,2,3,1);
+  grid.print_grid();
+  grid.square_validation_test(2,6,3,1);
 }

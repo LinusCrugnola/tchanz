@@ -41,8 +41,8 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
 $(TST_PATH)/%.o: $(TST_PATH)%.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
-test/test_squarecell : test/test_squarecell.o obj/squarecell.o
-	$(CXX) $(CXXFLAGS) -o $@ test/test_squarecell.o obj/squarecell.o
+test/test_squarecell : test/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ test/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
 
 
 

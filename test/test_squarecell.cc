@@ -10,5 +10,6 @@
 
 
 int main(){
-
+  Squarecell grid(16);
+  grid.square_validation_test(20,20,3,0);
 }
