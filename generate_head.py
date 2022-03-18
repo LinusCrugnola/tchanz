@@ -1,5 +1,6 @@
 import os
 from datetime import date
+import re
 
 
 mypath = os.path.dirname(os.path.abspath(__file__)) + "/src"
@@ -29,7 +30,7 @@ for file in files:
         describtion = file.replace('.cc','') + " implementation"
     elif file[-1] == "h":
         describtion = file.replace('.h','') + " interface"
-    fline = "/****************************************************************!\n \\file     "+file+"\n \\author   Léo Brückl, Linus Crugnola\n \\date     "+date.today().strftime("%d/%m/%Y")+"\n \\brief    "+describtion+"\n*****************************************************************/"
+    fline = "/****************************************************************!\n \\file     "+file+"\n \\author   Léo Brückl, Linus Crugnola\n \\date     "+date.today().strftime("%d.%m.%Y")+"\n \\brief    "+describtion+"\n*****************************************************************/"
     content = myfile.read()
     if content[0:10] != "/*********":
         new_content = fline + "\n \n" + content
@@ -39,6 +40,9 @@ for file in files:
         myfile.close()
     else:
         myfile.close()
+        with open(path, "w") as myfile:
+            myregex = re.compile("\\d{2}\\.\\d{2}\\.\\d{4}")
+            myfile.write(myregex.sub(date.today().strftime("%d.%m.%Y"), content))
 
 print("added headers for: ", end="")
 for file in files:

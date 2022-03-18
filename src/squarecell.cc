@@ -1,7 +1,7 @@
 /****************************************************************!
   \file     squarecell.cc
   \author   Léo Brückl, Linus Crugnola
-  \date     date
+  \date     18.03.2022
   \brief    squarecell implementation
 *****************************************************************/
 
