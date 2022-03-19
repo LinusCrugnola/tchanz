@@ -117,7 +117,3 @@ void print_grid(){
     }
     std::cout << std::endl << "_____________" << std::endl;
 }
-
-unsigned get_gmax(){
-    return g_max;
-}

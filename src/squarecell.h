@@ -8,12 +8,23 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
-void square_validation_test(unsigned x, unsigned y, unsigned side, bool centered);
-bool square_superposition_test(unsigned x, unsigned y, unsigned side, bool centered);
-bool square_add(unsigned x, unsigned y, unsigned side, bool centered);
-bool square_delete(unsigned x, unsigned y, unsigned side, bool centered);
+struct square{
+    // coordinates (point)
+    unsigned x;
+    unsigned y;
+    // side length
+    unsigned side;
+    // centered (point is in the center of square or bottom left edge)
+    bool centered;
+};
+
+void square_validation_test(square square);
+bool square_superposition_test(square square);
+bool square_add(square square);
+bool square_delete(square square);
+
+// Functions to test module
 void set_coordinate(unsigned x, unsigned y);
 void print_grid();
-unsigned get_gmax();
 
 #endif
