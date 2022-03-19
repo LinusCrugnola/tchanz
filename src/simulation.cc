@@ -6,3 +6,7 @@
 *****************************************************************/
 
 #include "simulation.h"
+
+void Simulation::read_configfile(std::string filename){
+    //Read txt file
+}

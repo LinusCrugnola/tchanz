@@ -8,6 +8,27 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+#include <string>
+
+class Simulation
+{
+private:
+/* data */
+public:
+    Simulation(/* args */);
+    ~Simulation();
+    void read_configfile(std::string filename);
+};
+
+Simulation::Simulation(/* args */)
+{
+
+}
+
+Simulation::~Simulation()
+{
+    
+}
 
 
 #endif
