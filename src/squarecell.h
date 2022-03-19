@@ -8,6 +8,7 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
+// Concrete type square
 struct square{
     // coordinates (point)
     unsigned x;
