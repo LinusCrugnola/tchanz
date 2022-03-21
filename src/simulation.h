@@ -13,7 +13,7 @@
 class Simulation
 {
 private:
-/* data */
+    void decode_line(std::string line);
 public:
     Simulation(/* args */);
     ~Simulation();
