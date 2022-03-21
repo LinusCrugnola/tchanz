@@ -31,5 +31,6 @@ string get_testfile(int argc, char **argv){
 }
 
 int main(int argc, char **argv){
-
+    Simulation simulation;
+    simulation.read_configfile(get_testfile(argc, argv));
 }
