@@ -43,7 +43,7 @@ void Simulation::decode_line(string line){
             //if(!(data >> x >> y)) /*TODO: lecture format error*/;
             // else{
             //     // TODO: nourriture constructor
-            // }
+            // }   
             i += 1;
             if(i >= total) state = nbF;
             break;
