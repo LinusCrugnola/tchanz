@@ -9,6 +9,13 @@
 #define SIMULATION_H
 
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+
+#include "squarecell.h"
+#include "constantes.h"
 
 class Simulation
 {

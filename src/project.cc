@@ -9,6 +9,7 @@
 #include <string>
 #include "squarecell.h"
 #include "simulation.h"
+
 using namespace std;
 
 // TODO: replace exit();

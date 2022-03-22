@@ -5,14 +5,7 @@
   \brief    simulation implementation
 *****************************************************************/
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
-
 #include "simulation.h"
-#include "squarecell.h"
-#include "constantes.h"
 
 using namespace std;
 
@@ -47,11 +40,10 @@ void Simulation::decode_line(string line){
             else state = nourriture;
             break;
         case nourriture:
-            int x,y;
-            if(!(data >> x >> y)) /*TODO: lecture format error*/;
-            else{
-                // TODO: nourriture constructor
-            }
+            //if(!(data >> x >> y)) /*TODO: lecture format error*/;
+            // else{
+            //     // TODO: nourriture constructor
+            // }
             i += 1;
             if(i >= total) state = nbF;
             break;
@@ -62,11 +54,11 @@ void Simulation::decode_line(string line){
             else state = heap;
             break;
         case heap:
-            int x, y, side, xg, yg, total_n;
-            if(!(data >> x >> y >> side >> xg >> yg >> total_n >> nbC >> nbD >> nbP)) /*TODO: lecture format error*/;
-            else{
-                // TODO: fourmilière constructor
-            }
+            // int x, y, side, xg, yg, total_n;
+            // if(!(data >> x >> y >> side >> xg >> yg >> total_n >> nbC >> nbD >> nbP)) /*TODO: lecture format error*/;
+            // else{
+            //     // TODO: fourmilière constructor
+            // }
             i += 1;
             state = collector;
             j = 0;
@@ -76,11 +68,11 @@ void Simulation::decode_line(string line){
                 state = defensor;
                 j = 0;
             }
-            int x, y, age, Etat_collector;
-            if(!(data >> x >> y >> age >> Etat_collector)) /*TODO: lecture format error*/;
-            else{
-                // TODO: collector constructor
-            }
+            // int x, y, age, Etat_collector;
+            // if(!(data >> x >> y >> age >> Etat_collector)) /*TODO: lecture format error*/;
+            // else{
+            //     // TODO: collector constructor
+            // }
             j += 1;
             break;
         case defensor:
@@ -88,19 +80,19 @@ void Simulation::decode_line(string line){
                 state = predator;
                 j = 0;
             }
-            int x, y, age;
-            if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
-            else{
-                // TODO: defensor constructor
-            }
+            // int x, y, age;
+            // if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
+            // else{
+            //     // TODO: defensor constructor
+            // }
             j += 1;
             break;
         case predator:
-            int x, y, age;
-            if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
-            else{
-                // TODO: predator generator
-            }
+            // int x, y, age;
+            // if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
+            // else{
+            //     // TODO: predator generator
+            // }
             j += 1;
             if(j >= nbP){
                 if(i >= total) state = finale;
