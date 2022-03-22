@@ -29,20 +29,10 @@ private:
     // private functions:
     void decode_line(std::string line);
 public:
-    Simulation(/* args */);
-    ~Simulation();
     void read_configfile(std::string filename);
 };
 
-Simulation::Simulation(/* args */)
-{
 
-}
-
-Simulation::~Simulation()
-{
-    
-}
 
 
 #endif
