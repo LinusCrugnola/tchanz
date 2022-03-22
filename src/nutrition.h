@@ -10,12 +10,12 @@
  class Nutrition
  {
      private:
-        int x,y;
+        int x_coor,y_coor;
      public:
+        Nutrition (int x, int y) : x_coor(x), y_coor(y) {}
+        
 
  };
-
- int i=0;
 
 #endif
  
