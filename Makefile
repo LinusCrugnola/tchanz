@@ -40,6 +40,10 @@ obj/test_squarecell.o : test/test_squarecell.cc
 # ADD THIS
 .PHONY: test
 test: bin/test_squarecell
+
+#.PHONY: run tests
+runtests:
+	@echo Test squarecell:
 	@ ./bin/test_squarecell
 
 .PHONY: clean
