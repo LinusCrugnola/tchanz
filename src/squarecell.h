@@ -19,17 +19,17 @@ struct square{
     bool centered;
 };
 
-// Validation of a square
-void square_validation_test(square square);
+// Validation of a square (returns false if square invalid)
+bool square_validation(square square);
 
-// Test if a square superposes with an existing square
-bool square_superposition_test(square square);
-bool square_superposition_test(square square1, square square2);
+// Test if a square superposes with an existing square (true if superposition)
+bool square_superposition(square square);
+bool square_superposition(square square1, square square2);
 
-// Add a square to the grid
+// Add a square to the grid (returns false if square invalid or superposition)
 bool square_add(square square);
 
-// Delete a square from the grid
+// Delete a square from the grid (returns false if no square or square invalid)
 bool square_delete(square square);
 
 // Functions to test module
