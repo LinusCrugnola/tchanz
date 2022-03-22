@@ -24,6 +24,7 @@ void square_validation_test(square square);
 
 // Test if a square superposes with an existing square
 bool square_superposition_test(square square);
+bool square_superposition_test(square square1, square square2);
 
 // Add a square to the grid
 bool square_add(square square);
