@@ -10,10 +10,14 @@
  class Nutrition
  {
      private:
-        int x_coor,y_coor;
+        unsigned x,y;
+        double val_food;
      public:
-        Nutrition (int x, int y) : x_coor(x), y_coor(y) {}
-
+         static bool data_validation(unsigned x_coor, unsigned y_coor);
+         Nutrition(unsigned x_coor, unsigned y_coor) : x(x_coor) , y(y_coor)
+         {
+             square_add({x,y,1,1});
+         }
  };
 
 #endif
