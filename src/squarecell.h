@@ -8,6 +8,12 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
+#include <math.h>
+
+// module constants
+constexpr short unsigned g_dim = 7;
+constexpr short unsigned g_max = pow(2,g_dim);
+
 // Concrete type square
 struct square{
     // coordinates (point)

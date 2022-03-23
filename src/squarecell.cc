@@ -11,7 +11,6 @@
 #include <iostream>
 
 namespace{
-	unsigned g_max = 16;
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
 
@@ -166,10 +165,10 @@ void print_grid(){
         std::cout << std::endl;
         for(unsigned j=0; j<g_max; j++){
             if(grid[j][i]){
-                std::cout << "1 ";
+                std::cout << "\033[41;1mX\033[0m";
             }
             else{
-                std::cout << "0 ";
+                std::cout << "\033[42;1mX\033[0m";
             }
         }
     }

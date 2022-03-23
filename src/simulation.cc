@@ -43,19 +43,22 @@ void Simulation::decode_line(string line){
         case nourriture:
             unsigned x,y;
             if(!(data >> x >> y)) /*TODO: lecture format error*/;
-            Nutrition::data_validation(x,y);
-            else{
-                //Nutrition::Nutrition Object(x,y);
-            }   
+            // Validate data and create nutrition if valid
+            if(Nutrition::data_validation(x,y)){
+                this->nutrition.push_back(Nutrition(x,y));
+            }
             i += 1;
             if(i >= total) state = nbF;
             break;
         case nbF:
-            if(!(data >> total)) /*TODO: lecture format error*/;
-            else i = 0;
-            if(total == 0) state = finale;
-            else state = heap;
-            break;
+            //to start:
+            print_grid();
+            exit(0);
+            // if(!(data >> total)) /*TODO: lecture format error*/;
+            // else i = 0;
+            // if(total == 0) state = finale;
+            // else state = heap;
+            // break;
         case heap:
             // int x, y, side, xg, yg, total_n;
             // if(!(data >> x >> y >> side >> xg >> yg >> total_n >> nbC >> nbD >> nbP)) /*TODO: lecture format error*/;

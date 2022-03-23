@@ -7,6 +7,10 @@
  #ifndef NUTRITION_H
  #define NUTRITION_H
 
+ #include "squarecell.h"
+ #include "message.h"
+ #include "error_squarecell.h"
+
  class Nutrition
  {
      private:
