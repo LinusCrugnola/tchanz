@@ -5,6 +5,8 @@
   \brief    simulation implementation
 *****************************************************************/
 
+#include <cassert>
+
 #include "simulation.h"
 #include "nutrition.h"
 
@@ -26,7 +28,7 @@ void Simulation::decode_line(string line){
     istringstream data(line);
     // States
     enum Reading_states {nbN, nourriture, nbF, heap, collector, defensor, predator, finale};
-    static unsigned state = nbN; // TODO: does this change the state with each call?
+    static unsigned state = nbN;
     // counter
     static unsigned i = 0, total = 0;
     // variable
@@ -47,6 +49,7 @@ void Simulation::decode_line(string line){
             if(Nutrition::data_validation(x,y)){
                 this->nutrition.push_back(Nutrition(x,y));
             }
+            assert(square_superposition({x,y,1,1}));
             i += 1;
             if(i >= total) state = nbF;
             break;
