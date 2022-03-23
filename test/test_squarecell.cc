@@ -45,13 +45,15 @@ int main(){
     cout << "Test 11 Passed" << endl;
     assert(square_superposition({2,2,3,1}, {5,2,3,1})==false);
     cout << "Test 12 Passed" << endl;
+    assert(square_superposition({2,2,3,1}, {2,2,1,1}));
+    cout << "Test 13 Passed" << endl;
 
     // Test of square delete function
     assert(square_delete({0,0,4,0}));
-    cout << "Test 13 Passed" << endl;
-    assert(square_delete({g_max-2,g_max-2,3,1}));
     cout << "Test 14 Passed" << endl;
-    assert(square_delete({g_max-2,g_max-2,3,1})==false);
+    assert(square_delete({g_max-2,g_max-2,3,1}));
     cout << "Test 15 Passed" << endl;
+    assert(square_delete({g_max-2,g_max-2,3,1})==false);
+    cout << "Test 16 Passed" << endl;
 
 }
