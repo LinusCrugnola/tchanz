@@ -40,6 +40,7 @@ obj/test_squarecell.o : test/test_squarecell.cc
 # ADD THIS
 .PHONY: test
 test: bin/test_squarecell
+	@make runtests
 
 #.PHONY: run tests
 runtests:
