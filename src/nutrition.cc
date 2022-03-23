@@ -7,30 +7,34 @@
 
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 #include "nutrition.h"
 #include "message.h"
 #include "squarecell.h"
+#include "error_squarecell.h"
 
 using namespace std;
 
-bool Nutrition::data_validation(std::string line){
+bool Nutrition::data_validation(unsigned x_coor, unsigned y_coor){
     //convert line to stringstream
+    //istringstream data(line);
     //read x, y
-    //validate x,y (squarecell)
-    //chek superposition (squarecell)
-}
-
-
-void add_food(unsigned int x, unsigned int y)
-{
-    if(grid[x][g_max-1-y]) //Step to control if cell is empty
+    //unsigned x_coor,y_coor;
+    /*if(!(data >> x_coor >> y_coor))
     {
-        std::string food_overlap(x,y);
+        return false;
+    }*/
+
+    if(square_validation({x_coor,y_coor,3,1}))
+    {
+        return false;
     }
-    else
+
+    if(square_superposition({x_coor,y_coor,1,1}))
     {
-        grid[x][g_max-1-y]=true;
+        std::string food_overlap(x_coor,y_coor);
     }
 }
 

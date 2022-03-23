@@ -6,6 +6,7 @@
 *****************************************************************/
 
 #include "simulation.h"
+#include "nutrition.h"
 
 using namespace std;
 
@@ -40,10 +41,12 @@ void Simulation::decode_line(string line){
             else state = nourriture;
             break;
         case nourriture:
-            //if(!(data >> x >> y)) /*TODO: lecture format error*/;
-            // else{
-            //     // TODO: nourriture constructor
-            // }   
+            unsigned x,y;
+            if(!(data >> x >> y)) /*TODO: lecture format error*/;
+            Nutrition::data_validation(x,y);
+            else{
+                //Nutrition::Nutrition Object(x,y);
+            }   
             i += 1;
             if(i >= total) state = nbF;
             break;
