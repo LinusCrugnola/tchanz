@@ -48,8 +48,10 @@ int main(){
 
     // Test of square delete function
     assert(square_delete({0,0,4,0}));
+    assert(square_superposition({0,0,4,0})==false);
     cout << "Test 14 Passed" << endl;
     assert(square_delete({g_max-2,g_max-2,3,1}));
+    assert(square_superposition({g_max-2,g_max-2,3,1})==false);
     cout << "Test 15 Passed" << endl;
     assert(square_delete({g_max-2,g_max-2,3,1})==false);
     cout << "Test 16 Passed" << endl;
