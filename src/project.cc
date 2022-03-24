@@ -15,7 +15,7 @@ using namespace std;
 // TODO: replace exit();
 // Function to get name of textfile (ending must be .txt)
 string get_testfile(int argc, char **argv){
-	string filename = "myfile";
+	string filename;
 	if(argc>1){
 		filename = argv[1];
 	}
