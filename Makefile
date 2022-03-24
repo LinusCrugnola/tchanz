@@ -33,19 +33,27 @@ $(OBJ_PATH)/%.o: $(TST_PATH)%.c*
 bin/test_squarecell : obj/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
 	$(CXX) $(CXXFLAGS) -o $@ obj/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
 
+bin/test_nutrition : obj/test_nutrition.o obj/squarecell.o obj/error_squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ obj/test_nutrition.o obj/squarecell.o obj/error_squarecell.o
+
+
 obj/test_squarecell.o : test/test_squarecell.cc
+	$(CXX) $(CXXOBJFLAGS) -o $@ $<
+
+obj/test_nutrition.o : test/test_nutrition.cc
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
 
 # ADD THIS
 .PHONY: test
-test: bin/test_squarecell
+test: bin/test_squarecell bin/test_nutrition
 	@make runtests
 
 #.PHONY: run tests
 runtests:
 	@echo Test squarecell:
 	@ ./bin/test_squarecell
+	@ ./bin/test_nutrition
 
 .PHONY: clean
 clean:

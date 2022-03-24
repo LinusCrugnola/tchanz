@@ -11,8 +11,6 @@
 
 using namespace std;
 
-const unsigned g_max = 16;
-
 int main(){
     // Test of validation function
     assert(square_validation({0,0,1,1}));
