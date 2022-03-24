@@ -22,6 +22,9 @@
          {
              square_add({x,y,1,1});
          }
+         ~Nutrition(){
+             square_delete({x,y,1,1});
+         }
  };
 
 #endif
