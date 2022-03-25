@@ -6,26 +6,31 @@
 *****************************************************************/
  #ifndef NUTRITION_H
  #define NUTRITION_H
+ 
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <string>
 
- #include "squarecell.h"
- #include "message.h"
- #include "error_squarecell.h"
+#include "error_squarecell.h"
+#include "squarecell.h"
 
- class Nutrition
- {
-     private:
-        unsigned x,y;
-        double val_food;
-     public:
-         static bool data_validation(unsigned x_coor, unsigned y_coor);
-         Nutrition(unsigned x_coor, unsigned y_coor) : x(x_coor) , y(y_coor)
-         {
-             square_add({x,y,1,1});
-         }
-         ~Nutrition(){
-             square_delete({x,y,1,1});
-         }
- };
+class Nutrition
+{
+    private:
+    unsigned x,y;
+    double val_food;
+    public:
+        static Nutrition data_validation(std::string line);
+        Nutrition(unsigned x_coor, unsigned y_coor) : x(x_coor) , y(y_coor)
+        {
+            square_add({x,y,1,1});
+        }
+    // FIXME: The validation function returns a Nutrition object, therefore if we use this destructor, the local Nutrition object gets deleted and the square gets free -> BUG
+    //  ~Nutrition(){
+    //      square_delete({x,y,1,1});
+    //  }
+};
 
 #endif
  

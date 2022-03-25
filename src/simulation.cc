@@ -43,13 +43,8 @@ void Simulation::decode_line(string line){
             else state = nourriture;
             break;
         case nourriture:
-            unsigned x,y;
-            if(!(data >> x >> y)) /*TODO: lecture format error*/;
             // Validate data and create nutrition if valid
-            if(Nutrition::data_validation(x,y)){
-                this->nutrition.push_back(Nutrition(x,y));
-            }
-            assert(square_superposition({x,y,1,1}));
+            this->nutrition.push_back(Nutrition::data_validation(line));
             i += 1;
             if(i >= total) state = nbF;
             break;

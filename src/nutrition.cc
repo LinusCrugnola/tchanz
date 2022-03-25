@@ -5,23 +5,23 @@
  \brief    nutrition implementation
 *****************************************************************/
 
-#include <vector>
-#include <iostream>
-#include <sstream>
-#include <string>
-
 #include "nutrition.h"
+#include "message.h"
+
 
 using namespace std;
 
-bool Nutrition::data_validation(unsigned x_coor, unsigned y_coor){
-    if(!square_validation({x_coor,y_coor,3,1})){
-        return false;
-    }
+Nutrition Nutrition::data_validation(string line){
+    unsigned x_coor, y_coor;
+    istringstream data(line);
+    if(!(data >> x_coor >> y_coor)); //TODO: lecture format error
+    square_validation({x_coor,y_coor,3,1}); // throws error if invalid
     if(square_superposition({x_coor,y_coor,1,1})){
-        std::string food_overlap(x_coor,y_coor);
+        cout << message::food_overlap(x_coor,y_coor) << endl;
+        exit(EXIT_FAILURE);
     }
-    return true;
+    Nutrition nutrition(x_coor, y_coor);
+    return nutrition;
 }
 
 
