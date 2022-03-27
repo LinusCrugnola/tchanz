@@ -13,21 +13,21 @@ class Anthill
 {
     private:
         unsigned x,y;
-        unsigned sizeF;
+        unsigned side;
         //Formule de sizeF = partie_entière(sqrt(4*(sizeG*sizeG+sizeC*sizeC*nbC+sizeD*sizeD*nbD+sizeP*sizeP*nbP)))
         //(sizeF+2=side...?)
         //Constructeur sizeF à faire
         
 
     public:
-        Anthill(int sizeF) : sizeF(sizeF)
+        /*Anthill(int sizeF) : sizeF(sizeF)
         { 
             //sizeF formula
-        }
+        }*/
         static Anthill data_validation(std::string line);
-        Anthill(unsigned x,unsigned y) : x(x) , y(y)
+        Anthill(unsigned x,unsigned y, unsigned side) : x(x) , y(y) , side(side)
         {
-            square_add({x,y,sizeF,0});
+            square_add({x,y,side,0});
         }
         
 
