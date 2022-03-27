@@ -110,6 +110,15 @@ bool square_superposition(square s1, square s2){
     return false;
 }
 
+// function to check if s2 is contained in s1 (not on border) s2 centered, s1 not
+bool square_contains(square s1, square s2){
+    if(s2.x-s2.side/2 <= s1.x) return false;
+    else if(s2.x+s2.side/2 >= s1.x+s1.side) return false;
+    else if(s2.y-s2.side/2 <= s1.y) return false;
+    else if(s2.y+s2.side/2 >= s1.y+s1.side) return false;
+    return true;
+}
+
 bool square_add(square square){
     if(!square_validation(square)) return false;
     if(square_superposition(square)) return false;
