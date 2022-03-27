@@ -18,10 +18,11 @@ class Ant
 {
 private:
     square position;
-    unsigned age;
 public:
     static Ant data_validation(std::istringstream data);
-    Ant(square position) : position(position){};
+    Ant(square position) : position(position){
+        square_add(position);
+    };
 
     // debug function:
     virtual square print_data(Ant& ant);
@@ -34,38 +35,41 @@ private:
     /* data */
 public:
     static Generator data_validation(std::istringstream data);
-    Generator(square postion) : position(position){
-        square_add(position);
-    }
 };
 
 class Collector : public Ant
 {
 private:
     Etat_collector food;
+    unsigned age;
 public:
     static Collector data_validation(std::istringstream data);
     Collector(square position, unsigned age, Etat_collector food)
     : position(position), age(age), food(food){
-        square_add(posit)
+        square_add(position);
     }
 };
 
 class Defensor : public Ant
 {
 private:
-    /* data */
+    unsigned age;    
 public:
     static Defensor data_validation(std::istringstream data);
-    Defensor(square position, unsigned age) : position(position), age(age){}
+    Defensor(square position, unsigned age) : position(position), age(age){
+        square_add(position);
+    }
 };
 
 class Predator : public Ant
 {
 private:
-    /* data */
+    unsigned age;
 public:
-    /* data */
+    static Predator data_validation(std::istringstream data);
+    Predator(square position, unsigned age) : position(position), age(age){
+        square_add(position);
+    }
 };
 
 

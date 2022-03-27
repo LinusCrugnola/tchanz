@@ -11,15 +11,6 @@
 
 using namespace std;
 
-Ant Ant::data_validation(istringstream data){
-    square position = {0, 0, size, 0}; //are ants centered?
-    unsigned age;
-    if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
-    square_validation(position);
-    square_superposition(position); //functions throw error if position invalid
-    // Generate ant
-}
-
 Generator Generator::data_validation(istringstream data){
     //TODO: think about this (validation steps)
     square position = {0, 0, sizeG, 0}; //are ants centered?
@@ -32,12 +23,13 @@ Generator Generator::data_validation(istringstream data){
 Collector Collector::data_validation(istringstream data){
     square position = {0, 0, sizeC, 0}; //are ants centered?
     unsigned age;
-    if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
+    Etat_collector food;
+    if(!(data >> position.x >> position.y >> age >> food)) exit(EXIT_FAILURE);
     square_validation(position);
     square_superposition(position); //functions throw error if position invalid
     //TODO: check if it is in anthill
     // Generate ant
-    Collector collector(position, age);
+    Collector collector(position, age, food);
     return collector;
 }
 
