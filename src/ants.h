@@ -9,17 +9,19 @@
 #define ANTS_H
 
 #include <string>
+#include <sstream>
 
 #include "squarecell.h"
+#include "constantes.h"
 
 class Ant
 {
 private:
-    square square;
+    square position;
     unsigned age;
 public:
-    static Ant data_validation(std::string line);
-    Ant(square square) : square(square){};
+    static Ant data_validation(std::istringstream data);
+    Ant(square position) : position(position){};
 
     // debug function:
     virtual square print_data(Ant& ant);
@@ -31,15 +33,22 @@ class Generator : public Ant
 private:
     /* data */
 public:
-    /* data */
+    static Generator data_validation(std::istringstream data);
+    Generator(square postion) : position(position){
+        square_add(position);
+    }
 };
 
 class Collector : public Ant
 {
 private:
-    /* data */
+    Etat_collector food;
 public:
-    /* data */
+    static Collector data_validation(std::istringstream data);
+    Collector(square position, unsigned age, Etat_collector food)
+    : position(position), age(age), food(food){
+        square_add(posit)
+    }
 };
 
 class Defensor : public Ant
@@ -47,10 +56,11 @@ class Defensor : public Ant
 private:
     /* data */
 public:
-    /* data */
+    static Defensor data_validation(std::istringstream data);
+    Defensor(square position, unsigned age) : position(position), age(age){}
 };
 
-class  : public Ant
+class Predator : public Ant
 {
 private:
     /* data */
