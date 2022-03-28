@@ -53,28 +53,51 @@ bool square_validation(square square){
     return true;
 }
 
-square square_superposition(square test){
+bool square_superposition(square square){
+    if(square.centered){
+        for(unsigned i=square.y-square.side/2; i<=square.y+square.side/2; i++){
+            for(unsigned j=square.x-square.side/2; j<=square.x+square.side/2; j++){
+                if(grid[j][g_max-1-i]){
+                    return true;
+                }
+            }
+        }
+    }
+    else{
+        for(unsigned i=square.y; i<square.y+square.side; i++){
+            for(unsigned j=square.x; j<square.x+square.side; j++){
+                if(grid[j][g_max-1-i]){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+square square_get_superposition(square test){
     square cross;
     if(test.centered){
-        for(unsigned i=test.y-test.side/2; i<=test.y+test.side/2; i++){
+        for(unsigned i=test.y+test.side/2; i>=test.y+test.side/2; i--){
             for(unsigned j=test.x-test.side/2; j<=test.x+test.side/2; j++){
                 if(grid[j][g_max-1-i]){
-                    cross = {j,g_max-1-i,1,1};
+                    cross = {j,i,1,1};
                     return cross;
                 }
             }
         }
     }
     else{
-        for(unsigned i=test.y; i<test.y+test.side; i++){
+        for(unsigned i=test.y+test.side-1; i>=test.y; i--){
             for(unsigned j=test.x; j<test.x+test.side; j++){
                 if(grid[j][g_max-1-i]){
-                    cross = {j, g_max-1-j, 1, 0};
+                    cross = {j,i,1,1};
                     return cross;
                 }
             }
         }
     }
+    //default return
     return {500,500,0,0};
 }
 
