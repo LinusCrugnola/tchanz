@@ -25,11 +25,14 @@ struct square{
     bool centered;
 };
 
+constexpr square no_superposition = {500,500,0,0};
+
 // Validation of a square (returns false if square invalid)
 bool square_validation(square square);
 
+// Test if a square superposes with a square in memory (returns (-1,-1,0,0) if no superposition)
+square square_superposition(square square);
 // Test if a square superposes with an existing square (true if superposition)
-bool square_superposition(square square);
 bool square_superposition(square square1, square square2);
 
 // Test if a square contains another square
