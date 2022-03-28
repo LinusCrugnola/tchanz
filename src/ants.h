@@ -35,6 +35,10 @@ private:
     /* data */
 public:
     static Generator data_validation(std::istringstream data);
+    //FIXME: is this constructor necessairy
+    Generator(square position) : position(position){
+        square_add(position);
+    }
 };
 
 class Collector : public Ant
