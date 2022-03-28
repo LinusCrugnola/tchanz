@@ -1,5 +1,5 @@
-#ifndef FOURMILIERE_H
- #define FOURMILIERE_H
+#ifndef ANTHILL_H
+ #define ANTHILL_H
  
 #include <vector>
 #include <iostream>
@@ -12,23 +12,30 @@
 class Anthill
 {
     private:
-        unsigned x,y;
-        unsigned side;
+        square anthill_type;
+        unsigned nbC, nbD, nbP;
+        unsigned total_food;
+
+        //Ants:
+    
         //Formule de sizeF = partie_entière(sqrt(4*(sizeG*sizeG+sizeC*sizeC*nbC+sizeD*sizeD*nbD+sizeP*sizeP*nbP)))
         //(sizeF+2=side...?)
         //Constructeur sizeF à faire
-        
-
     public:
         /*Anthill(int sizeF) : sizeF(sizeF)
         { 
             //sizeF formula
         }*/
         static Anthill data_validation(std::string line);
-        Anthill(unsigned x,unsigned y, unsigned side) : x(x) , y(y) , side(side)
+        unsigned anthill_get_ants(const Anthill& anthill);
+
+        Anthill(square anthill_type, unsigned total_food, unsigned nbC, unsigned nbD, unsigned nbP) : anthill_type(anthill_type), 
+        total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
         {
-            square_add({x,y,side,0});
+            square_add(anthill_type);
         }
+
+
         
 
 

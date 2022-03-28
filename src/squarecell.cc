@@ -10,6 +10,8 @@
 #include <vector>
 #include <iostream>
 
+
+// definition of grid
 namespace{
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
@@ -75,6 +77,32 @@ bool square_superposition(square square){
     return false;
 }
 
+square square_get_superposition(square test){
+    square cross;
+    if(test.centered){
+        for(unsigned i=test.y+test.side/2; i>=test.y+test.side/2; i--){
+            for(unsigned j=test.x-test.side/2; j<=test.x+test.side/2; j++){
+                if(grid[j][g_max-1-i]){
+                    cross = {j,i,1,1};
+                    return cross;
+                }
+            }
+        }
+    }
+    else{
+        for(unsigned i=test.y+test.side-1; i>=test.y; i--){
+            for(unsigned j=test.x; j<test.x+test.side; j++){
+                if(grid[j][g_max-1-i]){
+                    cross = {j,i,1,1};
+                    return cross;
+                }
+            }
+        }
+    }
+    //default return
+    return {500,500,0,0};
+}
+
 bool square_superposition(square s1, square s2){
     // check x
     int xmin, x1min, x2min;
@@ -121,7 +149,6 @@ bool square_contains(square s1, square s2){
 
 bool square_add(square square){
     if(!square_validation(square)) return false;
-    if(square_superposition(square)) return false;
     if(square.centered){
         for(unsigned i=square.y-square.side/2; i<=square.y+square.side/2; i++){
             for(unsigned j=square.x-square.side/2; j<=square.x+square.side/2; j++){

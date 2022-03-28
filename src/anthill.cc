@@ -6,28 +6,24 @@ using namespace std;
 
 Anthill Anthill::data_validation(string line)
 {
-    unsigned x_coor,y_coor;
-    unsigned side;
+    square anthill = {0,0,0,0};
     unsigned x_g, y_g;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
     istringstream data(line);
-    if(!(data >> x_coor >> y_coor >> side >> x_g >> y_g >> total_food >> nbC >> nbD >> nbP));
-    square_validation({x_coor,y_coor,side,0});
-    if(square_superposition({x_coor,y_coor,side,0}))
+    if(!(data >> anthill.x >> anthill.y >> anthill.side >> x_g >> y_g >> total_food >> nbC >> nbD >> nbP));
+    square_validation(anthill);
+    if(square_superposition(anthill))
     {
-        cout << message::homes_overlap(x_coor,y_coor) << endl;
+        cout << message::homes_overlap(anthill.x,anthill.y) << endl;
         exit(EXIT_FAILURE);
     }
-    Anthill anthill(x_coor,y_coor,side);
+    Anthill anthill_ (anthill, total_food, nbC, nbD, nbP);
     
-    
-    return anthill;
+    return anthill_;
 }
 
-int anthill_get_ants(unsigned nbC, unsigned nbD, unsigned nbP)
+unsigned Anthill::anthill_get_ants(const Anthill& anthill)
 {
-    unsigned nbT = 1 + nbC + nbD + nbP;
-    return nbT;
-    //not sure about this...
+    return this->nbC + this->nbD + this->nbP + 1;
 }
