@@ -8,8 +8,6 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
-#include <math.h>
-
 // module constants
 constexpr short unsigned g_dim = 7;
 constexpr short unsigned g_max = 128;
@@ -25,17 +23,17 @@ struct square{
     bool centered;
 };
 
-constexpr square no_superposition = {500,500,0,0};
 
 // Validation of a square (returns false if square invalid)
 bool square_validation(square square);
 
-// Test if a square superposes with a square in memory (returns (-1,-1,0,0) if no superposition)
-square square_get_superposition(square test);
 
 // Test if a square superposes with an existing square (true if superposition)
 bool square_superposition(square square);
 bool square_superposition(square square1, square square2);
+
+// get first square that superposes (biggest y, smallest x)
+square square_get_superposition(square test);
 
 // Test if a square contains another square
 bool square_contains(square s1, square s2);

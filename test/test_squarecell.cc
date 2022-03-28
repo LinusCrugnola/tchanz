@@ -12,8 +12,7 @@
 using namespace std;
 
 int main(){
-    //square error = {500,500,0,0};
-
+    
     // Test of validation function
     assert(square_validation({0,0,1,1}));
     cout << "Test 1 passed" << endl;

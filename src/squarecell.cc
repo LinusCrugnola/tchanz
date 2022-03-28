@@ -10,6 +10,8 @@
 #include <vector>
 #include <iostream>
 
+
+// definition of grid
 namespace{
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
