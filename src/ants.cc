@@ -4,10 +4,13 @@
  \date     25.03.2022
  \brief    ants implementation
 *****************************************************************/
- 
+
+#include <iostream>
+
 #include "ants.h"
 #include "squarecell.h"
 #include "constantes.h"
+#include "message.h"
 
 using namespace std;
 
@@ -27,19 +30,21 @@ Collector Collector::data_validation(istringstream data){
     if(!(data >> position.x >> position.y >> age >> food)) exit(EXIT_FAILURE);
     square_validation(position);
     square_superposition(position); //functions throw error if position invalid
-    //TODO: check if it is in anthill
     // Generate ant
     Collector collector(position, age, food);
     return collector;
 }
 
-Defensor Defensor::data_validation(istringstream data){
+Defensor Defensor::data_validation(istringstream data, const square& anthill_position){
     square position = {0, 0, sizeD, 0}; //are ants centered?
     unsigned age;
     if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
-    square_validation(position);
-    square_superposition(position); //functions throw error if position invalid
+    square_validation(position); // throws error if position invalid
+    if(square_superposition(position)){
+        cout << message::
+    }
     //TODO: check if it is in anthill
+    square_contains(anthill_position, position);
     // Generate ant
     Defensor defensor(position, age);
     return defensor;
@@ -51,7 +56,6 @@ Predator Predator::data_validation(istringstream data){
     if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
     square_validation(position);
     square_superposition(position); //functions throw error if position invalid
-    //TODO: check if it is in anthill
     // Generate ant
     Predator predator(position, age);
     return predator;
