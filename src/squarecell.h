@@ -32,6 +32,9 @@ bool square_validation(square square);
 bool square_superposition(square square);
 bool square_superposition(square square1, square square2);
 
+// Test if a square contains another square
+bool square_contains(square s1, square s2);
+
 // Add a square to the grid (returns false if square invalid or superposition)
 bool square_add(square square);
 

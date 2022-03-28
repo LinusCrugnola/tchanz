@@ -46,14 +46,25 @@ int main(){
     assert(square_superposition({2,2,3,1}, {2,2,1,1}));
     cout << "Test 13 Passed" << endl;
 
+    // Test of contains function
+    assert(square_contains({1,1,5,0}, {3,3,3,1}));
+    cout << "Test 14 Passed" << endl;
+    assert(square_contains({0,0,3,0}, {1,1,1,1}));
+    cout << "Test 15 Passed" << endl;
+    assert(square_contains({1,1,5,0}, {6,6,1,1})==false);
+    cout << "Test 16 Passed" << endl;
+    assert(square_contains({2,2,3,0}, {2,2,1,1})==false);
+    cout << "Test 17 Passed" << endl;
+
     // Test of square delete function
     assert(square_delete({0,0,4,0}));
     assert(square_superposition({0,0,4,0})==false);
-    cout << "Test 14 Passed" << endl;
+    cout << "Test 18 Passed" << endl;
     assert(square_delete({g_max-2,g_max-2,3,1}));
+    cout << "Test 19 Passed" << endl;
     assert(square_superposition({g_max-2,g_max-2,3,1})==false);
-    cout << "Test 15 Passed" << endl;
+    cout << "Test 20 Passed" << endl;
     assert(square_delete({g_max-2,g_max-2,3,1})==false);
-    cout << "Test 16 Passed" << endl;
+    cout << "Test 21 Passed" << endl;
 
 }
