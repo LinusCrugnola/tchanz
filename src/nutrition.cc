@@ -11,9 +11,8 @@
 
 using namespace std;
 
-Nutrition Nutrition::data_validation(string line){
+Nutrition Nutrition::data_validation(istringstream& data){
     unsigned x_coor, y_coor;
-    istringstream data(line);
     if(!(data >> x_coor >> y_coor)); //TODO: lecture format error
     square_validation({x_coor,y_coor,3,1}); // throws error if invalid
     if(square_superposition({x_coor,y_coor,1,1})){

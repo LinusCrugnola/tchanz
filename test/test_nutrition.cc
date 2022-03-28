@@ -6,6 +6,8 @@
 *****************************************************************/
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <sstream>
 
 #include "../src/nutrition.h"
 #include "../src/squarecell.h"
@@ -18,4 +20,12 @@ int main(){
     Nutrition nutri(1,1);
     assert(square_superposition({1,1,1,1}));
     cout << "Test 1 passed" << endl;
+
+    // Test data validation
+    string line = " 20 55";
+    istringstream data(line);
+    Nutrition::data_validation(data);
+    assert(square_superposition({20,55,1,0}));
+    cout << "Test 2 passed" << endl;
+
 }
