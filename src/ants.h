@@ -16,7 +16,7 @@
 
 class Ant
 {
-private:
+protected:
     square position;
 public:
     static Ant data_validation(std::istringstream data);
@@ -29,7 +29,7 @@ public:
 };
 
 // Subclasses of ant:
-class Generator : public Ant
+class Generator : private Ant
 {
 private:
     /* data */
@@ -41,7 +41,7 @@ public:
     }
 };
 
-class Collector : public Ant
+class Collector : private Ant
 {
 private:
     Etat_collector food;
@@ -54,7 +54,7 @@ public:
     }
 };
 
-class Defensor : public Ant
+class Defensor : private Ant
 {
 private:
     unsigned age;    
@@ -65,7 +65,7 @@ public:
     }
 };
 
-class Predator : public Ant
+class Predator : private Ant
 {
 private:
     unsigned age;
