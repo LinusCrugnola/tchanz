@@ -27,7 +27,7 @@ void Simulation::read_configfile(std::string filename){
 void Simulation::decode_line(string line){
     istringstream data(line);
     // States
-    enum Reading_states {nbN, nourriture, nbF, heap, collector, defensor, predator, finale};
+    enum Reading_states {nbN, nourriture, nbF, anthill, collector, defensor, predator, finale};
     static unsigned state = nbN;
     // counter
     static unsigned i = 0, total = 0;
@@ -57,12 +57,13 @@ void Simulation::decode_line(string line){
             // if(total == 0) state = finale;
             // else state = heap;
             // break;
-        case heap:
+        case anthill:
             // int x, y, side, xg, yg, total_n;
             // if(!(data >> x >> y >> side >> xg >> yg >> total_n >> nbC >> nbD >> nbP)) /*TODO: lecture format error*/;
             // else{
             //     // TODO: fourmilière constructor
             // }
+            //this->anthill.push_back(Anthill::anthill_validation(line));
             i += 1;
             state = collector;
             j = 0;
@@ -100,7 +101,7 @@ void Simulation::decode_line(string line){
             j += 1;
             if(j >= nbP){
                 if(i >= total) state = finale;
-                else state = heap;
+                else state = anthill;
             }
             break;
         case finale:

@@ -17,15 +17,18 @@
 #include "squarecell.h"
 #include "constantes.h"
 #include "nutrition.h"
+#include "anthill.h"
 
 class Simulation
 {
 private:
+
+    // Anthill instances
+    std::vector<Anthill> anthill;
+
     // Nutrition instances
     std::vector<Nutrition> nutrition;
-    // Anthill instances
-    //std::vector<Anthill> anthills; TODO: implement anthill
-
+    
     // private functions:
     void decode_line(std::string line);
 public:

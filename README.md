@@ -54,3 +54,13 @@ after this the part of reading anthill data is finished, if you have time, the n
 - make sure that j ants are generated (with j and total_ants) like in state nutrition and change state back to anthill or to finale depending on i and total (number of anthills to create) after all ants of one anthill are created (meanwhile I create the function that generates ants, you can let this empty)
 
 ## Holy shit t'es un chef si t'as réussi de faire tout ça!!!
+
+```cpp
+//in anthill data_validation:
+//get square (position)
+for(unsigned i=0; i<anthill.size(); i++){ //anthill is the vector
+  if(square_superposition(anthill[i].position, position)){ //iterate over vector
+    std::cout << message::homes_overlap(i+1, anthill.size()+1) << std::endl; //call error
+  }
+}
+```

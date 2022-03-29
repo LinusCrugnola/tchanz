@@ -26,9 +26,14 @@ class Anthill
         { 
             //sizeF formula
         }*/
-        static Anthill data_validation(std::string line);
-        unsigned anthill_get_ants(const Anthill& anthill);
+        square get_anthill_type() const
+        {
+            return anthill_type;
+        }
 
+
+        static Anthill anthill_validation(std::istringstream& data,std::vector<Anthill> anthills);
+        unsigned anthill_get_ants(const Anthill& anthill);
         Anthill(square anthill_type, unsigned total_food, unsigned nbC, unsigned nbD, unsigned nbP) : anthill_type(anthill_type), 
         total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
         {
