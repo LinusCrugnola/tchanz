@@ -42,7 +42,7 @@ void Simulation::decode_line(string line){
             break;
         case nourriture:
             // Validate data and create nutrition if valid
-            this->nutrition.push_back(Nutrition::data_validation(line));
+            this->nutrition.push_back(Nutrition::data_validation(data));
             i += 1;
             if(i >= total) state = nbF;
             break;
@@ -55,7 +55,7 @@ void Simulation::decode_line(string line){
             // Validate data and create anthill if valid
             this->anthill.push_back(Anthill::anthill_validation(data, this->anthill));
             //initialize ant counter
-            total_ants = anthill[i-1].anthill_get_ants() - 1;
+            total_ants = this->anthill[i-1].Anthill::anthill_get_ants() - 1;
             j = 0;
             i += 1;
             if(total_ants == 0){
@@ -65,7 +65,7 @@ void Simulation::decode_line(string line){
             break;
         case ant:
             // create ant
-            anthill[i-1].ant_validation(data, i);
+            this->anthill[i-1].Anthill::ant_validation(data, i);
             j += 1;
             if(j >= total_ants){
                 state = i >= total ? finale : anthill;
