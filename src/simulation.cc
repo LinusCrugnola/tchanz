@@ -27,20 +27,19 @@ void Simulation::read_configfile(std::string filename){
 void Simulation::decode_line(string line){
     istringstream data(line);
     // States
-    enum Reading_states {nbN, nourriture, nbF, anthill, collector, defensor, predator, finale};
+    enum Reading_states {nbN, nourriture, nbF, anthill, ant, finale};
     static unsigned state = nbN;
     // counter
     static unsigned i = 0, total = 0;
     // variable
-    static unsigned j = 0, nbC, nbD, nbP;
+    static unsigned j = 0, total_ants;
     
     // lecture statemachine
     switch(state){
         case nbN:   // Initial state
             if(!(data >> total)) /*TODO: lecture format error*/;
             else i = 0;
-            if(total == 0) state = nbF;
-            else state = nourriture;
+            state = total == 0 ? nbF : nourriture;
             break;
         case nourriture:
             // Validate data and create nutrition if valid
@@ -49,60 +48,25 @@ void Simulation::decode_line(string line){
             if(i >= total) state = nbF;
             break;
         case nbF:
-            //to start:
-            print_grid();
-            exit(0);
-            // if(!(data >> total)) /*TODO: lecture format error*/;
-            // else i = 0;
-            // if(total == 0) state = finale;
-            // else state = heap;
-            // break;
+            if(!(data >> total)) /*TODO: lecture format error*/;
+            else i = 0;
+            state = total == 0 ? finale : anthill;
+            break;
         case anthill:
-            // int x, y, side, xg, yg, total_n;
-            // if(!(data >> x >> y >> side >> xg >> yg >> total_n >> nbC >> nbD >> nbP)) /*TODO: lecture format error*/;
-            // else{
-            //     // TODO: fourmilière constructor
-            // }
-            //this->anthill.push_back(Anthill::anthill_validation(line));
-            i += 1;
-            state = collector;
+            // Validate data and create anthill if valid
+            this->anthill.push_back(Anthill::anthill_validation(data, this->anthill));
+            //initialize ant counter
+            total_ants = anthill[i-1].anthill_get_ants() - 1;
             j = 0;
+            i += 1;
+            state = ant;
             break;
-        case collector:
-            if(j >= nbC){
-                state = defensor;
-                j = 0;
+        case ant:
+            if(j >= total_ants){
+                state = i >= total ? finale : anthill;
             }
-            // int x, y, age, Etat_collector;
-            // if(!(data >> x >> y >> age >> Etat_collector)) /*TODO: lecture format error*/;
-            // else{
-            //     // TODO: collector constructor
-            // }
-            j += 1;
-            break;
-        case defensor:
-            if(j >= nbD){
-                state = predator;
-                j = 0;
-            }
-            // int x, y, age;
-            // if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
-            // else{
-            //     // TODO: defensor constructor
-            // }
-            j += 1;
-            break;
-        case predator:
-            // int x, y, age;
-            // if(!(data >> x >> y >> age)) /*TODO: lecture format error*/;
-            // else{
-            //     // TODO: predator generator
-            // }
-            j += 1;
-            if(j >= nbP){
-                if(i >= total) state = finale;
-                else state = anthill;
-            }
+            else j += 1;
+            // create ant
             break;
         case finale:
             break;

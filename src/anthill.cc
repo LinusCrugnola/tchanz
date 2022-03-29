@@ -56,7 +56,7 @@ Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills
 
 
 
-unsigned Anthill::anthill_get_ants(const Anthill& anthill)
+unsigned Anthill::anthill_get_ants()
 {
     return this->nbC + this->nbD + this->nbP + 1;
 }
