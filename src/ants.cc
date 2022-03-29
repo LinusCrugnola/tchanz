@@ -32,9 +32,10 @@ Generator Generator::data_validation(unsigned xg, unsigned yg, const square& ant
 
 Collector Collector::data_validation(istringstream& data){
     square position = {0, 0, sizeC, 1};
-    unsigned age;
+    unsigned age, food_state;
     Etat_collector food;
-    if(!(data >> position.x >> position.y >> age >> food)) cout << "reading error!" << endl;
+    if(!(data >> position.x >> position.y >> age >> food_state)) cout << "reading error!" << endl;
+    food = (Etat_collector)food_state;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);

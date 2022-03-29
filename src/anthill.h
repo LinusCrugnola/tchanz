@@ -14,11 +14,13 @@ class Anthill
 {
     private:
         square anthill_type;
-        unsigned nbC, nbD, nbP;
         unsigned total_food;
+        unsigned nbC, nbD, nbP;
 
         //Ants:
-        Generator generator;
+        //FIXME: how can we have only one generator (error)
+        //Generator generator;
+        std::vector<Generator> generator;
         std::vector<Collector> collectors;
         std::vector<Defensor> defensors;
         std::vector<Predator> predators;
@@ -37,14 +39,14 @@ class Anthill
         }
 
 
-        static Anthill anthill_validation(std::istringstream& data,std::vector<Anthill> anthills);
+        static Anthill anthill_validation(std::istringstream& data,std::vector<Anthill> anthills, unsigned home);
         unsigned anthill_get_ants();
         void ant_validation(std::istringstream& data, unsigned home);
 
-        Anthill(square anthill_type, unsigned total_food, unsigned nbC, unsigned nbD, unsigned nbP) : anthill_type(anthill_type), 
-        total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
-        {
+        Anthill(square anthill_type, unsigned total_food, unsigned nbC, unsigned nbD, unsigned nbP, unsigned xg, unsigned yg, unsigned home) : anthill_type(anthill_type), 
+        total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP){
             square_add(anthill_type);
+            this->generator.push_back(Generator::data_validation(xg, yg, anthill_type, home));
         }
 
 

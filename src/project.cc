@@ -20,7 +20,7 @@ string get_testfile(int argc, char **argv);
 int main(int argc, char **argv){
     Simulation simulation;
     simulation.read_configfile(get_testfile(argc, argv));
-    cout << message::success << endl;
+    cout << message::success() << endl;
     exit(EXIT_SUCCESS);
 }
 

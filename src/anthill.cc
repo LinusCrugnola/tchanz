@@ -6,18 +6,18 @@
 
 using namespace std;
 
-Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills)
+Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills, unsigned home)
 {
     square anthill = {0,0,0,0};
-    unsigned x_g, y_g;
+    unsigned xg, yg;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
-    if(!(data >> anthill.x >> anthill.y >> anthill.side >> x_g >> y_g >> total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
+    if(!(data >> anthill.x >> anthill.y >> anthill.side >> xg >> yg >> total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
     if(anthills.size()==0)
     {
         if(square_validation(anthill))
         {
-            Anthill anthill_(anthill, nbC, nbD, nbP, total_food);
+            Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
             return anthill_;
         }
     }
@@ -32,7 +32,7 @@ Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills
             }
             if(square_validation(anthill))
             {
-                Anthill anthill_(anthill, nbC, nbD, nbP, total_food);
+                Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
                 return anthill_;
             }
         }
@@ -63,14 +63,15 @@ unsigned Anthill::anthill_get_ants()
 }
 
 void Anthill::ant_validation(istringstream& data, unsigned home){
+    enum Ant_states {collector, defensor, predator, finale};
     static unsigned i = 0, total = this->nbC;
-    static enum Ant_states {collector, defensor, predator, finale};
     static Ant_states state = collector;
 
     switch (state){
         case collector:
             if(i >= total){
                 state = defensor;
+                i = 0;
                 total = this->nbD;
                 break;
             }
@@ -79,10 +80,11 @@ void Anthill::ant_validation(istringstream& data, unsigned home){
         case defensor:
             if(i >= total){
                 state = predator;
+                i = 0;
                 total = this->nbP;
                 break;
             }
-            this->defensors.push_back(Defensor::data_validation(data));
+            this->defensors.push_back(Defensor::data_validation(data, this->anthill_type, home));
             break;    
         case predator:
             if(i >= total){

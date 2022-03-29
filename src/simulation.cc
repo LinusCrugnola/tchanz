@@ -53,7 +53,7 @@ void Simulation::decode_line(string line){
             break;
         case anthill:
             // Validate data and create anthill if valid
-            this->anthill.push_back(Anthill::anthill_validation(data, this->anthill));
+            this->anthill.push_back(Anthill::anthill_validation(data, this->anthill, i));
             //initialize ant counter
             total_ants = this->anthill[i-1].Anthill::anthill_get_ants() - 1;
             j = 0;

@@ -14,64 +14,65 @@
 #include "squarecell.h"
 #include "constantes.h"
 
+// Base class ant:
 class Ant
 {
-protected:
-    square position;
-public:
-    static Ant data_validation(std::istringstream data);
-    Ant(square position) : position(position){
-        square_add(position);
-    };
+    protected:
+        square position;
+    public:
+        //static Ant data_validation(std::istringstream data);
+        Ant(square position) : position(position){
+            square_add(position);
+        };
 
-    // debug function:
-    virtual square print_data(Ant& ant);
+        // debug function:
+        //virtual square print_data(Ant& ant);
 };
 
 // Subclasses of ant:
-class Generator : private Ant
+class Generator : public Ant
 {
-private:
-    /* data */
-public:
-    static Generator data_validation(unsigned xg, unsigned yg, const square& anthill_position, const unsigned& home);
-    //FIXME: is this constructor necessairy
-    Generator(square position) : position(position){
-        square_add(position);
-    }
+    private:
+        /* data */
+    public:
+        static Generator data_validation(unsigned xg, unsigned yg, const square& anthill_position, const unsigned& home);
+        //FIXME: is this constructor necessairy
+        Generator(square position) : Ant(position){
+            square_add(position);
+        }
 };
 
-class Collector : private Ant
+class Collector : public Ant
 {
 private:
-    Etat_collector food;
     unsigned age;
+    Etat_collector food;
 public:
     static Collector data_validation(std::istringstream& data);
     Collector(square position, unsigned age, Etat_collector food)
-    : position(position), age(age), food(food){
+    : Ant(position), age(age), food(food){
         square_add(position);
     }
 };
 
-class Defensor : private Ant
+class Defensor : public Ant
 {
 private:
     unsigned age;    
 public:
     static Defensor data_validation(std::istringstream& data, const square& anthill_position, const unsigned& home);
-    Defensor(square position, unsigned age) : position(position), age(age){
+    Defensor(square position, unsigned age) : Ant(position), age(age){
         square_add(position);
     }
 };
 
-class Predator : private Ant
+class Predator : public Ant
 {
 private:
     unsigned age;
 public:
     static Predator data_validation(std::istringstream& data);
-    Predator(square position, unsigned age) : position(position), age(age){
+    Predator(square position, unsigned age) : Ant(position), age(age){
         square_add(position);
     }
 };
