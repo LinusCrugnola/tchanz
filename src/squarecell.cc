@@ -80,7 +80,7 @@ bool square_superposition(square square){
 square square_get_superposition(square test){
     square cross;
     if(test.centered){
-        for(unsigned i=test.y+test.side/2; i>=test.y+test.side/2; i--){
+        for(unsigned i=test.y+test.side/2; i>=test.y-test.side/2; i--){
             for(unsigned j=test.x-test.side/2; j<=test.x+test.side/2; j++){
                 if(grid[j][g_max-1-i]){
                     cross = {j,i,1,1};
@@ -141,9 +141,9 @@ bool square_superposition(square s1, square s2){
 // function to check if s2 is contained in s1 (not on border) s2 centered, s1 not
 bool square_contains(square s1, square s2){
     if(s2.x-s2.side/2 <= s1.x) return false;
-    else if(s2.x+s2.side/2 >= s1.x+s1.side) return false;
+    else if(s2.x+s2.side/2 >= s1.x+s1.side-1) return false;
     else if(s2.y-s2.side/2 <= s1.y) return false;
-    else if(s2.y+s2.side/2 >= s1.y+s1.side) return false;
+    else if(s2.y+s2.side/2 >= s1.y+s1.side-1) return false;
     return true;
 }
 

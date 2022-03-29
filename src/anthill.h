@@ -45,7 +45,6 @@ class Anthill
 
         Anthill(square anthill_type, unsigned total_food, unsigned nbC, unsigned nbD, unsigned nbP, unsigned xg, unsigned yg, unsigned home) : anthill_type(anthill_type), 
         total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP){
-            square_add(anthill_type);
             this->generator.push_back(Generator::data_validation(xg, yg, anthill_type, home));
         }
 

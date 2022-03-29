@@ -27,7 +27,7 @@ Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills
         {
             if(square_superposition(anthills[i].get_anthill_type(),anthill))
             {
-                std::cout << message::homes_overlap(i+1, anthills.size()+1) << std::endl;
+                std::cout << message::homes_overlap(i, anthills.size()) << std::endl;
                 exit(EXIT_FAILURE);
             }
             if(square_validation(anthill))
@@ -66,32 +66,34 @@ void Anthill::ant_validation(istringstream& data, unsigned home){
     enum Ant_states {collector, defensor, predator, finale};
     static unsigned i = 0, total = this->nbC;
     static Ant_states state = collector;
-
+    if(this->nbC == 0){
+        state = this->nbD == 0 ? predator : defensor;
+    }
     switch (state){
         case collector:
+            this->collectors.push_back(Collector::data_validation(data));
+            i += 1;
             if(i >= total){
                 state = defensor;
                 i = 0;
                 total = this->nbD;
-                break;
             }
-            this->collectors.push_back(Collector::data_validation(data));
             break;
         case defensor:
+            this->defensors.push_back(Defensor::data_validation(data, this->anthill_type, home));
+            i += 1;
             if(i >= total){
                 state = predator;
                 i = 0;
                 total = this->nbP;
-                break;
             }
-            this->defensors.push_back(Defensor::data_validation(data, this->anthill_type, home));
             break;    
         case predator:
+            this->predators.push_back(Predator::data_validation(data));
+            i += 1;
             if(i >= total){
                 state = finale;
-                break;
             }
-            this->predators.push_back(Predator::data_validation(data));
             break;
         case finale:
             break;

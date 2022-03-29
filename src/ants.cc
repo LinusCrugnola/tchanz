@@ -22,8 +22,9 @@ Generator Generator::data_validation(unsigned xg, unsigned yg, const square& ant
         cout << message::generator_overlap(position.x, position.y, overlap.x, overlap.y) << endl;
         exit(EXIT_FAILURE);
     }
-    if(square_contains(anthill_position, position)){
+    if(!square_contains(anthill_position, position)){
         cout << message::generator_not_within_home(position.x, position.y, home) << endl;
+        exit(EXIT_FAILURE);
     }
     // Generate ant
     Generator generator(position);
@@ -32,10 +33,11 @@ Generator Generator::data_validation(unsigned xg, unsigned yg, const square& ant
 
 Collector Collector::data_validation(istringstream& data){
     square position = {0, 0, sizeC, 1};
-    unsigned age, food_state;
+    unsigned age;
+    string food_state;
     Etat_collector food;
     if(!(data >> position.x >> position.y >> age >> food_state)) cout << "reading error!" << endl;
-    food = (Etat_collector)food_state;
+    food = food_state == "true" ? LOADED : EMPTY;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
@@ -57,9 +59,9 @@ Defensor Defensor::data_validation(istringstream& data, const square& anthill_po
         cout << message::defensor_overlap(position.x, position.y, overlap.x, overlap.y) << endl;
         exit(EXIT_FAILURE);
     }
-    //TODO: check if it is in anthill
-    if(square_contains(anthill_position, position)){
+    if(!square_contains(anthill_position, position)){
         cout << message::defensor_not_within_home(position.x, position.y, home) << endl;
+        exit(EXIT_FAILURE);
     }
     // Generate ant
     Defensor defensor(position, age);
