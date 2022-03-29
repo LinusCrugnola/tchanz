@@ -21,7 +21,7 @@ void Simulation::read_configfile(std::string filename){
             Simulation::decode_line(line);
         }
     }
-    else /*TODO: error could not open*/;
+    else cout << "error could not open file!" << endl;
 }
 
 void Simulation::decode_line(string line){
@@ -29,15 +29,14 @@ void Simulation::decode_line(string line){
     // States
     enum Reading_states {nbN, nourriture, nbF, anthill, ant, finale};
     static unsigned state = nbN;
-    // counter
+    // counters
     static unsigned i = 0, total = 0;
-    // variable
     static unsigned j = 0, total_ants;
     
     // lecture statemachine
     switch(state){
         case nbN:   // Initial state
-            if(!(data >> total)) /*TODO: lecture format error*/;
+            if(!(data >> total)) cout << "reading error!" << endl;
             else i = 0;
             state = total == 0 ? nbF : nourriture;
             break;
@@ -48,7 +47,7 @@ void Simulation::decode_line(string line){
             if(i >= total) state = nbF;
             break;
         case nbF:
-            if(!(data >> total)) /*TODO: lecture format error*/;
+            if(!(data >> total)) cout << "reading error!" << endl;
             else i = 0;
             state = total == 0 ? finale : anthill;
             break;
@@ -59,14 +58,18 @@ void Simulation::decode_line(string line){
             total_ants = anthill[i-1].anthill_get_ants() - 1;
             j = 0;
             i += 1;
-            state = ant;
+            if(total_ants == 0){
+                state = i >= total ? finale : anthill;
+            }
+            else state = ant;
             break;
         case ant:
+            // create ant
+            anthill[i-1].ant_validation(data, i);
+            j += 1;
             if(j >= total_ants){
                 state = i >= total ? finale : anthill;
             }
-            else j += 1;
-            // create ant
             break;
         case finale:
             break;

@@ -7,13 +7,23 @@
 
 #include <iostream>
 #include <string>
+
 #include "squarecell.h"
 #include "simulation.h"
+#include "message.h"
 
 using namespace std;
 
-// TODO: replace exit();
 // Function to get name of textfile (ending must be .txt)
+string get_testfile(int argc, char **argv);
+
+int main(int argc, char **argv){
+    Simulation simulation;
+    simulation.read_configfile(get_testfile(argc, argv));
+    cout << message::success << endl;
+    exit(EXIT_SUCCESS);
+}
+
 string get_testfile(int argc, char **argv){
 	string filename;
 	if(argc>1){
@@ -29,9 +39,4 @@ string get_testfile(int argc, char **argv){
 		exit(0);
 	}
 	return filename;
-}
-
-int main(int argc, char **argv){
-    Simulation simulation;
-    simulation.read_configfile(get_testfile(argc, argv));
 }

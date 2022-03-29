@@ -30,11 +30,11 @@ Generator Generator::data_validation(unsigned xg, unsigned yg, const square& ant
     return generator;
 }
 
-Collector Collector::data_validation(istringstream data){
+Collector Collector::data_validation(istringstream& data){
     square position = {0, 0, sizeC, 1};
     unsigned age;
     Etat_collector food;
-    if(!(data >> position.x >> position.y >> age >> food)) exit(EXIT_FAILURE);
+    if(!(data >> position.x >> position.y >> age >> food)) cout << "reading error!" << endl;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
@@ -46,10 +46,10 @@ Collector Collector::data_validation(istringstream data){
     return collector;
 }
 
-Defensor Defensor::data_validation(istringstream data, const square& anthill_position, const unsigned& home){
+Defensor Defensor::data_validation(istringstream& data, const square& anthill_position, const unsigned& home){
     square position = {0, 0, sizeD, 1};
     unsigned age;
-    if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
+    if(!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
@@ -65,10 +65,10 @@ Defensor Defensor::data_validation(istringstream data, const square& anthill_pos
     return defensor;
 }
 
-Predator Predator::data_validation(istringstream data){
+Predator Predator::data_validation(istringstream& data){
     square position = {0, 0, sizeP, 1};
     unsigned age;
-    if(!(data >> position.x >> position.y >> age)) exit(EXIT_FAILURE);
+    if(!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         cout << message::predator_overlap(position.x, position.y) << endl;
