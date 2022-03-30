@@ -40,7 +40,10 @@ test: test/test_squarecell test/test_nutrition
 	@rm -rf test
 	@make clean
 
-#.PHONY: run tests
+testfiles: $(TARGET)
+	@./runtestfiles.sh
+	@make clean
+
 runtests:
 	@echo Test squarecell:
 	@ ./test/test_squarecell
@@ -50,4 +53,4 @@ runtests:
 clean:
 	@echo CLEAN
 	@rm -f ./*.o
-	@rm -f prog
+	@rm -f $(TARGET)
