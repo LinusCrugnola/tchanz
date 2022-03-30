@@ -25,7 +25,7 @@ Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills
     {
         if(square_superposition(anthills[i].get_anthill_type(),anthill))
         {
-            std::cout << message::homes_overlap(i, anthills.size()) << std::endl;
+            std::cout << message::homes_overlap(i, anthills.size());
             exit(EXIT_FAILURE);
         }
     }
