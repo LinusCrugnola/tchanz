@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     anthill.h
+ \author   Léo Brückl, Linus Crugnola
+ \date     30.03.2022
+ \brief    anthill interface
+*****************************************************************/
+ 
 #ifndef ANTHILL_H
  #define ANTHILL_H
  

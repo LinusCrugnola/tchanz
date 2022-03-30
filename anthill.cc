@@ -1,3 +1,10 @@
+/****************************************************************!
+ \file     anthill.cc
+ \author   Léo Brückl, Linus Crugnola
+ \date     30.03.2022
+ \brief    anthill implementation
+*****************************************************************/
+ 
 #include "anthill.h"
 #include "message.h"
 #include "squarecell.h"

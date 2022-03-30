@@ -3,8 +3,8 @@ from datetime import date
 import re
 
 
-mypath = os.path.dirname(os.path.abspath(__file__)) + "/src"
-testpath = os.path.dirname(os.path.abspath(__file__)) + "/test"
+mypath = os.path.dirname(os.path.abspath(__file__))
+testpath = os.path.dirname(os.path.abspath(__file__))
 
 files = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
 testfiles = [f for f in os.listdir(testpath) if os.path.isfile(os.path.join(testpath, f))]
