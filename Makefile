@@ -4,43 +4,41 @@ CXXFLAGS := -g -Wall -std=c++11
 CXXOBJFLAGS := $(CXXFLAGS) -c
 
 # path macros
-BIN_PATH := bin
-OBJ_PATH := obj
-SRC_PATH := src
-TST_PATH := test
+# BIN_PATH := bin
+# OBJ_PATH := obj
+# SRC_PATH := src
+# TST_PATH := test
 
 # compile macros
 TARGET_NAME := prog
-TARGET := $(BIN_PATH)/$(TARGET_NAME)
+TARGET := ./$(TARGET_NAME)
 
 # src files & obj files
-SRC := $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
-OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
-
+# SRC := $(foreach x, ./, $(notdir $(wildcard $(addprefix $(x)*,.c*))))
+# OBJ := $(shell find -ipath 'test*.cc' $(addsuffix .o, $(notdir $(basename $(SRC)))))
+# TST := $(wildcard test*.cc)
+# TAR_SRC := $(SRC) - $(TST)
 
 # General target
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
+$(TARGET): anthill.o ants.o error_squarecell.o message.o nutrition.o project.o simulation.o squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ anthill.o ants.o error_squarecell.o message.o nutrition.o project.o simulation.o squarecell.o
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
-	$(CXX) $(CXXOBJFLAGS) -o $@ $<
-
-$(OBJ_PATH)/%.o: $(TST_PATH)%.c*
+$%.o: %.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
 
 # Rules for testfiles
-bin/test_squarecell : obj/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
-	$(CXX) $(CXXFLAGS) -o $@ obj/test_squarecell.o obj/squarecell.o obj/error_squarecell.o
+bin/test_squarecell : test_squarecell.o squarecell.o error_squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ test_squarecell.o squarecell.o error_squarecell.o
 
-bin/test_nutrition : obj/test_nutrition.o obj/squarecell.o obj/error_squarecell.o obj/nutrition.o obj/message.o
-	$(CXX) $(CXXFLAGS) -o $@ obj/test_nutrition.o obj/squarecell.o obj/error_squarecell.o obj/nutrition.o obj/message.o
+bin/test_nutrition : test_nutrition.o squarecell.o error_squarecell.o nutrition.o message.o
+	$(CXX) $(CXXFLAGS) -o $@ test_nutrition.o squarecell.o error_squarecell.o nutrition.o message.o
 
 
-obj/test_squarecell.o : test/test_squarecell.cc
+obj/test_squarecell.o : test_squarecell.cc
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
-obj/test_nutrition.o : test/test_nutrition.cc
+obj/test_nutrition.o : test_nutrition.cc
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<
 
 
@@ -52,11 +50,11 @@ test: bin/test_squarecell bin/test_nutrition
 #.PHONY: run tests
 runtests:
 	@echo Test squarecell:
-	@ ./bin/test_squarecell
-	@ ./bin/test_nutrition
+	@ ./test_squarecell
+	@ ./test_nutrition
 
 .PHONY: clean
 clean:
 	@echo CLEAN
-	@rm -f bin/*
-	@rm -f obj/*
+	@rm -f ./*.o
+	@rm -f prog

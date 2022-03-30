@@ -7,7 +7,7 @@
  
 #include <cassert>
 
-#include "../src/simulation.h"
+#include "simulation.h"
 
 int main(){
 

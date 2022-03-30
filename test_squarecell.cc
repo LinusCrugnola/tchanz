@@ -5,7 +5,7 @@
   \brief    squarecell test
 *****************************************************************/
 
-#include "../src/squarecell.h"
+#include "squarecell.h"
 #include <iostream>
 #include <cassert>
 

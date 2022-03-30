@@ -9,8 +9,8 @@
 #include <string>
 #include <sstream>
 
-#include "../src/nutrition.h"
-#include "../src/squarecell.h"
+#include "nutrition.h"
+#include "squarecell.h"
 
 using namespace std;
 
