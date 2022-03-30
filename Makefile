@@ -5,7 +5,7 @@ CXXOBJFLAGS := $(CXXFLAGS) -c
 
 
 # compile macros
-TARGET_NAME := prog
+TARGET_NAME := projet
 TARGET := ./$(TARGET_NAME)
 
 # General target
