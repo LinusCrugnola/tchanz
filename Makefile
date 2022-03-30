@@ -9,8 +9,8 @@ TARGET_NAME := projet
 TARGET := ./$(TARGET_NAME)
 
 # General target
-$(TARGET): anthill.o ants.o error_squarecell.o message.o nutrition.o project.o simulation.o squarecell.o
-	$(CXX) $(CXXFLAGS) -o $@ anthill.o ants.o error_squarecell.o message.o nutrition.o project.o simulation.o squarecell.o
+$(TARGET): anthill.o ants.o error_squarecell.o message.o nutrition.o projet.o simulation.o squarecell.o
+	$(CXX) $(CXXFLAGS) -o $@ anthill.o ants.o error_squarecell.o message.o nutrition.o projet.o simulation.o squarecell.o
 
 $%.o: %.c*
 	$(CXX) $(CXXOBJFLAGS) -o $@ $<

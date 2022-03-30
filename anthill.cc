@@ -20,30 +20,17 @@ Anthill Anthill::anthill_validation(istringstream& data,vector<Anthill> anthills
     unsigned total_food;
     unsigned nbC, nbD, nbP;
     if(!(data >> anthill.x >> anthill.y >> anthill.side >> xg >> yg >> total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
-    if(anthills.size()==0)
+    square_validation(anthill); //throws error
+    for(unsigned i(0);i<anthills.size();i++)
     {
-        if(square_validation(anthill))
+        if(square_superposition(anthills[i].get_anthill_type(),anthill))
         {
-            Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
-            return anthill_;
+            std::cout << message::homes_overlap(i, anthills.size()) << std::endl;
+            exit(EXIT_FAILURE);
         }
     }
-    else
-    {
-        for(unsigned i(0);i<anthills.size();i++)
-        {
-            if(square_superposition(anthills[i].get_anthill_type(),anthill))
-            {
-                std::cout << message::homes_overlap(i, anthills.size()) << std::endl;
-                exit(EXIT_FAILURE);
-            }
-            if(square_validation(anthill))
-            {
-                Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
-                return anthill_;
-            }
-        }
-    }
+    Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
+    return anthill_; 
 }
 
 /*bool Anthill::anthill_position_control(const vector<Anthill>& anthills)
