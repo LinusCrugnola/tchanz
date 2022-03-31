@@ -32,10 +32,5 @@ string get_testfile(int argc, char **argv){
 		cout << "False file" << endl;
 		exit(0);
 	}
-	// size_t check = filename.rfind(".txt");
-	// if(filename.length()-check != 4){
-	// 	cout << "no txt file" << endl;
-	// 	exit(0);
-	// }
 	return filename;
 }
