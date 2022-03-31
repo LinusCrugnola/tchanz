@@ -1,7 +1,8 @@
 /****************************************************************!
- \file     squarecell.cc
- \author   Léo Brückl, Linus Crugnola
- \version  1.0
+  \file     squarecell.cc
+  \author   Léo Brückl, Linus Crugnola
+  \date     31.03.2022
+  \brief    squarecell implementation
 *****************************************************************/
 
 #include <iostream>
@@ -15,7 +16,9 @@ namespace {
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
 
+// functions
 bool square_validation(square square) {
+    // Check the point
     if (square.x < 0 || square.x > (g_max-1)) {
         std::cout << error_squarecell::print_index(square.x, g_max-1);
         std::exit(EXIT_FAILURE);
@@ -24,30 +27,31 @@ bool square_validation(square square) {
         std::cout << error_squarecell::print_index(square.y, g_max-1);
         std::exit(EXIT_FAILURE);
     }
+    // Check side
     if (square.centered) {
         if (square.side % 2 == 0) {
             std::cout << "Side is not an odd number";
             std::exit(EXIT_FAILURE);
         }
-        else if (square.x-square.side/2 < 0 || square.x+square.side/2 > g_max-1) {
-            std::cout << error_squarecell::print_outside(square.x, square.side, 
+        else if ((square.x-square.side/2) < 0 || (square.x+square.side/2) > g_max-1) {
+            std::cout << error_squarecell::print_outside(square.x, square.side,
                                                          g_max-1);
             std::exit(EXIT_FAILURE);
         }
         else if ((square.y-square.side/2) < 0 || (square.y+square.side/2) > g_max-1) {
-            std::cout << error_squarecell::print_outside(square.y, square.side, 
+            std::cout << error_squarecell::print_outside(square.y, square.side,
                                                          g_max-1);
             std::exit(EXIT_FAILURE);
         }
     }
     else {
-        if ((square.x+square.side+1) > g_max-1) {
-            std::cout << error_squarecell::print_outside(square.x, square.side, 
+        if ((square.x+square.side-1) > g_max-1) {
+            std::cout << error_squarecell::print_outside(square.x, square.side,
                                                          g_max-1);
             std::exit(EXIT_FAILURE);
         }
-        else if ((square.y+square.side+1) > g_max-1) {
-            std::cout << error_squarecell::print_outside(square.y, square.side, 
+        else if ((square.y+square.side-1) > g_max-1) {
+            std::cout << error_squarecell::print_outside(square.y, square.side,
                                                          g_max-1);
             std::exit(EXIT_FAILURE);
         }
@@ -91,9 +95,9 @@ square square_get_superposition(square test) {
         }
     }
     else {
-        for (unsigned i = test.y+test.side+1; i >= test.y; i--) {
+        for (unsigned i = test.y+test.side-1; i >= test.y; i--) {
             for (unsigned j = test.x; j < test.x+test.side; j++) {
-                if (grid[j][g_max-1+i]) {
+                if (grid[j][g_max-1-i]) {
                     cross = {j, i, 1, 1};
                     return cross;
                 }
@@ -107,30 +111,30 @@ square square_get_superposition(square test) {
 bool square_superposition(square s1, square s2) {
     // check x
     int xmin, x1min, x2min;
-    x1min = s1.centered ? s1.x+s1.side/2 : s1.x;
-    x2min = s2.centered ? s2.x+s2.side/2 : s2.x;
+    x1min = s1.centered ? s1.x-s1.side/2 : s1.x;
+    x2min = s2.centered ? s2.x-s2.side/2 : s2.x;
     int xmax;
     if (x1min < x2min) {
         xmin = x2min;
-        xmax = s1.centered ? s1.x+s1.side/2 : s1.x+s1.side+1;
+        xmax = s1.centered ? s1.x+s1.side/2 : s1.x+s1.side-1;
     }
     else {
         xmin = x1min;
-        xmax = s2.centered ? s2.x+s2.side/2 : s2.x+s2.side+1;
+        xmax = s2.centered ? s2.x+s2.side/2 : s2.x+s2.side-1;
     }
     if (xmax >= xmin) {
         // check y
         int ymin, y1min, y2min;
-        y1min = s1.centered ? s1.y+s1.side/2 : s1.y;
-        y2min = s2.centered ? s2.y+s2.side/2 : s2.y;
+        y1min = s1.centered ? s1.y-s1.side/2 : s1.y;
+        y2min = s2.centered ? s2.y-s2.side/2 : s2.y;
         int ymax;
         if (y1min < y2min) {
             ymin = y2min;
-            ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side+1;
+            ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side-1;
         }
         else {
             ymin = y1min;
-            ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s2.side+1;
+            ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s2.side-1;
         }
         if (ymax >= ymin) {
             return true;
@@ -139,14 +143,15 @@ bool square_superposition(square s1, square s2) {
     return false;
 }
 
+// function to check if s2 is contained in s1 (not on border) s2 centered, s1 not
 bool square_contains(square s1, square s2) {
-    if (s2.x+s2.side/2 <= s1.x)
+    if (s2.x-s2.side/2 <= s1.x)
         return false;
-    else if (s2.x+s2.side/2 >= s1.x+s1.side+1)
+    else if (s2.x+s2.side/2 >= s1.x+s1.side-1)
         return false;
-    else if (s2.y+s2.side/2 <= s1.y)
+    else if (s2.y-s2.side/2 <= s1.y)
         return false;
-    else if (s2.y+s2.side/2 >= s1.y+s1.side+1)
+    else if (s2.y+s2.side/2 >= s1.y+s1.side-1)
         return false;
     return true;
 }
@@ -154,17 +159,17 @@ bool square_contains(square s1, square s2) {
 bool square_add(square square) {
     if (!square_validation(square)) return false;
     if (square.centered) {
-        for (unsigned i = square.y+square.side/2; i <= square.y+square.side/2; i++) {
-            for (unsigned j = square.x+square.side/2; j <= square.x+square.side/2;
+        for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
+            for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                grid[j][g_max-1+i] = true;
+                grid[j][g_max-1-i] = true;
             }
         }
     }
     else {
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                grid[j][g_max-1+i] = true;
+                grid[j][g_max-1-i] = true;
             }
         }
     }
@@ -174,28 +179,28 @@ bool square_add(square square) {
 bool square_delete(square square) {
     if (!square_validation(square)) return false;
     if (square.centered) {
-        for (unsigned i = square.y+square.side/2; i <= square.y+square.side/2; i++) {
-            for (unsigned j = square.x+square.side/2; j <= square.x+square.side/2;
+        for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
+            for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                if (!grid[j][g_max-1+i]) return false;
+                if (!grid[j][g_max-1-i]) return false;
             }
         }
-        for (unsigned i = square.y+square.side/2; i <= square.y+square.side/2; i++) {
-            for (unsigned j = square.x+square.side/2; j <= square.x+square.side/2;
+        for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
+            for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                grid[j][g_max-1+i] = false;
+                grid[j][g_max-1-i] = false;
             }
         }
     }
     else {
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                if (!grid[j][g_max-1+i]) return false;
+                if (!grid[j][g_max-1-i]) return false;
             }
         }
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                grid[j][g_max-1+i] = false;
+                grid[j][g_max-1-i] = false;
             }
         }
     }
