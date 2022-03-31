@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     test_nutrition.cc
  \author   Léo Brückl, Linus Crugnola
- \date     31.03.2022
- \brief    test_nutrition implementation
+ \version  1.0
 *****************************************************************/
 #include <cassert>
 #include <iostream>

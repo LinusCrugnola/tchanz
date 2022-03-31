@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     error_squarecell.cc
- \author   RB
- \date     31.03.2022
- \brief    error_squarecell implementation
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
  
 #include "error_squarecell.h"

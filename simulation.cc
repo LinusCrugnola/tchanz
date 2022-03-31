@@ -1,8 +1,7 @@
 /****************************************************************!
-  \file     simulation.cc
-  \author   Léo Brückl, Linus Crugnola
-  \date     31.03.2022
-  \brief    simulation implementation
+ \file     simulation.cc
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
 
 #include <fstream>

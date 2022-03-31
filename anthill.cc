@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     anthill.cc
  \author   Léo Brückl, Linus Crugnola
- \date     31.03.2022
- \brief    anthill implementation
+ \version  1.0
 *****************************************************************/
 
 #include "anthill.h"

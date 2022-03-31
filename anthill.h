@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     anthill.h
  \author   Léo Brückl, Linus Crugnola
- \date     31.03.2022
- \brief    anthill interface
+ \version  1.0
 *****************************************************************/
 
 #ifndef ANTHILL_H

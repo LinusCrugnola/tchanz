@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     message.h
- \author   RB
- \date     31.03.2022
- \brief    message interface
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
  
 #ifndef MESSAGE_H_INCLUDED
