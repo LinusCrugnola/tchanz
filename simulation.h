@@ -1,8 +1,7 @@
 /****************************************************************!
-  \file     simulation.h
-  \author   Léo Brückl, Linus Crugnola
-  \date     31.03.2022
-  \brief    simulation interface
+ \file     simulation.h
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
 
 #ifndef SIMULATION_H

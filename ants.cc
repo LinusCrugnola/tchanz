@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     ants.cc
  \author   Léo Brückl, Linus Crugnola
- \date     31.03.2022
- \brief    ants implementation
+ \version  1.0
 *****************************************************************/
 
 #include <iostream>

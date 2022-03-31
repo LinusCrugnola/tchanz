@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     error_squarecell.h
- \author   RB
- \date     31.03.2022
- \brief    error_squarecell interface
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
  
 #ifndef ERROR_SQUARECELL_H_INCLUDED

@@ -1,8 +1,7 @@
 /****************************************************************!
-  \file     test_squarecell.cc
-  \author   Léo Brückl, Linus Crugnola
-  \date     31.03.2022
-  \brief    squarecell test
+ \file     test_squarecell.cc
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
 
 #include "squarecell.h"

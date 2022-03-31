@@ -30,7 +30,7 @@ for file in files:
         describtion = file.replace('.cc','') + " implementation"
     elif file[-1] == "h":
         describtion = file.replace('.h','') + " interface"
-    fline = "/****************************************************************!\n \\file     "+file+"\n \\author   Léo Brückl, Linus Crugnola\n""\n \\version    "+"1.0"+"\n*****************************************************************/"
+    fline = "/****************************************************************!\n \\\\file     "+file+"\n \\\\author   Léo Brückl, Linus Crugnola\n \\\\version  1.0"+"\n*****************************************************************/"
     content = myfile.read()
     if content[0:10] != "/*********":
         new_content = fline + "\n \n" + content
@@ -41,8 +41,8 @@ for file in files:
     else:
         myfile.close()
         with open(path, "w") as myfile:
-            myregex = re.compile("\\d{2}\\.\\d{2}\\.\\d{4}")
-            myfile.write(myregex.sub(date.today().strftime("%d.%m.%Y"), content))
+            myregex = re.compile("\/\*{10,}[\s\S]*\*{10,}\/")
+            myfile.write(myregex.sub(fline, content))
 
 print("added headers for: ", end="")
 for file in files:

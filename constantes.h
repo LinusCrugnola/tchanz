@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     constantes.h
- \author   RB
- \date     31.03.2022
- \brief    constantes interface
+ \author   Léo Brückl, Linus Crugnola
+ \version  1.0
 *****************************************************************/
  
 #ifndef CONSTANTES_H_INCLUDED

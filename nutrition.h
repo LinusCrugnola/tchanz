@@ -1,8 +1,7 @@
 /****************************************************************!
  \file     nutrition.h
  \author   Léo Brückl, Linus Crugnola
- \date     31.03.2022
- \brief    nutrition interface
+ \version  1.0
 *****************************************************************/
 #ifndef NUTRITION_H
 #define NUTRITION_H
