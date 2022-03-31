@@ -13,16 +13,22 @@
 
 using namespace std;
 
-Generator Generator::data_validation(unsigned xg, unsigned yg, const square& anthill_position, const unsigned& home){
+//These functions verify the data of every ant. An ant must fit in the grid
+//A generator ant must be in an given anthill
+
+Generator Generator::data_validation(unsigned xg, unsigned yg, 
+                                    const square& anthill_position, 
+                                    const unsigned& home){
     square position = {xg, yg, sizeG, 1};
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
-        cout << message::generator_overlap(position.x, position.y, overlap.x, overlap.y) ;
+        cout << message::generator_overlap(position.x, position.y, overlap.x, 
+                                            overlap.y);
         exit(EXIT_FAILURE);
     }
     if(!square_contains(anthill_position, position)){
-        cout << message::generator_not_within_home(position.x, position.y, home) ;
+        cout << message::generator_not_within_home(position.x, position.y, home);
         exit(EXIT_FAILURE);
     }
     // Generate ant
@@ -40,7 +46,8 @@ Collector Collector::data_validation(istringstream& data){
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
-        cout << message::collector_overlap(position.x, position.y, overlap.x, overlap.y) ;
+        cout << message::collector_overlap(position.x, position.y, 
+                                            overlap.x, overlap.y);
         exit(EXIT_FAILURE);
     }
     // Generate ant
@@ -48,18 +55,21 @@ Collector Collector::data_validation(istringstream& data){
     return collector;
 }
 
-Defensor Defensor::data_validation(istringstream& data, const square& anthill_position, const unsigned& home){
+Defensor Defensor::data_validation(istringstream& data, 
+                                const square& anthill_position, 
+                                const unsigned& home){
     square position = {0, 0, sizeD, 1};
     unsigned age;
     if(!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
         square overlap = square_get_superposition(position);
-        cout << message::defensor_overlap(position.x, position.y, overlap.x, overlap.y) ;
+        cout << message::defensor_overlap(position.x, position.y, 
+                                        overlap.x, overlap.y);
         exit(EXIT_FAILURE);
     }
     if(!square_contains(anthill_position, position)){
-        cout << message::defensor_not_within_home(position.x, position.y, home) ;
+        cout << message::defensor_not_within_home(position.x, position.y, home);
         exit(EXIT_FAILURE);
     }
     // Generate ant
@@ -73,7 +83,7 @@ Predator Predator::data_validation(istringstream& data){
     if(!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
     square_validation(position); // throws error if position invalid
     if(square_superposition(position)){
-        cout << message::predator_overlap(position.x, position.y) ;
+        cout << message::predator_overlap(position.x, position.y);
         exit(EXIT_FAILURE);
     }
     // Generate ant
