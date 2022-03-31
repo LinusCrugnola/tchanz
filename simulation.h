@@ -9,33 +9,25 @@
 #define SIMULATION_H
 
 #include <string>
-#include <iostream>
-#include <fstream>
 #include <vector>
-#include <sstream>
 
-#include "squarecell.h"
-#include "constantes.h"
-#include "nutrition.h"
 #include "anthill.h"
+#include "nutrition.h"
 
-class Simulation
-{
+class Simulation {
 private:
-
     // Anthill instances
     std::vector<Anthill> anthill;
 
     // Nutrition instances
     std::vector<Nutrition> nutrition;
-    
-    // private functions:
+
+    // function to decode one line of configfile
     void decode_line(std::string line);
+
 public:
+    // function to read the configfile
     void read_configfile(std::string filename);
 };
-
-
-
 
 #endif
