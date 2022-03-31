@@ -1,19 +1,15 @@
 /****************************************************************!
-	\file     squarecell.h
-	\author   Léo Brückl, Linus Crugnola
-	\date     30.03.2022
-	\brief    squarecell interface
+    \file     squarecell.h
+    \author   Léo Brückl, Linus Crugnola
+    \date     31.03.2022
+    \brief    squarecell interface
 *****************************************************************/
 
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
-// module constants
-constexpr short unsigned g_dim = 7;
-constexpr short unsigned g_max = 128;
-
 // Concrete type square
-struct square{
+struct square {
     // coordinates (point)
     unsigned x;
     unsigned y;
@@ -23,19 +19,23 @@ struct square{
     bool centered;
 };
 
+// module constants
+constexpr short unsigned g_dim = 7;
+constexpr short unsigned g_max = 128;
 
-// Validation of a square (returns false if square invalid)
+// Validation of a square, function throws error
 bool square_validation(square square);
-
 
 // Test if a square superposes with an existing square (true if superposition)
 bool square_superposition(square square);
+
+// Test if two squares superpose (true if superposition)
 bool square_superposition(square square1, square square2);
 
 // get first square that superposes (biggest y, smallest x)
 square square_get_superposition(square test);
 
-// Test if a square contains another square
+// Test if first square contains second square
 bool square_contains(square s1, square s2);
 
 // Add a square to the grid (returns false if square invalid or superposition)
