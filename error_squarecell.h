@@ -1,8 +1,8 @@
-/****************************************************************!
- \file     error_squarecell.h
- \author   Léo Brückl, Linus Crugnola
- \version  1.0
-*****************************************************************/
+/******************************************************************************!
+* @file     error_squarecell.h
+* @author   Léo Brückl, Linus Crugnola
+* @version  1.0
+*******************************************************************************/
  
 #ifndef ERROR_SQUARECELL_H_INCLUDED
 #define ERROR_SQUARECELL_H_INCLUDED

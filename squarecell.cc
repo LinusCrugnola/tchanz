@@ -1,9 +1,8 @@
-/****************************************************************!
-  \file     squarecell.cc
-  \author   Léo Brückl, Linus Crugnola
-  \date     31.03.2022
-  \brief    squarecell implementation
-*****************************************************************/
+/******************************************************************************!
+* @file     squarecell.cc
+* @author   Léo Brückl, Linus Crugnola
+* @version  1.0
+*******************************************************************************/
 
 #include <iostream>
 #include <vector>
