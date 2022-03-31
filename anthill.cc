@@ -36,7 +36,7 @@ unsigned Anthill::anthill_get_ants() {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-//Function which verifies if an ant fits in the grid. Then it is put in the respected category list of an anthill
+//Function which verifies if an ant fits in the grid. Then it is put in the respected class list of an anthill
 void Anthill::ant_validation(istringstream& data, unsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i=0, total = this->nbC;
