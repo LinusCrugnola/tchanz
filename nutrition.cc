@@ -10,7 +10,8 @@
 
 using namespace std;
 
-//Verification if a food point fits in the grid and if it has a distance bigger than 1 from the border. Then it verifies if it overlaps with another entity
+//Verification if a food point fits in the grid and if it has a distance bigger than 1 
+//from the border. Then it verifies if it overlaps with another entity.
 Nutrition Nutrition::data_validation(istringstream& data){
     unsigned x_coor, y_coor;
     if(!(data >> x_coor >> y_coor)) cout << "reading error!" << endl;

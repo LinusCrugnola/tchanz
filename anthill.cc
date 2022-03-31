@@ -12,6 +12,15 @@
 
 using namespace std;
 
+//Anthill constructor
+Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
+                unsigned nbP, unsigned xg, unsigned yg, unsigned home)
+                : position(position), total_food(total_food), nbC(nbC), 
+                nbD(nbD), nbP(nbP)
+{
+    this->generator.push_back(Generator::data_validation(xg, yg, position, home));
+}
+
 //Verification of an anthill's data. If it fits in the grid AND if it overlaps with another anthill or entity
 //Once validated, the anthill is inserted in the anthill list
 Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthills, unsigned home) {
@@ -19,10 +28,11 @@ Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthill
     unsigned xg, yg;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
-    if (!(data >> anthill.x >> anthill.y >> anthill.side >> xg >> yg >> total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
+    if (!(data >> anthill.x >> anthill.y >> anthill.side >> xg >> yg >> total_food >> 
+        nbC >> nbD >> nbP)) cout << "reading error!" << endl;
     square_validation(anthill); // throws error
     for (unsigned i(0); i < anthills.size(); i++) {
-        if (square_superposition(anthills[i].get_anthill_type(), anthill)) {
+        if (square_superposition(anthills[i].get_position(), anthill)) {
             std::cout << message::homes_overlap(i, anthills.size());
             exit(EXIT_FAILURE);
         }
@@ -55,7 +65,7 @@ void Anthill::ant_validation(istringstream& data, unsigned home) {
             }
             break;
         case defensor:
-            this->defensors.push_back(Defensor::data_validation(data, this->anthill_type, home));
+            this->defensors.push_back(Defensor::data_validation(data, this->position, home));
             i += 1;
             if (i >= total) {
                 state = predator;
