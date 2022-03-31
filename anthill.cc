@@ -20,8 +20,8 @@ Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nb
     this->generator.push_back(Generator::data_validation(xg, yg, position, home));
 }
 
-//Verification of an anthill's data. If it fits in the grid AND if it overlaps with another anthill or entity
-//Once validated, the anthill is inserted in the anthill list
+//Verification of an anthill's data. If it fits in the grid AND if it overlaps 
+//with another anthill or entity
 Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthills, unsigned home) {
     square anthill = {0, 0, 0, 0};
     unsigned xg, yg;

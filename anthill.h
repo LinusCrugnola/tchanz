@@ -31,10 +31,14 @@ public:
     square get_position() const {
         return position;
     }
-
+    //Verification of an anthill's data. If it fits in the grid AND if it overlaps 
+    //with another anthill or entity
     static Anthill anthill_validation(std::istringstream& data,
                                       std::vector<Anthill> anthills, unsigned home);
+    
     unsigned anthill_get_ants();
+    //Function which verifies if an ant fits in the grid. Then it is put in 
+    //the respected class list of an anthill
     void ant_validation(std::istringstream& data, unsigned home);
 
     Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
