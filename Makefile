@@ -53,4 +53,4 @@ runtests:
 clean:
 	@echo CLEAN
 	@rm -f ./*.o
-	@rm -f $(TARGET)
+	@rm $(TARGET_NAME)
