@@ -29,6 +29,13 @@ public:
      * @param position 2D coordinates (center) and side length
      */
     Ant(square position);
+
+    /**
+     * @brief Destroy the Ant object
+     * 
+     * @note Frees the square occupied by the ant
+     */
+    virtual ~Ant();
 };
 
 /**
