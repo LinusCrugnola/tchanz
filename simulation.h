@@ -49,6 +49,11 @@ public:
      * @brief Default simulation constructor
      */
     Simulation(){}
+
+    /**
+     * @brief Destroy the Simulation object
+     */
+    ~Simulation();
 };
 
 #endif

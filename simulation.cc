@@ -70,3 +70,15 @@ void Simulation::handle_line(string line) {
             break;
     }
 }
+
+Simulation::~Simulation(){
+    // free all the memory
+    for(auto& hill : this->anthill){
+        delete hill;
+        hill = nullptr;
+    }
+    for(auto& food : this->nutrition){
+        delete food;
+        food = nullptr;
+    }
+}
