@@ -21,7 +21,7 @@ Nutrition::Nutrition(unsigned x_coor, unsigned y_coor)
 }
 
 Nutrition* Nutrition::data_validation(istringstream& data) {
-    Nutrition* ptr = nullptr;
+    Nutrition* nutrition = nullptr;
     unsigned x_coor, y_coor;
     if (!(data >> x_coor >> y_coor)) cout << "reading error!" << endl;
 
@@ -33,6 +33,6 @@ Nutrition* Nutrition::data_validation(istringstream& data) {
     }
 
     // Generate nutrition
-    ptr = new Nutrition(x_coor, y_coor);
-    return ptr;
+    nutrition = new Nutrition(x_coor, y_coor);
+    return nutrition;
 }
