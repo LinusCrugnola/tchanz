@@ -15,12 +15,18 @@
 #include "ants.h"
 #include "squarecell.h"
 
+/**
+ * @class Anthill
+ */
 class Anthill {
 private:
     square position;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
 
+    /**
+     * @brief vector of ants that belong to hill
+     */
     std::vector<Ant*> ants;
 
 public:
@@ -52,7 +58,16 @@ public:
     void ant_validation(std::istringstream& data, unsigned home);
 
     /**
-     * @brief Anthill constructor
+     * @brief Construct a new Anthill object
+     * 
+     * @param position 2D coordinates (center) and side length
+     * @param total_food 
+     * @param nbC number of collector ants
+     * @param nbD number of defensor ants
+     * @param nbP number of predator ants
+     * @param xg x coordinate of generator
+     * @param yg y coordinate of generator
+     * @param home number of hill (starts at 0)
      */
     Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
             unsigned nbP, unsigned xg, unsigned yg, unsigned home);

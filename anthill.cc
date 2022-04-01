@@ -6,9 +6,10 @@
 * @date     01.04.2022
 *******************************************************************************/
 
+#include "anthill.h"
+
 #include <iostream>
 
-#include "anthill.h"
 #include "message.h"
 
 using namespace std;
