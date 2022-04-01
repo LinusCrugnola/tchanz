@@ -25,15 +25,16 @@ class Nutrition
          * bigger than 1 from the border. 
          * Also verifies if it overlaps with another entity.
          */
-        static Nutrition data_validation(std::istringstream& data);
+        static Nutrition* data_validation(std::istringstream& data);
 
         /**
          * @brief Construct a new Nutrition object
-         */
+         */        
         Nutrition(unsigned x_coor, unsigned y_coor) : x(x_coor) , y(y_coor)
         {
             square_add({x, y, 1, 1});
         }
+        ~Nutrition(){square_delete({this->x, this->y, 1,0});}
 };
 
 #endif

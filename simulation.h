@@ -18,12 +18,12 @@ private:
     /**
      * @brief Anthill instances 
      */
-    std::vector<Anthill> anthill;
+    std::vector<Anthill*> anthill;
 
     /**
      * @brief Nutrition instances
      */
-    std::vector<Nutrition> nutrition;
+    std::vector<Nutrition*> nutrition;
 
     /**
      * @brief Function to decode one line of configfile

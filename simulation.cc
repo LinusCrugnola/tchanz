@@ -52,14 +52,14 @@ void Simulation::decode_line(string line) {
             break;
         case anthill:
             this->anthill.push_back(Anthill::anthill_validation(data,this->anthill,i));
-            total_ants = this->anthill[i].Anthill::anthill_get_ants()-1;
+            total_ants = this->anthill[i]->Anthill::anthill_get_ants()-1;
             j = 0;
             i += 1;
             if (total_ants == 0) state = i >= total ? finale : anthill;
             else state = ant;
             break;
         case ant:
-            this->anthill[i-1].Anthill::ant_validation(data, i-1);
+            this->anthill[i-1]->Anthill::ant_validation(data, i-1);
             j += 1;
             if (j >= total_ants) state = i >= total ? finale : anthill;
             break;
