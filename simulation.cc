@@ -6,11 +6,12 @@
 * @date     01.04.2022
 *******************************************************************************/
 
+#include "simulation.h"
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-#include "simulation.h"
 #include "constantes.h"
 #include "squarecell.h"
 
@@ -22,14 +23,14 @@ void Simulation::read_configfile(std::string filename) {
         string line;
         while (getline(file >> ws, line)) {
             if (line[0] == '#') continue;
-            Simulation::decode_line(line);
+            Simulation::handle_line(line);
         }
     }
     else
         cout << "error could not open file!" << endl;
 }
 
-void Simulation::decode_line(string line) {
+void Simulation::handle_line(string line) {
     istringstream data(line);
     enum Reading_states {nbN, nourriture, nbF, anthill, ant, finale};
     static unsigned state = nbN;

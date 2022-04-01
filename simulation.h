@@ -15,6 +15,11 @@
 #include "anthill.h"
 #include "nutrition.h"
 
+/**
+ * @class simulation
+ * 
+ * @brief Class that can create the base scenario of the map from a configfile
+ */
 class Simulation {
 private:
     /**
@@ -28,15 +33,22 @@ private:
     std::vector<Nutrition*> nutrition;
 
     /**
-     * @brief Function to decode one line of configfile
+     * @brief Function to distribute one line of the configfile
+     * 
+     * @param line string of one line
      */
-    void decode_line(std::string line);
+    void handle_line(std::string line);
 
 public:
     /**
      * @brief Function to read the configfile
      */
     void read_configfile(std::string filename);
+
+    /**
+     * @brief Default simulation constructor
+     */
+    Simulation(){}
 };
 
 #endif
