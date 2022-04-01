@@ -15,17 +15,25 @@
 
 class Simulation {
 private:
-    // Anthill instances
+    /**
+     * @brief Anthill instances 
+     */
     std::vector<Anthill> anthill;
 
-    // Nutrition instances
+    /**
+     * @brief Nutrition instances
+     */
     std::vector<Nutrition> nutrition;
 
-    // function to decode one line of configfile
+    /**
+     * @brief Function to decode one line of configfile
+     */
     void decode_line(std::string line);
 
 public:
-    // function to read the configfile
+    /**
+     * @brief Function to read the configfile
+     */
     void read_configfile(std::string filename);
 };
 

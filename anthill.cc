@@ -11,7 +11,6 @@
 
 using namespace std;
 
-//Anthill constructor
 Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
                 unsigned nbP, unsigned xg, unsigned yg, unsigned home)
                 : position(position), total_food(total_food), nbC(nbC), 
@@ -20,8 +19,6 @@ Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nb
     this->generator.push_back(Generator::data_validation(xg, yg, position, home));
 }
 
-//Verification of an anthill's data. If it fits in the grid AND if it overlaps 
-//with another anthill or entity
 Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthills, unsigned home) {
     square anthill = {0, 0, 0, 0};
     unsigned xg, yg;
@@ -40,13 +37,10 @@ Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthill
     return anthill_;
 }
 
-//This function returns the number of ants in anthill
 unsigned Anthill::anthill_get_ants() {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-//Function which verifies if an ant fits in the grid. Then it is put in the respected 
-//class list of an anthill
 void Anthill::ant_validation(istringstream& data, unsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i=0, total = this->nbC;
