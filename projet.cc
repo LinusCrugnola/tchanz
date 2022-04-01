@@ -15,9 +15,22 @@
 
 using namespace std;
 
-// Function to get name of textfile (ending must be .txt)
+/**
+ * @brief Main module of Tchanz project (highest priority)
+ */
+
+/**
+ * @brief Get the name of the testfile
+ * 
+ * @param argc 
+ * @param argv 
+ * @return string 
+ */
 string get_testfile(int argc, char **argv);
 
+/**
+ * @brief project main function
+ */
 int main(int argc, char **argv){
     Simulation simulation;
     simulation.read_configfile(get_testfile(argc, argv));
