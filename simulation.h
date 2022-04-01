@@ -19,7 +19,7 @@ private:
     std::vector<Anthill> anthill;
 
     // Nutrition instances
-    std::vector<Nutrition> nutrition;
+    std::vector<Nutrition*> nutrition;
 
     // function to decode one line of configfile
     void decode_line(std::string line);

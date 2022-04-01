@@ -212,7 +212,7 @@ void print_grid() {
         std::cout << std::endl;
         for (unsigned j = 0; j < g_max; j++) {
             if (grid[j][i]) {
-                std::cout << "\033[41;1mX\033[0m";
+                std::cout << "\033[41;1mO\033[0m";
             }
             else {
                 std::cout << "\033[42;1mX\033[0m";
