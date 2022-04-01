@@ -17,6 +17,8 @@
 
 /**
  * @class Anthill
+ * 
+ * @brief Anthill contains different ants
  */
 class Anthill {
 private:
