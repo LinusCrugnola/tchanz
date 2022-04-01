@@ -16,7 +16,7 @@
 class Simulation {
 private:
     // Anthill instances
-    std::vector<Anthill> anthill;
+    std::vector<Anthill*> anthill;
 
     // Nutrition instances
     std::vector<Nutrition*> nutrition;

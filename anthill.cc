@@ -17,27 +17,32 @@ Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nb
                 : position(position), total_food(total_food), nbC(nbC), 
                 nbD(nbD), nbP(nbP)
 {
-    this->generator.push_back(Generator::data_validation(xg, yg, position, home));
+    this->ants.push_back(Generator::data_validation(xg, yg, position, home));
 }
 
 //Verification of an anthill's data. If it fits in the grid AND if it overlaps 
 //with another anthill or entity
-Anthill Anthill::anthill_validation(istringstream& data, vector<Anthill> anthills, unsigned home) {
-    square anthill = {0, 0, 0, 0};
+Anthill* Anthill::anthill_validation(istringstream& data,
+                                     const vector<Anthill*>& hills_existing, const unsigned& home) {
+    Anthill* anthill = nullptr;
+    square position = {0, 0, 0, 0};
     unsigned xg, yg;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
-    if (!(data >> anthill.x >> anthill.y >> anthill.side >> xg >> yg >> total_food >> 
-        nbC >> nbD >> nbP)) cout << "reading error!" << endl;
-    square_validation(anthill); // throws error
-    for (unsigned i(0); i < anthills.size(); i++) {
-        if (square_superposition(anthills[i].get_position(), anthill)) {
-            std::cout << message::homes_overlap(i, anthills.size());
+    if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> 
+          total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
+
+    square_validation(position); // throws error
+
+    for (unsigned i(0); i < hills_existing.size(); i++) {
+        if (square_superposition(hills_existing[i]->get_position(), position)) {
+            std::cout << message::homes_overlap(i, hills_existing.size());
             exit(EXIT_FAILURE);
         }
     }
-    Anthill anthill_(anthill, total_food, nbC, nbD, nbP, xg, yg, home);
-    return anthill_;
+
+    anthill = new Anthill(position, total_food, nbC, nbD, nbP, xg, yg, home);
+    return anthill;
 }
 
 //This function returns the number of ants in anthill
@@ -56,7 +61,7 @@ void Anthill::ant_validation(istringstream& data, unsigned home) {
     }
     switch (state) {
         case collector:
-            this->collectors.push_back(Collector::data_validation(data));
+            this->ants.push_back(Collector::data_validation(data));
             i += 1;
             if (i >= total) {
                 state = defensor;
@@ -65,7 +70,7 @@ void Anthill::ant_validation(istringstream& data, unsigned home) {
             }
             break;
         case defensor:
-            this->defensors.push_back(Defensor::data_validation(data, this->position, home));
+            this->ants.push_back(Defensor::data_validation(data, this->position,home));
             i += 1;
             if (i >= total) {
                 state = predator;
@@ -74,7 +79,7 @@ void Anthill::ant_validation(istringstream& data, unsigned home) {
             }
             break;
         case predator:
-            this->predators.push_back(Predator::data_validation(data));
+            this->ants.push_back(Predator::data_validation(data));
             i += 1;
             if (i >= total) {
                 state = finale;
