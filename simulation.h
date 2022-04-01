@@ -49,6 +49,13 @@ public:
      * @brief Default simulation constructor
      */
     Simulation(){}
+
+    /**
+     * @brief Destroy the Simulation object
+     * 
+     * @note frees all the memory occupied by the simulation and its food & anthills
+     */
+    ~Simulation();
 };
 
 #endif

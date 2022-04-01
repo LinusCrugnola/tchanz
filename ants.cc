@@ -22,6 +22,10 @@ Ant::Ant(square position)
     square_add(position);
 };
 
+Ant::~Ant(){
+    square_delete(this->position);
+}
+
 Generator::Generator(square position)
     : Ant(position) {
     square_add(position);

@@ -87,3 +87,12 @@ void Anthill::ant_validation(istringstream& data, unsigned home) {
             break;
     }
 }
+
+Anthill::~Anthill(){
+    // destroy all ants
+    for(auto& ant : this->ants){
+        delete ant;
+        ant = nullptr;
+    }
+    square_delete(this->position);
+}

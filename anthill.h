@@ -17,6 +17,8 @@
 
 /**
  * @class Anthill
+ * 
+ * @brief Anthill contains different ants
  */
 class Anthill {
 private:
@@ -71,6 +73,13 @@ public:
      */
     Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
             unsigned nbP, unsigned xg, unsigned yg, unsigned home);
+
+    /**
+     * @brief Destroy the Anthill object
+     * 
+     * @note destroys all ants of the hill and frees the square in the grid
+     */
+    ~Anthill();
 };
 
 #endif
