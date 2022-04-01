@@ -32,7 +32,7 @@ for file in files:
         describtion = file.replace('.cc','') + " implementation"
     elif file[-1] == "h":
         describtion = file.replace('.h','') + " interface"
-    fline = "/******************************************************************************!\n* @file     "+file+"\n* @author   Léo Brückl <leo.bruckl@epfll.ch>            \n*           Linus Crugnola <linus.crugnola@epfl.ch>     \n* @version  1.0\n* @date     "+today.strftime("%d.%m.%Y")+"\n*******************************************************************************/"
+    fline = "/******************************************************************************!\n* @file     "+file+"\n* @author   Léo Brückl <leo.bruckl@epfl.ch>             \n*           Linus Crugnola <linus.crugnola@epfl.ch>     \n* @version  1.0\n* @date     "+today.strftime("%d.%m.%Y")+"\n*******************************************************************************/"
     content = myfile.read()
     if content[0:10] != "/*********":
         new_content = fline + "\n \n" + content

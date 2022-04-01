@@ -1,6 +1,6 @@
 /******************************************************************************!
  * @file     nutrition.cc
- * @author   Léo Brückl <leo.bruckl@epfll.ch>            70 %
+ * @author   Léo Brückl <leo.bruckl@epfl.ch>             70 %
  *           Linus Crugnola <linus.crugnola@epfl.ch>     30 %
  * @version  1.0
  * @date     01.04.2022
