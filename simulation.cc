@@ -1,7 +1,9 @@
 /******************************************************************************!
 * @file     simulation.cc
-* @author   Léo Brückl, Linus Crugnola
+* @author   Léo Brückl <leo.bruckl@epfll.ch>            40 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     60 %
 * @version  1.0
+* @date     01.04.2022
 *******************************************************************************/
 
 #include <fstream>

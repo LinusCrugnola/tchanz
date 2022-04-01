@@ -1,7 +1,8 @@
 /******************************************************************************!
 * @file     error_squarecell.h
-* @author   Léo Brückl, Linus Crugnola
+* @author   RB  
 * @version  1.0
+* @date     01.04.2022
 *******************************************************************************/
  
 #ifndef ERROR_SQUARECELL_H_INCLUDED

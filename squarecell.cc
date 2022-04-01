@@ -1,7 +1,9 @@
 /******************************************************************************!
 * @file     squarecell.cc
-* @author   Léo Brückl, Linus Crugnola
+* @author   Léo Brückl <leo.bruckl@epfll.ch>            50 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     50 %
 * @version  1.0
+* @date     01.04.2022
 *******************************************************************************/
 
 #include <iostream>

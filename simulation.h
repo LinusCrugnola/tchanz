@@ -1,7 +1,9 @@
 /******************************************************************************!
 * @file     simulation.h
-* @author   Léo Brückl, Linus Crugnola
+* @author   Léo Brückl <leo.bruckl@epfll.ch>            
+*           Linus Crugnola <linus.crugnola@epfl.ch>     
 * @version  1.0
+* @date     01.04.2022
 *******************************************************************************/
 
 #ifndef SIMULATION_H

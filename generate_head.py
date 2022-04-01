@@ -2,6 +2,8 @@ import os
 from datetime import date
 import re
 
+today=date.today()
+
 
 mypath = os.path.dirname(os.path.abspath(__file__))
 testpath = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +32,7 @@ for file in files:
         describtion = file.replace('.cc','') + " implementation"
     elif file[-1] == "h":
         describtion = file.replace('.h','') + " interface"
-    fline = "/******************************************************************************!\n* @file     "+file+"\n* @author   Léo Brückl, Linus Crugnola\n* @version  1.0"+"\n*******************************************************************************/"
+    fline = "/******************************************************************************!\n* @file     "+file+"\n* @author   Léo Brückl <leo.bruckl@epfll.ch>            \n*           Linus Crugnola <linus.crugnola@epfl.ch>     \n* @version  1.0\n* @date     "+today.strftime("%d.%m.%Y")+"\n*******************************************************************************/"
     content = myfile.read()
     if content[0:10] != "/*********":
         new_content = fline + "\n \n" + content
