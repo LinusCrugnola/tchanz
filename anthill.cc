@@ -6,10 +6,10 @@
 * @date     01.04.2022
 *******************************************************************************/
 
+#include <iostream>
+
 #include "anthill.h"
-#include "ants.h"
 #include "message.h"
-#include "squarecell.h"
 
 using namespace std;
 
@@ -22,7 +22,8 @@ Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nb
 }
 
 Anthill* Anthill::anthill_validation(istringstream& data,
-                                     const vector<Anthill*>& hills_existing, const unsigned& home) {
+                                     const vector<Anthill*>& hills_existing, const 
+                                     unsigned& home) {
     Anthill* anthill = nullptr;
     square position = {0, 0, 0, 0};
     unsigned xg, yg;

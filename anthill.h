@@ -9,13 +9,10 @@
 #ifndef ANTHILL_H
 #define ANTHILL_H
 
-#include <iostream>
 #include <sstream>
-#include <string>
 #include <vector>
 
 #include "ants.h"
-#include "error_squarecell.h"
 #include "squarecell.h"
 
 class Anthill {
@@ -33,7 +30,9 @@ public:
 
     /**
      * @brief Verification of an anthill's data. 
-     * If it fits in the grid AND if it overlaps with another anthill or entity
+     * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
+     * @param data input stream, existing anthills and number of home (starts at 0)
+     * @returns Pointer on new anthill object
      */
     static Anthill* anthill_validation(std::istringstream& data,
                                      const std::vector<Anthill*>& hills_existing, 
@@ -45,13 +44,15 @@ public:
     unsigned anthill_get_ants();
 
     /**
-     * @brief Function which verifies if an ant fits in the grid. 
-     * Then it is put in a class list of an anthill 
+     * @brief Function which verifies if an ant fits in the grid and doesn't overlap
+     * with another entity
+     * @param data input stream and number of home (starts at 0)
+     * @result if ant is valid, it is added to ants attribute of this hill
      */
     void ant_validation(std::istringstream& data, unsigned home);
 
     /**
-     * @brief Construct a new Anthill object 
+     * @brief Anthill constructor
      */
     Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
             unsigned nbP, unsigned xg, unsigned yg, unsigned home);
