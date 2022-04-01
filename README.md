@@ -64,3 +64,16 @@ for(unsigned i=0; i<anthill.size(); i++){ //anthill is the vector
   }
 }
 ```
+
+
+# Questions:
+- data_validation: return pointer or class (Problem with destructor)?
+- Describtion of functions: with @brief or just comment?
+```cpp
+/**
+ * @brief function describtion
+ */
+void foo();
+```
+- store ants in different vectors or store them in one big vector (encapsulation...)?
+- Unit tests in rendu or not?
