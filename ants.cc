@@ -1,6 +1,6 @@
 /******************************************************************************!
  * @file     ants.cc
- * @author   Léo Brückl <leo.bruckl@epfl.ch>            10 %
+ * @author   Léo Brückl <leo.bruckl@epfl.ch>             10 %
  *           Linus Crugnola <linus.crugnola@epfl.ch>     90 %
  * @version  1.0
  * @date     01.04.2022

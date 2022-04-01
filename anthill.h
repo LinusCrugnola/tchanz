@@ -1,6 +1,6 @@
 /******************************************************************************!
 * @file     anthill.h
-* @author   Léo Brückl <leo.bruckl@epfl.ch>            
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             
 *           Linus Crugnola <linus.crugnola@epfl.ch>     
 * @version  1.0
 * @date     01.04.2022

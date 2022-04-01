@@ -1,6 +1,6 @@
 /******************************************************************************!
 * @file     squarecell.h
-* @author   Léo Brückl <leo.bruckl@epfl.ch>            
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             
 *           Linus Crugnola <linus.crugnola@epfl.ch>     
 * @version  1.0
 * @date     01.04.2022
@@ -25,6 +25,9 @@ struct square {
     bool centered;
 };
 
+/**
+ * @brief Module constantes
+ */
 constexpr short unsigned g_dim = 7;
 constexpr short unsigned g_max = 128;
 

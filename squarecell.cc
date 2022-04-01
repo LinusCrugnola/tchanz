@@ -1,8 +1,8 @@
 /******************************************************************************!
 * @file     squarecell.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>            50 %
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             50 %
 *           Linus Crugnola <linus.crugnola@epfl.ch>     50 %
-* @version  1.0
+* @version  1.2
 * @date     01.04.2022
 *******************************************************************************/
 
