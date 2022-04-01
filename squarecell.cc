@@ -6,18 +6,20 @@
 * @date     01.04.2022
 *******************************************************************************/
 
+#include "squarecell.h"
+
 #include <iostream>
 #include <vector>
 
-#include "squarecell.h"
 #include "error_squarecell.h"
 
-// definition of grid
+/**
+ * @brief unnamed namespace with the implementation of the grid
+ */
 namespace {
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
 
-// functions
 bool square_validation(square square) {
     // Check the point
     if (square.x < 0 || square.x > (g_max-1)) {
