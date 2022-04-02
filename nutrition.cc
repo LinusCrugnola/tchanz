@@ -15,8 +15,8 @@
 
 using namespace std;
 
-Nutrition::Nutrition(unsigned x_coor, unsigned y_coor)
-    : x(x_coor), y(y_coor) {
+Nutrition::Nutrition(coord x, coord y)
+    : x(x), y(y) {
     square_add({x, y, 1, 1});
 }
 

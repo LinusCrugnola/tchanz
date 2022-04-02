@@ -26,13 +26,13 @@ Ant::~Ant(){
     square_delete(this->position);
 }
 
-Generator::Generator(square position)
+Generator::Generator(csquare position)
     : Ant(position) {
     square_add(position);
 }
 
-Ant* Generator::data_validation(unsigned xg, unsigned yg,
-                                const square& anthill_position,
+Ant* Generator::data_validation(coord xg, coord yg,
+                                csquare anthill_position,
                                 const unsigned& home) {
     Ant* generator = nullptr;
     square position = {xg, yg, sizeG, 1};
@@ -56,7 +56,7 @@ Ant* Generator::data_validation(unsigned xg, unsigned yg,
     return generator;
 }
 
-Collector::Collector(square position, unsigned age, Etat_collector food)
+Collector::Collector(csquare position, unsigned age, Etat_collector food)
     : Ant(position), age(age), food(food) {
     square_add(position);
 }
@@ -85,13 +85,13 @@ Ant* Collector::data_validation(istringstream& data) {
     return collector;
 }
 
-Defensor::Defensor(square position, unsigned age)
+Defensor::Defensor(csquare position, unsigned age)
     : Ant(position), age(age) {
     square_add(position);
 }
 
 Ant* Defensor::data_validation(istringstream& data,
-                               const square& anthill_position,
+                               csquare anthill_position,
                                const unsigned& home) {
     Ant* defensor = nullptr;
     square position = {0, 0, sizeD, 1};
@@ -117,7 +117,7 @@ Ant* Defensor::data_validation(istringstream& data,
     return defensor;
 }
 
-Predator::Predator(square position, unsigned age)
+Predator::Predator(csquare position, unsigned age)
     : Ant(position), age(age) {
     square_add(position);
 }

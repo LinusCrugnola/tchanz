@@ -37,7 +37,7 @@ public:
     /**
      * @brief Construct a new Nutrition object
      */
-    Nutrition(unsigned x_coor, unsigned y_coor);
+    Nutrition(coord x, coord y);
 
     /**
      * @brief Destroy the Nutrition object

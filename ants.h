@@ -53,7 +53,7 @@ public:
      * @param coordinates, position of anthill and number of anthill 
      * @returns pointer to new ant object
      */
-    static Ant* data_validation(unsigned xg, unsigned yg, const square& 
+    static Ant* data_validation(coord xg, coord yg, csquare 
                                 anthill_position, const unsigned& home);
 
     /**
@@ -61,7 +61,7 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Generator(square position);
+    Generator(csquare position);
 };
 
 /**
@@ -91,7 +91,7 @@ public:
      * @param age 
      * @param food a collector can initially be empty or loaded
      */
-    Collector(square position, unsigned age, Etat_collector food);
+    Collector(csquare position, unsigned age, Etat_collector food);
 };
 
 /**
@@ -111,7 +111,7 @@ public:
      * @param input data stream, position and number of anthill
      * @returns pointer to new ant object
      */
-    static Ant* data_validation(std::istringstream& data, const square& 
+    static Ant* data_validation(std::istringstream& data, csquare 
                                 anthill_position, const unsigned& home);
 
     /**
@@ -120,7 +120,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age 
      */
-    Defensor(square position, unsigned age);
+    Defensor(csquare position, unsigned age);
 };
 
 /**
@@ -149,7 +149,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age 
      */
-    Predator(square position, unsigned age);
+    Predator(csquare position, unsigned age);
 };
 
 #endif

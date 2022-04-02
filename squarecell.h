@@ -31,6 +31,11 @@ struct square {
 typedef const square& csquare;
 
 /**
+ * @brief define reference on coordinate
+ */
+typedef const unsigned& coord;
+
+/**
  * @brief Constants of the module
  */
 constexpr short unsigned g_dim = 7;
