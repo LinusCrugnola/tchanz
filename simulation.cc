@@ -32,7 +32,7 @@ void Simulation::read_configfile(const std::string& filename) {
 
 void Simulation::handle_line(const string& line) {
     istringstream data(line);
-    enum Reading_states {nbN, food, nbF, anthill, ant, finale};
+    enum Reading_states {nbN, nutrition, nbF, anthill, ant, finale};
     static unsigned state = nbN;
     static unsigned i = 0, total = 0;
     static unsigned j = 0, total_ants;
@@ -41,9 +41,9 @@ void Simulation::handle_line(const string& line) {
         case nbN: 
             if (!(data >> total)) cout << "reading error!" << endl;   
             else i = 0;
-            state = total == 0 ? nbF : food;
+            state = total == 0 ? nbF : nutrition;
             break;
-        case food:
+        case nutrition:
             this->nutrition.push_back(Nutrition::data_validation(data));
             i += 1;
             if (i >= total) state = nbF;
