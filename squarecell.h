@@ -26,7 +26,17 @@ struct square {
 };
 
 /**
- * @brief Module constantes
+ * @brief define a constant reference on square
+ */
+typedef const square& csquare;
+
+/**
+ * @brief define reference on coordinate
+ */
+typedef const unsigned& coord;
+
+/**
+ * @brief Constants of the module
  */
 constexpr short unsigned g_dim = 7;
 constexpr short unsigned g_max = 128;
@@ -38,28 +48,28 @@ constexpr short unsigned g_max = 128;
  * 
  * @returns bool: true if square is valild
  */
-bool square_validation(square square);
+bool square_validation(csquare square);
 
 /**
  * @brief Checks if a square superposes with an existing square in the grid
  * 
  * @returns Bool: true if there's a superposition
  */
-bool square_superposition(square square);
+bool square_superposition(csquare square);
 
 /**
  * @brief Test if two squares superpose 
  * 
  * @returns Bool: true if there's a superpostion
  */
-bool square_superposition(square square1, square square2);
+bool square_superposition(csquare square1, csquare square2);
 
 /**
  * @brief get the point where a square superposes in the grid
  * 
  * @returns Gets first point where squares superpose (biggest y, smallest x)
  */
-square square_get_superposition(square test);
+square square_get_superposition(csquare test);
 
 /**
  * @brief Test if the first square contains a second square
@@ -68,26 +78,25 @@ square square_get_superposition(square test);
  * 
  * @note the borders of the squares cannot overlap
  */
-bool square_contains(square s1, square s2);
+bool square_contains(csquare s1, csquare s2);
 
 /**
  * @brief Add a square to the grid 
  * 
  * @returns Bool: false if a square is invalid or that there's a superposition 
  */
-bool square_add(square square);
+bool square_add(csquare square);
 
 /**
  * @brief Deletes a square from the grid 
  * 
  * @returns Bool: false if there's no square or square invalid
  */
-bool square_delete(square square);
+bool square_delete(csquare square);
 
 /**
  * @brief Functions to debug the module
  */
-void set_coordinate(unsigned x, unsigned y);
 void print_grid();
 
 #endif

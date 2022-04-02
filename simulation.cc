@@ -17,7 +17,7 @@
 
 using namespace std;
 
-void Simulation::read_configfile(std::string filename) {
+void Simulation::read_configfile(const std::string& filename) {
     ifstream file(filename);
     if (!file.fail()) {
         string line;
@@ -30,9 +30,9 @@ void Simulation::read_configfile(std::string filename) {
         cout << "error could not open file!" << endl;
 }
 
-void Simulation::handle_line(string line) {
+void Simulation::handle_line(const string& line) {
     istringstream data(line);
-    enum Reading_states {nbN, nourriture, nbF, anthill, ant, finale};
+    enum Reading_states {nbN, nutrition, nbF, anthill, ant, finale};
     static unsigned state = nbN;
     static unsigned i = 0, total = 0;
     static unsigned j = 0, total_ants;
@@ -41,9 +41,9 @@ void Simulation::handle_line(string line) {
         case nbN: 
             if (!(data >> total)) cout << "reading error!" << endl;   
             else i = 0;
-            state = total == 0 ? nbF : nourriture;
+            state = total == 0 ? nbF : nutrition;
             break;
-        case nourriture:
+        case nutrition:
             this->nutrition.push_back(Nutrition::data_validation(data));
             i += 1;
             if (i >= total) state = nbF;

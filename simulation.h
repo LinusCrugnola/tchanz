@@ -37,13 +37,13 @@ private:
      * 
      * @param line string of one line
      */
-    void handle_line(std::string line);
+    void handle_line(const std::string& line);
 
 public:
     /**
      * @brief Function to read the configfile
      */
-    void read_configfile(std::string filename);
+    void read_configfile(const std::string& filename);
 
     /**
      * @brief Default simulation constructor

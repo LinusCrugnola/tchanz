@@ -20,7 +20,7 @@ namespace {
     std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
 }
 
-bool square_validation(square square) {
+bool square_validation(csquare square) {
     // Check the point
     if (square.x < 0 || square.x > (g_max-1)) {
         std::cout << error_squarecell::print_index(square.x, g_max-1);
@@ -62,7 +62,7 @@ bool square_validation(square square) {
     return true;
 }
 
-bool square_superposition(square square) {
+bool square_superposition(csquare square) {
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
             for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
@@ -85,7 +85,7 @@ bool square_superposition(square square) {
     return false;
 }
 
-square square_get_superposition(square test) {
+square square_get_superposition(csquare test) {
     square cross;
     if (test.centered) {
         for (unsigned i = test.y+test.side/2; i >= test.y-test.side/2; i--) {
@@ -111,7 +111,7 @@ square square_get_superposition(square test) {
     return {500, 500, 0, 0};
 }
 
-bool square_superposition(square s1, square s2) {
+bool square_superposition(csquare s1, csquare s2) {
     // check x
     int xmin, x1min, x2min;
     x1min = s1.centered ? s1.x-s1.side/2 : s1.x;
@@ -146,7 +146,7 @@ bool square_superposition(square s1, square s2) {
     return false;
 }
 
-bool square_contains(square s1, square s2) {
+bool square_contains(csquare s1, csquare s2) {
     if (s2.x-s2.side/2 <= s1.x)
         return false;
     else if (s2.x+s2.side/2 >= s1.x+s1.side-1)
@@ -158,7 +158,7 @@ bool square_contains(square s1, square s2) {
     return true;
 }
 
-bool square_add(square square) {
+bool square_add(csquare square) {
     if (!square_validation(square)) return false;
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
@@ -178,7 +178,7 @@ bool square_add(square square) {
     return true;
 }
 
-bool square_delete(square square) {
+bool square_delete(csquare square) {
     if (!square_validation(square)) return false;
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
