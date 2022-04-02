@@ -14,8 +14,8 @@
 
 using namespace std;
 
-Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
-                unsigned nbP, unsigned xg, unsigned yg, unsigned home)
+Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
+                cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home)
                 : position(position), total_food(total_food), nbC(nbC), 
                 nbD(nbD), nbP(nbP)
 {
@@ -23,8 +23,7 @@ Anthill::Anthill(square position, unsigned total_food, unsigned nbC, unsigned nb
 }
 
 Anthill* Anthill::anthill_validation(istringstream& data,
-                                     const vector<Anthill*>& hills_existing, const 
-                                     unsigned& home) {
+                                     vector<Anthill*>& hills_existing, cunsigned home) {
     Anthill* anthill = nullptr;
     square position = {0, 0, 0, 0};
     unsigned xg, yg;
@@ -46,11 +45,11 @@ Anthill* Anthill::anthill_validation(istringstream& data,
     return anthill;
 }
 
-unsigned Anthill::anthill_get_ants() {
+unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-void Anthill::ant_validation(istringstream& data, unsigned home) {
+void Anthill::ant_validation(istringstream& data, cunsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i=0, total = this->nbC;
     static Ant_states state = collector;

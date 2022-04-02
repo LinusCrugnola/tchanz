@@ -15,6 +15,8 @@
 #include "ants.h"
 #include "squarecell.h"
 
+typedef const unsigned& cunsigned;
+
 /**
  * @class Anthill
  * 
@@ -32,9 +34,7 @@ private:
     std::vector<Ant*> ants;
 
 public:
-    square get_position() const {
-        return position;
-    }
+    square get_position() const {return position;}
 
     /**
      * @brief Verification of an anthill's data. 
@@ -43,13 +43,13 @@ public:
      * @returns Pointer on new anthill object
      */
     static Anthill* anthill_validation(std::istringstream& data,
-                                     const std::vector<Anthill*>& hills_existing, 
-                                     const unsigned& home);
+                                     std::vector<Anthill*>& hills_existing, 
+                                     cunsigned home);
 
     /**
      * @brief This function returns the number of ants in anthill
      */
-    unsigned anthill_get_ants();
+    unsigned anthill_get_ants() const;
 
     /**
      * @brief Function which verifies if an ant fits in the grid and doesn't overlap
@@ -57,7 +57,7 @@ public:
      * @param data input stream and number of home (starts at 0)
      * @result if ant is valid, it is added to ants attribute of this hill
      */
-    void ant_validation(std::istringstream& data, unsigned home);
+    void ant_validation(std::istringstream& data, cunsigned home);
 
     /**
      * @brief Construct a new Anthill object
@@ -71,8 +71,8 @@ public:
      * @param yg y coordinate of generator
      * @param home number of hill (starts at 0)
      */
-    Anthill(square position, unsigned total_food, unsigned nbC, unsigned nbD,
-            unsigned nbP, unsigned xg, unsigned yg, unsigned home);
+    Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
+            cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home);
 
     /**
      * @brief Destroy the Anthill object
