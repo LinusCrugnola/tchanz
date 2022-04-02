@@ -41,8 +41,10 @@ public:
 
     /**
      * @brief Destroy the Nutrition object
+     * 
+     * @note frees the square occupied by the object in the grid
      */
-    ~Nutrition() {square_delete({this->x, this->y, 1, 0});}
+    ~Nutrition();
 };
 
 #endif

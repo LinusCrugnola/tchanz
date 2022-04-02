@@ -20,6 +20,10 @@ Nutrition::Nutrition(unsigned x_coor, unsigned y_coor)
     square_add({x, y, 1, 1});
 }
 
+Nutrition::~Nutrition(){
+    square_delete({this->x, this->y, 1, 1});
+}
+
 Nutrition* Nutrition::data_validation(istringstream& data) {
     Nutrition* nutrition = nullptr;
     unsigned x_coor, y_coor;
