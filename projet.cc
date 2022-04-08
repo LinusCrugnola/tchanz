@@ -35,10 +35,10 @@ int main(int argc, char **argv){
     //create a simulation and set up the map
     Simulation simulation;
     simulation.read_configfile(get_testfile(argc, argv));
-    cout << message::success();
+    //cout << message::success();
 
     //destroy the simulation and all of its allocated data
-    simulation.~Simulation();
+    //simulation.~Simulation();
     exit(EXIT_SUCCESS);
 }
 

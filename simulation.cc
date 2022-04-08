@@ -65,7 +65,8 @@ void Simulation::handle_line(const string& line) {
                 if (total_ants == 0) state = i >= total ? finale : anthill;
                 else state = ant;
             }
-            state = i >= total ? finale : anthill;
+            //if invalid abort anthill
+            else state = ++i >= total ? finale : anthill;
             break;
         case ant:
             this->anthill[i-1]->Anthill::ant_validation(data, i-1);

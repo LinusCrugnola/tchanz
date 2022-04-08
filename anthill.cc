@@ -19,12 +19,12 @@ Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigne
                 : position(position), total_food(total_food), nbC(nbC), 
                 nbD(nbD), nbP(nbP)
 {
-    this->ants.push_back(Generator::data_validation(xg, yg, position, home));
+    Ant* new_generator = Generator::data_validation(xg, yg, position, home);
+    if(new_generator != nullptr) this->ants.push_back(new_generator);
 }
 
 Anthill* Anthill::anthill_validation(istringstream& data,
                                      vector<Anthill*>& hills_existing, cunsigned home) {
-    bool valid = true;
     Anthill* anthill = nullptr;
     square position = {0, 0, 0, 0};
     unsigned xg, yg;
@@ -33,16 +33,14 @@ Anthill* Anthill::anthill_validation(istringstream& data,
     if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> 
           total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
 
-    valid = square_validation(position); // throws error
+    if(!square_validation(position)) return nullptr;
 
     for (unsigned i(0); i < hills_existing.size(); i++) {
         if (square_superposition(hills_existing[i]->get_position(), position)) {
             std::cout << message::homes_overlap(i, hills_existing.size());
-            valid = false;
+            return nullptr;
         }
     }
-
-    if(!valid) return nullptr;
 
     anthill = new Anthill(position, total_food, nbC, nbD, nbP, xg, yg, home);
     return anthill;
@@ -59,9 +57,12 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
     if (this->nbC == 0) {
         state = this->nbD == 0 ? predator : defensor;
     }
+    Ant* new_ant = nullptr;
+
     switch (state) {
         case collector:
-            this->ants.push_back(Collector::data_validation(data));
+            new_ant = Collector::data_validation(data);
+            if(new_ant != nullptr) this->ants.push_back(new_ant);
             i += 1;
             if (i >= total) {
                 state = defensor;
@@ -70,7 +71,8 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
             }
             break;
         case defensor:
-            this->ants.push_back(Defensor::data_validation(data, this->position,home));
+            new_ant = Defensor::data_validation(data, this->position,home);
+            if(new_ant != nullptr) this->ants.push_back(new_ant);
             i += 1;
             if (i >= total) {
                 state = predator;
@@ -79,7 +81,8 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
             }
             break;
         case predator:
-            this->ants.push_back(Predator::data_validation(data));
+            new_ant = Predator::data_validation(data);
+            if(new_ant != nullptr) this->ants.push_back(new_ant);
             i += 1;
             if (i >= total) {
                 state = finale;

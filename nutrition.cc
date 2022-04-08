@@ -20,7 +20,7 @@ void Nutrition::add_element(istringstream& data) {
     square position = {0,0,1,1};
     if (!(data >> position.x >> position.y)) cout << "reading error!" << endl;
 
-    valid = square_validation(position); // throws error if invalid
+    valid = square_validation(position); // displays error if invalid
 
     if (square_superposition(position)) {
         cout << message::food_overlap(position.x, position.y);
