@@ -24,39 +24,39 @@ bool square_validation(csquare square) {
     // Check the point
     if (square.x < 0 || square.x > (g_max-1)) {
         std::cout << error_squarecell::print_index(square.x, g_max-1);
-        std::exit(EXIT_FAILURE);
+        return false;
     }
     else if (square.y < 0 || square.y > (g_max-1)) {
         std::cout << error_squarecell::print_index(square.y, g_max-1);
-        std::exit(EXIT_FAILURE);
+        return false;
     }
     // Check side
     if (square.centered) {
         if (square.side % 2 == 0) {
             std::cout << "Side is not an odd number";
-            std::exit(EXIT_FAILURE);
+            return false;
         }
         else if ((square.x-square.side/2) < 0 || (square.x+square.side/2) > g_max-1) {
             std::cout << error_squarecell::print_outside(square.x, square.side,
                                                          g_max-1);
-            std::exit(EXIT_FAILURE);
+            return false;
         }
         else if ((square.y-square.side/2) < 0 || (square.y+square.side/2) > g_max-1) {
             std::cout << error_squarecell::print_outside(square.y, square.side,
                                                          g_max-1);
-            std::exit(EXIT_FAILURE);
+            return false;
         }
     }
     else {
         if ((square.x+square.side-1) > g_max-1) {
             std::cout << error_squarecell::print_outside(square.x, square.side,
                                                          g_max-1);
-            std::exit(EXIT_FAILURE);
+            return false;
         }
         else if ((square.y+square.side-1) > g_max-1) {
             std::cout << error_squarecell::print_outside(square.y, square.side,
                                                          g_max-1);
-            std::exit(EXIT_FAILURE);
+            return false;
         }
     }
     return true;
