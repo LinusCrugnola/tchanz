@@ -34,22 +34,25 @@ Generator::Generator(csquare position)
 Ant* Generator::data_validation(coord xg, coord yg,
                                 csquare anthill_position,
                                 const unsigned& home) {
+    bool valid = true;
     Ant* generator = nullptr;
     square position = {xg, yg, sizeG, 1};
 
-    square_validation(position); // throws error if position invalid
+    valid = square_validation(position); // throws error if position invalid
 
     if (square_superposition(position)) {
         square overlap = square_get_superposition(position);
         cout << message::generator_overlap(position.x, position.y, overlap.x,
                                            overlap.y);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
 
     if (!square_contains(anthill_position, position)) {
         cout << message::generator_not_within_home(position.x, position.y, home);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
+
+    if(!valid) return nullptr;
 
     // Generate ant
     generator = new Generator(position);
@@ -62,6 +65,7 @@ Collector::Collector(csquare position, unsigned age, Etat_collector food)
 }
 
 Ant* Collector::data_validation(istringstream& data) {
+    bool valid = true;
     Ant* collector = nullptr;
     square position = {0, 0, sizeC, 1};
     unsigned age;
@@ -71,14 +75,16 @@ Ant* Collector::data_validation(istringstream& data) {
           cout << "reading error!" << endl;
     food = food_state == "true" ? LOADED : EMPTY;
 
-    square_validation(position); // throws error if position invalid
+    valid = square_validation(position); // throws error if position invalid
 
     if (square_superposition(position)) {
         square overlap = square_get_superposition(position);
         cout << message::collector_overlap(position.x, position.y,
                                            overlap.x, overlap.y);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
+
+    if(!valid) return nullptr;
 
     // Generate ant
     collector = new Collector(position, age, food);
@@ -93,24 +99,27 @@ Defensor::Defensor(csquare position, unsigned age)
 Ant* Defensor::data_validation(istringstream& data,
                                csquare anthill_position,
                                const unsigned& home) {
+    bool valid = true;
     Ant* defensor = nullptr;
     square position = {0, 0, sizeD, 1};
     unsigned age;
     if (!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
 
-    square_validation(position); // throws error if position invalid
+    valid = square_validation(position); // throws error if position invalid
 
     if (square_superposition(position)) {
         square overlap = square_get_superposition(position);
         cout << message::defensor_overlap(position.x, position.y,
                                           overlap.x, overlap.y);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
 
     if (!square_contains(anthill_position, position)) {
         cout << message::defensor_not_within_home(position.x, position.y, home);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
+
+    if(!valid) return nullptr;
 
     // Generate ant
     defensor = new Defensor(position, age);
@@ -123,17 +132,20 @@ Predator::Predator(csquare position, unsigned age)
 }
 
 Ant* Predator::data_validation(istringstream& data) {
+    bool valid = true;
     Ant* predator = nullptr;
     square position = {0, 0, sizeP, 1};
     unsigned age;
     if (!(data >> position.x >> position.y >> age)) cout << "reading error!" << endl;
 
-    square_validation(position); // throws error if position invalid
+    valid = square_validation(position); // throws error if position invalid
 
     if (square_superposition(position)) {
         cout << message::predator_overlap(position.x, position.y);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
+
+    if(!valid) return nullptr;
 
     // Generate ant
     predator = new Predator(position, age);
