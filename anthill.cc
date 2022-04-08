@@ -24,6 +24,7 @@ Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigne
 
 Anthill* Anthill::anthill_validation(istringstream& data,
                                      vector<Anthill*>& hills_existing, cunsigned home) {
+    bool valid = true;
     Anthill* anthill = nullptr;
     square position = {0, 0, 0, 0};
     unsigned xg, yg;
@@ -32,14 +33,16 @@ Anthill* Anthill::anthill_validation(istringstream& data,
     if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> 
           total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
 
-    square_validation(position); // throws error
+    valid = square_validation(position); // throws error
 
     for (unsigned i(0); i < hills_existing.size(); i++) {
         if (square_superposition(hills_existing[i]->get_position(), position)) {
             std::cout << message::homes_overlap(i, hills_existing.size());
-            exit(EXIT_FAILURE);
+            valid = false;
         }
     }
+
+    if(!valid) return nullptr;
 
     anthill = new Anthill(position, total_food, nbC, nbD, nbP, xg, yg, home);
     return anthill;
