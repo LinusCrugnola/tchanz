@@ -30,5 +30,9 @@ void Nutrition::add_element(istringstream& data) {
     if(valid){
         //add element to map
         //block square
+
+        //temp
+        square_add(position);
+        this->foods.push_back(position);
     }
 }

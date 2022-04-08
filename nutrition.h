@@ -15,14 +15,6 @@
 #include "squarecell.h"
 
 /**
- * @brief Concrete type for storing nutrition data
- */
-struct Food_data{
-    square position;
-    double val_food;
-};
-
-/**
  * @class Nutrition
  * 
  * @brief Nutrition is a container that handles all Nutrition elements in the grid
@@ -33,6 +25,8 @@ private:
      * @brief Map of Food_data to store the nutrition elements
      */
 
+    //temp
+    std::vector<square> foods;
 
 public:
     /**
@@ -47,12 +41,12 @@ public:
     /**
      * @brief Construct a new Nutrition object
      */
-    Nutrition();
+    //TODO:Nutrition();
 
     /**
      * @brief Destroy the Nutrition object
      */
-    ~Nutrition();
+    //TODO:~Nutrition();
 };
 
 #endif

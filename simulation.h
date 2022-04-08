@@ -28,9 +28,9 @@ private:
     std::vector<Anthill*> anthill;
 
     /**
-     * @brief Nutrition instances
+     * @brief Nutrition object
      */
-    std::vector<Nutrition*> nutrition;
+    Nutrition food;
 
     /**
      * @brief Function to distribute one line of the configfile
@@ -48,7 +48,7 @@ public:
     /**
      * @brief Default simulation constructor
      */
-    Simulation(){}
+    Simulation() : food() {};
 
     /**
      * @brief Destroy the Simulation object

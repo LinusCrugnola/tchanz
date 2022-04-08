@@ -37,6 +37,8 @@ void Simulation::handle_line(const string& line) {
     static unsigned i = 0, total = 0;
     static unsigned j = 0, total_ants;
 
+    Anthill* new_hill = nullptr;
+
     switch (state) {
         case nbN: 
             if (!(data >> total)) cout << "reading error!" << endl;   
@@ -44,7 +46,7 @@ void Simulation::handle_line(const string& line) {
             state = total == 0 ? nbF : nutrition;
             break;
         case nutrition:
-            this->nutrition.push_back(Nutrition::data_validation(data));
+            this->food.add_element(data);
             i += 1;
             if (i >= total) state = nbF;
             break;
@@ -54,12 +56,16 @@ void Simulation::handle_line(const string& line) {
             state = total == 0 ? finale : anthill;
             break;
         case anthill:
-            this->anthill.push_back(Anthill::anthill_validation(data,this->anthill,i));
-            total_ants = this->anthill[i]->Anthill::anthill_get_ants()-1;
-            j = 0;
-            i += 1;
-            if (total_ants == 0) state = i >= total ? finale : anthill;
-            else state = ant;
+            new_hill = Anthill::anthill_validation(data,this->anthill,i);
+            if(new_hill != nullptr){
+                this->anthill.push_back(new_hill);
+                total_ants = this->anthill[i]->Anthill::anthill_get_ants()-1;
+                j = 0;
+                i += 1;
+                if (total_ants == 0) state = i >= total ? finale : anthill;
+                else state = ant;
+            }
+            state = i >= total ? finale : anthill;
             break;
         case ant:
             this->anthill[i-1]->Anthill::ant_validation(data, i-1);
@@ -77,8 +83,5 @@ Simulation::~Simulation(){
         delete hill;
         hill = nullptr;
     }
-    for(auto& food : this->nutrition){
-        delete food;
-        food = nullptr;
-    }
+    this->food.~Nutrition();
 }
