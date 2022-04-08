@@ -25,16 +25,19 @@ Nutrition::~Nutrition(){
 }
 
 Nutrition* Nutrition::data_validation(istringstream& data) {
+    bool valid = true;
     Nutrition* nutrition = nullptr;
     unsigned x_coor, y_coor;
     if (!(data >> x_coor >> y_coor)) cout << "reading error!" << endl;
 
-    square_validation({x_coor, y_coor, 3, 1}); // throws error if invalid
+    valid = square_validation({x_coor, y_coor, 3, 1}); // throws error if invalid
 
     if (square_superposition({x_coor, y_coor, 1, 1})) {
         cout << message::food_overlap(x_coor, y_coor);
-        exit(EXIT_FAILURE);
+        valid = false;
     }
+
+    if(!valid) return nullptr;
 
     // Generate nutrition
     nutrition = new Nutrition(x_coor, y_coor);
