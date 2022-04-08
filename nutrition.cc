@@ -15,31 +15,20 @@
 
 using namespace std;
 
-Nutrition::Nutrition(coord x, coord y)
-    : x(x), y(y) {
-    square_add({x, y, 1, 1});
-}
-
-Nutrition::~Nutrition(){
-    square_delete({this->x, this->y, 1, 1});
-}
-
-Nutrition* Nutrition::data_validation(istringstream& data) {
+void Nutrition::add_element(istringstream& data) {
     bool valid = true;
-    Nutrition* nutrition = nullptr;
-    unsigned x_coor, y_coor;
-    if (!(data >> x_coor >> y_coor)) cout << "reading error!" << endl;
+    square position = {0,0,1,1};
+    if (!(data >> position.x >> position.y)) cout << "reading error!" << endl;
 
-    valid = square_validation({x_coor, y_coor, 3, 1}); // throws error if invalid
+    valid = square_validation(position); // throws error if invalid
 
-    if (square_superposition({x_coor, y_coor, 1, 1})) {
-        cout << message::food_overlap(x_coor, y_coor);
+    if (square_superposition(position)) {
+        cout << message::food_overlap(position.x, position.y);
         valid = false;
     }
 
-    if(!valid) return nullptr;
-
-    // Generate nutrition
-    nutrition = new Nutrition(x_coor, y_coor);
-    return nutrition;
+    if(valid){
+        //add element to map
+        //block square
+    }
 }

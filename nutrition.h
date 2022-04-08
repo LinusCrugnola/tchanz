@@ -10,19 +10,29 @@
 #define NUTRITION_H
 
 #include <sstream>
+#include <vector>
 
 #include "squarecell.h"
 
 /**
+ * @brief Concrete type for storing nutrition data
+ */
+struct Food_data{
+    square position;
+    double val_food;
+};
+
+/**
  * @class Nutrition
  * 
- * @brief Nutrition objects are points in the grid that can be collected by collector 
- * ants
+ * @brief Nutrition is a container that handles all Nutrition elements in the grid
  */
 class Nutrition {
 private:
-    unsigned x, y;
-    double val_food;
+    /**
+     * @brief Map of Food_data to store the nutrition elements
+     */
+
 
 public:
     /**
@@ -32,17 +42,15 @@ public:
      * 
      * @param data input string stream
      */
-    static Nutrition* data_validation(std::istringstream& data);
+    void add_element(std::istringstream& data);
 
     /**
      * @brief Construct a new Nutrition object
      */
-    Nutrition(coord x, coord y);
+    Nutrition();
 
     /**
      * @brief Destroy the Nutrition object
-     * 
-     * @note frees the square occupied by the object in the grid
      */
     ~Nutrition();
 };
