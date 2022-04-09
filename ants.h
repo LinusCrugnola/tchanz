@@ -31,6 +31,13 @@ public:
     Ant(square position);
 
     /**
+     * @brief Get the configfile data of an ant object
+     * 
+     * @return std::string 
+     */
+    virtual std::string get_filedata() = 0;
+
+    /**
      * @brief Destroy the Ant object
      * 
      * @note Frees the square occupied by the ant
@@ -62,6 +69,13 @@ public:
                                 anthill_position, const unsigned& home);
 
     /**
+     * @brief get the configfile data of a generator
+     * 
+     * @return std::string with x and y coordinate
+     */
+    std::string Generator::get_filedata();
+
+    /**
      * @brief Construct a new Generator object
      * 
      * @param position 2D coordinates (center) and side length
@@ -90,6 +104,13 @@ public:
      * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
+
+    /**
+     * @brief get the configfile data of a collector
+     * 
+     * @return std::string with coordinates, age and state
+     */
+    std::string Collector::get_filedata();
 
     /**
      * @brief Construct a new Collector object
@@ -124,6 +145,13 @@ public:
                                 anthill_position, const unsigned& home);
 
     /**
+     * @brief get the configfile data of a defensor
+     * 
+     * @return std::string with coordinates and age
+     */
+    std::string Defensor::get_filedata();
+
+    /**
      * @brief Construct a new Defensor object
      * 
      * @param position 2D coordinates (center) and side length
@@ -153,6 +181,13 @@ public:
      * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
+
+    /**
+     * @brief get the configfile data of a predator
+     * 
+     * @return std::string with coordinates and age
+     */
+    std::string Predator::get_filedata();
 
     /**
      * @brief Construct a new Predator object

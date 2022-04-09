@@ -55,6 +55,10 @@ Ant* Generator::data_validation(coord xg, coord yg,
     return generator;
 }
 
+string Generator::get_filedata(){
+    return to_string(this->position.x) + " " + to_string(this->position.y);
+}
+
 Collector::Collector(csquare position, unsigned age, Etat_collector food)
     : Ant(position), age(age), food(food) {
     square_add(position);
@@ -81,6 +85,11 @@ Ant* Collector::data_validation(istringstream& data) {
 
     collector = new Collector(position, age, food);
     return collector;
+}
+
+string Collector::get_filedata(){
+    return to_string(this->position.x) + " " + to_string(this->position.y)
+           + to_string(this->age) + (this->food == LOADED ? "true" : "false") + "\n";
 }
 
 Defensor::Defensor(csquare position, unsigned age)
@@ -114,6 +123,11 @@ Ant* Defensor::data_validation(istringstream& data,
     return defensor;
 }
 
+string Defensor::get_filedata(){
+    return to_string(this->position.x) + " " + to_string(this->position.y) + " "
+           + to_string(this->age) + "\n";
+}
+
 Predator::Predator(csquare position, unsigned age)
     : Ant(position), age(age) {
     square_add(position);
@@ -134,4 +148,9 @@ Ant* Predator::data_validation(istringstream& data) {
 
     predator = new Predator(position, age);
     return predator;
+}
+
+string Predator::get_filedata(){
+    return to_string(this->position.x) + " " + to_string(this->position.y) + " "
+           + to_string(this->age) + "\n";
 }
