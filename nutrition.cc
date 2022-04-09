@@ -13,11 +13,11 @@
 #include "error_squarecell.h"
 #include "message.h"
 
-void Nutrition::add_element(std::istringstream& data) {
+bool Nutrition::add_element(std::istringstream& data) {
     bool valid = true;
     square position = {0,0,1,1};
     if (!(data >> position.x >> position.y)) 
-        std::cout << "reading error!" << std::endl;
+        return false;
 
     valid = square_validation(position); // displays error if invalid
 
@@ -33,7 +33,9 @@ void Nutrition::add_element(std::istringstream& data) {
         //temp
         square_add(position);
         this->foods.push_back(position);
+        return true;
     }
+    return false;
 }
 
 std::string Nutrition::get_filedata(){

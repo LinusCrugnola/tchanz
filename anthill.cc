@@ -51,7 +51,7 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
+bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i=0, total = this->nbC;
     static Ant_states state = collector;
@@ -64,6 +64,7 @@ void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case collector:
             new_ant = Collector::data_validation(data);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
+            else return false;
             i += 1;
             if (i >= total) {
                 state = defensor;
@@ -74,6 +75,7 @@ void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case defensor:
             new_ant = Defensor::data_validation(data, this->position,home);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
+            else return false;
             i += 1;
             if (i >= total) {
                 state = predator;
@@ -84,6 +86,7 @@ void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case predator:
             new_ant = Predator::data_validation(data);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
+            else return false;
             i += 1;
             if (i >= total) {
                 state = finale;
@@ -92,6 +95,7 @@ void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case finale:
             break;
     }
+    return true;
 }
 
 std::string Anthill::get_filedata(unsigned home){
@@ -127,5 +131,6 @@ Anthill::~Anthill(){
         delete ant;
         ant = nullptr;
     }
+    this->ants.clear();
     square_delete(this->position);
 }

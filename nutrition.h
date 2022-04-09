@@ -36,7 +36,7 @@ public:
      * 
      * @param data input string stream
      */
-    void add_element(std::istringstream& data);
+    bool add_element(std::istringstream& data);
 
     /**
      * @brief Get position data of all nutrition elements in configfile format
