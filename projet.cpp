@@ -19,9 +19,9 @@ using namespace std;
  * @brief Main module of Tchanz project (highest priority)
  */
 
-std::string read = "---------- File Lecture ----------";
-std::string clear = "---------- Abort Lecture ----------";
-std::string write = "---------- Generate File ----------";
+std::string read =  "----------------------- File Lecture ------------------------";
+std::string clear = "----------------------- Abort Lecture -----------------------";
+std::string write = "----------------------- Generate File -----------------------";
 
 /**
  * @brief Get the name of the testfile
