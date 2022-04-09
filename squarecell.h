@@ -44,23 +44,23 @@ constexpr short unsigned g_max = 128;
 /**
  * @brief Validation of a square checks if square is inside of the grid borders
  * 
- * @note function throws error if square is not valid
+ * @returns true if square is valild
  * 
- * @returns bool: true if square is valild
+ * @note function throws error if square is not valid
  */
 bool square_validation(csquare square);
 
 /**
  * @brief Checks if a square superposes with an existing square in the grid
  * 
- * @returns Bool: true if there's a superposition
+ * @returns true if there's a superposition
  */
 bool square_superposition(csquare square);
 
 /**
  * @brief Test if two squares superpose 
  * 
- * @returns Bool: true if there's a superpostion
+ * @returns true if there's a superpostion
  */
 bool square_superposition(csquare square1, csquare square2);
 
@@ -74,7 +74,7 @@ square square_get_superposition(csquare test);
 /**
  * @brief Test if the first square contains a second square
  * 
- * @returns Bool: true if first square fully contains second square
+ * @returns true if first square fully contains second square
  * 
  * @note the borders of the squares cannot overlap
  */
@@ -83,7 +83,7 @@ bool square_contains(csquare s1, csquare s2);
 /**
  * @brief Add a square to the grid 
  * 
- * @returns Bool: false if a square is invalid or that there's a superposition 
+ * @returns false if a square is invalid or if there's a superposition 
  */
 bool square_add(csquare square);
 

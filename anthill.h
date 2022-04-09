@@ -39,8 +39,12 @@ public:
     /**
      * @brief Verification of an anthill's data. 
      * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
-     * @param data input stream, existing anthills and number of home (starts at 0)
-     * @returns Pointer on new anthill object
+     * 
+     * @param data input stream
+     * @param hills_existing anthills that already exist 
+     * @param home number of current hill (starts at 0)
+     * 
+     * @returns Pointer on new anthill object, null if invalid
      */
     static Anthill* anthill_validation(std::istringstream& data,
                                      std::vector<Anthill*>& hills_existing, 
@@ -54,8 +58,11 @@ public:
     /**
      * @brief Function which verifies if an ant fits in the grid and doesn't overlap
      * with another entity
-     * @param data input stream and number of home (starts at 0)
-     * @result if ant is valid, it is added to ants attribute of this hill
+     * 
+     * @param data input stream
+     * @param home number of current hill (starts at 0)
+     * 
+     * @result if ant is valid, it is added to ants attribute of the anthill
      */
     void ant_validation(std::istringstream& data, cunsigned home);
 
@@ -77,7 +84,7 @@ public:
     /**
      * @brief Destroy the Anthill object
      * 
-     * @note destroys all ants of the hill and frees the square in the grid
+     * @note destroys all ants of the hill and frees their squares in the grid
      */
     ~Anthill();
 };

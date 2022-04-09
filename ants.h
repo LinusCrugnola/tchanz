@@ -50,8 +50,13 @@ public:
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 
      * intersect with another entity
-     * @param coordinates, position of anthill and number of anthill 
-     * @returns pointer to new ant object
+     * 
+     * @param xg x coordinate of generator
+     * @param yg y cooridinate of generator
+     * @param anthill_position position of the parent anthill
+     * @param home number of parent anthill (starts at 0)
+     * 
+     * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(coord xg, coord yg, csquare 
                                 anthill_position, const unsigned& home);
@@ -79,8 +84,10 @@ public:
     /**
      * @brief validates that an ants position is inside the grid and it doesn't 
      * intersect with another entity
+     * 
      * @param input data stream
-     * @returns pointer to new ant object
+     * 
+     * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
 
@@ -88,7 +95,7 @@ public:
      * @brief Construct a new Collector object
      * 
      * @param position 2D coordinates (center) and side length
-     * @param age 
+     * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
      */
     Collector(csquare position, unsigned age, Etat_collector food);
@@ -108,8 +115,10 @@ public:
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 
      * intersect with another entity
+     * 
      * @param input data stream, position and number of anthill
-     * @returns pointer to new ant object
+     * 
+     * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data, csquare 
                                 anthill_position, const unsigned& home);
@@ -118,7 +127,7 @@ public:
      * @brief Construct a new Defensor object
      * 
      * @param position 2D coordinates (center) and side length
-     * @param age 
+     * @param age initial age of the ant
      */
     Defensor(csquare position, unsigned age);
 };
@@ -138,8 +147,10 @@ public:
     /**
      * @brief validates that an ants position is inside the grid and it doesn't 
      * intersect with another entity
+     * 
      * @param input data stream
-     * @returns pointer to new ant object
+     * 
+     * @returns pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
 
@@ -147,7 +158,7 @@ public:
      * @brief Construct a new Predator object
      * 
      * @param position 2D coordinates (center) and side length
-     * @param age 
+     * @param age initial age of the ant
      */
     Predator(csquare position, unsigned age);
 };

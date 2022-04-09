@@ -42,6 +42,8 @@ private:
 public:
     /**
      * @brief Function to read the configfile
+     * 
+     * @param filename name of the file to read
      */
     void read_configfile(const std::string& filename);
 
