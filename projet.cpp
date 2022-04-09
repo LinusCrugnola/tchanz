@@ -23,14 +23,6 @@ std::string read =  "----------------------- File Lecture ----------------------
 std::string clear = "----------------------- Abort Lecture -----------------------";
 std::string write = "----------------------- Generate File -----------------------";
 
-/**
- * @brief Get the name of the testfile
- * 
- * @param argc 
- * @param argv 
- * @return string 
- */
-string get_testfile(int argc, char **argv);
 
 /**
  * @brief project main function
@@ -41,7 +33,10 @@ int main(int argc, char **argv){
 
     std::cout << read << std::endl;
 
-    if(!simulation.read_configfile(get_testfile(argc, argv))){
+    // get the name of the configfile
+    std::string filename = argc > 1 ? argv[1] : "";
+    
+    if(!simulation.read_configfile(filename)){
         std::cout << clear << std::endl;
         simulation.clear();
     }
@@ -49,23 +44,8 @@ int main(int argc, char **argv){
         cout << message::success();
         std::cout << write << std::endl;
         simulation.write_configfile();
-        simulation.write_configfile();
-        simulation.write_configfile();
-
     }
     //destroy the simulation and all of its allocated data
     //simulation.~Simulation();
     exit(EXIT_SUCCESS);
-}
-
-string get_testfile(int argc, char **argv){
-	string filename;
-	if(argc>1){
-		filename = argv[1];
-	}
-	else{
-		cout << "False file" << endl;
-		exit(0);
-	}
-	return filename;
 }
