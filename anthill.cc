@@ -12,8 +12,6 @@
 
 #include "message.h"
 
-using namespace std;
-
 Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
                 cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home)
                 : position(position), total_food(total_food), nbC(nbC), 
@@ -23,15 +21,18 @@ Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigne
     if(new_generator != nullptr) this->ants.push_back(new_generator);
 }
 
-Anthill* Anthill::anthill_validation(istringstream& data,
-                                     vector<Anthill*>& hills_existing, cunsigned home) {
+Anthill* Anthill::anthill_validation(std::istringstream& data,
+                                     std::vector<Anthill*>& hills_existing, 
+                                     cunsigned home) {
     Anthill* anthill = nullptr;
     square position = {0, 0, 0, 0};
     unsigned xg, yg;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
-    if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> 
-          total_food >> nbC >> nbD >> nbP)) cout << "reading error!" << endl;
+    if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> total_food
+               >> nbC >> nbD >> nbP)){
+        std::cout << "reading error!" << std::endl;
+    }
 
     if(!square_validation(position)) return nullptr;
 
@@ -50,7 +51,7 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-void Anthill::ant_validation(istringstream& data, cunsigned home) {
+void Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i=0, total = this->nbC;
     static Ant_states state = collector;
@@ -93,16 +94,17 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
     }
 }
 
-string Anthill::get_filedata(unsigned home){
-    string output = {};
-    string gen_dat = this->ants[0]->get_filedata();
+std::string Anthill::get_filedata(unsigned home){
+    std::string output = {};
+    std::string gen_dat = this->ants[0]->get_filedata();
     // add anthill data
-    output +=  "\t" + to_string(this->position.x) + " " + to_string(this->position.y) 
-              + " " + to_string(this->position.side) + " " + gen_dat 
-              + " " + to_string(this->total_food) 
-              + " " + to_string(this->nbC) + " " + to_string(this->nbD) 
-              + " " + to_string(this->nbP);
-    output += " # anthill #" + to_string(home) + "\n";
+    output +=  "\t" +  std::to_string(this->position.x) 
+              + " " +  std::to_string(this->position.y) 
+              + " " +  std::to_string(this->position.side) + " " + gen_dat
+              + " " +  std::to_string(this->total_food) 
+              + " " +  std::to_string(this->nbC) + " " +  std::to_string(this->nbD)
+              + " " +  std::to_string(this->nbP);
+    output += " # anthill #" +  std::to_string(home) + "\n";
     // add ant data
     output += "\n\t# collectors:\n";
     for(unsigned i=1; i<=nbC; i++){
