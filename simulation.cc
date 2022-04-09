@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <ctime>
 
 #include "constantes.h"
 #include "squarecell.h"
@@ -76,6 +77,30 @@ void Simulation::handle_line(const string& line) {
         case finale:
             break;
     }
+}
+
+void Simulation::write_configfile(){
+    ofstream file("./output.txt");
+    if(!file.fail()){
+        file << Simulation::get_fileheader();
+        file << this->food.get_filedata();
+        file << to_string(this->anthill.size()) << " # nb anthill\n";
+        for(auto elem : this->anthill){
+            file << elem->get_filedata();
+        }
+    }
+    else cout << "problem writing file" << endl;
+    file.close();
+}
+
+string Simulation::get_fileheader(){
+    time_t now = time(0);
+    tm *time = localtime(&now);
+
+    return "# Saved scenario from: " + to_string(time->tm_mday) + "."
+           + to_string(1 + time->tm_mon) + "." + to_string(1900 + time->tm_year)
+           + " at: " + to_string(time->tm_hour) + ":" 
+           + to_string(time->tm_min) + "\n";
 }
 
 Simulation::~Simulation(){
