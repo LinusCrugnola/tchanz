@@ -8,6 +8,7 @@ LDLIBS := 'pkg-config gtkmm-3.0 --cflags'
 # directories (comment for release)
 OBJ_DIR := obj
 TST_DIR := test
+SRC_DIR := src
 
 # get files
 SRC := $(notdir $(shell find . -maxdepth 1 -name "*.cc" ))
@@ -16,6 +17,8 @@ OBJ := $(BASE:%=$(OBJ_DIR)/%.o)
 TST := $(shell find $(TST_DIR) -name "*.cc")
 BASE_TST := $(notdir $(basename $(TST)))
 TST_OBJ := $(addprefix $(TST_DIR)/,$(BASE_TST:%=$(OBJ_DIR)/%.o))
+TARGET_OBJ := $(OBJ_DIR)/projet.o
+TARGET_TST_OBJ := $(TST_DIR)/$(OBJ_DIR)/test.o
 
 # define target
 TARGET_NAME := projet
@@ -25,7 +28,7 @@ TARGET := ./$(TARGET_NAME)
 TARGET_TST := test.out
 
 # Build target
-$(TARGET): $(OBJ)
+$(TARGET): $(OBJ) $(TARGET_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ 
 #$(LDFLAGS)
 
@@ -36,7 +39,7 @@ $(OBJ_DIR)/%.o: %.cc
 #$(LDLIBS)
 
 # build tests
-$(TARGET_TST): $(TST_OBJ) $(OBJ)
+$(TARGET_TST): $(TST_OBJ) $(OBJ) $(TARGET_TST_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ 
 #$(LDFLAGS)
 
@@ -45,20 +48,25 @@ $(TST_DIR)/obj/%.o: $(TST_DIR)/%.cc
 	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
 #$(LDLIBS)	
 
+# compile root files with main()
+$(TARGET_OBJ) : projet.cpp
+	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
+
+$(TARGET_TST_OBJ) : test.cpp
+	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
 
 testfiles: $(TARGET)
 	@./runtestfiles.sh
 	@make clean
 
 runtests: $(TARGET_TST)
-	@make test
-	@./test
+	@./test.out
 	@make clean
 
 .PHONY: clean
 clean:
-	@rm -rf $(TST_DIR)/$(OBJ_DIR)
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(TST_DIR)/$(OBJ_DIR)/*
+	@rm -rf $(OBJ_DIR)/*
 	@rm -f ./*.o
 	@rm projet
 	@rm test.out

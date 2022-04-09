@@ -1,4 +1,4 @@
-#include "testfunctions.h"
+#include "test/testfunctions.h"
 int main(){
     test_squarecell();
     test_simulation();
