@@ -73,7 +73,7 @@ public:
      * 
      * @return std::string with x and y coordinate
      */
-    std::string Generator::get_filedata();
+    std::string get_filedata();
 
     /**
      * @brief Construct a new Generator object
@@ -110,7 +110,7 @@ public:
      * 
      * @return std::string with coordinates, age and state
      */
-    std::string Collector::get_filedata();
+    std::string get_filedata();
 
     /**
      * @brief Construct a new Collector object
@@ -149,7 +149,7 @@ public:
      * 
      * @return std::string with coordinates and age
      */
-    std::string Defensor::get_filedata();
+    std::string get_filedata();
 
     /**
      * @brief Construct a new Defensor object
@@ -187,7 +187,7 @@ public:
      * 
      * @return std::string with coordinates and age
      */
-    std::string Predator::get_filedata();
+    std::string get_filedata();
 
     /**
      * @brief Construct a new Predator object
