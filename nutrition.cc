@@ -13,17 +13,16 @@
 #include "error_squarecell.h"
 #include "message.h"
 
-using namespace std;
-
-void Nutrition::add_element(istringstream& data) {
+void Nutrition::add_element(std::istringstream& data) {
     bool valid = true;
     square position = {0,0,1,1};
-    if (!(data >> position.x >> position.y)) cout << "reading error!" << endl;
+    if (!(data >> position.x >> position.y)) 
+        std::cout << "reading error!" << std::endl;
 
     valid = square_validation(position); // displays error if invalid
 
     if (square_superposition(position)) {
-        cout << message::food_overlap(position.x, position.y);
+        std::cout << message::food_overlap(position.x, position.y);
         valid = false;
     }
 
@@ -37,12 +36,12 @@ void Nutrition::add_element(istringstream& data) {
     }
 }
 
-string Nutrition::get_filedata(){
-    string output = {};
+std::string Nutrition::get_filedata(){
+    std::string output = {};
     output += "# \n\n";
-    output += "# nb food\n" + to_string(this->foods.size()) + "\n\n# food \n";
+    output += "# nb food\n" + std::to_string(this->foods.size()) + "\n\n# food \n";
     for(auto elem : this->foods){
-        output += to_string(elem.x) + "  " + to_string(elem.y) + "\n";
+        output += std::to_string(elem.x) + "  " + std::to_string(elem.y) + "\n";
     }
     return output;
 }
