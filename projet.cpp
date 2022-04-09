@@ -45,10 +45,8 @@ int main(int argc, char **argv){
         std::cout << clear << std::endl;
         simulation.clear();
     }
-
-    //cout << message::success();
-
     else{
+        cout << message::success();
         std::cout << write << std::endl;
         simulation.write_configfile();
     }

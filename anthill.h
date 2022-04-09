@@ -86,7 +86,7 @@ public:
      * @param home number of hill (starts at 0)
      */
     Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-            cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home);
+            cunsigned nbP);
 
     /**
      * @brief Destroy the Anthill object

@@ -13,13 +13,10 @@
 #include "message.h"
 
 Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-                cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home)
+                cunsigned nbP)
                 : position(position), total_food(total_food), nbC(nbC), 
                 nbD(nbD), nbP(nbP)
-{
-    Ant* new_generator = Generator::data_validation(xg, yg, position, home);
-    if(new_generator != nullptr) this->ants.push_back(new_generator);
-}
+{}
 
 Anthill* Anthill::anthill_validation(std::istringstream& data,
                                      std::vector<Anthill*>& hills_existing, 
@@ -43,7 +40,12 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
         }
     }
 
-    anthill = new Anthill(position, total_food, nbC, nbD, nbP, xg, yg, home);
+    anthill = new Anthill(position, total_food, nbC, nbD, nbP);
+
+    Ant* new_generator = Generator::data_validation(xg, yg, position, home);
+    if(new_generator != nullptr) anthill->ants.push_back(new_generator);
+    else return nullptr;
+
     return anthill;
 }
 
