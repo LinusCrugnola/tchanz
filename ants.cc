@@ -88,8 +88,9 @@ Ant* Collector::data_validation(istringstream& data) {
 }
 
 string Collector::get_filedata(){
-    return to_string(this->position.x) + " " + to_string(this->position.y)
-           + to_string(this->age) + (this->food == LOADED ? "true" : "false") + "\n";
+    return "\t" + to_string(this->position.x) + " " + to_string(this->position.y)
+           + to_string(this->age) + " " + (this->food == LOADED ? "true" : "false") 
+           + "\n";
 }
 
 Defensor::Defensor(csquare position, unsigned age)
@@ -124,7 +125,7 @@ Ant* Defensor::data_validation(istringstream& data,
 }
 
 string Defensor::get_filedata(){
-    return to_string(this->position.x) + " " + to_string(this->position.y) + " "
+    return "\t" + to_string(this->position.x) + " " + to_string(this->position.y) + " "
            + to_string(this->age) + "\n";
 }
 
@@ -151,6 +152,6 @@ Ant* Predator::data_validation(istringstream& data) {
 }
 
 string Predator::get_filedata(){
-    return to_string(this->position.x) + " " + to_string(this->position.y) + " "
+    return "\t" + to_string(this->position.x) + " " + to_string(this->position.y) + " "
            + to_string(this->age) + "\n";
 }

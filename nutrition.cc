@@ -39,7 +39,7 @@ void Nutrition::add_element(istringstream& data) {
 
 string Nutrition::get_filedata(){
     string output = {};
-    output += "# \n";
+    output += "# \n\n";
     output += "# nb food\n" + to_string(this->foods.size()) + "\n\n# food \n";
     for(auto elem : this->foods){
         output += to_string(elem.x) + "  " + to_string(elem.y) + "\n";

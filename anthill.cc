@@ -93,7 +93,7 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
     }
 }
 
-string Anthill::get_filedata(){
+string Anthill::get_filedata(unsigned home){
     string output = {};
     string gen_dat = this->ants[0]->get_filedata();
     // add anthill data
@@ -101,20 +101,22 @@ string Anthill::get_filedata(){
               + " " + to_string(this->position.side) + " " + gen_dat 
               + " " + to_string(this->total_food) 
               + " " + to_string(this->nbC) + " " + to_string(this->nbD) 
-              + " " + to_string(this->nbP) + "\n";
+              + " " + to_string(this->nbP);
+    output += " # anthill #" + to_string(home) + "\n";
     // add ant data
     output += "\n\t# collectors:\n";
-    for(int i=1; i<=nbC; i++){
+    for(unsigned i=1; i<=nbC; i++){
         output += this->ants[i]->get_filedata();
     }
     output += "\n\t# defensors:\n";
-    for(int i=nbC+1; i<=nbD+nbC; i++){
+    for(unsigned i=nbC+1; i<=nbD+nbC; i++){
         output += this->ants[i]->get_filedata();
     }
     output += "\n\t# predators:\n";
-    for(int i=nbD+1; i<=this->anthill_get_ants()-1; i++){
+    for(unsigned i=nbD+nbC+1; i<=this->anthill_get_ants()-1; i++){
         output += this->ants[i]->get_filedata();
     }
+    return output;
 }
 
 Anthill::~Anthill(){

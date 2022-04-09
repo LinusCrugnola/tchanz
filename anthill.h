@@ -71,7 +71,7 @@ public:
      * 
      * @return std::string 
      */
-    std::string get_filedata();
+    std::string get_filedata(unsigned home);
 
     /**
      * @brief Construct a new Anthill object

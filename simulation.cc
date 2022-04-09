@@ -84,9 +84,10 @@ void Simulation::write_configfile(){
     if(!file.fail()){
         file << Simulation::get_fileheader();
         file << this->food.get_filedata();
-        file << to_string(this->anthill.size()) << " # nb anthill\n";
-        for(auto elem : this->anthill){
-            file << elem->get_filedata();
+        file << "\n" << to_string(this->anthill.size()) << " # nb anthill\n";
+        for(unsigned i=0; i<this->anthill.size(); i++){
+            if(i>0) file << "\n\n";
+            file << this->anthill[i]->get_filedata(i+1);
         }
     }
     else cout << "problem writing file" << endl;
