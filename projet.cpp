@@ -19,6 +19,10 @@ using namespace std;
  * @brief Main module of Tchanz project (highest priority)
  */
 
+std::string read = "---------- File Lecture ----------";
+std::string clear = "---------- Abort Lecture ----------";
+std::string write = "---------- Generate File ----------";
+
 /**
  * @brief Get the name of the testfile
  * 
@@ -34,12 +38,20 @@ string get_testfile(int argc, char **argv);
 int main(int argc, char **argv){
     //create a simulation and set up the map
     Simulation simulation;
+
+    std::cout << read << std::endl;
+
     if(!simulation.read_configfile(get_testfile(argc, argv))){
+        std::cout << clear << std::endl;
         simulation.clear();
     }
-    //simulation.write_configfile();
+
     //cout << message::success();
 
+    else{
+        std::cout << write << std::endl;
+        simulation.write_configfile();
+    }
     //destroy the simulation and all of its allocated data
     //simulation.~Simulation();
     exit(EXIT_SUCCESS);
