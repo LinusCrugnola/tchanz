@@ -16,23 +16,21 @@
 #include "constantes.h"
 #include "squarecell.h"
 
-using namespace std;
-
 void Simulation::read_configfile(const std::string& filename) {
-    ifstream file(filename);
+    std::ifstream file(filename);
     if (!file.fail()) {
-        string line;
-        while (getline(file >> ws, line)) {
+        std::string line;
+        while (std::getline(file >> std::ws, line)) {
             if (line[0] == '#') continue;
             Simulation::handle_line(line);
         }
     }
     else
-        cout << "error could not open file!" << endl;
+        std::cout << "error could not open file!" << std::endl;
 }
 
-void Simulation::handle_line(const string& line) {
-    istringstream data(line);
+void Simulation::handle_line(const std::string& line) {
+    std::istringstream data(line);
     enum Reading_states {nbN, nutrition, nbF, anthill, ant, finale};
     static unsigned state = nbN;
     static unsigned i = 0, total = 0;
@@ -42,7 +40,7 @@ void Simulation::handle_line(const string& line) {
 
     switch (state) {
         case nbN: 
-            if (!(data >> total)) cout << "reading error!" << endl;   
+            if (!(data >> total)) std::cout << "reading error!" << std::endl;   
             else i = 0;
             state = total == 0 ? nbF : nutrition;
             break;
@@ -52,7 +50,7 @@ void Simulation::handle_line(const string& line) {
             if (i >= total) state = nbF;
             break;
         case nbF:
-            if (!(data >> total)) cout << "reading error!" << endl;
+            if (!(data >> total)) std::cout << "reading error!" << std::endl;
             else i = 0;
             state = total == 0 ? finale : anthill;
             break;
@@ -80,28 +78,29 @@ void Simulation::handle_line(const string& line) {
 }
 
 void Simulation::write_configfile(){
-    ofstream file("./output.txt");
+    std::ofstream file("./output.txt");
     if(!file.fail()){
         file << Simulation::get_fileheader();
         file << this->food.get_filedata();
-        file << "\n" << to_string(this->anthill.size()) << " # nb anthill\n";
+        file << "\n" << std::to_string(this->anthill.size()) << " # nb anthill\n";
         for(unsigned i=0; i<this->anthill.size(); i++){
             if(i>0) file << "\n\n";
             file << this->anthill[i]->get_filedata(i+1);
         }
     }
-    else cout << "problem writing file" << endl;
+    else std::cout << "problem writing file" << std::endl;
     file.close();
 }
 
-string Simulation::get_fileheader(){
+std::string Simulation::get_fileheader(){
     time_t now = time(0);
     tm *time = localtime(&now);
 
-    return "# Saved scenario from: " + to_string(time->tm_mday) + "."
-           + to_string(1 + time->tm_mon) + "." + to_string(1900 + time->tm_year)
-           + " at: " + to_string(time->tm_hour) + ":" 
-           + to_string(time->tm_min) + "\n";
+    return "# Saved scenario from: " + std::to_string(time->tm_mday) + "."
+           + std::to_string(1 + time->tm_mon) + "." 
+           + std::to_string(1900 + time->tm_year) + " at: " 
+           + std::to_string(time->tm_hour) + ":" 
+           + std::to_string(time->tm_min) + "\n";
 }
 
 Simulation::~Simulation(){
