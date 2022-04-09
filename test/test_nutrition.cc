@@ -13,10 +13,11 @@
 
 #include "nutrition.h"
 #include "squarecell.h"
+#include "testfunctions.h"
 
 using namespace std;
 
-int main(){
+void test_nutrition(){
     // Test constructor:
     cout << "Test nutrition" << endl;
     Nutrition nutri(1,1);

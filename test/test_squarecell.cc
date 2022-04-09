@@ -7,12 +7,13 @@
 *******************************************************************************/
 
 #include "squarecell.h"
+#include "testfunctions.h"
 #include <iostream>
 #include <cassert>
 
 using namespace std;
 
-int main(){
+void test_squarecell(){
     
     // Test of validation function
     assert(square_validation({0,0,1,1}));

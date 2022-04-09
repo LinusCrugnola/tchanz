@@ -9,8 +9,9 @@
 #include <cassert>
 
 #include "simulation.h"
+#include "testfunctions.h"
 
-int main(){
+void test_simulation(){
 
     return 0;
 }
