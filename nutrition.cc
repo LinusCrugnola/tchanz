@@ -36,3 +36,13 @@ void Nutrition::add_element(istringstream& data) {
         this->foods.push_back(position);
     }
 }
+
+string Nutrition::get_filedata(){
+    string output = {};
+    output += "# \n";
+    output += "# nb food\n" + to_string(this->foods.size()) + "\n\n# food \n";
+    for(auto elem : this->foods){
+        output += to_string(elem.x) + "  " + to_string(elem.y) + "\n";
+    }
+    return output;
+}

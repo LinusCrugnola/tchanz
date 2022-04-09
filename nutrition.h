@@ -39,6 +39,13 @@ public:
     void add_element(std::istringstream& data);
 
     /**
+     * @brief Get position data of all nutrition elements in configfile format
+     * 
+     * @return std::string 
+     */
+    std::string get_filedata();
+
+    /**
      * @brief Construct a new Nutrition object
      */
     //TODO:Nutrition();
