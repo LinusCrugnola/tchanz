@@ -80,7 +80,14 @@ bool Simulation::handle_line(const std::string& line) {
 }
 
 void Simulation::write_configfile(){
-    std::ofstream file("./output.txt");
+    // generate unique filename for output
+    static unsigned file_count = 0;
+    std::string filename = "./output";
+    filename += file_count == 0 ? "" : std::to_string(file_count);
+    filename += ".txt";
+
+    //write file
+    std::ofstream file(filename);
     if(!file.fail()){
         file << Simulation::get_fileheader();
         file << this->food.get_filedata();
@@ -92,6 +99,7 @@ void Simulation::write_configfile(){
     }
     else std::cout << "problem writing file" << std::endl;
     file.close();
+    file_count++;
 }
 
 std::string Simulation::get_fileheader(){

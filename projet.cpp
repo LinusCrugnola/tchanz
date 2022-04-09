@@ -49,6 +49,9 @@ int main(int argc, char **argv){
         cout << message::success();
         std::cout << write << std::endl;
         simulation.write_configfile();
+        simulation.write_configfile();
+        simulation.write_configfile();
+
     }
     //destroy the simulation and all of its allocated data
     //simulation.~Simulation();
