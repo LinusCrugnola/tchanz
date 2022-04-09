@@ -47,3 +47,17 @@ std::string Nutrition::get_filedata(){
     }
     return output;
 }
+
+void Nutrition::clear(){
+    for(auto elem : foods){
+        square_delete(elem);
+    }
+    this->foods.clear();
+}
+
+Nutrition::~Nutrition(){
+    for(auto elem : this->foods){
+        square_delete(elem);
+    }
+    this->foods.clear();
+}

@@ -46,14 +46,23 @@ public:
     std::string get_filedata();
 
     /**
+     * @brief delete all food objects
+     * 
+     * @note deletes squares from grid
+     */
+    void clear();
+
+    /**
      * @brief Construct a new Nutrition object
      */
     //TODO:Nutrition();
 
     /**
      * @brief Destroy the Nutrition object
+     * 
+     * @note free the grid
      */
-    //TODO:~Nutrition();
+    ~Nutrition();
 };
 
 #endif

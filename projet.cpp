@@ -46,6 +46,6 @@ int main(int argc, char **argv){
         simulation.write_configfile();
     }
     //destroy the simulation and all of its allocated data
-    //simulation.~Simulation();
+    simulation.~Simulation();
     exit(EXIT_SUCCESS);
 }

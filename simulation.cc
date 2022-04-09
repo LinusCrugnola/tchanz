@@ -114,7 +114,7 @@ std::string Simulation::get_fileheader(){
 }
 
 void Simulation::clear(){
-    this->food.~Nutrition();
+    this->food.clear();
     for(auto elem : this->anthill){
         delete elem;
         elem = nullptr;
@@ -128,5 +128,5 @@ Simulation::~Simulation(){
         delete hill;
         hill = nullptr;
     }
-    this->food.~Nutrition();
+    //this->food.~Nutrition();
 }
