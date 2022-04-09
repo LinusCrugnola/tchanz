@@ -11,8 +11,8 @@
 #include <string>
 #include <sstream>
 
-#include "nutrition.h"
-#include "squarecell.h"
+#include "../nutrition.h"
+#include "../squarecell.h"
 #include "testfunctions.h"
 
 using namespace std;
@@ -20,15 +20,13 @@ using namespace std;
 void test_nutrition(){
     // Test constructor:
     cout << "Test nutrition" << endl;
-    Nutrition nutri(1,1);
-    assert(square_superposition({1,1,1,1}));
-    cout << "Test 1 passed" << endl;
+    Nutrition nutri;
 
     // Test data validation
     string line = " 20 55";
     istringstream data(line);
-    Nutrition::data_validation(data);
+    nutri.add_element(data);
     assert(square_superposition({20,55,1,0}));
-    cout << "Test 2 passed" << endl;
+    cout << "Test 1 passed" << endl;
 
 }

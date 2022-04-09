@@ -6,7 +6,7 @@
 * @date     01.04.2022
 *******************************************************************************/
 
-#include "squarecell.h"
+#include "../squarecell.h"
 #include "testfunctions.h"
 #include <iostream>
 #include <cassert>

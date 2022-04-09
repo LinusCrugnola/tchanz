@@ -24,17 +24,13 @@ TARGET := ./$(TARGET_NAME)
 # test target
 TARGET_TST := test.out
 
-lol :
-	@echo $(SRC)
-	@echo $(TST_OBJ)
-
 # Build target
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ 
 #$(LDFLAGS)
 
 # compile object files
-$(OBJ_DIR)/%.o: %.cc $(TST_DIR)/%.cc
+$(OBJ_DIR)/%.o: %.cc
 	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
 #$(LDLIBS)
@@ -54,7 +50,7 @@ testfiles: $(TARGET)
 	@./runtestfiles.sh
 	@make clean
 
-runtests:
+runtests: $(TARGET_TST)
 	@make test
 	@./test
 	@make clean
