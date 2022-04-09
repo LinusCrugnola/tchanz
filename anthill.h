@@ -67,6 +67,13 @@ public:
     void ant_validation(std::istringstream& data, cunsigned home);
 
     /**
+     * @brief Get the configfile data of the hill and its ants
+     * 
+     * @return std::string 
+     */
+    std::string get_filedata();
+
+    /**
      * @brief Construct a new Anthill object
      * 
      * @param position 2D coordinates (center) and side length

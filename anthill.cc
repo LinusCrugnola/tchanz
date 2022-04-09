@@ -93,6 +93,30 @@ void Anthill::ant_validation(istringstream& data, cunsigned home) {
     }
 }
 
+string Anthill::get_filedata(){
+    string output = {};
+    string gen_dat = this->ants[0]->get_filedata();
+    // add anthill data
+    output +=  "\t" + to_string(this->position.x) + " " + to_string(this->position.y) 
+              + " " + to_string(this->position.side) + " " + gen_dat 
+              + " " + to_string(this->total_food) 
+              + " " + to_string(this->nbC) + " " + to_string(this->nbD) 
+              + " " + to_string(this->nbP) + "\n";
+    // add ant data
+    output += "\n\t# collectors:\n";
+    for(int i=1; i<=nbC; i++){
+        output += this->ants[i]->get_filedata();
+    }
+    output += "\n\t# defensors:\n";
+    for(int i=nbC+1; i<=nbD+nbC; i++){
+        output += this->ants[i]->get_filedata();
+    }
+    output += "\n\t# predators:\n";
+    for(int i=nbD+1; i<=this->anthill_get_ants()-1; i++){
+        output += this->ants[i]->get_filedata();
+    }
+}
+
 Anthill::~Anthill(){
     // destroy all ants
     for(auto& ant : this->ants){
