@@ -1,3 +1,11 @@
+/******************************************************************************!
+* @file     generator.h
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             
+*           Linus Crugnola <linus.crugnola@epfl.ch>     
+* @version  1.0
+* @date     12.04.2022
+*******************************************************************************/
+ 
 #ifndef GENERATOR_H
 #define GENERATOR_H
 

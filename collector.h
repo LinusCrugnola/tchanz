@@ -1,3 +1,11 @@
+/******************************************************************************!
+* @file     collector.h
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             
+*           Linus Crugnola <linus.crugnola@epfl.ch>     
+* @version  1.0
+* @date     12.04.2022
+*******************************************************************************/
+ 
 #ifndef COLLECTOR_H
 #define COLLECTOR_H
 
