@@ -13,6 +13,10 @@
 #include <vector>
 
 #include "ants.h"
+#include "generator.h"
+#include "collector.h"
+#include "defensor.h"
+#include "predator.h"
 #include "squarecell.h"
 
 typedef const unsigned& cunsigned;
