@@ -2,7 +2,7 @@
  * @file     ants.h
  * @author   Léo Brückl <leo.bruckl@epfl.ch> 
  *           Linus Crugnola <linus.crugnola@epfl.ch>
- * @version  1.0
+ * @version  2.0
  * @date     01.04.2022
  *******************************************************************************/
 
@@ -20,7 +20,7 @@
  */
 class Ant {
 protected:
-    square position;
+    scl::square position;
 
 public:
     /**
@@ -28,7 +28,14 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Ant(square position);
+    Ant(scl::csquare position); 
+    
+    /**
+     * @brief Get the configfile data of an ant object
+     * 
+     * @return std::string 
+     */
+    virtual std::string get_filedata() = 0;
 
     /**
      * @brief Destroy the Ant object
@@ -36,120 +43,6 @@ public:
      * @note Frees the square occupied by the ant
      */
     virtual ~Ant();
-};
-
-/**
- * @class Generator
- * @brief Subclass of ant
- * 
- * @note Each anthill has a Generator that stays inside of the hill
- */
-class Generator : public Ant {
-public:
-
-    /**
-     * @brief validates that an ants position is inside the hill and it doesn't 
-     * intersect with another entity
-     * @param coordinates, position of anthill and number of anthill 
-     * @returns pointer to new ant object
-     */
-    static Ant* data_validation(coord xg, coord yg, csquare 
-                                anthill_position, const unsigned& home);
-
-    /**
-     * @brief Construct a new Generator object
-     * 
-     * @param position 2D coordinates (center) and side length
-     */
-    Generator(csquare position);
-};
-
-/**
- * @class Collector
- * @brief Subclass of ant
- * 
- * @note Collector ants search and carry food
- */
-class Collector : public Ant {
-private:
-    unsigned age;
-    Etat_collector food;
-
-public:
-    /**
-     * @brief validates that an ants position is inside the grid and it doesn't 
-     * intersect with another entity
-     * @param input data stream
-     * @returns pointer to new ant object
-     */
-    static Ant* data_validation(std::istringstream& data);
-
-    /**
-     * @brief Construct a new Collector object
-     * 
-     * @param position 2D coordinates (center) and side length
-     * @param age 
-     * @param food a collector can initially be empty or loaded
-     */
-    Collector(csquare position, unsigned age, Etat_collector food);
-};
-
-/**
- * @class Defensor
- * @brief Subclass of ant
- * 
- * @note Defensor ants defend the anthill
- */
-class Defensor : public Ant {
-private:
-    unsigned age;
-
-public:
-    /**
-     * @brief validates that an ants position is inside the hill and it doesn't 
-     * intersect with another entity
-     * @param input data stream, position and number of anthill
-     * @returns pointer to new ant object
-     */
-    static Ant* data_validation(std::istringstream& data, csquare 
-                                anthill_position, const unsigned& home);
-
-    /**
-     * @brief Construct a new Defensor object
-     * 
-     * @param position 2D coordinates (center) and side length
-     * @param age 
-     */
-    Defensor(csquare position, unsigned age);
-};
-
-/**
- * @class Predator
- * @brief Subclass of ant
- * 
- * @note At simulation initialization, predators must be inside the anthill
- * @note Preadator ants atack other anthills
- */
-class Predator : public Ant {
-private:
-    unsigned age;
-
-public:
-    /**
-     * @brief validates that an ants position is inside the grid and it doesn't 
-     * intersect with another entity
-     * @param input data stream
-     * @returns pointer to new ant object
-     */
-    static Ant* data_validation(std::istringstream& data);
-
-    /**
-     * @brief Construct a new Predator object
-     * 
-     * @param position 2D coordinates (center) and side length
-     * @param age 
-     */
-    Predator(csquare position, unsigned age);
 };
 
 #endif

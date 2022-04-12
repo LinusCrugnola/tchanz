@@ -11,27 +11,28 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <ctime>
 
 #include "constantes.h"
 #include "squarecell.h"
 
-using namespace std;
-
-void Simulation::read_configfile(const std::string& filename) {
-    ifstream file(filename);
+bool Simulation::read_configfile(const std::string& filename) {
+    std::ifstream file(filename);
     if (!file.fail()) {
-        string line;
-        while (getline(file >> ws, line)) {
+        std::string line;
+        while (std::getline(file >> std::ws, line)) {
             if (line[0] == '#') continue;
-            Simulation::handle_line(line);
+            if(!Simulation::handle_line(line))
+                return false;
         }
+        return true;
     }
     else
-        cout << "error could not open file!" << endl;
+        return false;
 }
 
-void Simulation::handle_line(const string& line) {
-    istringstream data(line);
+bool Simulation::handle_line(const std::string& line) {
+    std::istringstream data(line);
     enum Reading_states {nbN, nutrition, nbF, anthill, ant, finale};
     static unsigned state = nbN;
     static unsigned i = 0, total = 0;
@@ -41,17 +42,17 @@ void Simulation::handle_line(const string& line) {
 
     switch (state) {
         case nbN: 
-            if (!(data >> total)) cout << "reading error!" << endl;   
+            if (!(data >> total)) return false;  
             else i = 0;
             state = total == 0 ? nbF : nutrition;
             break;
         case nutrition:
-            this->food.add_element(data);
+            if(!this->food.add_element(data)) return false;
             i += 1;
             if (i >= total) state = nbF;
             break;
         case nbF:
-            if (!(data >> total)) cout << "reading error!" << endl;
+            if (!(data >> total)) return false;
             else i = 0;
             state = total == 0 ? finale : anthill;
             break;
@@ -64,18 +65,61 @@ void Simulation::handle_line(const string& line) {
                 i += 1;
                 if (total_ants == 0) state = i >= total ? finale : anthill;
                 else state = ant;
+                break;
             }
-            //if invalid abort anthill
-            else state = ++i >= total ? finale : anthill;
-            break;
+            return false;
         case ant:
-            this->anthill[i-1]->Anthill::ant_validation(data, i-1);
+            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1)) return false;
             j += 1;
             if (j >= total_ants) state = i >= total ? finale : anthill;
             break;
         case finale:
             break;
     }
+    return true;
+}
+
+void Simulation::write_configfile(){
+    // generate unique filename for output
+    static unsigned file_count = 0;
+    std::string filename = "./output";
+    filename += file_count == 0 ? "" : std::to_string(file_count);
+    filename += ".txt";
+
+    //write file
+    std::ofstream file(filename);
+    if(!file.fail()){
+        file << Simulation::get_fileheader();
+        file << this->food.get_filedata();
+        file << "\n" << std::to_string(this->anthill.size()) << " # nb anthill\n";
+        for(unsigned i=0; i<this->anthill.size(); i++){
+            if(i>0) file << "\n\n";
+            file << this->anthill[i]->get_filedata(i+1);
+        }
+    }
+    else std::cout << "problem writing file" << std::endl;
+    file.close();
+    file_count++;
+}
+
+std::string Simulation::get_fileheader(){
+    time_t now = time(0);
+    tm *time = localtime(&now);
+
+    return "# Saved scenario from: " + std::to_string(time->tm_mday) + "."
+           + std::to_string(1 + time->tm_mon) + "." 
+           + std::to_string(1900 + time->tm_year) + " at: " 
+           + std::to_string(time->tm_hour) + ":" 
+           + std::to_string(time->tm_min) + "\n";
+}
+
+void Simulation::clear(){
+    this->food.clear();
+    for(auto elem : this->anthill){
+        delete elem;
+        elem = nullptr;
+    }
+    this->anthill.clear();
 }
 
 Simulation::~Simulation(){
@@ -84,5 +128,5 @@ Simulation::~Simulation(){
         delete hill;
         hill = nullptr;
     }
-    this->food.~Nutrition();
+    //this->food.~Nutrition();
 }

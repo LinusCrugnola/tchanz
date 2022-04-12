@@ -13,6 +13,10 @@
 #include <vector>
 
 #include "ants.h"
+#include "generator.h"
+#include "collector.h"
+#include "defensor.h"
+#include "predator.h"
 #include "squarecell.h"
 
 typedef const unsigned& cunsigned;
@@ -24,7 +28,7 @@ typedef const unsigned& cunsigned;
  */
 class Anthill {
 private:
-    square position;
+    scl::square position;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
 
@@ -34,17 +38,21 @@ private:
     std::vector<Ant*> ants;
 
 public:
-    square get_position() const {return position;}
+    scl::square get_position() const {return position;}
 
     /**
      * @brief Verification of an anthill's data. 
      * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
-     * @param data input stream, existing anthills and number of home (starts at 0)
-     * @returns Pointer on new anthill object
+     * 
+     * @param data input stream
+     * @param hills_existing anthills that already exist 
+     * @param home number of current hill (starts at 0)
+     * 
+     * @returns Pointer on new anthill object, null if invalid
      */
     static Anthill* anthill_validation(std::istringstream& data,
-                                     std::vector<Anthill*>& hills_existing, 
-                                     cunsigned home);
+                                       std::vector<Anthill*>& hills_existing, 
+                                       cunsigned home);
 
     /**
      * @brief This function returns the number of ants in anthill
@@ -54,10 +62,20 @@ public:
     /**
      * @brief Function which verifies if an ant fits in the grid and doesn't overlap
      * with another entity
-     * @param data input stream and number of home (starts at 0)
-     * @result if ant is valid, it is added to ants attribute of this hill
+     * 
+     * @param data input stream
+     * @param home number of current hill (starts at 0)
+     * 
+     * @result if ant is valid, it is added to ants attribute of the anthill
      */
-    void ant_validation(std::istringstream& data, cunsigned home);
+    bool ant_validation(std::istringstream& data, cunsigned home);
+
+    /**
+     * @brief Get the configfile data of the hill and its ants
+     * 
+     * @return std::string 
+     */
+    std::string get_filedata(unsigned home);
 
     /**
      * @brief Construct a new Anthill object
@@ -71,13 +89,13 @@ public:
      * @param yg y coordinate of generator
      * @param home number of hill (starts at 0)
      */
-    Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-            cunsigned nbP, cunsigned xg, cunsigned yg, cunsigned home);
+    Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
+            cunsigned nbP);
 
     /**
      * @brief Destroy the Anthill object
      * 
-     * @note destroys all ants of the hill and frees the square in the grid
+     * @note destroys all ants of the hill and frees their squares in the grid
      */
     ~Anthill();
 };

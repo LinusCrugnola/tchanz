@@ -17,17 +17,22 @@
  * @brief unnamed namespace with the implementation of the grid
  */
 namespace {
-    std::vector<std::vector<bool>> grid(g_max, std::vector<bool>(g_max, false));
+    std::vector<std::vector<bool>> grid(scl::g_max, std::vector<bool>(scl::g_max, 
+                                                                      false));
 }
 
-bool square_validation(csquare square) {
+scl::square to_square(scl::cpoint point){
+    return {point.x, point.y, 1, 1};
+}
+
+bool scl::square_validation(scl::csquare square) {
     // Check the point
-    if (square.x < 0 || square.x > (g_max-1)) {
-        std::cout << error_squarecell::print_index(square.x, g_max-1);
+    if (square.x < 0 || square.x > (scl::g_max-1)) {
+        std::cout << error_squarecell::print_index(square.x, scl::g_max-1);
         return false;
     }
-    else if (square.y < 0 || square.y > (g_max-1)) {
-        std::cout << error_squarecell::print_index(square.y, g_max-1);
+    else if (square.y < 0 || square.y > (scl::g_max-1)) {
+        std::cout << error_squarecell::print_index(square.y, scl::g_max-1);
         return false;
     }
     // Check side
@@ -36,38 +41,40 @@ bool square_validation(csquare square) {
             std::cout << "Side is not an odd number";
             return false;
         }
-        else if ((square.x-square.side/2) < 0 || (square.x+square.side/2) > g_max-1) {
+        else if ((square.x-square.side/2) < 0 || 
+                 (square.x+square.side/2) > scl::g_max-1) {
             std::cout << error_squarecell::print_outside(square.x, square.side,
-                                                         g_max-1);
+                                                         scl::g_max-1);
             return false;
         }
-        else if ((square.y-square.side/2) < 0 || (square.y+square.side/2) > g_max-1) {
+        else if ((square.y-square.side/2) < 0 || 
+                 (square.y+square.side/2) > scl::g_max-1) {
             std::cout << error_squarecell::print_outside(square.y, square.side,
-                                                         g_max-1);
+                                                         scl::g_max-1);
             return false;
         }
     }
     else {
-        if ((square.x+square.side-1) > g_max-1) {
+        if ((square.x+square.side-1) > scl::g_max-1) {
             std::cout << error_squarecell::print_outside(square.x, square.side,
-                                                         g_max-1);
+                                                         scl::g_max-1);
             return false;
         }
-        else if ((square.y+square.side-1) > g_max-1) {
+        else if ((square.y+square.side-1) > scl::g_max-1) {
             std::cout << error_squarecell::print_outside(square.y, square.side,
-                                                         g_max-1);
+                                                         scl::g_max-1);
             return false;
         }
     }
     return true;
 }
 
-bool square_superposition(csquare square) {
+bool scl::square_superposition(scl::csquare square) {
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
             for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                if (grid[j][g_max-1-i]) {
+                if (grid[j][scl::g_max-1-i]) {
                     return true;
                 }
             }
@@ -76,7 +83,7 @@ bool square_superposition(csquare square) {
     else {
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                if (grid[j][g_max-1-i]) {
+                if (grid[j][scl::g_max-1-i]) {
                     return true;
                 }
             }
@@ -85,12 +92,12 @@ bool square_superposition(csquare square) {
     return false;
 }
 
-square square_get_superposition(csquare test) {
+scl::square scl::square_get_superposition(scl::csquare test) {
     square cross;
     if (test.centered) {
         for (unsigned i = test.y+test.side/2; i >= test.y-test.side/2; i--) {
             for (unsigned j = test.x-test.side/2; j <= test.x+test.side/2; j++) {
-                if (grid[j][g_max-1-i]) {
+                if (grid[j][scl::g_max-1-i]) {
                     cross = {j, i, 1, 1};
                     return cross;
                 }
@@ -100,7 +107,7 @@ square square_get_superposition(csquare test) {
     else {
         for (unsigned i = test.y+test.side-1; i >= test.y; i--) {
             for (unsigned j = test.x; j < test.x+test.side; j++) {
-                if (grid[j][g_max-1-i]) {
+                if (grid[j][scl::g_max-1-i]) {
                     cross = {j, i, 1, 1};
                     return cross;
                 }
@@ -111,7 +118,7 @@ square square_get_superposition(csquare test) {
     return {500, 500, 0, 0};
 }
 
-bool square_superposition(csquare s1, csquare s2) {
+bool scl::square_superposition(scl::csquare s1, scl::csquare s2) {
     // check x
     int xmin, x1min, x2min;
     x1min = s1.centered ? s1.x-s1.side/2 : s1.x;
@@ -146,7 +153,7 @@ bool square_superposition(csquare s1, csquare s2) {
     return false;
 }
 
-bool square_contains(csquare s1, csquare s2) {
+bool scl::square_contains(scl::csquare s1, scl::csquare s2) {
     if (s2.x-s2.side/2 <= s1.x)
         return false;
     else if (s2.x+s2.side/2 >= s1.x+s1.side-1)
@@ -158,51 +165,51 @@ bool square_contains(csquare s1, csquare s2) {
     return true;
 }
 
-bool square_add(csquare square) {
-    if (!square_validation(square)) return false;
+bool scl::square_add(scl::csquare square) {
+    if (!scl::square_validation(square)) return false;
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
             for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                grid[j][g_max-1-i] = true;
+                grid[j][scl::g_max-1-i] = true;
             }
         }
     }
     else {
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                grid[j][g_max-1-i] = true;
+                grid[j][scl::g_max-1-i] = true;
             }
         }
     }
     return true;
 }
 
-bool square_delete(csquare square) {
-    if (!square_validation(square)) return false;
+bool scl::square_delete(scl::csquare square) {
+    if (!scl::square_validation(square)) return false;
     if (square.centered) {
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
             for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                if (!grid[j][g_max-1-i]) return false;
+                if (!grid[j][scl::g_max-1-i]) return false;
             }
         }
         for (unsigned i = square.y-square.side/2; i <= square.y+square.side/2; i++) {
             for (unsigned j = square.x-square.side/2; j <= square.x+square.side/2;
                  j++) {
-                grid[j][g_max-1-i] = false;
+                grid[j][scl::g_max-1-i] = false;
             }
         }
     }
     else {
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                if (!grid[j][g_max-1-i]) return false;
+                if (!grid[j][scl::g_max-1-i]) return false;
             }
         }
         for (unsigned i = square.y; i < square.y+square.side; i++) {
             for (unsigned j = square.x; j < square.x+square.side; j++) {
-                grid[j][g_max-1-i] = false;
+                grid[j][scl::g_max-1-i] = false;
             }
         }
     }
@@ -210,10 +217,10 @@ bool square_delete(csquare square) {
 }
 
 // print function (Debug):
-void print_grid() {
-    for (unsigned i = 0; i < g_max; i++) {
+void scl::print_grid() {
+    for (unsigned i = 0; i < scl::g_max; i++) {
         std::cout << std::endl;
-        for (unsigned j = 0; j < g_max; j++) {
+        for (unsigned j = 0; j < scl::g_max; j++) {
             if (grid[j][i]) {
                 std::cout << "\033[41;1mO\033[0m";
             }

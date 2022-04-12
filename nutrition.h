@@ -26,7 +26,7 @@ private:
      */
 
     //temp
-    std::vector<square> foods;
+    std::vector<scl::square> foods;
 
 public:
     /**
@@ -36,7 +36,21 @@ public:
      * 
      * @param data input string stream
      */
-    void add_element(std::istringstream& data);
+    bool add_element(std::istringstream& data);
+
+    /**
+     * @brief Get position data of all nutrition elements in configfile format
+     * 
+     * @return std::string 
+     */
+    std::string get_filedata();
+
+    /**
+     * @brief delete all food objects
+     * 
+     * @note deletes squares from grid
+     */
+    void clear();
 
     /**
      * @brief Construct a new Nutrition object
@@ -45,8 +59,10 @@ public:
 
     /**
      * @brief Destroy the Nutrition object
+     * 
+     * @note free the grid
      */
-    //TODO:~Nutrition();
+    ~Nutrition();
 };
 
 #endif

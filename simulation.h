@@ -33,17 +33,40 @@ private:
     Nutrition food;
 
     /**
-     * @brief Function to distribute one line of the configfile
+     * @brief Distribute one line of the configfile
      * 
      * @param line string of one line
+     * 
+     * @returns true if no error occured while reading the line
      */
-    void handle_line(const std::string& line);
+    bool handle_line(const std::string& line);
+
+    /**
+     * @brief Get the header for a configfile with timestamp
+     * 
+     * @return std::string 
+     */
+    std::string get_fileheader();
 
 public:
     /**
-     * @brief Function to read the configfile
+     * @brief Read the configfile
+     * 
+     * @param filename name of the file to read
+     * 
+     * @returns true if everything could be initialized
      */
-    void read_configfile(const std::string& filename);
+    bool read_configfile(const std::string& filename);
+
+    /**
+     * @brief Store the actual state of the simulation in a configfile
+     */
+    void write_configfile();
+
+    /**
+     * @brief clear the simulation and delete all objects (empty grid)
+     */
+    void clear();
 
     /**
      * @brief Default simulation constructor
