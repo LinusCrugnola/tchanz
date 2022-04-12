@@ -15,13 +15,13 @@
 
 bool Nutrition::add_element(std::istringstream& data) {
     bool valid = true;
-    square position = {0,0,1,1};
+    scl::square position = {0,0,1,1};
     if (!(data >> position.x >> position.y)) 
         return false;
 
-    valid = square_validation(position); // displays error if invalid
+    valid = scl::square_validation(position); // displays error if invalid
 
-    if (square_superposition(position)) {
+    if (scl::square_superposition(position)) {
         std::cout << message::food_overlap(position.x, position.y);
         valid = false;
     }
@@ -31,7 +31,7 @@ bool Nutrition::add_element(std::istringstream& data) {
         //block square
 
         //temp
-        square_add(position);
+        scl::square_add(position);
         this->foods.push_back(position);
         return true;
     }
@@ -50,14 +50,14 @@ std::string Nutrition::get_filedata(){
 
 void Nutrition::clear(){
     for(auto elem : foods){
-        square_delete(elem);
+        scl::square_delete(elem);
     }
     this->foods.clear();
 }
 
 Nutrition::~Nutrition(){
     for(auto elem : this->foods){
-        square_delete(elem);
+        scl::square_delete(elem);
     }
     this->foods.clear();
 }

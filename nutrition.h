@@ -26,7 +26,7 @@ private:
      */
 
     //temp
-    std::vector<square> foods;
+    std::vector<scl::square> foods;
 
 public:
     /**

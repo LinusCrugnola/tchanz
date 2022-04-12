@@ -24,7 +24,7 @@ typedef const unsigned& cunsigned;
  */
 class Anthill {
 private:
-    square position;
+    scl::square position;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
 
@@ -34,7 +34,7 @@ private:
     std::vector<Ant*> ants;
 
 public:
-    square get_position() const {return position;}
+    scl::square get_position() const {return position;}
 
     /**
      * @brief Verification of an anthill's data. 
@@ -47,8 +47,8 @@ public:
      * @returns Pointer on new anthill object, null if invalid
      */
     static Anthill* anthill_validation(std::istringstream& data,
-                                     std::vector<Anthill*>& hills_existing, 
-                                     cunsigned home);
+                                       std::vector<Anthill*>& hills_existing, 
+                                       cunsigned home);
 
     /**
      * @brief This function returns the number of ants in anthill
@@ -85,7 +85,7 @@ public:
      * @param yg y coordinate of generator
      * @param home number of hill (starts at 0)
      */
-    Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
+    Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
             cunsigned nbP);
 
     /**

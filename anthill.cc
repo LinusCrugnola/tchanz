@@ -12,17 +12,16 @@
 
 #include "message.h"
 
-Anthill::Anthill(csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-                cunsigned nbP)
-                : position(position), total_food(total_food), nbC(nbC), 
-                nbD(nbD), nbP(nbP)
+Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
+                 cunsigned nbD,cunsigned nbP)
+    : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
 {}
 
 Anthill* Anthill::anthill_validation(std::istringstream& data,
                                      std::vector<Anthill*>& hills_existing, 
                                      cunsigned home) {
     Anthill* anthill = nullptr;
-    square position = {0, 0, 0, 0};
+    scl::square position = {0, 0, 0, 0};
     unsigned xg, yg;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
@@ -31,10 +30,10 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
         std::cout << "reading error!" << std::endl;
     }
 
-    if(!square_validation(position)) return nullptr;
+    if(!scl::square_validation(position)) return nullptr;
 
     for (unsigned i(0); i < hills_existing.size(); i++) {
-        if (square_superposition(hills_existing[i]->get_position(), position)) {
+        if (scl::square_superposition(hills_existing[i]->get_position(), position)) {
             std::cout << message::homes_overlap(i, hills_existing.size());
             return nullptr;
         }
@@ -134,5 +133,5 @@ Anthill::~Anthill(){
         ant = nullptr;
     }
     this->ants.clear();
-    square_delete(this->position);
+    scl::square_delete(this->position);
 }

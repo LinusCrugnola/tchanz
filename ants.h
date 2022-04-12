@@ -20,7 +20,7 @@
  */
 class Ant {
 protected:
-    square position;
+    scl::square position;
 
 public:
     /**
@@ -28,8 +28,8 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Ant(square position);
-
+    Ant(scl::csquare position); 
+    
     /**
      * @brief Get the configfile data of an ant object
      * 
@@ -65,7 +65,7 @@ public:
      * 
      * @returns pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(coord xg, coord yg, csquare 
+    static Ant* data_validation(scl::coord xg, scl::coord yg, scl::csquare 
                                 anthill_position, const unsigned& home);
 
     /**
@@ -80,7 +80,7 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Generator(csquare position);
+    Generator(scl::csquare position);
 };
 
 /**
@@ -119,7 +119,7 @@ public:
      * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
      */
-    Collector(csquare position, unsigned age, Etat_collector food);
+    Collector(scl::csquare position, unsigned age, Etat_collector food);
 };
 
 /**
@@ -141,7 +141,7 @@ public:
      * 
      * @returns pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(std::istringstream& data, csquare 
+    static Ant* data_validation(std::istringstream& data, scl::csquare 
                                 anthill_position, const unsigned& home);
 
     /**
@@ -157,7 +157,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
      */
-    Defensor(csquare position, unsigned age);
+    Defensor(scl::csquare position, unsigned age);
 };
 
 /**
@@ -195,7 +195,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
      */
-    Predator(csquare position, unsigned age);
+    Predator(scl::csquare position, unsigned age);
 };
 
 #endif
