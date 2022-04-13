@@ -26,3 +26,9 @@ void test_simulation();
  * 
  */
 void test_nutrition();
+
+/**
+ * @brief test gui
+ * 
+ */
+void test_gui();

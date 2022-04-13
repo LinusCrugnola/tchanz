@@ -42,6 +42,7 @@ int main(int argc, char **argv){
     }
     else{
         cout << message::success();
+        scl::print_grid();
         std::cout << write << std::endl;
         simulation.write_configfile();
     }
