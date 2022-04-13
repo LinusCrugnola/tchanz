@@ -11,22 +11,9 @@
 #include <string>
 #include <sstream>
 
-#include "../nutrition.h"
-#include "../squarecell.h"
+//#include "../GUIgraphic.h"
 #include "testfunctions.h"
 
-using namespace std;
-
-void test_nutrition(){
-    // Test constructor:
-    cout << "Test nutrition" << endl;
-    Nutrition nutri;
-
-    // Test data validation
-    string line = " 20 55";
-    istringstream data(line);
-    nutri.add_element(data);
-    assert(scl::square_superposition({20,55,1,0}));
-    cout << "Test 1 passed" << endl;
+void test_gui(){
 
 }

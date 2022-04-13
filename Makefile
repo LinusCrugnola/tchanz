@@ -2,8 +2,8 @@
 CXX := g++
 CXXFLAGS := -g -Wall -std=c++11
 CXXOBJFLAGS := $(CXXFLAGS) -c
-LDFLAGS := -lm 'pkg-config gtkmm-3.0 --libs'
-LDLIBS := 'pkg-config gtkmm-3.0 --cflags'
+LDFLAGS := `pkg-config --libs gtkmm-3.0`
+LDLIBS := `pkg-config --cflags gtkmm-3.0`
 
 # directories (comment for release)
 OBJ_DIR := obj
@@ -29,24 +29,20 @@ TARGET_TST := test.out
 
 # Build target
 $(TARGET): $(OBJ) $(TARGET_OBJ)
-	$(CXX) $(CXXFLAGS) $^ -o $@ 
-#$(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)
 
 # compile object files
 $(OBJ_DIR)/%.o: %.cc
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
-#$(LDLIBS)
+	$(CXX) $(CXXOBJFLAGS) $< -o $@ $(LDFLAGS)
 
 # build tests
 $(TARGET_TST): $(TST_OBJ) $(OBJ) $(TARGET_TST_OBJ)
-	$(CXX) $(CXXFLAGS) $^ -o $@ 
-#$(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(TST_DIR)/obj/%.o: $(TST_DIR)/%.cc
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CXXOBJFLAGS) $< -o $@ 
-#$(LDLIBS)	
+	$(CXX) $(CXXOBJFLAGS) $< -o $@ $(LDLIBS)
 
 # compile root files with main()
 $(TARGET_OBJ) : projet.cpp
