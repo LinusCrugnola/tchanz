@@ -47,6 +47,17 @@ namespace scl {
     };
 
     /**
+     * @brief Define drawing types for squares
+     * 
+     * @details empty:    empty square (only border line)
+     *          rhomb:    square border with a rhomb inscribed
+     *          uniform:  completely filled square
+     *          diagonal: square with diagonals inscribed (X)
+     *          grille:   square with a grid form inscribed (#)
+     */
+    enum drawtype {empty, rhomb, uniform, diagonal, grille};
+
+    /**
      * @brief define a constant reference on square
      */
     typedef const square& csquare;
@@ -122,6 +133,16 @@ namespace scl {
      * @returns Bool: false if there's no square or square invalid
      */
     bool square_delete(csquare square);
+
+    /**
+     * @brief Draws a square with a chosen drawtype
+     * 
+     * @param square 
+     * @param type 
+     * 
+     * @returns bool true if no errors while drawing
+     */
+    bool square_draw(csquare square, drawtype type);
 
     /**
      * @brief Functions to debug the module

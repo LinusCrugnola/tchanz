@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "error_squarecell.h"
+#include "graphic.h"
 
 /**
  * @brief unnamed namespace with the implementation of the grid
@@ -214,6 +215,26 @@ bool scl::square_delete(scl::csquare square) {
         }
     }
     return true;
+}
+
+bool scl::square_draw(scl::csquare square, scl::drawtype drawtype){
+    if(!square_validation(square)) 
+        return false;
+    switch (drawtype)
+    {
+    case empty:
+        return graphic::draw_empty(square.x, square.y, square.side, square.centered);
+    case rhomb:
+        return graphic::draw_rhomb(square.x, square.y, square.side, square.centered);
+    case uniform:
+        return graphic::draw_uniform(square.x, square.y, square.side, square.centered);
+    case diagonal:
+        return graphic::draw_diagonal(square.x, square.y, square.side, square.centered);
+    case grille:
+        return graphic::draw_grille(square.x, square.y, square.side, square.centered);
+    default:
+        return false;
+    }
 }
 
 // print function (Debug):
