@@ -9,6 +9,8 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
+#include "graphic.h"
+
 /**
  * @brief Squarecell library namespace: scl
  */
@@ -56,15 +58,6 @@ namespace scl {
      *          grille:   square with a grid form inscribed (#)
      */
     enum drawtype {empty, rhomb, uniform, diagonal, grille};
-
-    /**
-     * @brief concrete type of rgb color
-     */
-    struct color {
-        double r;
-        double g;
-        double b;
-    };
 
     /**
      * @brief define a constant reference on square
@@ -151,17 +144,17 @@ namespace scl {
      * 
      * @returns bool true if no errors while drawing
      */
-    bool square_draw(csquare square, drawtype type);
+    bool square_draw(csquare square, drawtype type, graphic::color color);
 
     /**
-     * @brief Gets the next scl::color from the hidden list of colors
+     * @brief Gets the next color from the graphic module
      * 
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
-     * @returns scl::color (rgb struct)
+     * @returns graphic::color (rgb struct)
      */
-    color get_new_color();
+    graphic::color get_new_color();
 
     /**
      * @brief Functions to debug the module

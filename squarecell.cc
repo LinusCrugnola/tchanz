@@ -13,7 +13,6 @@
 #include <array>
 
 #include "error_squarecell.h"
-#include "graphic.h"
 
 /**
  * @brief unnamed namespace with the implementation of the grid
@@ -21,14 +20,6 @@
 namespace {
     std::vector<std::vector<bool>> grid(scl::g_max, std::vector<bool>(scl::g_max, 
                                                                       false));
-    const scl::color color_list[6] = {
-        {1, 0, 0},   // red
-        {0, 1, 0},   // green
-        {0, 0, 1},   // blue
-        {1, 1, 0.2}, // yellow TODO: try values
-        {1, 0, 1},   // magenta
-        {0, 1, 1}    // cyan
-    };
 }
 
 scl::square to_square(scl::cpoint point){
@@ -226,10 +217,10 @@ bool scl::square_delete(scl::csquare square) {
     return true;
 }
 
-bool scl::square_draw(scl::csquare square, scl::drawtype drawtype){
+bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color color){
     if(!square_validation(square)) 
         return false;
-    switch (drawtype)
+    switch (dtype)
     {
     case empty:
         return graphic::draw_empty(square.x, square.y, square.side, square.centered);
@@ -246,12 +237,8 @@ bool scl::square_draw(scl::csquare square, scl::drawtype drawtype){
     }
 }
 
-scl::color scl::get_new_color(){
-    static unsigned state = 0;
-    scl::color new_color = color_list[state];
-    state += 1;
-    state = state % 6;
-    return new_color;
+graphic::color scl::get_new_color(){
+    return graphic::get_new_color();
 }
 
 // print function (Debug):

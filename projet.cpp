@@ -28,6 +28,13 @@ std::string write = "----------------------- Generate File ---------------------
  * @brief project main function
  */
 int main(int argc, char **argv){
+
+    for(int i=0; i<10; i++){
+        graphic::color color = scl::get_new_color();
+        std::cout << color.r << " " << color.g << " " << color.b << std::endl;
+    }
+    exit(0);
+
     //create a simulation and set up the map
     Simulation simulation;
 
