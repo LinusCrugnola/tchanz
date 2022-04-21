@@ -4,8 +4,10 @@
 
 typedef const unsigned& cunsigned;
 
+/**
+ * @brief namespace of the graphic module
+ */
 namespace graphic{
-
     /**
      * @brief concrete type of rgb color
      */
