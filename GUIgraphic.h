@@ -3,8 +3,15 @@
 
 #include <gtkmm.h>
 
-class Canvas
-{};
+class Canvas : public Gtk::DrawingArea
+{
+	public:
+		Canvas();
+		virtual ~Canvas();
+	
+	protected:
+		bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+};
 
 class Gui : public Gtk::Window
 {
@@ -13,17 +20,23 @@ class Gui : public Gtk::Window
 		virtual ~Gui();
 	
 	protected:
-		Gtk::Box H_box;
-		Gtk::Box navbar;//vertical box
-		Gtk::Box display;
+		
+		void on_button_clicked_exit();
+		void on_button_clicked_open();
+		void on_button_clicked_save();
+		void on_button_clicked_start();
+		void on_button_clicked_step();
+		
 		Canvas canvas;
-		Gtk::Frame general, info, anthill_info;
-		Gtk::Button leave,open;
 		
+		Gtk::Box H_box;
+		Gtk::Box V_box, canvas_box, navbar, anthill_info_box;
+		Gtk::Frame general_frame, info_frame, anthill_info_frame;
+		Gtk::Label nbF_info;
+		Gtk::Button exit, open, save, start, step,
+					previous, next;
+									
 };
-		
-		
-
 
 
 #endif
