@@ -154,9 +154,12 @@ namespace scl {
     bool square_draw(csquare square, drawtype type);
 
     /**
-     * @brief Get a new color from the list of colors
+     * @brief Gets the next scl::color from the hidden list of colors
      * 
-     * @returns color (rgb struct)
+     * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
+     *       after cyan, it restarts with red.
+     * 
+     * @returns scl::color (rgb struct)
      */
     color get_new_color();
 
