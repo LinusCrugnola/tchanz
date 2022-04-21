@@ -1,6 +1,7 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
+#include <gtkmm/drawingarea.h>
 
 typedef const unsigned& cunsigned;
 

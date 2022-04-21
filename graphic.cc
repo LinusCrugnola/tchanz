@@ -9,6 +9,8 @@ namespace{
         {1, 0, 1},   // magenta
         {0, 1, 1}    // cyan
     };
+
+    const Cairo::RefPtr<Cairo::Context>* ptcr = nullptr;
 }
 
 graphic::color graphic::get_new_color(){
