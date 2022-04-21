@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 	
     Gtk::Window win;
     win.set_title("Test Graphic");
-	win.set_default_size(200,200);
+	win.set_default_size(500,500);
 
 	MockArea canvas;
     win.add(canvas);

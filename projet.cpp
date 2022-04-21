@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-#include "squarecell.h"
+#include "../squarecell.h"
 #include "simulation.h"
 #include "message.h"
 
