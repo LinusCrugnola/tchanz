@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <array>
 
 #include "error_squarecell.h"
 #include "graphic.h"
@@ -20,6 +21,14 @@
 namespace {
     std::vector<std::vector<bool>> grid(scl::g_max, std::vector<bool>(scl::g_max, 
                                                                       false));
+    const scl::color color_list[6] = {
+        {1, 0, 0},   // red
+        {0, 1, 0},   // green
+        {0, 0, 1},   // blue
+        {1, 1, 0.2}, // yellow TODO: try values
+        {1, 0, 1},   // magenta
+        {0, 1, 1}    // cyan
+    };
 }
 
 scl::square to_square(scl::cpoint point){
@@ -235,6 +244,14 @@ bool scl::square_draw(scl::csquare square, scl::drawtype drawtype){
     default:
         return false;
     }
+}
+
+scl::color scl::get_new_color(){
+    static unsigned state = 0;
+    scl::color new_color = color_list[state];
+    state += 1;
+    state = state % 6;
+    return new_color;
 }
 
 // print function (Debug):

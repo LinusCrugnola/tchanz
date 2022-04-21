@@ -58,6 +58,15 @@ namespace scl {
     enum drawtype {empty, rhomb, uniform, diagonal, grille};
 
     /**
+     * @brief concrete type of rgb color
+     */
+    struct color {
+        double r;
+        double g;
+        double b;
+    };
+
+    /**
      * @brief define a constant reference on square
      */
     typedef const square& csquare;
@@ -143,6 +152,13 @@ namespace scl {
      * @returns bool true if no errors while drawing
      */
     bool square_draw(csquare square, drawtype type);
+
+    /**
+     * @brief Get a new color from the list of colors
+     * 
+     * @returns color (rgb struct)
+     */
+    color get_new_color();
 
     /**
      * @brief Functions to debug the module
