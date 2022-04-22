@@ -4,6 +4,7 @@
 #include <gtkmm/drawingarea.h>
 
 typedef const unsigned& cunsigned;
+typedef const double& cdouble;
 
 /**
  * @brief namespace of the graphic module
@@ -59,7 +60,7 @@ namespace graphic{
      * @param centered true if origin in center, false if bottom left corner
      * @return true if drawing could be done
      */
-    bool draw_rhomb(cunsigned x, cunsigned y, cunsigned side, bool centered);
+    bool draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered);
 
     /**
      * @brief draw a filled square

@@ -29,6 +29,8 @@ void graphic::set_context(const Cairo::RefPtr<Cairo::Context>& cr){
 
 bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered){
 
+    if(side < 3) return false;
+
     (*ptcr)->set_line_width(0.5);
     graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
@@ -53,7 +55,7 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered
     return true;
 }
 
-bool graphic::draw_rhomb(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered){
 
     (*ptcr)->set_line_width(sqrt(2)*side/2);
     graphic::color color = get_new_color();
