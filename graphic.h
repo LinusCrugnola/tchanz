@@ -29,6 +29,13 @@ namespace graphic{
     color get_new_color();
 
     /**
+     * @brief set the cairo context pointer in graphic module
+     * 
+     * @param cr cairo context pointer
+     */
+    void set_context(const Cairo::RefPtr<Cairo::Context>& cr);
+
+    /**
      * @brief draw an empty square (border only)
      * 
      * @remark style of anthill
