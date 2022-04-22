@@ -83,13 +83,13 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
 
     //TODO: check details (side etc)
     if(centered){
-        (*ptcr)->move_to(x-side/2,y);
-        (*ptcr)->line_to(x+side/2,y);
+        (*ptcr)->move_to(x-side/2-0.5,y);
+        (*ptcr)->line_to(x+side/2+0.5,y);
         (*ptcr)->stroke();
     }
     else{
-        (*ptcr)->move_to(x-0.5,y+side/2-0.5);
-        (*ptcr)->line_to(x+side-0.5,y+side/2-0.5);
+        (*ptcr)->move_to(x-0.5,y+side/2);
+        (*ptcr)->line_to(x+side-0.5,y+side/2);
         (*ptcr)->stroke();
     }
     return true;
