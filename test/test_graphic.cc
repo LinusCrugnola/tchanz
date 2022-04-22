@@ -33,39 +33,39 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     // test drawing functions
     graphic::color color = graphic::get_new_color();
-    // graphic::draw_empty(2,2,3,1,color);
+    graphic::draw_empty(2,2,3,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_empty(2,2,3,0,color);
+    graphic::draw_empty(4,2,3,0,color);
     color = graphic::get_new_color();
-    // graphic::draw_empty(10,10,1,1,color);
+    graphic::draw_empty(6,2,1,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_empty(1,1,5,0,color);
+    graphic::draw_empty(8,1,5,0,color);
 
     color = graphic::get_new_color();
-    // graphic::draw_rhomb(6,6,1,1,color);
+    graphic::draw_rhomb(15,2,1,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_rhomb(10,10,3,1,color);
+    graphic::draw_rhomb(18,2,3,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_rhomb(5,5,1,0,color);
+    graphic::draw_rhomb(21,2,1,0,color);
 
     color = graphic::get_new_color();
-    // graphic::draw_uniform(3,3,3,1,color);
+    graphic::draw_uniform(3,8,3,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_uniform(2,2,5,0,color);
+    graphic::draw_uniform(7,8,5,0,color);
     color = graphic::get_new_color();
-    // graphic::draw_uniform(10,10,1,1,color);
+    graphic::draw_uniform(14,8,1,1,color);
     color = graphic::get_new_color();
-    // graphic::draw_uniform(11,11,1,0,color);
+    graphic::draw_uniform(16,8,1,0,color);
     
     color = graphic::get_new_color();
-    graphic::draw_diagonal(2,2,3,1,color);
+    graphic::draw_diagonal(3,18,3,1,color);
     color = graphic::get_new_color();
-    graphic::draw_diagonal(4,4,3,0,color);
+    graphic::draw_diagonal(9,18,3,0,color);
 
     color = graphic::get_new_color();
-    graphic::draw_grille(8,8,3,1,color);
+    graphic::draw_grille(15,18,3,1,color);
     color = graphic::get_new_color();
-    graphic::draw_grille(10,10,3,0,color);
+    graphic::draw_grille(20,18,3,0,color);
 
     graphic::draw_world(scl::g_max, width, height);
 
