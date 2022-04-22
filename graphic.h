@@ -99,6 +99,16 @@ namespace graphic{
      * @return true if drawing could be done
      */
     bool draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered);
+
+    /**
+     * @brief draw an empty world of size x size (Grid and border)
+     * 
+     * @param size 
+     * @param width of the window
+     * @param height of the window
+     * @return true if world could be drawn
+     */
+    bool draw_world(cunsigned size, cunsigned width, cunsigned height);
 }
 
 #endif
