@@ -16,13 +16,12 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     const double width = allocation.get_width();
     const double height = allocation.get_height();
 
-    //keep the aspect ratio
-    double scale_y = width/scl::g_max;
-    double delta_x = scl::g_max * (width/height);
-    double scale_x = width/delta_x;
-    double scale = scale_x < scale_y ? scale_x : scale_y;
+    //get the ratios
+    double scale_y = height/scl::g_max;
+    double scale_x = width/scl::g_max;
 
-    //transform to bottom left corner:
+    // take the smaller ratio to scale 
+    double scale = scale_x < scale_y ? scale_x : scale_y;
     cr->translate(0, height);
     cr->scale(scale, -scale);
 
