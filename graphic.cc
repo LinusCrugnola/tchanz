@@ -1,5 +1,7 @@
 #include "graphic.h"
 
+#include <math.h>
+
 namespace{
     const graphic::color color_list[6] = {
         {1, 0, 0},   // red
@@ -52,29 +54,21 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered
     return true;
 }
 
-bool graphic::draw_rhomb(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered){
 
-    (*ptcr)->set_line_width(1);
+    (*ptcr)->set_line_width(sqrt(2)*side/2);
     graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
-    //draw rhomb
-    //TODO: check details (side etc)
     if(centered){
-        (*ptcr)->move_to(x-side/2,y);
-        (*ptcr)->line_to(x,y+side/2);
-        (*ptcr)->line_to(x+side/2,y);
-        (*ptcr)->line_to(x,y-side/2);
-        (*ptcr)->line_to(x-side/2,y);
+        (*ptcr)->move_to(x-side/4,y-side/4);
+        (*ptcr)->line_to(x+side/4,y+side/4);
         (*ptcr)->stroke();
     }
     else{
-        (*ptcr)->move_to(x,y+side/2);
-        (*ptcr)->line_to(x+side/2,y+side);
-        (*ptcr)->line_to(x+side,y+side/2);
-        (*ptcr)->line_to(x+side/2,y);
-        (*ptcr)->line_to(x,y+side/2);
-        (*ptcr)->stroke();          
+        (*ptcr)->move_to(x+side/4-0.5,y+side/4-0.5);
+        (*ptcr)->line_to(x+3*side/4-0.5,y+3*side/4-0.5);
+        (*ptcr)->stroke();
     }
  
     return true;
@@ -112,6 +106,7 @@ bool graphic::draw_world(cunsigned size, cunsigned width, cunsigned height){
 
     (*ptcr)->set_line_width(0.05); //TODO: how large must this be?
     (*ptcr)->set_source_rgb(1,1,1);
+    (*ptcr)->translate(-0.5, -0.5);
     //draw lines
     for(unsigned i=0; i<size; i++){
         (*ptcr)->move_to(i,0);

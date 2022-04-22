@@ -19,7 +19,7 @@ namespace scl {
      * @brief Constants of the module
      */
     constexpr short unsigned g_dim = 7;
-    constexpr short unsigned g_max = 128;
+    constexpr short unsigned g_max = 25;
 
     /**
      * @brief General type point
