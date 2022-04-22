@@ -32,25 +32,40 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     cr->set_line_width(1);
 
     // test drawing functions
-    // graphic::draw_empty(2,2,3,1);
-    // graphic::draw_empty(2,2,3,0);
-    // graphic::draw_empty(10,10,1,1);
-    // graphic::draw_empty(1,1,5,0);
+    graphic::color color = graphic::get_new_color();
+    // graphic::draw_empty(2,2,3,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_empty(2,2,3,0,color);
+    color = graphic::get_new_color();
+    // graphic::draw_empty(10,10,1,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_empty(1,1,5,0,color);
 
-    // graphic::draw_rhomb(6,6,1,1);
-    // graphic::draw_rhomb(10,10,3,1);
-    // graphic::draw_rhomb(5,5,1,0);
+    color = graphic::get_new_color();
+    // graphic::draw_rhomb(6,6,1,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_rhomb(10,10,3,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_rhomb(5,5,1,0,color);
 
-    // graphic::draw_uniform(3,3,3,1);
-    // graphic::draw_uniform(2,2,5,0);
-    // graphic::draw_uniform(10,10,1,1);
-    // graphic::draw_uniform(11,11,1,0);
+    color = graphic::get_new_color();
+    // graphic::draw_uniform(3,3,3,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_uniform(2,2,5,0,color);
+    color = graphic::get_new_color();
+    // graphic::draw_uniform(10,10,1,1,color);
+    color = graphic::get_new_color();
+    // graphic::draw_uniform(11,11,1,0,color);
     
-    graphic::draw_diagonal(2,2,3,1);
-    graphic::draw_diagonal(4,4,3,0);
+    color = graphic::get_new_color();
+    graphic::draw_diagonal(2,2,3,1,color);
+    color = graphic::get_new_color();
+    graphic::draw_diagonal(4,4,3,0,color);
 
-    graphic::draw_grille(8,8,3,1);
-    graphic::draw_grille(10,10,3,0);
+    color = graphic::get_new_color();
+    graphic::draw_grille(8,8,3,1,color);
+    color = graphic::get_new_color();
+    graphic::draw_grille(10,10,3,0,color);
 
     graphic::draw_world(scl::g_max, width, height);
 

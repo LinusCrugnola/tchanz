@@ -45,9 +45,12 @@ namespace graphic{
      * @param y y coordinate of square origin
      * @param side side length of square
      * @param centered true if origin in center, false if bottom left corner
+     * @param color graphic::color of the square
+     * 
      * @return true if drawing could be done
      */
-    bool draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered);
+    bool draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+                    color color);
 
     /**
      * @brief draw a square with inscribed rhomb (no borders) TODO: verify
@@ -58,9 +61,11 @@ namespace graphic{
      * @param y y coordinate of square origin
      * @param side side length of square
      * @param centered true if origin in center, false if bottom left corner
+     * @param color graphic::color of the square
+     * 
      * @return true if drawing could be done
      */
-    bool draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered);
+    bool draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered, color color);
 
     /**
      * @brief draw a filled square
@@ -71,9 +76,12 @@ namespace graphic{
      * @param y y coordinate of square origin
      * @param side side length of square
      * @param centered true if origin in center, false if bottom left corner
+     * @param color graphic::color of the square
+     * 
      * @return true if drawing could be done
      */
-    bool draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool centered);
+    bool draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+                      color color);
 
     /**
      * @brief draw a square and its diagonals (X)
@@ -84,9 +92,12 @@ namespace graphic{
      * @param y y coordinate of square origin
      * @param side side length of square
      * @param centered true if origin in center, false if bottom left corner
+     * @param color graphic::color of the square
+     * 
      * @return true if drawing could be done
      */
-    bool draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered);
+    bool draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+                       color color);
 
     /**
      * @brief draw a square with inscribed grille (#)
@@ -96,10 +107,13 @@ namespace graphic{
      * @param x x coordinate of square origin
      * @param y y coordinate of square origin
      * @param side side length of square
-     * @param centered true if origin in center, false if bottom left corner
+     * @param centered true if origin in center, false if bottom left 
+     * @param color graphic::color of the square
+     * 
      * @return true if drawing could be done
      */
-    bool draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered);
+    bool draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+                     color color);
 
     /**
      * @brief draw an empty world of size x size (Grid and border)
@@ -107,6 +121,7 @@ namespace graphic{
      * @param size 
      * @param width of the window
      * @param height of the window
+     * 
      * @return true if world could be drawn
      */
     bool draw_world(cunsigned size, cunsigned width, cunsigned height);

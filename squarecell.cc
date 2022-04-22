@@ -223,15 +223,20 @@ bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color c
     switch (dtype)
     {
     case empty:
-        return graphic::draw_empty(square.x, square.y, square.side, square.centered);
+        return graphic::draw_empty(square.x, square.y, square.side, square.centered,
+                                   color);
     case rhomb:
-        return graphic::draw_rhomb(square.x, square.y, square.side, square.centered);
+        return graphic::draw_rhomb(square.x, square.y, square.side, square.centered,
+                                   color);
     case uniform:
-        return graphic::draw_uniform(square.x, square.y, square.side, square.centered);
+        return graphic::draw_uniform(square.x, square.y, square.side, square.centered, 
+                                     color);
     case diagonal:
-        return graphic::draw_diagonal(square.x, square.y, square.side, square.centered);
+        return graphic::draw_diagonal(square.x, square.y, square.side,
+                                      square.centered, color);
     case grille:
-        return graphic::draw_grille(square.x, square.y, square.side, square.centered);
+        return graphic::draw_grille(square.x, square.y, square.side, square.centered, 
+                                    color);
     default:
         return false;
     }

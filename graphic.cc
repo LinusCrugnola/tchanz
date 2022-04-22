@@ -27,12 +27,12 @@ void graphic::set_context(const Cairo::RefPtr<Cairo::Context>& cr){
     ptcr = &cr;
 }
 
-bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, 
+                         bool centered, graphic::color color){
 
     if(side < 3) return false;
 
     (*ptcr)->set_line_width(0.5);
-    graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
     //TODO: check line width
@@ -55,10 +55,10 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered
     return true;
 }
 
-bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered){
+bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered, 
+                         graphic::color color){
 
     (*ptcr)->set_line_width(sqrt(2)*side/2);
-    graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
     if(centered){
@@ -75,10 +75,10 @@ bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered){
     return true;
 }
 
-bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool centered,
+                           graphic::color color){
 
     (*ptcr)->set_line_width(side);
-    graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
     //TODO: check details (side etc)
@@ -95,63 +95,58 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
     return true;
 }
 
-bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+                            graphic::color color){
+
     if(side < 3) return false;
-    //light color:
-    graphic::color color = graphic::get_new_color();
-    graphic::color light = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    //dark color:
+    graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    bool even = 0;
     if(centered){
         for(unsigned i = x-side/2; i <= x+side/2; i++){
             for(unsigned j = y-side/2; j <= y+side/2; j++){
-                if(i == j){
-                    graphic::draw_uniform(i,j,1,1);
-                }
-                else{
-                    graphic::draw_uniform(i,j,1,1);
-                }
+                graphic::draw_uniform(i,j,1,1,(even? dark : color));
+                even = !even;
             }
         }
     }
     else{
         for(unsigned i = x; i < x+side; i++){
             for(unsigned j = y; j < y+side; j++){
-                if(i == j){
-                    graphic::draw_uniform(i,j,1,1);
-                }
-                else{
-                    graphic::draw_uniform(i,j,1,1);
-                }
+                graphic::draw_uniform(i,j,1,1,(even? dark : color));
+                even = !even;
             }
         }
     }
     return true;
 }
 
-bool graphic::draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered){
+bool graphic::draw_grille(cunsigned x, cunsigned y, cunsigned side, 
+                          bool centered, graphic::color color){
+
     if(side < 3) return false;
-    //light color:
-    graphic::color color = graphic::get_new_color();
-    graphic::color light = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    //dark color:
+    graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
     if(centered){
-        for(unsigned i = x-side/2; i <= x+side/2; i++){
-            for(unsigned j = y-side/2; j <= y+side/2; j++){
-                if(i%2 == 0 || j%2 == 0){
-                    graphic::draw_uniform(i,j,1,1);
+        for(unsigned i = 0; i < side; i++){
+            for(unsigned j = 0; j < side; j++){
+                if(i%2 == 1 || j%2 == 1){
+                    graphic::draw_uniform(x+i-side/2,y+j-side/2,1,1,color);
                 }
                 else{
-                    graphic::draw_uniform(i,j,1,1);
+                    graphic::draw_uniform(x+i-side/2,y+j-side/2,1,1,dark);
                 }
             }
         }
     }
     else{
-        for(unsigned i = x; i < x+side; i++){
-            for(unsigned j = y; j < y+side; j++){
-                if(i%2 == 0 || j%2 == 0){
-                    graphic::draw_uniform(i,j,1,1);
+        for(unsigned i = 0; i < side; i++){
+            for(unsigned j = 0; j < side; j++){
+                if(i%2 == 1 || j%2 == 1){
+                    graphic::draw_uniform(x+i,y+j,1,1,color);
                 }
                 else{
-                    graphic::draw_uniform(i,j,1,1);
+                    graphic::draw_uniform(x+i,y+j,1,1,dark);
                 }
             }
         }
