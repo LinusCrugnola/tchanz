@@ -96,6 +96,33 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
 }
 
 bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered){
+    //light color:
+    graphic::color color = graphic::get_new_color();
+    graphic::color light = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    if(centered){
+        for(unsigned i = x-side/2; i <= x+side/2; i++){
+            for(unsigned j = y-side/2; j <= y+side/2; j++){
+                if(i == j){
+                    graphic::draw_uniform(i,j,1,1);
+                }
+                else{
+                    graphic::draw_uniform(i,j,1,1);
+                }
+            }
+        }
+    }
+    else{
+        for(unsigned i = x; i < x+side; i++){
+            for(unsigned j = y; j < y+side; j++){
+                if(i == j){
+                    graphic::draw_uniform(i,j,1,1);
+                }
+                else{
+                    graphic::draw_uniform(i,j,1,1);
+                }
+            }
+        }
+    }
     return true;
 }
 

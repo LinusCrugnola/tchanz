@@ -32,16 +32,22 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     cr->set_line_width(1);
 
     // test drawing functions
-    // graphic::draw_empty(1,1,5,0);
-    // graphic::draw_empty(3,3,3,1);
+    graphic::draw_empty(2,2,3,1);
+    graphic::draw_empty(2,2,3,0);
     // graphic::draw_empty(10,10,1,1);
+    // graphic::draw_empty(1,1,5,0);
 
-    // graphic::draw_rhomb(5,5,1,0);
     // graphic::draw_rhomb(6,6,1,1);
     // graphic::draw_rhomb(10,10,3,1);
+    // graphic::draw_rhomb(5,5,1,0);
 
-    graphic::draw_uniform(2,2,5,0);
-    graphic::draw_uniform(3,3,3,1);
+    // graphic::draw_uniform(3,3,3,1);
+    // graphic::draw_uniform(2,2,5,0);
+    // graphic::draw_uniform(10,10,1,1);
+    // graphic::draw_uniform(11,11,1,0);
+    
+    graphic::draw_diagonal(2,2,3,1);
+    graphic::draw_diagonal(4,4,3,0);
 
     graphic::draw_world(scl::g_max, width, height);
 
