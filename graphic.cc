@@ -33,22 +33,21 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered
     graphic::color color = get_new_color();
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
-    //draw square
-    //TODO: check details (side etc)
+    //TODO: check line width
     if(centered){
         (*ptcr)->move_to(x-side/2,y-side/2);
         (*ptcr)->line_to(x-side/2,y+side/2);
         (*ptcr)->line_to(x+side/2,y+side/2);
         (*ptcr)->line_to(x+side/2,y-side/2);
-        (*ptcr)->line_to(x-side/2,y-side/2);
+        (*ptcr)->line_to(x-side/2-0.5,y-side/2);
         (*ptcr)->stroke();
     }
     else{
         (*ptcr)->move_to(x,y);
-        (*ptcr)->line_to(x+side,y);
-        (*ptcr)->line_to(x+side,y+side);
         (*ptcr)->line_to(x,y+side);
-        (*ptcr)->line_to(x,y);
+        (*ptcr)->line_to(x+side,y+side);
+        (*ptcr)->line_to(x+side,y);
+        (*ptcr)->line_to(x-0.5,y);
         (*ptcr)->stroke();
     }
     return true;
@@ -73,6 +72,7 @@ bool graphic::draw_rhomb(cdouble x, cdouble y, cdouble side, bool centered){
  
     return true;
 }
+
 bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool centered){
 
     (*ptcr)->set_line_width(side);
