@@ -38,6 +38,10 @@ bool Nutrition::add_element(std::istringstream& data) {
     return false;
 }
 
+unsigned Nutrition::get_nbF(){
+    return this->foods.size();
+}
+
 bool Nutrition::draw_all(){
     for(const auto& elem : this->foods){
         //draw white rhombs
