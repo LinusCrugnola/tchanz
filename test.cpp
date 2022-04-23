@@ -36,4 +36,4 @@ int main(int argc, char** argv){
 	return app->run(win);
 
     std::cout << "------------------------- Finished tests ------------------------------\n" << std::endl;
-    }
+}
