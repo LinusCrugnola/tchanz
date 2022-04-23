@@ -162,7 +162,7 @@ bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side,
     return true;
 }
 
-bool graphic::draw_world(cunsigned size, cunsigned width, cunsigned height){
+bool graphic::draw_grid(cunsigned size){
 
     (*ptcr)->set_line_width(0.05); //TODO: how large must this be?
     (*ptcr)->set_source_rgb(1,1,1);
@@ -175,14 +175,20 @@ bool graphic::draw_world(cunsigned size, cunsigned width, cunsigned height){
         (*ptcr)->line_to(size,i);
     }
     (*ptcr)->stroke();
+
+    return true;
+}
+
+bool graphic::draw_border(cunsigned size){
     //move in case and draw bord
     (*ptcr)->translate(0.5, 0.5);
     (*ptcr)->set_line_width(1);
+    (*ptcr)->set_source_rgb(1,1,1);
     (*ptcr)->move_to(0, 0);
     (*ptcr)->line_to(0, size-1);
     (*ptcr)->line_to(size-1, size-1);
     (*ptcr)->line_to(size-1, 0);
-    (*ptcr)->line_to(-1, 0);
+    (*ptcr)->line_to(-0.5, 0);
 
     (*ptcr)->stroke();
 

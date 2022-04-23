@@ -29,6 +29,8 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     graphic::set_context(cr);
 
+    graphic::draw_border(scl::g_max);
+
     //set global line width
     cr->set_line_width(1);
 
@@ -104,7 +106,7 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     std::cout << "\n------------------------- Draw world ------------------------------" << std::endl;
 
-    graphic::draw_world(scl::g_max, width, height);
+    graphic::draw_grid(scl::g_max);
 
     return true;
 }
