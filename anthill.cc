@@ -22,8 +22,9 @@ Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC,
 bool Anthill::draw_all_children(){
     scl::square_draw(this->position, scl::empty, this->color);
     for(const auto& ant : this->ants){
-        ant->draw(this->color);
+        if(!ant->draw(this->color)) return false;
     }
+    return true;
 }
 
 Anthill* Anthill::anthill_validation(std::istringstream& data,
