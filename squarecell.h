@@ -9,6 +9,8 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
+#include "graphic.h"
+
 /**
  * @brief Squarecell library namespace: scl
  */
@@ -45,6 +47,17 @@ namespace scl {
         unsigned side;
         bool centered;
     };
+
+    /**
+     * @brief Define drawing types for squares
+     * 
+     * @details empty:    empty square (only border line)
+     *          rhomb:    square border with a rhomb inscribed
+     *          uniform:  completely filled square
+     *          diagonal: square with diagonals inscribed (X)
+     *          grille:   square with a grid form inscribed (#)
+     */
+    enum drawtype {empty, rhomb, uniform, diagonal, grille};
 
     /**
      * @brief define a constant reference on square
@@ -122,6 +135,26 @@ namespace scl {
      * @returns Bool: false if there's no square or square invalid
      */
     bool square_delete(csquare square);
+
+    /**
+     * @brief Draws a square with a chosen drawtype
+     * 
+     * @param square 
+     * @param type 
+     * 
+     * @returns bool true if no errors while drawing
+     */
+    bool square_draw(csquare square, drawtype type, graphic::color color);
+
+    /**
+     * @brief Gets the next color from the graphic module
+     * 
+     * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
+     *       after cyan, it restarts with red.
+     * 
+     * @returns graphic::color (rgb struct)
+     */
+    graphic::color get_new_color();
 
     /**
      * @brief Functions to debug the module

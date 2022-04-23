@@ -1,3 +1,6 @@
+#ifndef TESTFUNCTIONS_H
+#define TESTFUNCTIONS_H
+
 /**
  * @file testfunctions.h
  * @author your name (you@domain.com)
@@ -8,6 +11,22 @@
  * @copyright Copyright (c) 2022
  * 
  */
+
+#include <gtkmm/drawingarea.h>
+
+/**
+ * @brief example area for drawing
+ * 
+ */
+class MockArea : public Gtk::DrawingArea
+{
+public:
+    MockArea();
+    virtual ~MockArea();
+protected:
+    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+};
+
 
 /**
  * @brief test squarecell
@@ -32,3 +51,12 @@ void test_nutrition();
  * 
  */
 void test_gui();
+
+/**
+ * @brief test graphic
+ * 
+ */
+void test_graphic();
+
+
+#endif
