@@ -66,6 +66,7 @@ Canvas::~Canvas()
 
 bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) // DESSIN EPFL
 {
+    //FIXME: find a way to avoid scl:: (see donnée)
 	cr->set_source_rgb(0,0,0);
     cr->paint();
 
@@ -88,7 +89,6 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) // DESSIN EPFL
         cr->translate(0, (height-width)/(2*scale));
     }
 
-    //move in square (0,0) center
     cr->translate(0.5,0.5);
     
     graphic::set_context(cr);
