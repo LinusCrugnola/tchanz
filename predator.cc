@@ -17,6 +17,10 @@ Predator::Predator(scl::csquare position, unsigned age)
     scl::square_add(position);
 }
 
+bool Predator::draw(graphic::color color){
+    return scl::square_draw(this->position, scl::uniform, color);
+}
+
 Ant* Predator::data_validation(std::istringstream& data) {
     Ant* predator = nullptr;
     scl::square position = {0, 0, sizeP, 1};
