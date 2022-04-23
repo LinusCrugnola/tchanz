@@ -18,8 +18,7 @@
 
 bool Simulation::draw_current_state(){
     //call draw functions of entities
-    bool state = true;
-    if(!this->food->draw_all()) return false;
+    if(!this->food.draw_all()) return false;
     for(const auto& hill : this->anthill){
         if(!hill->draw_all_children()) return false;
     }
