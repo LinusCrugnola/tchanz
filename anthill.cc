@@ -15,7 +15,16 @@
 Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
                  cunsigned nbD,cunsigned nbP)
     : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
-{}
+{
+    this->color = scl::get_new_color();
+}
+
+bool Anthill::draw_all_children(){
+    scl::square_draw(this->position, scl::empty, this->color);
+    for(const auto& ant : this->ants){
+        ant->draw(this->color);
+    }
+}
 
 Anthill* Anthill::anthill_validation(std::istringstream& data,
                                      std::vector<Anthill*>& hills_existing, 
