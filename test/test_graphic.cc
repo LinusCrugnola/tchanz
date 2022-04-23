@@ -106,11 +106,11 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     std::cout << "\n------------------------- Draw world ------------------------------" << std::endl;
 
-    graphic::draw_grid(scl::g_max);
-
     static unsigned x = 1, y = 1;
     graphic::draw_uniform(x++,y++,1,1, {1,1,0});
     if(x == scl::g_max){x = 1; y = 1;}
+
+    graphic::draw_grid(scl::g_max);
 
     return true;
 }
