@@ -106,7 +106,7 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
 bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool centered, 
                             graphic::color color){
 
-    if(side < 3) return false;
+    if(side != 3) return false;
     //dark color:
     graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
     bool even = 0;
@@ -132,7 +132,7 @@ bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool cente
 bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side, 
                           bool centered, graphic::color color){
 
-    if(side < 3) return false;
+    if(side != 3) return false;
     //dark color:
     graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
     if(centered){

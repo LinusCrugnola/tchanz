@@ -46,7 +46,7 @@ public:
      * @param anthill_position position of the parent anthill
      * @param home number of parent anthill (starts at 0)
      * 
-     * @returns pointer to new ant object, null if position is invalid
+     * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(scl::coord xg, scl::coord yg, scl::csquare 
                                 anthill_position, const unsigned& home);

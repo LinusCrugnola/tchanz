@@ -24,6 +24,8 @@ namespace scl {
     /**
      * @brief General type point
      * 
+     * @remark this is not used in rendu 2
+     * 
      * @param x coordinate of point
      * @param y coordinate of point
      */
@@ -86,7 +88,7 @@ namespace scl {
     /**
      * @brief Validation of a square checks if square is inside of the grid borders
      * 
-     * @returns true if square is valild
+     * @return true if square is valild
      * 
      * @note function throws error if square is not valid
      */
@@ -95,28 +97,28 @@ namespace scl {
     /**
      * @brief Checks if a square superposes with an existing square in the grid
      * 
-     * @returns true if there's a superposition
+     * @return true if there's a superposition
      */
     bool square_superposition(csquare square);
 
     /**
      * @brief Test if two squares superpose 
      * 
-     * @returns true if there's a superpostion
+     * @return true if there's a superpostion
      */
     bool square_superposition(csquare square1, csquare square2);
 
     /**
      * @brief get the point where a square superposes in the grid
      * 
-     * @returns Gets first point where squares superpose (biggest y, smallest x)
+     * @return Gets first point where squares superpose (biggest y, smallest x)
      */
     square square_get_superposition(csquare test);
 
     /**
      * @brief Test if the first square contains a second square
      * 
-     * @returns true if first square fully contains second square
+     * @return true if first square fully contains second square
      * 
      * @note the borders of the squares cannot overlap
      */
@@ -125,14 +127,14 @@ namespace scl {
     /**
      * @brief Add a square to the grid 
      * 
-     * @returns false if a square is invalid or if there's a superposition 
+     * @return false if a square is invalid or if there's a superposition 
      */
     bool square_add(csquare square);
 
     /**
      * @brief Deletes a square from the grid 
      * 
-     * @returns Bool: false if there's no square or square invalid
+     * @return Bool: false if there's no square or square invalid
      */
     bool square_delete(csquare square);
 
@@ -142,7 +144,7 @@ namespace scl {
      * @param square 
      * @param type 
      * 
-     * @returns bool true if no errors while drawing
+     * @return bool true if no errors while drawing
      */
     bool square_draw(csquare square, drawtype type, graphic::color color);
 
@@ -152,7 +154,7 @@ namespace scl {
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
-     * @returns graphic::color (rgb struct)
+     * @return graphic::color (rgb struct)
      */
     graphic::color get_new_color();
 

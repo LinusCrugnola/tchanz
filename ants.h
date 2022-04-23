@@ -20,6 +20,9 @@
  */
 class Ant {
 protected:
+    /**
+     * @brief position of the ant (square)
+     */
     scl::square position;
 
 public:

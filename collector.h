@@ -26,7 +26,15 @@ class Ant;
  */
 class Collector : public Ant {
 private:
+    /**
+     * @brief age of the ant
+     */
     unsigned age;
+
+    /**
+     * @brief state of the ant
+     * @remark empty => no food, loaded => carrying a food item
+     */
     Etat_collector food;
 
 public:
@@ -47,7 +55,7 @@ public:
      * 
      * @param input data stream
      * 
-     * @returns pointer to new ant object, null if position is invalid
+     * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
 

@@ -28,9 +28,24 @@ typedef const unsigned& cunsigned;
  */
 class Anthill {
 private:
+    /**
+     * @brief position of the hill (square)
+     */
     scl::square position;
+
+    /**
+     * @brief total food stocked in the hill
+     */
     unsigned total_food;
+
+    /**
+     * @brief number of collector, defensor and predator ants belonging to the hill
+     */
     unsigned nbC, nbD, nbP;
+
+    /**
+     * @brief color of the hill and all it's children
+     */
     graphic::color color;
 
     /**
@@ -56,7 +71,7 @@ public:
      * @param hills_existing anthills that already exist 
      * @param home number of current hill (starts at 0)
      * 
-     * @returns Pointer on new anthill object, null if invalid
+     * @return Pointer on new anthill object, null if invalid
      */
     static Anthill* anthill_validation(std::istringstream& data,
                                        std::vector<Anthill*>& hills_existing, 

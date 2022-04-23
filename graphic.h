@@ -33,7 +33,7 @@ namespace graphic{
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
-     * @returns graphic::color (rgb struct)
+     * @return graphic::color (rgb struct)
      */
     color get_new_color();
 
@@ -51,7 +51,7 @@ namespace graphic{
      * 
      * @param x x coordinate of square origin
      * @param y y coordinate of square origin
-     * @param side side length of square
+     * @param side side length of square, can't be < 3
      * @param centered true if origin in center, false if bottom left corner
      * @param color graphic::color of the square
      * 
@@ -94,11 +94,11 @@ namespace graphic{
     /**
      * @brief draw a square and its diagonals (X)
      * 
-     * @remark style of TODO: ?
+     * @remark style of the collector ant
      * 
      * @param x x coordinate of square origin
      * @param y y coordinate of square origin
-     * @param side side length of square
+     * @param side side length of square, must be 3
      * @param centered true if origin in center, false if bottom left corner
      * @param color graphic::color of the square
      * 
@@ -110,25 +110,23 @@ namespace graphic{
     /**
      * @brief draw a square with inscribed cross (#)
      * 
-     * @remark style of TODO: ?
+     * @remark style of the defensor ant
      * 
      * @param x x coordinate of square origin
      * @param y y coordinate of square origin
-     * @param side side length of square
+     * @param side side length of square, must be 3
      * @param centered true if origin in center, false if bottom left 
      * @param color graphic::color of the square
      * 
      * @return true if drawing could be done
      */
     bool draw_cross(cunsigned x, cunsigned y, cunsigned side, bool centered, 
-                     color color);
+                    color color);
 
     /**
      * @brief draw an empty world of size x size (without border)
      * 
-     * @param size 
-     * @param width of the window
-     * @param height of the window
+     * @param size of the world (scl::g_max)
      * 
      * @return true if world could be drawn
      */
@@ -137,8 +135,9 @@ namespace graphic{
     /**
      * @brief draw the border of the world
      * 
-     * @return true 
-     * @return false 
+     * @param size of the world (scl::g_max)
+     * 
+     * @return true if the border could be drawn
      */
     bool draw_border(cunsigned size);
 }

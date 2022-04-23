@@ -37,7 +37,7 @@ private:
      * 
      * @param line string of one line
      * 
-     * @returns true if no error occured while reading the line
+     * @return true if no error occured while reading the line
      */
     bool handle_line(const std::string& line);
 
@@ -62,7 +62,7 @@ public:
      * 
      * @param filename name of the file to read
      * 
-     * @returns true if everything could be initialized
+     * @return true if everything could be initialized
      */
     bool read_configfile(const std::string& filename);
 

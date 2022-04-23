@@ -26,6 +26,9 @@ class Ant;
  */
 class Defensor : public Ant {
 private:
+    /**
+     * @brief age of the ant
+     */
     unsigned age;
 
 public:
@@ -46,7 +49,7 @@ public:
      * 
      * @param input data stream, position and number of anthill
      * 
-     * @returns pointer to new ant object, null if position is invalid
+     * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data, scl::csquare 
                                 anthill_position, const unsigned& home);

@@ -27,6 +27,9 @@ class Ant;
  */
 class Predator : public Ant {
 private:
+    /**
+     * @brief age of the ant
+     */
     unsigned age;
 
 public:
@@ -47,7 +50,7 @@ public:
      * 
      * @param input data stream
      * 
-     * @returns pointer to new ant object, null if position is invalid
+     * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data);
 
