@@ -5,10 +5,11 @@
 #include <iostream>
 #include"../simulation.h"
 
-MockArea::MockArea(){}
+MockArea::MockArea():simu(){}
 MockArea::~MockArea(){}
 
 bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
+    std::cout << "on_draw" << std::endl;
 
     cr->set_source_rgb(0,0,0);
     cr->paint();
@@ -100,13 +101,16 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     std::cout << "\n------------------------- Draw simulation ------------------------------" << std::endl;
     //test simulation
-    Simulation simu_test;
-    std::cout << "reading output: " << simu_test.read_configfile("testfiles/t01.txt") << std::endl;
-    std::cout << "drawing output: " << simu_test.draw_current_state() << std::endl;
+    std::cout << "reading output: " << this->simu.read_configfile("testfiles/no_error_neighbours_anthill.txt") << std::endl;
+    std::cout << "drawing output: " << this->simu.draw_current_state() << std::endl;
 
     std::cout << "\n------------------------- Draw world ------------------------------" << std::endl;
 
     graphic::draw_grid(scl::g_max);
+
+    static unsigned x = 1, y = 1;
+    graphic::draw_uniform(x++,y++,1,1, {1,1,0});
+    if(x == scl::g_max){x = 1; y = 1;}
 
     return true;
 }
