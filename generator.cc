@@ -18,7 +18,7 @@ Generator::Generator(scl::csquare position)
 }
 
 bool Generator::draw(graphic::color color){
-    scl::square_draw(this->position, scl::uniform, color);
+    return scl::square_draw(this->position, scl::uniform, color);
 }
 
 Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
