@@ -30,6 +30,17 @@ private:
 
 public:
     /**
+     * @brief draw the defensor ant
+     * 
+     * @remark draws a square with diagonals
+     * 
+     * @param color specifies the color of the ant (parent color)
+     * 
+     * @return true if no errors
+     */
+    virtual bool draw(graphic::color color) override;
+
+    /**
      * @brief validates that an ants position is inside the hill and it doesn't 
      * intersect with another entity
      * 
