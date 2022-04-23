@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     simulation.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             40 %
-*           Linus Crugnola <linus.crugnola@epfl.ch>     60 %
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             30 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     70 %
 * @version  1.0
 * @date     01.04.2022
 *******************************************************************************/
@@ -15,6 +15,15 @@
 
 #include "constantes.h"
 #include "squarecell.h"
+
+bool Simulation::draw_current_state(){
+    //call draw functions of entities
+    if(!this->food.draw_all()) return false;
+    for(const auto& hill : this->anthill){
+        if(!hill->draw_all_children()) return false;
+    }
+    return true;
+}
 
 bool Simulation::read_configfile(const std::string& filename) {
     std::ifstream file(filename);

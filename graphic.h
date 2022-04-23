@@ -108,7 +108,7 @@ namespace graphic{
                        color color);
 
     /**
-     * @brief draw a square with inscribed grille (#)
+     * @brief draw a square with inscribed cross (#)
      * 
      * @remark style of TODO: ?
      * 
@@ -120,11 +120,11 @@ namespace graphic{
      * 
      * @return true if drawing could be done
      */
-    bool draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+    bool draw_cross(cunsigned x, cunsigned y, cunsigned side, bool centered, 
                      color color);
 
     /**
-     * @brief draw an empty world of size x size (Grid and border)
+     * @brief draw an empty world of size x size (without border)
      * 
      * @param size 
      * @param width of the window
@@ -132,7 +132,15 @@ namespace graphic{
      * 
      * @return true if world could be drawn
      */
-    bool draw_world(cunsigned size, cunsigned width, cunsigned height);
+    bool draw_grid(cunsigned size);
+
+    /**
+     * @brief draw the border of the world
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool draw_border(cunsigned size);
 }
 
 #endif

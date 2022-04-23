@@ -13,6 +13,7 @@
  */
 
 #include <gtkmm/drawingarea.h>
+#include "../simulation.h"
 
 /**
  * @brief example area for drawing
@@ -25,6 +26,8 @@ public:
     virtual ~MockArea();
 protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+private:
+    Simulation simu;
 };
 
 

@@ -3,11 +3,13 @@
 #include "../graphic.h"
 #include "../squarecell.h"
 #include <iostream>
+#include"../simulation.h"
 
-MockArea::MockArea(){}
+MockArea::MockArea():simu(){}
 MockArea::~MockArea(){}
 
 bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
+    std::cout << "on_draw" << std::endl;
 
     cr->set_source_rgb(0,0,0);
     cr->paint();
@@ -28,46 +30,87 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
 
     graphic::set_context(cr);
 
+    graphic::draw_border(scl::g_max);
+
     //set global line width
     cr->set_line_width(1);
 
-    // test drawing functions
-    graphic::color color = graphic::get_new_color();
-    graphic::draw_empty(2,2,3,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_empty(4,2,3,0,color);
-    color = graphic::get_new_color();
-    graphic::draw_empty(6,2,1,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_empty(8,1,5,0,color);
 
-    color = graphic::get_new_color();
-    graphic::draw_rhomb(15,2,1,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_rhomb(18,2,3,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_rhomb(21,2,1,0,color);
+    // // test drawing functions
+    // std::cout << "\n------------------------- Test graphic functions ------------------------------" << std::endl;
 
-    color = graphic::get_new_color();
-    graphic::draw_uniform(3,8,3,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_uniform(7,8,5,0,color);
-    color = graphic::get_new_color();
-    graphic::draw_uniform(14,8,1,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_uniform(16,8,1,0,color);
+    // graphic::color color = graphic::get_new_color();
+    // graphic::draw_empty(2,2,3,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_empty(4,2,3,0,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_empty(6,2,1,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_empty(8,1,5,0,color);
+
+    // color = graphic::get_new_color();
+    // graphic::draw_rhomb(15,2,1,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_rhomb(18,2,3,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_rhomb(21,2,1,0,color);
+
+    // color = graphic::get_new_color();
+    // graphic::draw_uniform(3,8,3,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_uniform(7,8,5,0,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_uniform(14,8,1,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_uniform(16,8,1,0,color);
     
-    color = graphic::get_new_color();
-    graphic::draw_diagonal(3,18,3,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_diagonal(9,18,3,0,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_diagonal(3,18,3,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_diagonal(9,18,3,0,color);
 
-    color = graphic::get_new_color();
-    graphic::draw_grille(15,18,3,1,color);
-    color = graphic::get_new_color();
-    graphic::draw_grille(20,18,3,0,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_cross(15,18,3,1,color);
+    // color = graphic::get_new_color();
+    // graphic::draw_cross(20,18,3,0,color);
 
-    graphic::draw_world(scl::g_max, width, height);
+    // // Test drawing of scl
+    // std::cout << "\n------------------------- Test scl::square_draw() ------------------------------" << std::endl;
+
+    // // draw a whole set of figures
+    // color = graphic::get_new_color();
+    // scl::square_draw({1,30,5,0}, scl::empty, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({9,32,5,1}, scl::empty, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({15,30,5,0}, scl::uniform, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({24,32,5,1}, scl::uniform, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({28,32,1,0}, scl::rhomb, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({30,32,1,1}, scl::rhomb, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({34,31,3,0}, scl::diagonal, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({39,32,3,1}, scl::diagonal, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({44,31,3,0}, scl::cross, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({49,32,3,1}, scl::cross, color);
+
+    std::cout << "\n------------------------- Draw simulation ------------------------------" << std::endl;
+    //test simulation
+    std::cout << "reading output: " << this->simu.read_configfile("testfiles/no_error_neighbours_anthill.txt") << std::endl;
+    std::cout << "drawing output: " << this->simu.draw_current_state() << std::endl;
+
+    std::cout << "\n------------------------- Draw world ------------------------------" << std::endl;
+
+    static unsigned x = 1, y = 1;
+    graphic::draw_uniform(x++,y++,1,1, {1,1,0});
+    if(x == scl::g_max){x = 1; y = 1;}
+
+    graphic::draw_grid(scl::g_max);
 
     return true;
 }

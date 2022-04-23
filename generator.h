@@ -26,6 +26,16 @@ class Ant;
  */
 class Generator : public Ant {
 public:
+    /**
+     * @brief draw the generator ant
+     * 
+     * @remark draws a filled square
+     * 
+     * @param color specifies the color of the ant (parent color)
+     * 
+     * @return true if no errors
+     */
+    virtual bool draw(graphic::color color) override;
 
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 

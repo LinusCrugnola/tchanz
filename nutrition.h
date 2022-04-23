@@ -39,6 +39,13 @@ public:
     bool add_element(std::istringstream& data);
 
     /**
+     * @brief draw all food elements on gui canvas
+     * 
+     * @return true if no errors
+     */
+    bool draw_all();
+
+    /**
      * @brief Get position data of all nutrition elements in configfile format
      * 
      * @return std::string 
