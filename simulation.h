@@ -18,7 +18,7 @@
 /**
  * @class simulation
  * 
- * @brief Class that can create the base scenario of the map from a configfile
+ * @brief Class that handles the entities
  */
 class Simulation {
 private:
