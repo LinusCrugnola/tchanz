@@ -111,16 +111,16 @@ std::string Anthill::get_filedata(unsigned home){
               + " " +  std::to_string(this->nbP);
     output += " # anthill #" +  std::to_string(home) + "\n";
     // add ant data
-    output += "\n\t# collectors:\n";
     for(unsigned i=1; i<=nbC; i++){
+        if(i == 1) output += "\n\t# collectors:\n";
         output += this->ants[i]->get_filedata();
     }
-    output += "\n\t# defensors:\n";
     for(unsigned i=nbC+1; i<=nbD+nbC; i++){
+        if(i == nbC+1) output += "\n\t# defensors:\n";
         output += this->ants[i]->get_filedata();
     }
-    output += "\n\t# predators:\n";
     for(unsigned i=nbD+nbC+1; i<=this->anthill_get_ants()-1; i++){
+        if(i == nbD+nbC+1) output += "\n\t# predators:\n";
         output += this->ants[i]->get_filedata();
     }
     return output;
