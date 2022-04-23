@@ -16,6 +16,10 @@
 #include "constantes.h"
 #include "squarecell.h"
 
+unsigned Simulation::get_nbF(){
+    return this->food.get_nbF();
+}
+
 bool Simulation::draw_current_state(){
     //call draw functions of entities
     if(!this->food.draw_all()) return false;
