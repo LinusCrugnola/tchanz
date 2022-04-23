@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <array>
 
 #include "error_squarecell.h"
 
@@ -214,6 +215,35 @@ bool scl::square_delete(scl::csquare square) {
         }
     }
     return true;
+}
+
+bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color color){
+    if(!square_validation(square)) 
+        return false;
+    switch (dtype)
+    {
+    case empty:
+        return graphic::draw_empty(square.x, square.y, square.side, square.centered,
+                                   color);
+    case rhomb:
+        return graphic::draw_rhomb(square.x, square.y, square.side, square.centered,
+                                   color);
+    case uniform:
+        return graphic::draw_uniform(square.x, square.y, square.side, square.centered, 
+                                     color);
+    case diagonal:
+        return graphic::draw_diagonal(square.x, square.y, square.side,
+                                      square.centered, color);
+    case grille:
+        return graphic::draw_grille(square.x, square.y, square.side, square.centered, 
+                                    color);
+    default:
+        return false;
+    }
+}
+
+graphic::color scl::get_new_color(){
+    return graphic::get_new_color();
 }
 
 // print function (Debug):

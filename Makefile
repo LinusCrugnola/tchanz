@@ -57,7 +57,7 @@ testfiles: $(TARGET)
 
 runtests: $(TARGET_TST)
 	@./test.out
-	@make clean
+#@make clean
 
 .PHONY: clean
 clean:
