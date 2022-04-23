@@ -40,6 +40,13 @@ public:
     bool add_element(std::istringstream& data);
 
     /**
+     * @brief Get the total amount of food
+     * 
+     * @return unsigned int
+     */
+    unsigned get_nbF();
+
+    /**
      * @brief draw all food elements on gui canvas
      * 
      * @return true if no errors

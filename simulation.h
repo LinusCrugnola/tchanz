@@ -49,6 +49,12 @@ private:
     std::string get_fileheader();
 
 public:
+    /**
+     * @brief Get the total food existing in the world
+     * 
+     * @return unsigned int
+     */
+    unsigned get_nbF();
 
     /**
      * @brief draw the current state of the simulation on the gui canvas
