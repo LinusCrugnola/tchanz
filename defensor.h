@@ -32,7 +32,7 @@ public:
     /**
      * @brief draw the defensor ant
      * 
-     * @remark draws a square with a grille inside
+     * @remark draws a square with a cross inside
      * 
      * @param color specifies the color of the ant (parent color)
      * 

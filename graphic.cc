@@ -129,7 +129,7 @@ bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool cente
     return true;
 }
 
-bool graphic::draw_grille(cunsigned x, cunsigned y, cunsigned side, 
+bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side, 
                           bool centered, graphic::color color){
 
     if(side < 3) return false;

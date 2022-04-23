@@ -18,7 +18,7 @@ Defensor::Defensor(scl::csquare position, unsigned age)
 }
 
 bool Defensor::draw(graphic::color color){
-    return scl::square_draw(this->position, scl::grille, color);
+    return scl::square_draw(this->position, scl::cross, color);
 }
 
 Ant* Defensor::data_validation(std::istringstream& data,

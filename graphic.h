@@ -108,7 +108,7 @@ namespace graphic{
                        color color);
 
     /**
-     * @brief draw a square with inscribed grille (#)
+     * @brief draw a square with inscribed cross (#)
      * 
      * @remark style of TODO: ?
      * 
@@ -120,7 +120,7 @@ namespace graphic{
      * 
      * @return true if drawing could be done
      */
-    bool draw_grille(cunsigned x, cunsigned y, cunsigned side, bool centered, 
+    bool draw_cross(cunsigned x, cunsigned y, cunsigned side, bool centered, 
                      color color);
 
     /**

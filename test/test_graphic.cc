@@ -67,9 +67,9 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     // graphic::draw_diagonal(9,18,3,0,color);
 
     // color = graphic::get_new_color();
-    // graphic::draw_grille(15,18,3,1,color);
+    // graphic::draw_cross(15,18,3,1,color);
     // color = graphic::get_new_color();
-    // graphic::draw_grille(20,18,3,0,color);
+    // graphic::draw_cross(20,18,3,0,color);
 
     // // Test drawing of scl
     // std::cout << "\n------------------------- Test scl::square_draw() ------------------------------" << std::endl;
@@ -92,9 +92,9 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     // color = graphic::get_new_color();
     // scl::square_draw({39,32,3,1}, scl::diagonal, color);
     // color = graphic::get_new_color();
-    // scl::square_draw({44,31,3,0}, scl::grille, color);
+    // scl::square_draw({44,31,3,0}, scl::cross, color);
     // color = graphic::get_new_color();
-    // scl::square_draw({49,32,3,1}, scl::grille, color);
+    // scl::square_draw({49,32,3,1}, scl::cross, color);
 
     std::cout << "\n------------------------- Draw simulation ------------------------------" << std::endl;
     //test simulation
