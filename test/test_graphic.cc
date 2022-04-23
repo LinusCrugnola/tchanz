@@ -32,12 +32,10 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     //set global line width
     cr->set_line_width(1);
 
-    //test simulation
-    Simulation simu_test;
-    simu_test.read_configfile("../testfiles/t01.txt");
-    std::cout << "drawing output: " << simu_test.draw_current_state() << std::endl;
 
-    // test drawing functions
+    // // test drawing functions
+    // std::cout << "\n------------------------- Test graphic functions ------------------------------" << std::endl;
+
     // graphic::color color = graphic::get_new_color();
     // graphic::draw_empty(2,2,3,1,color);
     // color = graphic::get_new_color();
@@ -72,6 +70,39 @@ bool MockArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr){
     // graphic::draw_grille(15,18,3,1,color);
     // color = graphic::get_new_color();
     // graphic::draw_grille(20,18,3,0,color);
+
+    // // Test drawing of scl
+    // std::cout << "\n------------------------- Test scl::square_draw() ------------------------------" << std::endl;
+
+    // // draw a whole set of figures
+    // color = graphic::get_new_color();
+    // scl::square_draw({1,30,5,0}, scl::empty, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({9,32,5,1}, scl::empty, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({15,30,5,0}, scl::uniform, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({24,32,5,1}, scl::uniform, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({28,32,1,0}, scl::rhomb, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({30,32,1,1}, scl::rhomb, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({34,31,3,0}, scl::diagonal, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({39,32,3,1}, scl::diagonal, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({44,31,3,0}, scl::grille, color);
+    // color = graphic::get_new_color();
+    // scl::square_draw({49,32,3,1}, scl::grille, color);
+
+    std::cout << "\n------------------------- Draw simulation ------------------------------" << std::endl;
+    //test simulation
+    Simulation simu_test;
+    std::cout << "reading output: " << simu_test.read_configfile("testfiles/t01.txt") << std::endl;
+    std::cout << "drawing output: " << simu_test.draw_current_state() << std::endl;
+
+    std::cout << "\n------------------------- Draw world ------------------------------" << std::endl;
 
     graphic::draw_world(scl::g_max, width, height);
 

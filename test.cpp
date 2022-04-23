@@ -3,6 +3,7 @@
 #include "graphic.h"
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
+#include "simulation.h"
 
 #include <iostream>
 
@@ -26,7 +27,7 @@ int main(int argc, char** argv){
 	
     Gtk::Window win;
     win.set_title("Test Graphic");
-	win.set_default_size(500,500);
+	win.set_default_size(700,700);
 
 	MockArea canvas;
     win.add(canvas);
