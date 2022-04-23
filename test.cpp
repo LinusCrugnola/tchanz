@@ -16,7 +16,7 @@ int main(int argc, char** argv){
     std::cout << "\n------------------------- Test GUI ------------------------------" << std::endl;
     
     auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
-	Gui gui;
+	Gui gui("testfiles/t01.txt");
 	gui.set_default_size(800,600);
 	
 	return app->run(gui);

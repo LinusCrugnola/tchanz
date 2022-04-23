@@ -6,8 +6,9 @@
 
 using namespace std;
 
-Gui::Gui()
+Gui::Gui(std::string filename)
 : 
+    canvas(this),
 	H_box(Gtk::ORIENTATION_HORIZONTAL),
 	V_box(Gtk::ORIENTATION_VERTICAL),
 	canvas_box(Gtk::ORIENTATION_VERTICAL),
@@ -16,8 +17,14 @@ Gui::Gui()
 	general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
 	nbF_info("Nb food:   nbF"),
 	exit("exit"),open("open"),save("save"),start("start"),step("step"),
-	previous("previous"), next("next")
+	previous("previous"), next("next"), simulation()
 {
+    // initialize simulation
+    if(!simulation.read_configfile(filename)){
+        simulation.clear();
+    }
+    update_nbF();
+
 	set_title("Tchanz");
 	set_border_width(5);
 	
@@ -58,7 +65,15 @@ Gui::Gui()
 Gui::~Gui()
 {}
 
-Canvas::Canvas()
+void Gui::update_nbF(){
+    this->nbF_info.set_text("Nb food:   " + to_string(this->simulation.get_nbF()));
+}
+
+void Gui::draw_simulation(){
+    this->simulation.draw_current_state();
+}
+
+Canvas::Canvas(Gui* parent) : parent(parent)
 {}
 
 Canvas::~Canvas()
@@ -95,7 +110,7 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) // DESSIN EPFL
 
     graphic::draw_border(scl::g_max);
 
-    //draw simulation
+    parent->draw_simulation();
 
     graphic::draw_grid(scl::g_max);
 

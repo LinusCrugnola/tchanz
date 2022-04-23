@@ -2,22 +2,29 @@
 #define GUIGRAPHIC_H
 
 #include <gtkmm.h>
+#include <string>
+#include "simulation.h"
+
+class Gui;
 
 class Canvas : public Gtk::DrawingArea
 {
 	public:
-		Canvas();
+		Canvas(Gui* parent);
 		virtual ~Canvas();
 	
 	protected:
 		bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+private:
+    Gui* parent;
 };
 
 class Gui : public Gtk::Window
 {
-	public:
-		Gui();
-		virtual ~Gui();
+public:
+    Gui(std::string filename);
+    virtual ~Gui();
+    void draw_simulation();					
 	
 	protected:
 		
@@ -35,7 +42,9 @@ class Gui : public Gtk::Window
 		Gtk::Label nbF_info;
 		Gtk::Button exit, open, save, start, step,
 					previous, next;
-									
+private:
+    Simulation simulation;
+    void update_nbF();	
 };
 
 
