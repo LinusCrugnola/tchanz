@@ -42,6 +42,6 @@ Ant* Collector::data_validation(std::istringstream& data) {
 
 std::string Collector::get_filedata(){
     return "\t" + std::to_string(this->position.x) + " " 
-           + std::to_string(this->position.y) + std::to_string(this->age) + " " 
+           + std::to_string(this->position.y) + " " + std::to_string(this->age) + " "
            + (this->food == LOADED ? "true" : "false") + "\n";
 }
