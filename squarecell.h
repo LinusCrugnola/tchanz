@@ -55,9 +55,9 @@ namespace scl {
      *          rhomb:    square border with a rhomb inscribed
      *          uniform:  completely filled square
      *          diagonal: square with diagonals inscribed (X)
-     *          grille:   square with a grid form inscribed (#)
+     *          cross:   square with a grid form inscribed (#)
      */
-    enum drawtype {empty, rhomb, uniform, diagonal, grille};
+    enum drawtype {empty, rhomb, uniform, diagonal, cross};
 
     /**
      * @brief define a constant reference on square

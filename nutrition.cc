@@ -38,6 +38,14 @@ bool Nutrition::add_element(std::istringstream& data) {
     return false;
 }
 
+bool Nutrition::draw_all(){
+    for(const auto& elem : this->foods){
+        //draw white rhombs
+        if(!scl::square_draw(elem, scl::rhomb, {1,1,1})) return false;
+    }
+    return true;
+}
+
 std::string Nutrition::get_filedata(){
     std::string output = {};
     output += "# \n\n";

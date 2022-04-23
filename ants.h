@@ -38,6 +38,15 @@ public:
     virtual std::string get_filedata() = 0;
 
     /**
+     * @brief draw the ant on the gui canvas
+     * 
+     * @param color specifies the color of the ant (parent color)
+     * 
+     * @return true if no errors
+     */
+    virtual bool draw(graphic::color color) = 0;
+
+    /**
      * @brief Destroy the Ant object
      * 
      * @note Frees the square occupied by the ant

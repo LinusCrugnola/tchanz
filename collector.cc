@@ -17,6 +17,10 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food)
     scl::square_add(position);
 }
 
+bool Collector::draw(graphic::color color){
+    return scl::square_draw(this->position, scl::diagonal, color);
+}
+
 Ant* Collector::data_validation(std::istringstream& data) {
     Ant* collector = nullptr;
     scl::square position = {0, 0, sizeC, 1};

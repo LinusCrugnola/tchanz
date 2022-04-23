@@ -234,8 +234,8 @@ bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color c
     case diagonal:
         return graphic::draw_diagonal(square.x, square.y, square.side,
                                       square.centered, color);
-    case grille:
-        return graphic::draw_grille(square.x, square.y, square.side, square.centered, 
+    case cross:
+        return graphic::draw_cross(square.x, square.y, square.side, square.centered, 
                                     color);
     default:
         return false;

@@ -49,6 +49,14 @@ private:
     std::string get_fileheader();
 
 public:
+
+    /**
+     * @brief draw the current state of the simulation on the gui canvas
+     * 
+     * @return true if no errors
+     */
+    bool draw_current_state();
+
     /**
      * @brief Read the configfile
      * 

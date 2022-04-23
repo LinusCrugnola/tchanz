@@ -31,6 +31,7 @@ private:
     scl::square position;
     unsigned total_food;
     unsigned nbC, nbD, nbP;
+    graphic::color color;
 
     /**
      * @brief vector of ants that belong to hill
@@ -39,6 +40,13 @@ private:
 
 public:
     scl::square get_position() const {return position;}
+
+    /**
+     * @brief draw the hill and all of its ants on the gui canvas
+     * 
+     * @return true if no errors
+     */
+    bool draw_all_children();
 
     /**
      * @brief Verification of an anthill's data. 
