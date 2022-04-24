@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Gui::Gui(Simulation* simulation)
+Gui::Gui()
     : canvas(this),
       H_box(Gtk::ORIENTATION_HORIZONTAL),
       V_box(Gtk::ORIENTATION_VERTICAL),
@@ -16,11 +16,8 @@ Gui::Gui(Simulation* simulation)
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
       nbF_info("Nb food:   nbF"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation(simulation) 
+      previous("previous"), next("next"), simulation(nullptr) 
     {
-    // window assembly
-    update_nbF();
-
     set_title("Tchanz");
     set_border_width(5);
 
@@ -61,15 +58,27 @@ Gui::Gui(Simulation* simulation)
 Gui::~Gui() {}
 
 void Gui::update_nbF() {
-    this->nbF_info.set_text("Nb food:   " + to_string(this->simulation->get_nbF()));
+    if(this->simulation == nullptr){
+        this->nbF_info.set_text("Nb food:   0");
+    }
+    else {
+        this->nbF_info.set_text("Nb food:   " + 
+                                to_string(this->simulation->get_nbF()));
+    }
 }
 
 void Gui::draw_simulation_state() {
-    this->simulation->draw_current_state();
+    if(this->simulation != nullptr)
+        this->simulation->draw_current_state();
 }
 
 unsigned Gui::get_dimension(){
+    if(this->simulation == nullptr) return 128;
     return this->simulation->get_dimension();
+}
+
+void Gui::set_simulation(Simulation* simulation){
+    this->simulation = simulation;
 }
 
 Canvas::Canvas(Gui* parent)
@@ -109,6 +118,7 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     graphic::draw_border(g_max);
 
     parent->draw_simulation_state();
+    parent->update_nbF();
 
     graphic::draw_grid(g_max);
 

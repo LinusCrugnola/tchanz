@@ -52,7 +52,8 @@ int main(int argc, char **argv){
 
     //create app without argc and argv (not necessairy) TODO: verify
     auto app = Gtk::Application::create("org.gtkmm.example");
-	Gui gui(&simulation);
+	Gui gui;
+    gui.set_simulation(&simulation);
 	gui.set_default_size(800,600);
 	
 	return app->run(gui);

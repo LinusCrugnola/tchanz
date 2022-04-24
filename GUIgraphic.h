@@ -22,10 +22,12 @@ private:
 
 class Gui : public Gtk::Window {
 public:
-    Gui(Simulation* simulation);
+    Gui();
     virtual ~Gui();
     void draw_simulation_state();
     unsigned get_dimension();
+    void set_simulation(Simulation* simulation);
+    void update_nbF();
 
 protected:
     void on_button_clicked_exit();
@@ -45,7 +47,6 @@ protected:
 
 private:
     Simulation* simulation;
-    void update_nbF();
 };
 
 #endif
