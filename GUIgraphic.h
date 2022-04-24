@@ -22,7 +22,7 @@ private:
 
 class Gui : public Gtk::Window {
 public:
-    Gui(std::string filename);
+    Gui(Simulation* simulation);
     virtual ~Gui();
     void draw_simulation_state();
     unsigned get_dimension();
@@ -44,7 +44,7 @@ protected:
         previous, next;
 
 private:
-    Simulation simulation;
+    Simulation* simulation;
     void update_nbF();
 };
 

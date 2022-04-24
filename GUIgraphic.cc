@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Gui::Gui(std::string filename)
+Gui::Gui(Simulation* simulation)
     : canvas(this),
       H_box(Gtk::ORIENTATION_HORIZONTAL),
       V_box(Gtk::ORIENTATION_VERTICAL),
@@ -16,13 +16,8 @@ Gui::Gui(std::string filename)
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
       nbF_info("Nb food:   nbF"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation() 
+      previous("previous"), next("next"), simulation(simulation) 
     {
-    // initialize simulation
-    if (!simulation.read_configfile(filename)) {
-        simulation.clear();
-    }
-
     // window assembly
     update_nbF();
 
@@ -66,15 +61,15 @@ Gui::Gui(std::string filename)
 Gui::~Gui() {}
 
 void Gui::update_nbF() {
-    this->nbF_info.set_text("Nb food:   " + to_string(this->simulation.get_nbF()));
+    this->nbF_info.set_text("Nb food:   " + to_string(this->simulation->get_nbF()));
 }
 
 void Gui::draw_simulation_state() {
-    this->simulation.draw_current_state();
+    this->simulation->draw_current_state();
 }
 
 unsigned Gui::get_dimension(){
-    return this->simulation.get_dimension();
+    return this->simulation->get_dimension();
 }
 
 Canvas::Canvas(Gui* parent)

@@ -8,10 +8,12 @@
 
 #include <iostream>
 #include <string>
+#include <gtkmm/application.h>
+#include <gtkmm/window.h>
 
-#include "squarecell.h"
 #include "simulation.h"
 #include "message.h"
+#include "GUIgraphic.h"
 
 /**
  * @brief Main module of Tchanz project (highest priority)
@@ -19,6 +21,7 @@
 
 std::string state_read =  "--------------------- File Lecture ----------------------";
 std::string state_clear = "--------------------- Abort Lecture ---------------------";
+std::string state_init =  "--------------------- Initialize Simulation -------------";
 std::string state_write = "--------------------- Generate File ---------------------";
 
 
@@ -41,10 +44,13 @@ int main(int argc, char **argv){
     }
     else{
         std::cout << message::success();
-        std::cout << state_write << std::endl;
-        simulation.write_configfile();
     }
-    //destroy the simulation and all of its allocated data
-    simulation.~Simulation();
-    exit(EXIT_SUCCESS);
+
+    std::cout << state_init << std::endl;
+
+    auto app = Gtk::Application::create("org.gtkmm.example");
+	Gui gui(&simulation);
+	gui.set_default_size(800,600);
+	
+	return app->run(gui);
 }
