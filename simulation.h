@@ -83,6 +83,13 @@ public:
     void clear();
 
     /**
+     * @brief Get the dimension of the simulation world
+     * 
+     * @return unsigned int
+     */
+    unsigned get_dimension();
+
+    /**
      * @brief Default simulation constructor
      */
     Simulation() : food() {};

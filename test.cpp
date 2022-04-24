@@ -1,11 +1,12 @@
-#include "test/testfunctions.h"
-#include "GUIgraphic.h"
-#include "graphic.h"
+#include <iostream>
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
-#include "simulation.h"
 
-#include <iostream>
+#include "GUIgraphic.h"
+#include "graphic.h"
+#include "simulation.h"
+#include "test/testfunctions.h"
+
 
 int main(int argc, char** argv){
     std::cout << "\n------------------------- Start tests ------------------------------" << std::endl;
@@ -14,9 +15,12 @@ int main(int argc, char** argv){
     // test_simulation();
     // test_nutrition();
     std::cout << "\n------------------------- Test GUI ------------------------------" << std::endl;
+
+    Simulation simu;
+    simu.read_configfile("testfiles/t01.txt");
     
     auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
-	Gui gui("testfiles/t01.txt");
+	Gui gui(&simu);
 	gui.set_default_size(800,600);
 	
 	return app->run(gui);
