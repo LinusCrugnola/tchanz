@@ -48,7 +48,8 @@ int main(int argc, char **argv){
 
     std::cout << state_init << std::endl;
 
-    auto app = Gtk::Application::create("Tchanz");
+    //create app without argc and argv (not necessairy) TODO: verify
+    auto app = Gtk::Application::create("org.gtkmm.example");
 	Gui gui(&simulation);
 	gui.set_default_size(800,600);
 	
