@@ -17,10 +17,13 @@
  * @brief Main module of Tchanz project (highest priority)
  */
 
-std::string state_read =  "--------------------- File Lecture ----------------------";
-std::string state_clear = "--------------------- Abort Lecture ---------------------";
-std::string state_write = "--------------------- Generate File ---------------------";
-
+/**
+ * @brief state messages
+ */
+std::string st_read =  "\n----------------- File Lecture ----------------------------";
+std::string st_clear = "\n----------------- Abort Lecture ---------------------------";
+std::string st_init =  "\n----------------- Initialize Simulation -------------------";
+std::string st_empty = "\n----------------- Initialize empty Simulation -------------";
 
 /**
  * @brief project main function
@@ -30,19 +33,18 @@ int main(int argc, char **argv){
     //create a simulation and set up the map
     Simulation simulation;
 
-    std::cout << state_read << std::endl;
-
     // get the name of the configfile
+    std::cout << st_read << std::endl;
     std::string filename = argc > 1 ? argv[1] : "";
     
     if(!simulation.read_configfile(filename)){
-        std::cout << state_clear << std::endl;
+        std::cout << st_clear << std::endl;
         simulation.clear();
+        std::cout << st_empty << std::endl;
     }
     else{
         std::cout << message::success();
-        std::cout << state_write << std::endl;
-        simulation.write_configfile();
+        std::cout << st_init << std::endl;
     }
     //destroy the simulation and all of its allocated data
     simulation.~Simulation();
