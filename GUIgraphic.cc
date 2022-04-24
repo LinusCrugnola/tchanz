@@ -81,6 +81,16 @@ void Gui::set_simulation(Simulation* simulation){
     this->simulation = simulation;
 }
 
+void Gui::display_next_hill(bool reverse){
+    enum hill_state {none, selected};
+    static hill_state state = none;
+    static int index = 0;
+    index = reverse ? index - 1 : index + 1;
+    if(!reverse){
+        //this->simulation->get_anthill_info(index);
+    }
+}
+
 Canvas::Canvas(Gui* parent)
     : parent(parent) {}
 

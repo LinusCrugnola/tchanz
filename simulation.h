@@ -16,6 +16,16 @@
 #include "nutrition.h"
 
 /**
+ * @brief general type of anthill data to send from simulation to gui
+ */
+struct anthill_info {
+    unsigned total_food;
+    unsigned nbC;
+    unsigned nbD;
+    unsigned nbP;
+};
+
+/**
  * @class simulation
  * 
  * @brief Class that handles the entities
@@ -55,6 +65,14 @@ public:
      * @return unsigned int
      */
     unsigned get_nbF();
+
+    /**
+     * @brief Get the anthill info 
+     * 
+     * @param index of the hill 
+     * @return anthill_info struct
+     */
+    anthill_info get_anthill_info(int index);
 
     /**
      * @brief draw the current state of the simulation on the gui canvas

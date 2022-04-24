@@ -20,6 +20,10 @@ unsigned Simulation::get_nbF(){
     return this->food.get_nbF();
 }
 
+//unsigned Simulation::get_nbH
+
+anthill_info Simulation::get_anthill_info(int index){}
+
 bool Simulation::draw_current_state(){
     //call draw functions of entities
     if(!this->food.draw_all()) return false;
@@ -46,25 +50,25 @@ bool Simulation::read_configfile(const std::string& filename) {
 
 bool Simulation::handle_line(const std::string& line) {
     std::istringstream data(line);
-    enum Reading_states {nbN, nutrition, nbF, anthill, ant, finale};
-    static unsigned state = nbN;
+    enum Reading_states {nbF, nutrition, nbH, anthill, ant, finale};
+    static unsigned state = nbF;
     static unsigned i = 0, total = 0;
     static unsigned j = 0, total_ants;
 
     Anthill* new_hill = nullptr;
 
     switch (state) {
-        case nbN: 
+        case nbF: 
             if (!(data >> total)) return false;  
             else i = 0;
-            state = total == 0 ? nbF : nutrition;
+            state = total == 0 ? nbH : nutrition;
             break;
         case nutrition:
             if(!this->food.add_element(data)) return false;
             i += 1;
-            if (i >= total) state = nbF;
+            if (i >= total) state = nbH;
             break;
-        case nbF:
+        case nbH:
             if (!(data >> total)) return false;
             else i = 0;
             state = total == 0 ? finale : anthill;
