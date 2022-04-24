@@ -10,7 +10,6 @@
 
 #include <iostream>
 
-#include "error_squarecell.h"
 #include "message.h"
 
 bool Nutrition::add_element(std::istringstream& data) {
