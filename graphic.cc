@@ -165,7 +165,7 @@ bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side,
 bool graphic::draw_grid(cunsigned size){
 
     (*ptcr)->set_line_width(0.05); //TODO: how large must this be?
-    (*ptcr)->set_source_rgb(1,1,1);
+    (*ptcr)->set_source_rgb(0.8,0.8,0.8); //light grey
     (*ptcr)->translate(-0.5, -0.5);
     //draw lines
     for(unsigned i=0; i<size; i++){
@@ -183,7 +183,7 @@ bool graphic::draw_border(cunsigned size){
     //move in case and draw bord
     (*ptcr)->translate(0.5, 0.5);
     (*ptcr)->set_line_width(1);
-    (*ptcr)->set_source_rgb(1,1,1);
+    (*ptcr)->set_source_rgb(1,1,1); //white
     (*ptcr)->move_to(0, 0);
     (*ptcr)->line_to(0, size-1);
     (*ptcr)->line_to(size-1, size-1);
