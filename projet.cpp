@@ -48,7 +48,7 @@ int main(int argc, char **argv){
 
     std::cout << state_init << std::endl;
 
-    auto app = Gtk::Application::create("org.gtkmm.example");
+    auto app = Gtk::Application::create("Tchanz");
 	Gui gui(&simulation);
 	gui.set_default_size(800,600);
 	
