@@ -135,6 +135,10 @@ void Simulation::clear(){
     this->anthill.clear();
 }
 
+unsigned Simulation::get_dimension(){
+    return scl::g_max;
+}
+
 Simulation::~Simulation(){
     // free all the memory
     for(auto& hill : this->anthill){

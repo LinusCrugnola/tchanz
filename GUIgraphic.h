@@ -24,7 +24,8 @@ class Gui : public Gtk::Window
 public:
     Gui(std::string filename);
     virtual ~Gui();
-    void draw_simulation();					
+    void draw_simulation_state();	
+    unsigned get_dimension();				
 	
 	protected:
 		
