@@ -27,18 +27,23 @@ Gui::Gui()
 
     canvas_box.pack_start(canvas);
 
-    V_box.pack_start(general_frame);
-    V_box.pack_start(info_frame);
-    V_box.pack_start(anthill_info_frame);
+    V_box.pack_start(general_frame,false,false);
+    V_box.pack_start(info_frame,false,false);
+    V_box.pack_start(anthill_info_frame,false,false);
 
     general_frame.add(navbar);
 
     navbar.pack_start(exit);
+    exit.set_size_request(0,60)
     navbar.pack_start(open);
+    open.set_size_request(0,60);
     navbar.pack_start(save);
+    save.set_size_request(0,60);
     navbar.pack_start(start);
+    start.set_size_request(0,60);
     navbar.pack_start(step);
-
+    step.set_size_request(0,60);
+    
     info_frame.add(nbF_info);
 
     anthill_info_frame.add(anthill_info_box);
