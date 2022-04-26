@@ -11,6 +11,7 @@
 
 #include <sstream>
 #include <vector>
+#include <string>
 
 #include "ants.h"
 #include "generator.h"
@@ -36,7 +37,8 @@ private:
     /**
      * @brief total food stocked in the hill
      */
-    unsigned total_food;
+    double total_food;
+    //TODO: check consequences of double
 
     /**
      * @brief number of collector, defensor and predator ants belonging to the hill
@@ -99,6 +101,13 @@ public:
      * @return std::string 
      */
     std::string get_filedata(unsigned home);
+
+    /**
+     * @brief Get the info of the anthill that is displayed in GUI
+     * 
+     * @return std::string 
+     */
+    std::string get_info();
 
     /**
      * @brief Construct a new Anthill object

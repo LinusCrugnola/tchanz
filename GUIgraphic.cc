@@ -14,7 +14,7 @@ Gui::Gui()
       navbar(Gtk::ORIENTATION_VERTICAL),
       anthill_info_box(Gtk::ORIENTATION_VERTICAL),
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
-      nbF_info("Nb food:   nbF"),
+      nbF_info("Nb food:   nbF"), anthill_info("None selected"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), simulation(nullptr) 
     {
@@ -45,12 +45,15 @@ Gui::Gui()
 
     anthill_info_box.pack_start(previous);
     anthill_info_box.pack_start(next);
+    anthill_info_box.pack_start(anthill_info);
 
     exit.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_exit));
     open.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_open));
     save.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_save));
     start.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_start));
     step.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_step));
+    next.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_next));
+    previous.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_previous));
 
     show_all_children();
 }
@@ -81,14 +84,9 @@ void Gui::set_simulation(Simulation* simulation){
     this->simulation = simulation;
 }
 
-void Gui::display_next_hill(bool reverse){
-    enum hill_state {none, selected};
-    static hill_state state = none;
-    static int index = 0;
-    index = reverse ? index - 1 : index + 1;
-    if(!reverse){
-        //this->simulation->get_anthill_info(index);
-    }
+void Gui::display_next_hill(bool reverse = false){
+    std::string info = this->simulation->get_next_anthill_info(reverse);
+    this->anthill_info.set_text(info);
 }
 
 Canvas::Canvas(Gui* parent)
@@ -185,4 +183,12 @@ void Gui::on_button_clicked_start() {
 
 void Gui::on_button_clicked_step() {
     cout << "This button will show the simulation step by step" << endl;
+}
+
+void Gui::on_button_clicked_next() {
+    display_next_hill();
+}
+
+void Gui::on_button_clicked_previous() {
+    display_next_hill(true);
 }

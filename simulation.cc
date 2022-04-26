@@ -22,7 +22,33 @@ unsigned Simulation::get_nbF(){
 
 //unsigned Simulation::get_nbH
 
-anthill_info Simulation::get_anthill_info(int index){}
+std::string Simulation::get_next_anthill_info(bool reverse){
+    static int index = -1;
+    unsigned anthill_size = this->anthill.size();
+    if(reverse){
+        if(index == -1){
+            index = anthill_size - 1;
+            return "id: " + std::to_string(index) + "\n" + 
+                    this->anthill[index]->get_info();
+        }
+        if(index == 0){
+            index = -1;
+            return "None selected";
+        }
+        index -= 1;
+        return "id: " + std::to_string(index) + "\n" + 
+                this->anthill[index]->get_info();
+    }
+    else{
+        if(index+1 >= (int) anthill_size){
+            index = -1;
+            return "None selected";
+        }
+        index += 1;
+        return "id: " + std::to_string(index) + "\n" + 
+                this->anthill[index]->get_info();
+    }
+}
 
 bool Simulation::draw_current_state(){
     //call draw functions of entities

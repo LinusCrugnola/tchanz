@@ -35,13 +35,15 @@ protected:
     void on_button_clicked_save();
     void on_button_clicked_start();
     void on_button_clicked_step();
+    void on_button_clicked_next();
+    void on_button_clicked_previous();
 
     Canvas canvas;
 
     Gtk::Box H_box;
     Gtk::Box V_box, canvas_box, navbar, anthill_info_box;
     Gtk::Frame general_frame, info_frame, anthill_info_frame;
-    Gtk::Label nbF_info;
+    Gtk::Label nbF_info, anthill_info;
     Gtk::Button exit, open, save, start, step,
         previous, next;
 
