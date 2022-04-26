@@ -27,18 +27,23 @@ Gui::Gui()
 
     canvas_box.pack_start(canvas);
 
-    V_box.pack_start(general_frame);
-    V_box.pack_start(info_frame);
-    V_box.pack_start(anthill_info_frame);
+    V_box.pack_start(general_frame,false,false);
+    V_box.pack_start(info_frame,false,false);
+    V_box.pack_start(anthill_info_frame,false,false);
 
     general_frame.add(navbar);
 
     navbar.pack_start(exit);
+    exit.set_size_request(0,60)
     navbar.pack_start(open);
+    open.set_size_request(0,60);
     navbar.pack_start(save);
+    save.set_size_request(0,60);
     navbar.pack_start(start);
+    start.set_size_request(0,60);
     navbar.pack_start(step);
-
+    step.set_size_request(0,60);
+    
     info_frame.add(nbF_info);
 
     anthill_info_frame.add(anthill_info_box);
@@ -139,25 +144,20 @@ void Gui::on_button_clicked_exit() {
 }
 
 void Gui::on_button_clicked_open() {
-    // cout << "This button will open a file for the simulation" << endl;
 
     Gtk::FileChooserDialog dialog("Please choose a file",
                                   Gtk::FILE_CHOOSER_ACTION_OPEN);
     dialog.set_transient_for(*this);
 
-    // Add response buttons the the dialog:
     dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
     dialog.add_button("_Open", Gtk::RESPONSE_OK);
 
-    // Show the dialog and wait for a user response:
     int result = dialog.run();
 
-    // Handle the response:
     switch (result) {
         case (Gtk::RESPONSE_OK): {
             std::cout << "Open clicked." << std::endl;
 
-            // Notice that this is a std::string, not a Glib::ustring.
             std::string filename = dialog.get_filename();
             std::cout << "File selected: " << filename << std::endl;
             break;
