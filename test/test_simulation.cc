@@ -17,10 +17,10 @@ void test_simulation(){
     std::cout << "\n------------------------- First file ------------------------------" << std::endl;
     simu.read_configfile("testfiles/t01.txt");
     simu.clear();
-    std::cout << "\n------------------------- Second file ------------------------------" << std::endl;
-    simu.read_configfile("testfiles/t01.txt");
-    simu.clear();
-    std::cout << "\n------------------------- Third file ------------------------------" << std::endl;
-    simu.read_configfile("testfiles/t01.txt");
-    simu.clear();
+    // std::cout << "\n------------------------- Second file ------------------------------" << std::endl;
+    // simu.read_configfile("testfiles/t01.txt");
+    // simu.clear();
+    // std::cout << "\n------------------------- Third file ------------------------------" << std::endl;
+    // simu.read_configfile("testfiles/t01.txt");
+    // simu.clear();
 }

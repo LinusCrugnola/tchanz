@@ -64,14 +64,17 @@ unsigned Anthill::anthill_get_ants() const {
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
-    static unsigned i=0, total = this->nbC;
+    static unsigned i=0, total = 0;
     static Ant_states state = collector;
-    if (this->nbC == 0) {
+    if(state == collector && total == 0){
+        total = this->nbC;
+    }
+    if (this->nbC == 0 && state == collector) {
         state = this->nbD == 0 ? predator : defensor;
     }
     Ant* new_ant = nullptr;
 
-    std::cout << state << std::endl;
+    std::cout << "ant_state:" << state << "\t" << i << " " << total << std::endl;
 
     switch (state) {
         case collector:
@@ -103,12 +106,13 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             i += 1;
             if (i >= total) {
                 state = finale;
-                i = 0;
             }
             break;
         case finale:
             state = collector;
             total = 0;
+            i = 0;
+            std::cout << "cleaned: " << i << " " << total << " " << state << std::endl;
             break;
     }
     return true;
