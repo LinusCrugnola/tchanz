@@ -159,6 +159,7 @@ void Gui::on_button_clicked_open() {
             std::string filename = dialog.get_filename();
             this->simulation->clear();
             this->simulation->read_configfile(filename);
+            this->canvas.queue_draw();
             break;
         }
         case (Gtk::RESPONSE_CANCEL): {
