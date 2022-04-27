@@ -154,9 +154,11 @@ namespace scl {
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
+     * @param reset flag to reset color if true (restart at red)
+     * 
      * @return graphic::color (rgb struct)
      */
-    graphic::color get_new_color();
+    graphic::color get_new_color(bool reset = 0);
 
     /**
      * @brief Functions to debug the module

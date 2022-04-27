@@ -33,9 +33,11 @@ namespace graphic{
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
+     * @param reset flag to reset the list if true (restart at red)
+     * 
      * @return graphic::color (rgb struct)
      */
-    color get_new_color();
+    color get_new_color(bool reset);
 
     /**
      * @brief set the cairo context pointer in graphic module

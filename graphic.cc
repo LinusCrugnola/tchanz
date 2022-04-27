@@ -23,11 +23,12 @@ namespace{
     const Cairo::RefPtr<Cairo::Context>* ptcr = nullptr;
 }
 
-graphic::color graphic::get_new_color(){
+graphic::color graphic::get_new_color(bool reset){
     static unsigned state = 0;
     graphic::color new_color = color_list[state];
     state += 1;
     state = state % 6;
+    if(reset) state = 0;
     return new_color;
 }
 

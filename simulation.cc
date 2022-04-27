@@ -64,6 +64,9 @@ bool Simulation::draw_current_state(){
 
 bool Simulation::read_configfile(const std::string& filename) {
     bool result = true;
+    this->clear();
+    //reset colors
+    scl::get_new_color(true);
     std::ifstream file(filename);
     if (!file.fail()) {
         std::string line;

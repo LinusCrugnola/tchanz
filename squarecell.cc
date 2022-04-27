@@ -242,8 +242,8 @@ bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color c
     }
 }
 
-graphic::color scl::get_new_color(){
-    return graphic::get_new_color();
+graphic::color scl::get_new_color(bool reset){
+    return graphic::get_new_color(reset);
 }
 
 // print function (Debug):
