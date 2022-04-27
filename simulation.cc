@@ -89,9 +89,6 @@ bool Simulation::handle_line(const std::string& line) {
 
     Anthill* new_hill = nullptr;
 
-    std::cout << "state: " << state << std::endl;
-    std::cout << "\t" << line << std::endl;
-
     switch (state) {
         case nbF: 
             if (!(data >> total)) return false;  

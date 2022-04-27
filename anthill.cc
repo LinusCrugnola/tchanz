@@ -74,8 +74,6 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     }
     Ant* new_ant = nullptr;
 
-    std::cout << "ant_state:" << state << "\t" << i << " " << total << std::endl;
-
     switch (state) {
         case collector:
             new_ant = Collector::data_validation(data);
@@ -112,7 +110,6 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             state = collector;
             total = 0;
             i = 0;
-            std::cout << "cleaned: " << i << " " << total << " " << state << std::endl;
             break;
     }
     return true;
