@@ -34,7 +34,7 @@ Gui::Gui()
     general_frame.add(navbar);
 
     navbar.pack_start(exit);
-    exit.set_size_request(0,60)
+    exit.set_size_request(0,60);
     navbar.pack_start(open);
     open.set_size_request(0,60);
     navbar.pack_start(save);
@@ -159,7 +159,8 @@ void Gui::on_button_clicked_open() {
             std::cout << "Open clicked." << std::endl;
 
             std::string filename = dialog.get_filename();
-            std::cout << "File selected: " << filename << std::endl;
+            this->simulation->clear();
+            this->simulation->read_configfile(filename);
             break;
         }
         case (Gtk::RESPONSE_CANCEL): {

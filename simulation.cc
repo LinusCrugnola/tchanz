@@ -25,7 +25,10 @@ unsigned Simulation::get_nbF(){
 std::string Simulation::get_next_anthill_info(bool reverse){
     static int index = -1;
     unsigned anthill_size = this->anthill.size();
-    if(reverse){
+    if(anthill_size == 0){
+        return "None selected";
+    }
+    else if(reverse){
         if(index == -1){
             index = anthill_size - 1;
             return "id: " + std::to_string(index) + "\n" + 
@@ -60,15 +63,18 @@ bool Simulation::draw_current_state(){
 }
 
 bool Simulation::read_configfile(const std::string& filename) {
+    bool result = true;
     std::ifstream file(filename);
     if (!file.fail()) {
         std::string line;
         while (std::getline(file >> std::ws, line)) {
             if (line[0] == '#') continue;
             if(!Simulation::handle_line(line))
-                return false;
+                result = false;
         }
-        return true;
+        //realnce pour reset
+        Simulation::handle_line("");
+        return result;
     }
     else
         return false;
@@ -82,6 +88,9 @@ bool Simulation::handle_line(const std::string& line) {
     static unsigned j = 0, total_ants;
 
     Anthill* new_hill = nullptr;
+
+    std::cout << "state: " << state << std::endl;
+    std::cout << line << std::endl;
 
     switch (state) {
         case nbF: 
@@ -114,9 +123,18 @@ bool Simulation::handle_line(const std::string& line) {
         case ant:
             if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1)) return false;
             j += 1;
-            if (j >= total_ants) state = i >= total ? finale : anthill;
+            if (j >= total_ants){
+                state = i >= total ? finale : anthill;
+                //rerun for state finale
+                this->anthill[i-1]->Anthill::ant_validation(data, i-1);
+            }
             break;
         case finale:
+            state = nbF;
+            i = 0;
+            j = 0;
+            total = 0;
+            total_ants = 0;
             break;
     }
     return true;
