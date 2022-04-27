@@ -140,12 +140,12 @@ bool Simulation::handle_line(const std::string& line) {
     return true;
 }
 
-void Simulation::write_configfile(){
-    // generate unique filename for output
-    static unsigned file_count = 0;
-    std::string filename = "./output";
-    filename += file_count == 0 ? "" : std::to_string(file_count);
-    filename += ".txt";
+void Simulation::write_configfile(const std::string& filename){
+    // // generate unique filename for output
+    // static unsigned file_count = 0;
+    // std::string filename = "./output";
+    // filename += file_count == 0 ? "" : std::to_string(file_count);
+    // filename += ".txt";
 
     //write file
     std::ofstream file(filename);
@@ -160,7 +160,7 @@ void Simulation::write_configfile(){
     }
     else std::cout << "problem writing file" << std::endl;
     file.close();
-    file_count++;
+    //file_count++;
 }
 
 std::string Simulation::get_fileheader(){

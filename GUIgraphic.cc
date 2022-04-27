@@ -156,26 +156,44 @@ void Gui::on_button_clicked_open() {
 
     switch (result) {
         case (Gtk::RESPONSE_OK): {
-            std::cout << "Open clicked." << std::endl;
-
             std::string filename = dialog.get_filename();
             this->simulation->clear();
             this->simulation->read_configfile(filename);
             break;
         }
         case (Gtk::RESPONSE_CANCEL): {
-            std::cout << "Cancel clicked." << std::endl;
             break;
         }
         default: {
-            std::cout << "Unexpected button clicked." << std::endl;
             break;
         }
     }
 }
 
 void Gui::on_button_clicked_save() {
-    cout << "This button will save the current state in a file" << endl;
+
+    Gtk::FileChooserDialog dialog("Please choose a file",
+                                  Gtk::FILE_CHOOSER_ACTION_SAVE);
+    dialog.set_transient_for(*this);
+
+    dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+    dialog.add_button("_Save", Gtk::RESPONSE_OK);
+
+    int result = dialog.run();
+
+    switch (result) {
+        case (Gtk::RESPONSE_OK): {
+            std::string filename = dialog.get_filename();
+            this->simulation->write_configfile(filename);
+            break;
+        }
+        case (Gtk::RESPONSE_CANCEL): {
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
 void Gui::on_button_clicked_start() {

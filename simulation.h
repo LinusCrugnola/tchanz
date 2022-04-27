@@ -83,7 +83,7 @@ public:
     /**
      * @brief Store the actual state of the simulation in a configfile
      */
-    void write_configfile();
+    void write_configfile(const std::string& filename);
 
     /**
      * @brief clear the simulation and delete all objects (empty grid)
