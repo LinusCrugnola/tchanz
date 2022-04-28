@@ -6,6 +6,8 @@
 
 #include "simulation.h"
 
+enum button_state {b_start, b_stop};
+
 class Gui;
 
 class Canvas : public Gtk::DrawingArea {
@@ -30,6 +32,7 @@ public:
     void update_nbF();
 
 protected:
+    bool on_key_press_event(GdkEventKey* key_event);
     void on_button_clicked_exit();
     void on_button_clicked_open();
     void on_button_clicked_save();
@@ -51,6 +54,11 @@ private:
     Simulation* simulation;
     void display_next_hill(bool reverse);
     void reset_anthill_info();
+    bool on_timeout();
+    unsigned val;
+    button_state state;
+    const int timeout_value;
+    bool disconnect;
 };
 
 #endif

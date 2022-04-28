@@ -16,7 +16,8 @@ Gui::Gui()
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
       nbF_info("Nb food:   nbF"), anthill_info("None selected"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation(nullptr) 
+      previous("previous"), next("next"), simulation(nullptr), val(0), state(b_start),
+      timeout_value(750), disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
@@ -204,11 +205,29 @@ void Gui::on_button_clicked_save() {
 }
 
 void Gui::on_button_clicked_start() {
-    cout << "This button will start the simulation" << endl;
+	if(state == b_start){
+        Glib::signal_timeout().connect(sigc::mem_fun(*this, &Gui::on_timeout),
+                                       timeout_value );
+        disconnect = false;
+        val++;
+        state = b_stop;
+        this->start.set_label("Stop");
+	}
+	else{
+		val--;
+        disconnect = true;
+		state = b_start;
+		this->start.set_label("Start");
+	}
 }
 
 void Gui::on_button_clicked_step() {
-    cout << "This button will show the simulation step by step" << endl;
+	if(state == b_start){
+        disconnect = false;
+        disconnect = true;
+        val++;
+        std::cout << "This is simulation update number : " << val << std::endl;
+	}    
 }
 
 void Gui::on_button_clicked_next() {
@@ -217,4 +236,47 @@ void Gui::on_button_clicked_next() {
 
 void Gui::on_button_clicked_previous() {
     display_next_hill(true);
+}
+
+bool Gui::on_key_press_event(GdkEventKey * key_event){
+    if(key_event->type == GDK_KEY_PRESS){
+        switch(gdk_keyval_to_unicode(key_event->keyval)){
+            case 'q':
+                on_button_clicked_exit();
+                break;
+            case 's':
+                on_button_clicked_start();
+                break;
+            case '1':
+                on_button_clicked_step();
+                break;
+            case 'n':
+                on_button_clicked_next();
+                break;
+            case 'p':
+                on_button_clicked_previous();
+                break;
+            default:
+                break;
+        }
+    }
+    return Gtk::Window::on_key_press_event(key_event);
+}
+
+bool Gui::on_timeout(){
+    if(disconnect){
+        disconnect = false;
+        return false;
+    }
+
+    std::cout << "This is simulation update number : " << val << std::endl;
+    ++val;
+    
+    // A call to make a single update of the simulation is expected here
+    
+    // Then a call to refresh the visualization (if any) would be done here
+
+    // Keep going with the timer ; launch the next countdown 
+
+    return true; 
 }
