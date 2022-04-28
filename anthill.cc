@@ -71,14 +71,17 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     }
     if (this->nbC == 0 && state == collector) {
         state = this->nbD == 0 ? predator : defensor;
+        total = this->nbD == 0 ? this->nbP : this->nbD;
     }
     Ant* new_ant = nullptr;
+
+    bool success = true;
 
     switch (state) {
         case collector:
             new_ant = Collector::data_validation(data);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
-            else return false;
+            else success = false;
             i += 1;
             if (i >= total) {
                 state = defensor;
@@ -89,7 +92,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case defensor:
             new_ant = Defensor::data_validation(data, this->position,home);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
-            else return false;
+            else success = false;
             i += 1;
             if (i >= total) {
                 state = predator;
@@ -100,7 +103,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
         case predator:
             new_ant = Predator::data_validation(data);
             if(new_ant != nullptr) this->ants.push_back(new_ant);
-            else return false;
+            else success = false;
             i += 1;
             if (i >= total) {
                 state = finale;
@@ -111,6 +114,12 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             total = 0;
             i = 0;
             break;
+    }
+    if(!success){
+        state = collector;
+        total = 0;
+        i = 0;
+        return false;
     }
     return true;
 }

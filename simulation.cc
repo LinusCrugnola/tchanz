@@ -63,7 +63,6 @@ bool Simulation::draw_current_state(){
 }
 
 bool Simulation::read_configfile(const std::string& filename) {
-    bool result = true;
     this->clear();
     //reset colors
     scl::get_new_color(true);
@@ -72,15 +71,19 @@ bool Simulation::read_configfile(const std::string& filename) {
         std::string line;
         while (std::getline(file >> std::ws, line)) {
             if (line[0] == '#') continue;
-            if(!Simulation::handle_line(line))
-                result = false;
+            if(!Simulation::handle_line(line)){
+                this->clear();
+                return false;
+            }
         }
         //realnce pour reset
         Simulation::handle_line("");
-        return result;
+        return true;
     }
-    else
+    else{
+        this->clear();
         return false;
+    }
 }
 
 bool Simulation::handle_line(const std::string& line) {
@@ -90,21 +93,23 @@ bool Simulation::handle_line(const std::string& line) {
     static unsigned i = 0, total = 0;
     static unsigned j = 0, total_ants;
 
+    bool success = true;
+
     Anthill* new_hill = nullptr;
 
     switch (state) {
         case nbF: 
-            if (!(data >> total)) return false;  
+            if (!(data >> total)) success = false;  
             else i = 0;
             state = total == 0 ? nbH : nutrition;
             break;
         case nutrition:
-            if(!this->food.add_element(data)) return false;
+            if(!this->food.add_element(data)) success = false;
             i += 1;
             if (i >= total) state = nbH;
             break;
         case nbH:
-            if (!(data >> total)) return false;
+            if (!(data >> total)) success = false;
             else i = 0;
             state = total == 0 ? finale : anthill;
             break;
@@ -119,9 +124,10 @@ bool Simulation::handle_line(const std::string& line) {
                 else state = ant;
                 break;
             }
-            return false;
+            success = false;
         case ant:
-            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1)) return false;
+            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1))
+                success = false;
             j += 1;
             if (j >= total_ants){
                 state = i >= total ? finale : anthill;
@@ -136,6 +142,14 @@ bool Simulation::handle_line(const std::string& line) {
             total = 0;
             total_ants = 0;
             break;
+    }
+    if(!success){
+        state = nbF;
+        i = 0;
+        j = 0;
+        total = 0;
+        total_ants = 0;   
+        return false;
     }
     return true;
 }
