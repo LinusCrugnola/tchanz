@@ -12,13 +12,22 @@
 #include <iostream>
 #include <sstream>
 #include <ctime>
+#include <string>
 
 #include "constantes.h"
 #include "squarecell.h"
+#include "message.h"
 
 unsigned Simulation::get_nbF(){
     return this->food.get_nbF();
 }
+
+/**
+ * @brief state messages
+ */
+std::string st_read =  "\n----------------- File Lecture ----------------------------";
+std::string st_clear = "\n----------------- Abort Lecture ---------------------------";
+std::string st_init =  "\n----------------- Initialize Simulation -------------------";
 
 //unsigned Simulation::get_nbH
 
@@ -66,6 +75,7 @@ bool Simulation::read_configfile(const std::string& filename) {
     this->clear();
     //reset colors
     scl::get_new_color(true);
+    std::cout << st_read << std::endl;
     std::ifstream file(filename);
     if (!file.fail()) {
         std::string line;
@@ -73,15 +83,19 @@ bool Simulation::read_configfile(const std::string& filename) {
             if (line[0] == '#') continue;
             if(!Simulation::handle_line(line)){
                 this->clear();
+                std::cout << st_clear << std::endl;
                 return false;
             }
         }
         //realnce pour reset
         Simulation::handle_line("");
+        std::cout << message::success();
+        std::cout << st_init << std::endl;
         return true;
     }
     else{
         this->clear();
+        std::cout << st_clear << std::endl;
         return false;
     }
 }
