@@ -36,6 +36,7 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static bool last_highlighted = false;
     if(reset){
         index = -1;
+        last_highlighted = false;
         return "None selected";
     }
     if(last_highlighted){

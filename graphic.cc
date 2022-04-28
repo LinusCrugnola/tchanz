@@ -56,7 +56,7 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side,
     else{
         if(highlight){
             (*ptcr)->set_line_width(1);
-            (*ptcr)->set_source_rgba(color.r, color.g, color.b, 0.35);
+            (*ptcr)->set_source_rgba(color.r, color.g, color.b, 0.3);
             for(unsigned i = 0; i < side-1; i++){
                 (*ptcr)->move_to(x,y+i+0.5);
                 (*ptcr)->line_to(x+side-1,y+i+0.5);
@@ -120,7 +120,7 @@ bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool cente
 
     if(side != 3) return false;
     //dark color:
-    graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    graphic::color dark = {color.r - 0.45, color.g - 0.45, color.b - 0.45};
     bool even = 0;
     if(centered){
         for(unsigned i = x-side/2; i <= x+side/2; i++){
@@ -146,7 +146,7 @@ bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side,
 
     if(side != 3) return false;
     //dark color:
-    graphic::color dark = {color.r - 0.5, color.g - 0.5, color.b - 0.5};
+    graphic::color dark = {color.r - 0.45, color.g - 0.45, color.b - 0.45};
     if(centered){
         for(unsigned i = 0; i < side; i++){
             for(unsigned j = 0; j < side; j++){
