@@ -125,9 +125,12 @@ bool Simulation::handle_line(const std::string& line) {
                 break;
             }
             success = false;
+            break;
         case ant:
-            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1))
+            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1)){
                 success = false;
+                break;
+            }
             j += 1;
             if (j >= total_ants){
                 state = i >= total ? finale : anthill;
