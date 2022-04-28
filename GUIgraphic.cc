@@ -94,6 +94,11 @@ void Gui::display_next_hill(bool reverse = false){
     this->anthill_info.set_text(info);
 }
 
+void Gui::reset_anthill_info(){
+    std::string info = this->simulation->get_next_anthill_info(0,1);
+    this->anthill_info.set_text(info);
+}
+
 Canvas::Canvas(Gui* parent)
     : parent(parent) {}
 
@@ -159,6 +164,7 @@ void Gui::on_button_clicked_open() {
             std::string filename = dialog.get_filename();
             this->simulation->clear();
             this->simulation->read_configfile(filename);
+            this->reset_anthill_info();
             this->canvas.queue_draw();
             break;
         }

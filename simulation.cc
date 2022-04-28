@@ -31,8 +31,12 @@ std::string st_init =  "\n----------------- Initialize Simulation --------------
 
 //unsigned Simulation::get_nbH
 
-std::string Simulation::get_next_anthill_info(bool reverse){
+std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static int index = -1;
+    if(reset){
+        index = -1;
+        return "None selected";
+    }
     unsigned anthill_size = this->anthill.size();
     if(anthill_size == 0){
         return "None selected";

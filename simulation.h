@@ -60,9 +60,10 @@ public:
      * @brief Get the info of the next anthill
      * 
      * @param reverse order of access
+     * @param reset reset the info to initial state
      * @return anthill_info struct
      */
-    std::string get_next_anthill_info(bool reverse);
+    std::string get_next_anthill_info(bool reverse, bool reset = false);
 
     /**
      * @brief draw the current state of the simulation on the gui canvas

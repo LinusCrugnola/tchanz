@@ -50,6 +50,7 @@ protected:
 private:
     Simulation* simulation;
     void display_next_hill(bool reverse);
+    void reset_anthill_info();
 };
 
 #endif
