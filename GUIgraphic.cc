@@ -6,6 +6,8 @@
 
 using namespace std;
 
+string st_quit =  "\n----------------- Exit Program ----------------------------";
+
 Gui::Gui()
     : canvas(this),
       H_box(Gtk::ORIENTATION_HORIZONTAL),
@@ -145,7 +147,7 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 }
 
 void Gui::on_button_clicked_exit() {
-    cout << "You have exited the simulation" << endl;
+    cout << st_quit << endl;
     hide();
 }
 
