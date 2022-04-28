@@ -275,8 +275,7 @@ bool Gui::on_timeout(){
     // A call to make a single update of the simulation is expected here
     
     // Then a call to refresh the visualization (if any) would be done here
-
-    // Keep going with the timer ; launch the next countdown 
+    this->canvas.queue_draw();
 
     return true; 
 }
