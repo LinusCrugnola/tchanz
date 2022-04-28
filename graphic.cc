@@ -37,7 +37,7 @@ void graphic::set_context(const Cairo::RefPtr<Cairo::Context>& cr){
 }
 
 bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side, 
-                         bool centered, graphic::color color){
+                         bool centered, graphic::color color, bool highlight){
 
     if(side < 3) return false;
 
@@ -54,11 +54,22 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side,
         (*ptcr)->stroke();
     }
     else{
+        if(highlight){
+            (*ptcr)->set_line_width(1);
+            (*ptcr)->set_source_rgba(color.r, color.g, color.b, 0.35);
+            for(unsigned i = 0; i < side-1; i++){
+                (*ptcr)->move_to(x,y+i+0.5);
+                (*ptcr)->line_to(x+side-1,y+i+0.5);
+            }
+            (*ptcr)->stroke();        
+        }
+        (*ptcr)->set_line_width(0.3);
+        (*ptcr)->set_source_rgb(color.r, color.g, color.b);
         (*ptcr)->move_to(x,y);
         (*ptcr)->line_to(x,y+side-1);
         (*ptcr)->line_to(x+side-1,y+side-1);
         (*ptcr)->line_to(x+side-1,y);
-        (*ptcr)->line_to(x-0.25,y);
+        (*ptcr)->line_to(x-0.15,y);
         (*ptcr)->stroke();
     }
     return true;

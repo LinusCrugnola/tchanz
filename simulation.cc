@@ -33,9 +33,14 @@ std::string st_init =  "\n----------------- Initialize Simulation --------------
 
 std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static int index = -1;
+    static bool last_highlighted = false;
     if(reset){
         index = -1;
         return "None selected";
+    }
+    if(last_highlighted){
+        this->anthill[index]->delete_highlight();
+        last_highlighted = false;
     }
     unsigned anthill_size = this->anthill.size();
     if(anthill_size == 0){
@@ -44,6 +49,8 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     else if(reverse){
         if(index == -1){
             index = anthill_size - 1;
+            this->anthill[index]->set_highlight();
+            last_highlighted = true;
             return "id: " + std::to_string(index) + "\n" + 
                     this->anthill[index]->get_info();
         }
@@ -52,6 +59,8 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
             return "None selected";
         }
         index -= 1;
+        this->anthill[index]->set_highlight();
+        last_highlighted = true;
         return "id: " + std::to_string(index) + "\n" + 
                 this->anthill[index]->get_info();
     }
@@ -61,6 +70,8 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
             return "None selected";
         }
         index += 1;
+        this->anthill[index]->set_highlight();
+        last_highlighted = true;
         return "id: " + std::to_string(index) + "\n" + 
                 this->anthill[index]->get_info();
     }
@@ -70,7 +81,10 @@ bool Simulation::draw_current_state(){
     //call draw functions of entities
     if(!this->food.draw_all()) return false;
     for(const auto& hill : this->anthill){
-        if(!hill->draw_all_children()) return false;
+        if(!hill->draw_hill()) return false;
+    }
+    for(const auto& hill : this->anthill){
+        if(!hill->draw_ants()) return false;
     }
     return true;
 }

@@ -55,15 +55,26 @@ private:
      */
     std::vector<Ant*> ants;
 
+    bool highlight;
+
 public:
     scl::square get_position() const {return position;}
+    void set_highlight() {this->highlight = true;}
+    void delete_highlight() {this->highlight = false;}
 
     /**
-     * @brief draw the hill and all of its ants on the gui canvas
+     * @brief draw the anthill on the gui canvas
      * 
      * @return true if no errors
      */
-    bool draw_all_children();
+    bool draw_hill();
+
+    /**
+     * @brief draw all of the hills ants on the gui canvas
+     * 
+     * @return true if no errors
+     */
+    bool draw_ants();
 
     /**
      * @brief Verification of an anthill's data. 

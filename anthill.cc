@@ -14,13 +14,17 @@
 
 Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
                  cunsigned nbD,cunsigned nbP)
-    : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP)
+    : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP), 
+      highlight(false)
 {
     this->color = scl::get_new_color();
 }
 
-bool Anthill::draw_all_children(){
-    scl::square_draw(this->position, scl::empty, this->color);
+bool Anthill::draw_hill(){
+    return scl::square_draw(this->position, scl::empty, this->color, this->highlight);
+}
+
+bool Anthill::draw_ants(){
     for(const auto& ant : this->ants){
         if(!ant->draw(this->color)) return false;
     }

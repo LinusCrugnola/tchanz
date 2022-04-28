@@ -217,14 +217,15 @@ bool scl::square_delete(scl::csquare square) {
     return true;
 }
 
-bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color color){
+bool scl::square_draw(scl::csquare square, scl::drawtype dtype, graphic::color color, 
+                      bool highlight){
     if(!square_validation(square)) 
         return false;
     switch (dtype)
     {
     case empty:
         return graphic::draw_empty(square.x, square.y, square.side, square.centered,
-                                   color);
+                                   color, highlight);
     case rhomb:
         return graphic::draw_rhomb(square.x, square.y, square.side, square.centered,
                                    color);

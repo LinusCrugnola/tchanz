@@ -56,11 +56,12 @@ namespace graphic{
      * @param side side length of square, can't be < 3
      * @param centered true if origin in center, false if bottom left corner
      * @param color graphic::color of the square
+     * @param highlight square is filled with transparent color (default false)
      * 
      * @return true if drawing could be done
      */
     bool draw_empty(cunsigned x, cunsigned y, cunsigned side, bool centered, 
-                    color color);
+                    color color, bool highlight = false);
 
     /**
      * @brief draw a square with inscribed rhomb (no borders) TODO: verify

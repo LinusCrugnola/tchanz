@@ -234,10 +234,12 @@ void Gui::on_button_clicked_step() {
 
 void Gui::on_button_clicked_next() {
     display_next_hill();
+    this->canvas.queue_draw();
 }
 
 void Gui::on_button_clicked_previous() {
     display_next_hill(true);
+    this->canvas.queue_draw();
 }
 
 bool Gui::on_key_press_event(GdkEventKey * key_event){

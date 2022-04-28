@@ -143,10 +143,12 @@ namespace scl {
      * 
      * @param square 
      * @param type 
+     * @param highlight square is filled with transparent color (default false)
      * 
      * @return bool true if no errors while drawing
      */
-    bool square_draw(csquare square, drawtype type, graphic::color color);
+    bool square_draw(csquare square, drawtype type, graphic::color color, 
+                     bool highlight = false);
 
     /**
      * @brief Gets the next color from the graphic module
