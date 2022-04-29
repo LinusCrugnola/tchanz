@@ -12,7 +12,7 @@
 #include <gtkmm/window.h>
 
 #include "simulation.h"
-#include "GUIgraphic.h"
+#include "gui.h"
 
 /**
  * @brief Main module of Tchanz project (highest priority)
@@ -31,7 +31,7 @@ int main(int argc, char **argv){
     
     simulation.read_configfile(filename);
 
-    //create app without argc and argv (not necessairy) TODO: verify
+    //create app without argc and argv (not necessairy)
     auto app = Gtk::Application::create("org.gtkmm.example");
 	Gui gui;
     gui.set_simulation(&simulation);

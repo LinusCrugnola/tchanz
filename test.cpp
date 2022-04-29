@@ -2,7 +2,7 @@
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
 
-#include "GUIgraphic.h"
+#include "gui.h"
 #include "graphic.h"
 #include "simulation.h"
 #include "test/testfunctions.h"

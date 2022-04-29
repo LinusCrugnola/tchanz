@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-#include "../GUIgraphic.h"
+#include "../gui.h"
 #include "testfunctions.h"
 
 void test_gui(){
