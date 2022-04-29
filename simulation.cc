@@ -29,7 +29,6 @@ std::string st_read =  "\n----------------- File Lecture -----------------------
 std::string st_clear = "\n----------------- Abort Lecture ---------------------------";
 std::string st_init =  "\n----------------- Initialize Simulation -------------------";
 
-//unsigned Simulation::get_nbH
 
 std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static int index = -1;
@@ -119,6 +118,7 @@ bool Simulation::read_configfile(const std::string& filename) {
     }
 }
 
+// First function longer than 40 lines
 bool Simulation::handle_line(const std::string& line) {
     std::istringstream data(line);
     enum Reading_states {nbF, nutrition, nbH, anthill, ant, finale};
@@ -191,12 +191,6 @@ bool Simulation::handle_line(const std::string& line) {
 }
 
 void Simulation::write_configfile(const std::string& filename){
-    // // generate unique filename for output
-    // static unsigned file_count = 0;
-    // std::string filename = "./output";
-    // filename += file_count == 0 ? "" : std::to_string(file_count);
-    // filename += ".txt";
-
     //write file
     std::ofstream file(filename);
     if(!file.fail()){
@@ -210,7 +204,6 @@ void Simulation::write_configfile(const std::string& filename){
     }
     else std::cout << "problem writing file" << std::endl;
     file.close();
-    //file_count++;
 }
 
 std::string Simulation::get_fileheader(){
