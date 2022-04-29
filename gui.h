@@ -1,5 +1,5 @@
 /******************************************************************************!
-* @file     GUIgraphic.h
+* @file     gui.h
 * @author   Léo Brückl <leo.bruckl@epfl.ch>             
 *           Linus Crugnola <linus.crugnola@epfl.ch>     
 * @version  1.0
