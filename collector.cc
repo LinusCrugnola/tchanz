@@ -18,7 +18,13 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food)
 }
 
 bool Collector::draw(graphic::color color){
-    return scl::square_draw(this->position, scl::diagonal, color);
+    bool error = false;
+    error = scl::square_draw(this->position, scl::diagonal, color);
+    if(this->food == LOADED){
+        error |= scl::square_draw({this->position.x, this->position.y, 1, 1}, 
+                                  scl::rhomb, {1,1,1});
+    }
+    return error;
 }
 
 Ant* Collector::data_validation(std::istringstream& data) {
