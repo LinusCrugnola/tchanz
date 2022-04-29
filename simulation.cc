@@ -29,7 +29,7 @@ const std::string st_read =  "\n----------------- File Lecture -----------------
 const std::string st_clear = "\n----------------- Abort Lecture --------------------";
 const std::string st_init =  "\n----------------- Initialize Simulation ------------";
 
-
+//TODO: how to make this shorter?
 std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static int index = -1;
     static bool last_highlighted = false;
