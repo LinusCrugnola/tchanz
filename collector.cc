@@ -12,15 +12,15 @@
 
 #include "message.h"
 
-Collector::Collector(scl::csquare position, unsigned age, Etat_collector food)
-    : Ant(position), age(age), food(food) {
+Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_state)
+    : Ant(position), age(age), food_state(food_state) {
     scl::square_add(position);
 }
 
 bool Collector::draw(graphic::color color){
     bool error = false;
     error = scl::square_draw(this->position, scl::diagonal, color);
-    if(this->food == LOADED){
+    if(this->food_state == LOADED){
         error |= scl::square_draw({this->position.x, this->position.y, 1, 1}, 
                                   scl::rhomb, {1,1,1});
     }
@@ -31,11 +31,11 @@ Ant* Collector::data_validation(std::istringstream& data) {
     Ant* collector = nullptr;
     scl::square position = {0, 0, sizeC, 1};
     unsigned age;
-    std::string food_state;
-    Etat_collector food;
-    if (!(data >> position.x >> position.y >> age >> food_state))
+    std::string food;
+    Etat_collector food_state;
+    if (!(data >> position.x >> position.y >> age >> food))
         std::cout << "reading error!" << std::endl;
-    food = food_state == "true" ? LOADED : EMPTY;
+    food_state = food == "true" ? LOADED : EMPTY;
 
     if(!scl::square_validation(position)) return nullptr;
 
@@ -46,12 +46,12 @@ Ant* Collector::data_validation(std::istringstream& data) {
         return nullptr;
     }
 
-    collector = new Collector(position, age, food);
+    collector = new Collector(position, age, food_state);
     return collector;
 }
 
 std::string Collector::get_filedata(){
     return "\t" + std::to_string(this->position.x) + " " 
            + std::to_string(this->position.y) + " " + std::to_string(this->age) + " "
-           + (this->food == LOADED ? "true" : "false") + "\n";
+           + (this->food_state == LOADED ? "true" : "false") + "\n";
 }

@@ -15,7 +15,7 @@
 #include "message.h"
 #include "squarecell.h"
 
-Ant::Ant(scl::csquare position) : position(position) {
+Ant::Ant(scl::csquare position) : position(position), end_of_life(false) {
     scl::square_add(position);
 };
 
