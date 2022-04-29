@@ -18,8 +18,8 @@ Gui::Gui()
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
       nbF_info("Nb food:   nbF"), anthill_info("None selected"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation(nullptr), timer_val(0), start_state(b_start),
-      timeout_value(750), timer_disconnect(false)
+      previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
+      start_state(b_start), timeout_value(750), timer_disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
@@ -58,10 +58,12 @@ Gui::Gui()
     exit.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_exit));
     open.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_open));
     save.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_save));
-    start.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_start));
+    start.signal_clicked().connect(sigc::mem_fun(*this, 
+                                                 &Gui::on_button_clicked_start));
     step.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_step));
     next.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_next));
-    previous.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_previous));
+    previous.signal_clicked().connect(sigc::mem_fun(*this, 
+                                                    &Gui::on_button_clicked_previous));
 
     show_all_children();
 }
