@@ -1,3 +1,11 @@
+/******************************************************************************!
+* @file     GUIgraphic.cc
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             
+*           Linus Crugnola <linus.crugnola@epfl.ch>     
+* @version  1.0
+* @date     29.04.2022
+*******************************************************************************/
+ 
 #include "GUIgraphic.h"
 
 #include <iostream>
