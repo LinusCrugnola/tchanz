@@ -18,8 +18,8 @@ Gui::Gui()
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
       nbF_info("Nb food:   nbF"), anthill_info("None selected"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation(nullptr), val(0), state(b_start),
-      timeout_value(750), disconnect(false)
+      previous("previous"), next("next"), simulation(nullptr), timer_val(0), start_state(b_start),
+      timeout_value(750), timer_disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
@@ -168,7 +168,7 @@ void Gui::on_button_clicked_open() {
             this->simulation->clear();
             this->simulation->read_configfile(filename);
             this->reset_anthill_info();
-            this->val = 0;
+            this->timer_val = 0;
             this->canvas.queue_draw();
             break;
         }
@@ -208,28 +208,28 @@ void Gui::on_button_clicked_save() {
 }
 
 void Gui::on_button_clicked_start() {
-	if(state == b_start){
+	if(start_state == b_start){
         Glib::signal_timeout().connect(sigc::mem_fun(*this, &Gui::on_timeout),
                                        timeout_value );
-        disconnect = false;
-        val++;
-        state = b_stop;
+        timer_disconnect = false;
+        timer_val++;
+        start_state = b_stop;
         this->start.set_label("Stop");
 	}
 	else{
-		val--;
-        disconnect = true;
-		state = b_start;
+		timer_val--;
+        timer_disconnect = true;
+		start_state = b_start;
 		this->start.set_label("Start");
 	}
 }
 
 void Gui::on_button_clicked_step() {
-	if(state == b_start){
-        disconnect = false;
-        disconnect = true;
-        val++;
-        std::cout << "This is simulation update number : " << val << std::endl;
+	if(start_state == b_start){
+        timer_disconnect = false;
+        timer_disconnect = true;
+        timer_val++;
+        std::cout << "This is simulation update number : " << timer_val << std::endl;
 	}    
 }
 
@@ -269,13 +269,13 @@ bool Gui::on_key_press_event(GdkEventKey * key_event){
 }
 
 bool Gui::on_timeout(){
-    if(disconnect){
-        disconnect = false;
+    if(timer_disconnect){
+        timer_disconnect = false;
         return false;
     }
 
-    std::cout << "This is simulation update number : " << val << std::endl;
-    ++val;
+    std::cout << "This is simulation update number : " << timer_val << std::endl;
+    ++timer_val;
     
     // A call to make a single update of the simulation is expected here
     
