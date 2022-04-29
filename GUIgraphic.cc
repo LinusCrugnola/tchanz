@@ -126,10 +126,10 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->translate(0, height);
     cr->scale(scale, -scale);
     if (scale_x > scale_y) {
-        cr->translate((width - height) / (2 * scale), -0.5);
+        cr->translate((width - height) / (2 * scale) -0.5 , -0.5);
     }
     else {
-        cr->translate(-0.5, (height - width) / (2 * scale));
+        cr->translate(-0.5, (height - width) / (2 * scale) -0.5 );
     }
 
     cr->translate(0.5, 0.5);

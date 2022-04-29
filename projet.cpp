@@ -35,7 +35,7 @@ int main(int argc, char **argv){
     auto app = Gtk::Application::create("org.gtkmm.example");
 	Gui gui;
     gui.set_simulation(&simulation);
-	gui.set_default_size(800,600);
+	gui.set_default_size(500,500);
 	
 	return app->run(gui);
 }
