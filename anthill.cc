@@ -165,7 +165,8 @@ std::string Anthill::get_info(){
            (decimal_part == 0 ? "00" : std::to_string(decimal_part)) + "\n\n" +
            "nbC: " + std::to_string(this->nbC) + "\n" +
            "nbD: " + std::to_string(this->nbD) + "\n" +
-           "nbP: " + std::to_string(this->nbP) + "\n";
+           "nbP: " + std::to_string(this->nbP) + 
+           "                            \n";
 }
 
 Anthill::~Anthill(){

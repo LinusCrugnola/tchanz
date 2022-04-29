@@ -38,11 +38,11 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     }
     if(reset){
         index = -1;
-        return "None selected";
+        return "None selected          ";
     }
     unsigned anthill_size = this->anthill.size();
     if(anthill_size == 0){
-        return "None selected";
+        return "None selected          ";
     }
     else if(reverse){
         if(index == -1){
@@ -54,13 +54,13 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
         }
         if(index == 0){
             index = -1;
-            return "None selected";
+            return "None selected          ";
         }
     }
     else{
         if(index+1 >= (int) anthill_size){
             index = -1;
-            return "None selected";
+            return "None selected          ";
         }
     }
     index = reverse ? index - 1 : index + 1;

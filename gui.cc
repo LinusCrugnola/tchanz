@@ -26,7 +26,7 @@ Gui::Gui()
       navbar(Gtk::ORIENTATION_VERTICAL),
       anthill_info_box(Gtk::ORIENTATION_VERTICAL),
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
-      nbF_info("Nb food:   nbF"), anthill_info("None selected"),
+      nbF_info("Nb food:   nbF"), anthill_info("None selected          "),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
       start_state(b_start), timeout_value(750), timer_disconnect(false)
