@@ -128,6 +128,10 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     return true;
 }
 
+void Anthill::set_highlight() { this->highlight = true; }
+
+void Anthill::delete_highlight() { this->highlight = false; }
+
 std::string Anthill::get_filedata(unsigned home){
     std::string output = {};
     std::string gen_dat = this->ants[0]->get_filedata();

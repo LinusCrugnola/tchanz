@@ -75,9 +75,23 @@ private:
     std::vector<Ant*> ants;
 
 public:
+    /**
+     * @brief Get the position of the anthill
+     * 
+     * @return scl::square 
+     */
     scl::square get_position() const {return position;}
-    void set_highlight() {this->highlight = true;}
-    void delete_highlight() {this->highlight = false;}
+
+    /**
+     * @brief highlight anthill (fill with transparent color)
+     */
+    void set_highlight();
+
+    /**
+     * @brief delete the highlight on anthill
+     * 
+     */
+    void delete_highlight();
 
     /**
      * @brief draw the anthill on the gui canvas
