@@ -25,9 +25,9 @@ unsigned Simulation::get_nbF(){
 /**
  * @brief state messages
  */
-const std::string st_read =  "\n----------------- File Lecture ----------------------";
-const std::string st_clear = "\n----------------- Abort Lecture ---------------------";
-const std::string st_init =  "\n----------------- Initialize Simulation -------------";
+const std::string st_read =  "\n----------------- File Lecture ---------------------";
+const std::string st_clear = "\n----------------- Abort Lecture --------------------";
+const std::string st_init =  "\n----------------- Initialize Simulation ------------";
 
 
 std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
