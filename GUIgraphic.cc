@@ -168,6 +168,7 @@ void Gui::on_button_clicked_open() {
             this->simulation->clear();
             this->simulation->read_configfile(filename);
             this->reset_anthill_info();
+            this->val = 0;
             this->canvas.queue_draw();
             break;
         }
