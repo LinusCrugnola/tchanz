@@ -13,11 +13,11 @@
 namespace{
     const graphic::color color_list[6] = {
         {1, 0, 0},   // red
-        {0, 1, 0},   // green
+        {0, 0.8, 0},   // green
         {0, 0, 1},   // blue
-        {1, 1, 0.2}, // yellow TODO: try values
-        {1, 0, 1},   // magenta
-        {0, 1, 1}    // cyan
+        {0.8, 0.8, 0.2}, // yellow TODO: try values
+        {0.8, 0, 0.8},   // magenta
+        {0, 0.8, 0.8}    // cyan
     };
 
     const Cairo::RefPtr<Cairo::Context>* ptcr = nullptr;
