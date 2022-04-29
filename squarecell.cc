@@ -27,7 +27,6 @@ scl::square to_square(scl::cpoint point){
 }
 
 bool scl::square_validation(scl::csquare square) {
-    // Check the point
     if (square.x < 0 || square.x > (scl::g_max-1)) {
         std::cout << error_squarecell::print_index(square.x, scl::g_max-1);
         return false;
@@ -36,10 +35,8 @@ bool scl::square_validation(scl::csquare square) {
         std::cout << error_squarecell::print_index(square.y, scl::g_max-1);
         return false;
     }
-    // Check side
     if (square.centered) {
         if (square.side % 2 == 0) {
-            std::cout << "Side is not an odd number";
             return false;
         }
         else if ((square.x-square.side/2) < 0 || 
