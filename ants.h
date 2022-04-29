@@ -25,6 +25,11 @@ protected:
      */
     scl::square position;
 
+    /**
+     * @brief true if ant is dead
+     */
+    bool end_of_life;
+
 public:
     /**
      * @brief Construct a new Ant object

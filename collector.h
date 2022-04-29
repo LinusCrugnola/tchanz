@@ -32,10 +32,10 @@ private:
     unsigned age;
 
     /**
-     * @brief state of the ant
+     * @brief state of the collector ant
      * @remark empty => no food, loaded => carrying a food item
      */
-    Etat_collector food;
+    Etat_collector food_state;
 
 public:
     /**

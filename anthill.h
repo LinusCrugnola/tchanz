@@ -38,7 +38,7 @@ private:
      * @brief total food stocked in the hill
      */
     double total_food;
-    //TODO: check consequences of double
+    //TODO: check consequences
 
     /**
      * @brief number of collector, defensor and predator ants belonging to the hill
@@ -51,11 +51,28 @@ private:
     graphic::color color;
 
     /**
+     * @brief state of the hill
+     * 
+     * @details free if the hill can grow in all directions, constrained if growth only in 
+     * one direction.
+     * 
+     */
+    Etat_fourmiliere anthill_state;
+
+    /**
+     * @brief true if clan is dead
+     */
+    bool end_of_klan;
+
+    /**
+     * @brief indicates if the hill is highlighted
+     */
+    bool highlight;
+
+    /**
      * @brief vector of ants that belong to hill
      */
     std::vector<Ant*> ants;
-
-    bool highlight;
 
 public:
     scl::square get_position() const {return position;}
