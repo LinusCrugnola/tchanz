@@ -15,7 +15,7 @@
 Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
                  cunsigned nbD,cunsigned nbP)
     : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP), 
-      highlight(false)
+      anthill_state(FREE), end_of_klan(false), highlight(false)
 {
     this->color = scl::get_new_color();
 }
