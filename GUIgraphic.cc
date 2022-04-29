@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     GUIgraphic.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             
-*           Linus Crugnola <linus.crugnola@epfl.ch>     
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             90%
+*           Linus Crugnola <linus.crugnola@epfl.ch>     10%
 * @version  1.0
 * @date     29.04.2022
 *******************************************************************************/
