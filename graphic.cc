@@ -10,12 +10,14 @@
 
 #include <math.h>
 
+//TODO: experiment with color values
+
 namespace{
     const graphic::color color_list[6] = {
         {1, 0, 0},   // red
         {0, 0.8, 0},   // green
         {0, 0, 1},   // blue
-        {0.8, 0.8, 0.2}, // yellow TODO: try values
+        {0.8, 0.8, 0.2}, // yellow
         {0.8, 0, 0.8},   // magenta
         {0, 0.8, 0.8}    // cyan
     };
@@ -44,7 +46,6 @@ bool graphic::draw_empty(cunsigned x, cunsigned y, cunsigned side,
     (*ptcr)->set_line_width(0.5);
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
-    //TODO: check line width
     if(centered){
         (*ptcr)->move_to(x-side/2,y-side/2);
         (*ptcr)->line_to(x-side/2,y+side/2);
@@ -101,7 +102,6 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
     (*ptcr)->set_line_width(side);
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
 
-    //TODO: check details (side etc)
     if(centered){
         (*ptcr)->move_to(x-side/2-0.5,y);
         (*ptcr)->line_to(x+side/2+0.5,y);
