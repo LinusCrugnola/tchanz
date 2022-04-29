@@ -14,9 +14,7 @@
 
 using namespace std;
 
-/**
- * @brief state message
- */
+/* state message */
 const string st_quit = "\n----------------- Exit Program ----------------------";
 
 // Second function larger than 40 lines!
