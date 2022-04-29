@@ -14,12 +14,12 @@
 
 namespace{
     const graphic::color color_list[6] = {
-        {1, 0, 0},   // red
-        {0, 0.8, 0},   // green
-        {0, 0, 1},   // blue
-        {0.8, 0.8, 0.2}, // yellow
+        {0.95, 0.1, 0.1},   // red
+        {0.1, 0.7, 0.05},   // green
+        {0.2, 0.35, 1},   // blue
+        {0.95, 0.7, 0.1}, // yellow
         {0.8, 0, 0.8},   // magenta
-        {0, 0.8, 0.8}    // cyan
+        {0.1, 0.65, 0.75}    // cyan
     };
 
     const Cairo::RefPtr<Cairo::Context>* ptcr = nullptr;
@@ -101,7 +101,6 @@ bool graphic::draw_uniform(cunsigned x, cunsigned y, cunsigned side, bool center
 
     (*ptcr)->set_line_width(side);
     (*ptcr)->set_source_rgb(color.r, color.g, color.b);
-
     if(centered){
         (*ptcr)->move_to(x-side/2-0.5,y);
         (*ptcr)->line_to(x+side/2+0.5,y);
@@ -120,7 +119,7 @@ bool graphic::draw_diagonal(cunsigned x, cunsigned y, cunsigned side, bool cente
 
     if(side != 3) return false;
     //dark color:
-    graphic::color dark = {color.r - 0.45, color.g - 0.45, color.b - 0.45};
+    graphic::color dark = {color.r - 0.25, color.g - 0.3, color.b - 0.3};
     bool even = 0;
     if(centered){
         for(unsigned i = x-side/2; i <= x+side/2; i++){
@@ -146,7 +145,7 @@ bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side,
 
     if(side != 3) return false;
     //dark color:
-    graphic::color dark = {color.r - 0.45, color.g - 0.45, color.b - 0.45};
+    graphic::color dark = {color.r - 0.25, color.g - 0.3, color.b - 0.3};
     if(centered){
         for(unsigned i = 0; i < side; i++){
             for(unsigned j = 0; j < side; j++){
