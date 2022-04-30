@@ -14,7 +14,7 @@
 
 #include "squarecell.h"
 #include "constantes.h"
-#include "ants.h"
+#include "ant.h"
 
 class Ant;
 

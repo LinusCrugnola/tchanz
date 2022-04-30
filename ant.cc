@@ -6,7 +6,7 @@
  * @date     01.04.2022
  *******************************************************************************/
 
-#include "ants.h"
+#include "ant.h"
 
 #include <iostream>
 #include <string>

@@ -13,7 +13,7 @@
 #include <vector>
 #include <string>
 
-#include "ants.h"
+#include "ant.h"
 #include "generator.h"
 #include "collector.h"
 #include "defensor.h"

@@ -1,5 +1,5 @@
 /******************************************************************************!
- * @file     ants.h
+ * @file     ant.h
  * @author   Léo Brückl <leo.bruckl@epfl.ch> 
  *           Linus Crugnola <linus.crugnola@epfl.ch>
  * @version  2.0
