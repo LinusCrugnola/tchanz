@@ -11,8 +11,8 @@
 
 #include <sstream>
 
-#include "squarecell.h"
 #include "constantes.h"
+#include "squarecell.h"
 
 /**
  * @class Ant
@@ -36,8 +36,8 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Ant(scl::csquare position); 
-    
+    Ant(scl::csquare position);
+
     /**
      * @brief Get the configfile data of an ant object
      * 
