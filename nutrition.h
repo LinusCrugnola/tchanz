@@ -80,4 +80,4 @@ public:
     ~Nutrition();
 };
 
-#endif
+#endif /* NUTRITION_H */

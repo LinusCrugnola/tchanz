@@ -174,4 +174,4 @@ public:
     ~Anthill();
 };
 
-#endif
+#endif /* ANTHILL_H */

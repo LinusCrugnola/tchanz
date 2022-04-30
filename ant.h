@@ -6,8 +6,8 @@
  * @date     01.04.2022
  *******************************************************************************/
 
-#ifndef ANTS_H
-#define ANTS_H
+#ifndef ANT_H
+#define ANT_H
 
 #include <sstream>
 
@@ -62,4 +62,4 @@ public:
     virtual ~Ant();
 };
 
-#endif
+#endif /* ANT_H */

@@ -76,4 +76,4 @@ public:
     Collector(scl::csquare position, unsigned age, Etat_collector food);
 };
 
-#endif
+#endif /* COLLECTOR_H */

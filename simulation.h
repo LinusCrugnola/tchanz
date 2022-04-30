@@ -111,4 +111,4 @@ public:
     ~Simulation();
 };
 
-#endif
+#endif /* SIMULATION_H */

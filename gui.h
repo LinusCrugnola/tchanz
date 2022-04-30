@@ -213,4 +213,4 @@ private:
     bool timer_disconnect;
 };
 
-#endif
+#endif /* GUI_H */

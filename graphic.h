@@ -145,4 +145,4 @@ namespace graphic{
     bool draw_border(cunsigned size);
 }
 
-#endif
+#endif /* GRAPHIC_H */

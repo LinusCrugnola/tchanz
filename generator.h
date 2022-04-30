@@ -66,4 +66,4 @@ public:
     Generator(scl::csquare position);
 };
 
-#endif
+#endif /* GENERATOR_H */

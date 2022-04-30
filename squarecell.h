@@ -168,4 +168,4 @@ namespace scl {
     void print_grid();
 }
 
-#endif
+#endif /* SQUARECELL_H */
