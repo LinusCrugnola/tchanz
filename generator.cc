@@ -5,7 +5,7 @@
 * @version  1.0
 * @date     12.04.2022
 *******************************************************************************/
- 
+
 #include "generator.h"
 
 #include <iostream>
@@ -17,7 +17,7 @@ Generator::Generator(scl::csquare position)
     scl::square_add(position);
 }
 
-bool Generator::draw(graphic::color color){
+bool Generator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }
 
@@ -27,7 +27,7 @@ Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
     Ant* generator = nullptr;
     scl::square position = {xg, yg, sizeG, 1};
 
-    if(!scl::square_validation(position)) return nullptr;
+    if (!scl::square_validation(position)) return nullptr;
 
     if (scl::square_superposition(position)) {
         scl::square overlap = scl::square_get_superposition(position);
@@ -45,6 +45,6 @@ Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
     return generator;
 }
 
-std::string Generator::get_filedata(){
+std::string Generator::get_filedata() {
     return std::to_string(this->position.x) + " " + std::to_string(this->position.y);
 }
