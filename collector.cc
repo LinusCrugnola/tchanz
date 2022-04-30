@@ -17,12 +17,12 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
     scl::square_add(position);
 }
 
-bool Collector::draw(graphic::color color){
+bool Collector::draw(graphic::color color) {
     bool error = false;
     error = scl::square_draw(this->position, scl::diagonal, color);
-    if(this->food_state == LOADED){
+    if (this->food_state == LOADED) {
         error |= scl::square_draw({this->position.x, this->position.y, 1, 1}, 
-                                  scl::rhomb, {1,1,1});
+                                  scl::rhomb, {1, 1, 1});
     }
     return error;
 }
@@ -37,7 +37,7 @@ Ant* Collector::data_validation(std::istringstream& data) {
         std::cout << "reading error!" << std::endl;
     food_state = food == "true" ? LOADED : EMPTY;
 
-    if(!scl::square_validation(position)) return nullptr;
+    if (!scl::square_validation(position)) return nullptr;
 
     if (scl::square_superposition(position)) {
         scl::square overlap = scl::square_get_superposition(position);
