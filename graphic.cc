@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     graphic.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             
-*           Linus Crugnola <linus.crugnola@epfl.ch>     
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             10 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     90 %
 * @version  1.0
 * @date     22.04.2022
 *******************************************************************************/
