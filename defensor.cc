@@ -17,7 +17,7 @@ Defensor::Defensor(scl::csquare position, unsigned age)
     scl::square_add(position);
 }
 
-bool Defensor::draw(graphic::color color){
+bool Defensor::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::cross, color);
 }
 
@@ -30,7 +30,7 @@ Ant* Defensor::data_validation(std::istringstream& data,
     if (!(data >> position.x >> position.y >> age))
         std::cout << "reading error!" << std::endl;
 
-    if(!scl::square_validation(position)) return nullptr;
+    if (!scl::square_validation(position)) return nullptr;
 
     if (scl::square_superposition(position)) {
         scl::square overlap = scl::square_get_superposition(position);
