@@ -14,8 +14,8 @@
 
 bool Nutrition::add_element(std::istringstream& data) {
     bool valid = true;
-    scl::square position = {0,0,1,1};
-    if (!(data >> position.x >> position.y)) 
+    scl::square position = {0, 0, 1, 1};
+    if (!(data >> position.x >> position.y))
         return false;
 
     valid = scl::square_validation(position); // displays error if invalid
@@ -25,7 +25,7 @@ bool Nutrition::add_element(std::istringstream& data) {
         valid = false;
     }
 
-    if(valid){
+    if (valid) {
         //add element to map
         //block square
 
@@ -37,37 +37,37 @@ bool Nutrition::add_element(std::istringstream& data) {
     return false;
 }
 
-unsigned Nutrition::get_nbF(){
+unsigned Nutrition::get_nbF() {
     return this->foods.size();
 }
 
-bool Nutrition::draw_all(){
-    for(const auto& elem : this->foods){
+bool Nutrition::draw_all() {
+    for (const auto& elem : this->foods) {
         //draw white rhombs
-        if(!scl::square_draw(elem, scl::rhomb, {1,1,1})) return false;
+        if (!scl::square_draw(elem, scl::rhomb, {1, 1, 1})) return false;
     }
     return true;
 }
 
-std::string Nutrition::get_filedata(){
+std::string Nutrition::get_filedata() {
     std::string output = {};
     output += "# \n\n";
     output += "# nb food\n" + std::to_string(this->foods.size()) + "\n\n# food \n";
-    for(auto elem : this->foods){
+    for (auto elem : this->foods) {
         output += std::to_string(elem.x) + "  " + std::to_string(elem.y) + "\n";
     }
     return output;
 }
 
-void Nutrition::clear(){
-    for(auto elem : foods){
+void Nutrition::clear() {
+    for (auto elem : foods) {
         scl::square_delete(elem);
     }
     this->foods.clear();
 }
 
-Nutrition::~Nutrition(){
-    for(auto elem : this->foods){
+Nutrition::~Nutrition() {
+    for (auto elem : this->foods) {
         scl::square_delete(elem);
     }
     this->foods.clear();
