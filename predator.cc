@@ -17,7 +17,7 @@ Predator::Predator(scl::csquare position, unsigned age)
     scl::square_add(position);
 }
 
-bool Predator::draw(graphic::color color){
+bool Predator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }
 
@@ -28,7 +28,7 @@ Ant* Predator::data_validation(std::istringstream& data) {
     if (!(data >> position.x >> position.y >> age))
         std::cout << "reading error!" << std::endl;
 
-    if(!scl::square_validation(position)) return nullptr;
+    if (!scl::square_validation(position)) return nullptr;
 
     if (scl::square_superposition(position)) {
         std::cout << message::predator_overlap(position.x, position.y);
