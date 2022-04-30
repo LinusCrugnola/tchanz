@@ -13,20 +13,19 @@
 #include "message.h"
 
 Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
-                 cunsigned nbD,cunsigned nbP)
+                 cunsigned nbD, cunsigned nbP)
     : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP), 
-      anthill_state(FREE), end_of_klan(false), highlight(false)
-{
+      anthill_state(FREE), end_of_klan(false), highlight(false) {
     this->color = scl::get_new_color();
 }
 
-bool Anthill::draw_hill(){
+bool Anthill::draw_hill() {
     return scl::square_draw(this->position, scl::empty, this->color, this->highlight);
 }
 
-bool Anthill::draw_ants(){
-    for(const auto& ant : this->ants){
-        if(!ant->draw(this->color)) return false;
+bool Anthill::draw_ants() {
+    for (const auto& ant : this->ants) {
+        if (!ant->draw(this->color)) return false;
     }
     return true;
 }
@@ -40,11 +39,11 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
     unsigned total_food;
     unsigned nbC, nbD, nbP;
     if (!(data >> position.x >> position.y >> position.side >> xg >> yg >> total_food
-               >> nbC >> nbD >> nbP)){
+               >> nbC >> nbD >> nbP)) {
         std::cout << "reading error!" << std::endl;
     }
 
-    if(!scl::square_validation(position)) return nullptr;
+    if (!scl::square_validation(position)) return nullptr;
 
     for (unsigned i(0); i < hills_existing.size(); i++) {
         if (scl::square_superposition(hills_existing[i]->get_position(), position)) {
@@ -56,8 +55,10 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
     anthill = new Anthill(position, total_food, nbC, nbD, nbP);
 
     Ant* new_generator = Generator::data_validation(xg, yg, position, home);
-    if(new_generator != nullptr) anthill->ants.push_back(new_generator);
-    else return nullptr;
+    if (new_generator != nullptr)
+        anthill->ants.push_back(new_generator);
+    else
+        return nullptr;
 
     return anthill;
 }
@@ -68,9 +69,9 @@ unsigned Anthill::anthill_get_ants() const {
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     enum Ant_states { collector, defensor, predator, finale };
-    static unsigned i=0, total = 0;
+    static unsigned i = 0, total = 0;
     static Ant_states state = collector;
-    if(state == collector && total == 0){
+    if (state == collector && total == 0) {
         total = this->nbC;
     }
     if (this->nbC == 0 && state == collector) {
@@ -84,7 +85,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     switch (state) {
         case collector:
             new_ant = Collector::data_validation(data);
-            if(new_ant != nullptr) this->ants.push_back(new_ant);
+            if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;
             if (i >= total) {
@@ -95,7 +96,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             break;
         case defensor:
             new_ant = Defensor::data_validation(data, this->position,home);
-            if(new_ant != nullptr) this->ants.push_back(new_ant);
+            if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;
             if (i >= total) {
@@ -106,7 +107,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             break;
         case predator:
             new_ant = Predator::data_validation(data);
-            if(new_ant != nullptr) this->ants.push_back(new_ant);
+            if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;
             if (i >= total) {
@@ -119,7 +120,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
             i = 0;
             break;
     }
-    if(!success){
+    if (!success) {
         state = collector;
         total = 0;
         i = 0;
@@ -128,11 +129,15 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
     return true;
 }
 
-void Anthill::set_highlight() { this->highlight = true; }
+void Anthill::set_highlight() {
+    this->highlight = true;
+}
 
-void Anthill::delete_highlight() { this->highlight = false; }
+void Anthill::delete_highlight() {
+    this->highlight = false;
+}
 
-std::string Anthill::get_filedata(unsigned home){
+std::string Anthill::get_filedata(unsigned home) {
     std::string output = {};
     std::string gen_dat = this->ants[0]->get_filedata();
     // add anthill data
@@ -169,9 +174,9 @@ std::string Anthill::get_info(){
            "                            \n";
 }
 
-Anthill::~Anthill(){
+Anthill::~Anthill() {
     // destroy all ants
-    for(auto& ant : this->ants){
+    for (auto& ant : this->ants) {
         delete ant;
         ant = nullptr;
     }
