@@ -70,7 +70,7 @@ public:
     /**
      * @brief Construct a new Nutrition object
      */
-    //TODO:Nutrition();
+    Nutrition() {};
 
     /**
      * @brief Destroy the Nutrition object
