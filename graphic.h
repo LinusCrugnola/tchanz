@@ -64,7 +64,7 @@ namespace graphic{
                     color color, bool highlight = false);
 
     /**
-     * @brief draw a square with inscribed rhomb (no borders) TODO: verify
+     * @brief draw a square with inscribed rhomb (no borders)
      * 
      * @remark style of food
      * 

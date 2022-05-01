@@ -38,7 +38,6 @@ private:
      * @brief total food stocked in the hill
      */
     double total_food;
-    //TODO: check consequences
 
     /**
      * @brief number of collector, defensor and predator ants belonging to the hill

@@ -10,8 +10,6 @@
 
 #include <math.h>
 
-//TODO: experiment with color values
-
 namespace{
     const graphic::color color_list[6] = {
         {0.95, 0.1, 0.1},   // red
@@ -175,7 +173,7 @@ bool graphic::draw_cross(cunsigned x, cunsigned y, cunsigned side,
 
 bool graphic::draw_grid(cunsigned size){
 
-    (*ptcr)->set_line_width(0.05); //TODO: how large must this be?
+    (*ptcr)->set_line_width(0.05);
     (*ptcr)->set_source_rgb(0.8, 0.8, 0.8); //light grey
     (*ptcr)->translate(-0.5, -0.5);
     //draw lines
