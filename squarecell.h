@@ -21,18 +21,6 @@ namespace scl {
     constexpr short unsigned g_dim = 7;
     constexpr short unsigned g_max = 128;
 
-    /**
-     * @brief General type point
-     * 
-     * @remark this is not used in rendu 2
-     * 
-     * @param x coordinate of point
-     * @param y coordinate of point
-     */
-    struct point {
-        unsigned x;
-        unsigned y;
-    };
 
     /**
      * @brief General type square
@@ -66,24 +54,11 @@ namespace scl {
      */
     typedef const square& csquare;
 
-    /**
-     * @brief define a constant reference on square
-     */
-    typedef const point& cpoint;
 
     /**
      * @brief define reference on coordinate
      */
     typedef const unsigned& coord;
-
-
-    /**
-     * @brief convert a point to a square
-     * 
-     * @param point 
-     * @return square 
-     */
-    square to_square(point point);
 
     /**
      * @brief Validation of a square checks if square is inside of the grid borders

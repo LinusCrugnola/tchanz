@@ -22,10 +22,6 @@ namespace {
                                                                       false));
 }
 
-scl::square to_square(scl::cpoint point){
-    return {point.x, point.y, 1, 1};
-}
-
 bool scl::square_validation(scl::csquare square) {
     if (square.x < 0 || square.x > (scl::g_max-1)) {
         std::cout << error_squarecell::print_index(square.x, scl::g_max-1);
