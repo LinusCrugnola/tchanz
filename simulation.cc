@@ -248,5 +248,4 @@ Simulation::~Simulation(){
         delete hill;
         hill = nullptr;
     }
-    //this->food.~Nutrition();
 }
