@@ -29,7 +29,7 @@ Gui::Gui()
       nbF_info("Nb food:   nbF"), anthill_info("None selected          "),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
-      start_state(b_start), timeout_value(100), timer_disconnect(false)
+      start_state(b_start), timeout_value(10), timer_disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
