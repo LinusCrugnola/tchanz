@@ -71,7 +71,7 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
 }
 
 bool Simulation::update(){
-    //create nutrition
+    //create nutrition TODO: check if inside anthill
     if(this->rand_bool(*rand_engine)){
         this->food.add_element(this->rand_int(*rand_engine),
                                this->rand_int(*rand_engine));
