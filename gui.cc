@@ -29,7 +29,7 @@ Gui::Gui()
       nbF_info("Nb food:   nbF"), anthill_info("None selected          "),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
-      start_state(b_start), timeout_value(750), timer_disconnect(false)
+      start_state(b_start), timeout_value(100), timer_disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
@@ -242,6 +242,10 @@ void Gui::on_button_clicked_step() {
         timer_disconnect = true;
         timer_val++;
         std::cout << "This is simulation update number : " << timer_val << std::endl;
+        // A call to make a single update of the simulation is expected here
+        this->simulation->update();
+        // Then a call to refresh the visualization (if any) would be done here
+        this->canvas.queue_draw();
 	}    
 }
 
@@ -290,7 +294,7 @@ bool Gui::on_timeout(){
     ++timer_val;
     
     // A call to make a single update of the simulation is expected here
-    
+    this->simulation->update();
     // Then a call to refresh the visualization (if any) would be done here
     this->canvas.queue_draw();
 

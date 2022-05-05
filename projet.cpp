@@ -10,6 +10,7 @@
 #include <string>
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
+#include <random>
 
 #include "simulation.h"
 #include "gui.h"
@@ -22,9 +23,11 @@
  * @brief project main function
  */
 int main(int argc, char **argv){
+    //set up random engine
+    std::default_random_engine engine;
 
     //create a simulation and set up the map
-    Simulation simulation;
+    Simulation simulation(&engine);
 
     // get the name of the configfile
     std::string filename = argc > 1 ? argv[1] : "";

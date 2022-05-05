@@ -37,6 +37,17 @@ bool Nutrition::add_element(std::istringstream& data) {
     return false;
 }
 
+bool Nutrition::add_element(unsigned x, unsigned y){
+    scl::square position = {x, y, 1, 1};
+
+    if(!scl::square_validation(position) || scl::square_superposition(position))
+        return false;
+
+    scl::square_add(position);
+    this->foods.push_back(position);
+    return true;
+}
+
 unsigned Nutrition::get_nbF(){
     return this->foods.size();
 }
