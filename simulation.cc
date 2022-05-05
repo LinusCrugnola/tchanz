@@ -240,7 +240,7 @@ unsigned Simulation::get_dimension(){
 }
 
 Simulation::Simulation(std::default_random_engine* engine) : food(), 
-    rand_engine(engine), rand_bool(food_rate), rand_int(0, scl::g_max-1) {};
+    rand_engine(engine), rand_bool(food_rate), rand_int(1, scl::g_max-2) {};
 
 Simulation::~Simulation(){
     // free all the memory
