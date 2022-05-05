@@ -86,7 +86,6 @@ bool Simulation::update(){
             }
         }
     }
-
     return true;
 }
 
