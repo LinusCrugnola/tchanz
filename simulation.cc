@@ -73,14 +73,18 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
 bool Simulation::update(){
     //create nutrition
     if(this->rand_bool(*rand_engine)){
-        bool overlap = false;
-        unsigned x = this->rand_int(*rand_engine);
-        unsigned y = this->rand_int(*rand_engine);
-        for(const auto& hill : this->anthill){
-            if(scl::square_superposition(hill->get_position(), {x, y, 1, 1}))
-                overlap = true;
+        for(unsigned i = 0; i < max_food_trial; i++){
+            bool overlap = false;
+            unsigned x = this->rand_int(*rand_engine);
+            unsigned y = this->rand_int(*rand_engine);
+            for(const auto& hill : this->anthill){
+                if(scl::square_superposition(hill->get_position(), {x, y, 1, 1}))
+                    overlap = true;
+            }
+            if(!overlap && this->food.add_element(x, y)){ //add only called if overlap
+                break;
+            }
         }
-        if(!overlap) this->food.add_element(x, y);
     }
 
     return true;
