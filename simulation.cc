@@ -13,6 +13,7 @@
 #include <sstream>
 #include <ctime>
 #include <string>
+#include <random>
 
 #include "constantes.h"
 #include "squarecell.h"
@@ -67,6 +68,22 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     this->anthill[index]->set_highlight();
     last_highlighted = true;
     return "id: " + std::to_string(index) + "\n" + this->anthill[index]->get_info();
+}
+
+bool Simulation::update(){
+    //create nutrition
+    if(this->rand_bool(*rand_engine)){
+        bool overlap = false;
+        unsigned x = this->rand_int(*rand_engine);
+        unsigned y = this->rand_int(*rand_engine);
+        for(const auto& hill : this->anthill){
+            if(scl::square_superposition(hill->get_position(), {x, y, 1, 1}))
+                overlap = true;
+        }
+        if(!overlap) this->food.add_element(x, y);
+    }
+
+    return true;
 }
 
 bool Simulation::draw_current_state(){
@@ -222,11 +239,13 @@ unsigned Simulation::get_dimension(){
     return scl::g_max;
 }
 
+Simulation::Simulation(std::default_random_engine* engine) : food(), 
+    rand_engine(engine), rand_bool(food_rate), rand_int(1, scl::g_max-2) {};
+
 Simulation::~Simulation(){
     // free all the memory
     for(auto& hill : this->anthill){
         delete hill;
         hill = nullptr;
     }
-    //this->food.~Nutrition();
 }

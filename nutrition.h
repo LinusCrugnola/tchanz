@@ -40,6 +40,15 @@ public:
     bool add_element(std::istringstream& data);
 
     /**
+     * @brief Add a new food element if valid
+     * 
+     * @param x coordinate of the food
+     * @param y coordinate of the food
+     * @return true if element was added
+     */
+    bool add_element(unsigned x, unsigned y);
+
+    /**
      * @brief Get the total amount of food
      * 
      * @return unsigned int

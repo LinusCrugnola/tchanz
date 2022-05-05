@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <random>
 
 #include "anthill.h"
 #include "nutrition.h"
@@ -33,6 +34,13 @@ private:
     Nutrition food;
 
     /**
+     * @brief random number generation objects
+     */
+    std::default_random_engine* rand_engine;
+    std::bernoulli_distribution rand_bool;
+    std::uniform_int_distribution<unsigned> rand_int;
+
+    /**
      * @brief Distribute one line of the configfile
      * 
      * @param line string of one line
@@ -49,6 +57,13 @@ private:
     std::string get_fileheader();
 
 public:
+    /**
+     * @brief udpates the simulation (1x)
+     * 
+     * @return true if no errors
+     */
+    bool update();
+
     /**
      * @brief Get the total food existing in the world
      * 
@@ -100,8 +115,10 @@ public:
 
     /**
      * @brief Default simulation constructor
+     * 
+     * @param engine pointer to the random engine
      */
-    Simulation() : food() {};
+    Simulation(std::default_random_engine* engine);
 
     /**
      * @brief Destroy the Simulation object
