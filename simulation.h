@@ -56,6 +56,14 @@ private:
      */
     std::string get_fileheader();
 
+    /**
+     * @brief method to spawn nutrition in the world
+     * 
+     * @details with a probability of 10% it effects 10 trys to pose a food item 
+     * in the world that doesnt intersect with other entities or anthills
+     */
+    void create_nutrition();
+
 public:
     /**
      * @brief udpates the simulation (1x)

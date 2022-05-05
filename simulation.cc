@@ -71,7 +71,11 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
 }
 
 bool Simulation::update(){
-    //create nutrition
+    create_nutrition();
+    return true;
+}
+
+void Simulation::create_nutrition(){
     if(this->rand_bool(*rand_engine)){
         for(unsigned i = 0; i < max_food_trial; i++){
             bool overlap = false;
@@ -86,7 +90,6 @@ bool Simulation::update(){
             }
         }
     }
-    return true;
 }
 
 bool Simulation::draw_current_state(){
