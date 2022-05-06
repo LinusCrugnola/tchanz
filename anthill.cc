@@ -181,7 +181,7 @@ bool Anthill::check_growth(std::vector<Anthill*>& hills){
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
     //check top right corner expansion
     scl::square new_position = this->position;
-    new_size = new_position.side - 1; //grow one field
+    //new_size = new_position.side - 1; //grow one field
     new_position.side = new_size + 2;
     if(this->update_position(new_position, hills)) return true;
     //check botton right corner expansion
