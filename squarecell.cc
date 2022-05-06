@@ -22,13 +22,14 @@ namespace {
                                                                       false));
 }
 
-bool scl::square_validation(scl::csquare square) {
+bool scl::square_validation(csquare square, bool print) {
+    using namespace error_squarecell;
     if (square.x < 0 || square.x > (scl::g_max-1)) {
-        std::cout << error_squarecell::print_index(square.x, scl::g_max-1);
+        if(print) std::cout << print_index(square.x, scl::g_max-1);
         return false;
     }
     else if (square.y < 0 || square.y > (scl::g_max-1)) {
-        std::cout << error_squarecell::print_index(square.y, scl::g_max-1);
+        if(print) std::cout << print_index(square.y, scl::g_max-1);
         return false;
     }
     if (square.centered) {
@@ -37,26 +38,22 @@ bool scl::square_validation(scl::csquare square) {
         }
         else if ((square.x-square.side/2) < 0 || 
                  (square.x+square.side/2) > scl::g_max-1) {
-            std::cout << error_squarecell::print_outside(square.x, square.side,
-                                                         scl::g_max-1);
+            if(print) std::cout << print_outside(square.x, square.side, scl::g_max-1);
             return false;
         }
         else if ((square.y-square.side/2) < 0 || 
                  (square.y+square.side/2) > scl::g_max-1) {
-            std::cout << error_squarecell::print_outside(square.y, square.side,
-                                                         scl::g_max-1);
+            if(print) std::cout << print_outside(square.y, square.side, scl::g_max-1);
             return false;
         }
     }
     else {
         if ((square.x+square.side-1) > scl::g_max-1) {
-            std::cout << error_squarecell::print_outside(square.x, square.side,
-                                                         scl::g_max-1);
+            if(print) std::cout << print_outside(square.x, square.side, scl::g_max-1);
             return false;
         }
         else if ((square.y+square.side-1) > scl::g_max-1) {
-            std::cout << error_squarecell::print_outside(square.y, square.side,
-                                                         scl::g_max-1);
+            if(print) std::cout << print_outside(square.y, square.side, scl::g_max-1);
             return false;
         }
     }

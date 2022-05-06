@@ -21,6 +21,11 @@ namespace scl {
     constexpr short unsigned g_dim = 7;
     constexpr short unsigned g_max = 128;
 
+    /**
+     * @brief flag to print no error message
+     */
+    constexpr bool NOERR = false;
+
 
     /**
      * @brief General type square
@@ -67,7 +72,7 @@ namespace scl {
      * 
      * @note function throws error if square is not valid
      */
-    bool square_validation(csquare square);
+    bool square_validation(csquare square, bool print = true);
 
     /**
      * @brief Checks if a square superposes with an existing square in the grid
