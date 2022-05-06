@@ -13,11 +13,11 @@ SRC_DIR := src
 # get files
 SRC := $(notdir $(shell find . -maxdepth 1 -name "*.cc" ))
 BASE := $(basename $(SRC))
-OBJ := $(addsuffix .o, $(BASE))
+OBJ := $(BASE:%=$(OBJ_DIR)/%.o)
 TST := $(shell find $(TST_DIR) -name "*.cc")
 BASE_TST := $(notdir $(basename $(TST)))
-TARGET_OBJ := projet.o
 TST_OBJ := $(addprefix $(TST_DIR)/,$(BASE_TST:%=$(OBJ_DIR)/%.o))
+TARGET_OBJ := $(OBJ_DIR)/projet.o
 TARGET_TST_OBJ := $(TST_DIR)/$(OBJ_DIR)/test.o
 
 # define target
@@ -28,11 +28,12 @@ TARGET := ./$(TARGET_NAME)
 TARGET_TST := test.out
 
 # Build target
-$(TARGET): $(TARGET_OBJ) $(OBJ)
+$(TARGET): $(OBJ) $(TARGET_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)
 
 # compile object files
-%.o: %.cc %.h
+$(OBJ_DIR)/%.o: %.cc %.h
+	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXOBJFLAGS) $< -o $@ $(LINKING)
 
 # build tests
