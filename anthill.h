@@ -73,6 +73,15 @@ private:
      */
     std::vector<Ant*> ants;
 
+    /**
+     * @brief set a new anthill position
+     * 
+     * @param position new position
+     * @param hills the other hills existing
+     * @return true if the position could be changed
+     */
+    bool update_position(scl::csquare new_position, std::vector<Anthill*>& hills);
+
 public:
     /**
      * @brief Get the position of the anthill
@@ -149,6 +158,16 @@ public:
      * @return std::string 
      */
     std::string get_info();
+
+    /**
+     * @brief verifies if the anthill can grow and updates its size if possible
+     * @remark sets anthill_state to constrained if no growth possible
+     * 
+     * @param hills the other existing anthills
+     * 
+     * @return true if it could grow
+     */
+    bool check_growth(std::vector<Anthill*>& hills);
 
     /**
      * @brief Construct a new Anthill object

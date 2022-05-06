@@ -72,6 +72,9 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
 
 bool Simulation::update(){
     create_nutrition();
+    for(auto& hill : this->anthill){
+        hill->check_growth(anthill);
+    }
     return true;
 }
 
