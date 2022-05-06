@@ -181,7 +181,7 @@ bool Anthill::check_growth(std::vector<Anthill*>& hills){
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
     //check top right corner expansion
     scl::square new_position = this->position;
-    //new_size = new_position.side - 1; //grow one field
+    new_size = new_position.side - 1; //grow one field
     new_position.side = new_size + 2;
     if(this->update_position(new_position, hills)) return true;
     //check botton right corner expansion
@@ -205,7 +205,7 @@ bool Anthill::check_growth(std::vector<Anthill*>& hills){
 }
 
 bool Anthill::update_position(scl::csquare new_position, std::vector<Anthill*>& hills){
-    if(!scl::square_validation(new_position)) return false;
+    if(!scl::square_validation(new_position, scl::NOERR)) return false;
     unsigned superpos_count = 0;
     for(const auto& hill : hills){
         if(scl::square_superposition(new_position, hill->get_position()))
