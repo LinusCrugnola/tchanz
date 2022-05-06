@@ -74,6 +74,15 @@ bool Simulation::update(){
     create_nutrition();
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
+        // update generator 
+        if(!hill->anthill_dead()){
+            //hill->ants_action();
+        }
+    }
+    for(auto& hill : this->anthill){
+        // if end of klan
+        // kill ants
+        // kill hills
     }
     return true;
 }

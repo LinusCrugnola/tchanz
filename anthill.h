@@ -91,6 +91,13 @@ public:
     scl::square get_position() const {return position;}
 
     /**
+     * @brief check if anthill is dead
+     * 
+     * @return true if anthill is dead
+     */
+    bool anthill_dead() const {return end_of_klan;}
+
+    /**
      * @brief highlight anthill (fill with transparent color)
      */
     void set_highlight();
