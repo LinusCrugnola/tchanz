@@ -91,6 +91,20 @@ public:
     scl::square get_position() const {return position;}
 
     /**
+     * @brief actions the generator ant
+     * 
+     * @return true if generator died
+     */
+    bool generator_action() const;
+
+    /**
+     * @brief actions the other ants (not generator)
+     * 
+     * @return true if no errors
+     */
+    bool ants_action() const;
+
+    /**
      * @brief check if anthill is dead
      * 
      * @return true if anthill is dead

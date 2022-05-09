@@ -68,6 +68,18 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
+bool Anthill::generator_action() const {
+    this->ants[0]->action(this->position);
+    return true; 
+}
+
+bool Anthill::ants_action() const{
+    for(unsigned i = 0; i < this->ants.size(); i++){
+        this->ants[i]->action(this->position);
+    }
+    return true;
+}
+
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 
                              Nutrition* nutrition) {
     enum Ant_states { collector, defensor, predator, finale };
