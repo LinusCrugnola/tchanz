@@ -20,7 +20,7 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
 
 bool Collector::action(scl::csquare hill_pos){
     //example print food data:
-    std::cout << this->nutrition->get_filedata() << std::endl;
+    //std::cout << this->nutrition->get_filedata() << std::endl;
     return true;
 }
 
