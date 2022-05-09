@@ -19,6 +19,8 @@
 #include "squarecell.h"
 #include "message.h"
 
+std::default_random_engine Simulation::rand_engine;
+
 unsigned Simulation::get_nbF(){
     return this->food.get_nbF();
 }
@@ -94,11 +96,11 @@ bool Simulation::update(){
 }
 
 void Simulation::create_nutrition(){
-    if(this->rand_bool(*rand_engine)){
+    if(this->rand_bool(rand_engine)){
         for(unsigned i = 0; i < max_food_trial; i++){
             bool overlap = false;
-            unsigned x = this->rand_int(*rand_engine);
-            unsigned y = this->rand_int(*rand_engine);
+            unsigned x = this->rand_int(rand_engine);
+            unsigned y = this->rand_int(rand_engine);
             for(const auto& hill : this->anthill){
                 if(scl::square_superposition(hill->get_position(), {x, y, 1, 1}))
                     overlap = true;
@@ -263,8 +265,7 @@ unsigned Simulation::get_dimension(){
     return scl::g_max;
 }
 
-Simulation::Simulation(std::default_random_engine* engine) : food(), 
-    rand_engine(engine), rand_bool(food_rate), rand_int(1, scl::g_max-2) {};
+Simulation::Simulation() : food(), rand_bool(food_rate), rand_int(1, scl::g_max-2) {};
 
 Simulation::~Simulation(){
     // free all the memory

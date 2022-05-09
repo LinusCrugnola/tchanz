@@ -36,7 +36,7 @@ private:
     /**
      * @brief random number generation objects
      */
-    std::default_random_engine* rand_engine;
+    static std::default_random_engine rand_engine;
     std::bernoulli_distribution rand_bool;
     std::uniform_int_distribution<unsigned> rand_int;
 
@@ -126,7 +126,7 @@ public:
      * 
      * @param engine pointer to the random engine
      */
-    Simulation(std::default_random_engine* engine);
+    Simulation();
 
     /**
      * @brief Destroy the Simulation object
