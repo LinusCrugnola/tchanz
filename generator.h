@@ -86,7 +86,7 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      */
-    Generator(scl::csquare position);
+    Generator(scl::csquare position, double total_food);
 };
 
 #endif /* GENERATOR_H */

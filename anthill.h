@@ -35,11 +35,6 @@ private:
     scl::square position;
 
     /**
-     * @brief total food stocked in the hill
-     */
-    // TODO:delete: double total_food;
-
-    /**
      * @brief number of collector, defensor and predator ants belonging to the hill
      */
     unsigned nbC, nbD, nbP;
