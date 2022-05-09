@@ -15,6 +15,7 @@
 #include "squarecell.h"
 #include "constantes.h"
 #include "ant.h"
+#include "nutrition.h"
 
 class Ant;
 
@@ -36,6 +37,11 @@ private:
      * @remark empty => no food, loaded => carrying a food item
      */
     Etat_collector food_state;
+
+    /**
+     * @brief pointer on the nutrition object stored in simulation
+     */
+    Nutrition* nutrition;
 
 public:
     /**
@@ -65,7 +71,7 @@ public:
      * 
      * @return pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(std::istringstream& data);
+    static Ant* data_validation(std::istringstream& data, Nutrition* nutrition);
 
     /**
      * @brief get the configfile data of a collector
@@ -81,7 +87,8 @@ public:
      * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
      */
-    Collector(scl::csquare position, unsigned age, Etat_collector food);
+    Collector(scl::csquare position, unsigned age, Etat_collector food, 
+              Nutrition* nutrition);
 };
 
 #endif /* COLLECTOR_H */

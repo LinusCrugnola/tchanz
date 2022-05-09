@@ -187,7 +187,7 @@ bool Simulation::handle_line(const std::string& line) {
             success = false;
             break;
         case ant:
-            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1)){
+            if(!this->anthill[i-1]->Anthill::ant_validation(data, i-1, &this->food)){
                 success = false;
                 break;
             }
@@ -195,7 +195,7 @@ bool Simulation::handle_line(const std::string& line) {
             if (j >= total_ants){
                 state = i >= total ? finale : anthill;
                 //rerun for state finale
-                this->anthill[i-1]->Anthill::ant_validation(data, i-1);
+                this->anthill[i-1]->Anthill::ant_validation(data, i-1, nullptr);
             }
             break;
         case finale:

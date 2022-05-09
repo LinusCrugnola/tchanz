@@ -68,7 +68,8 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
+bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 
+                             Nutrition* nutrition) {
     enum Ant_states { collector, defensor, predator, finale };
     static unsigned i = 0, total = 0;
     static Ant_states state = collector;
@@ -85,7 +86,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home) {
 
     switch (state) {
         case collector:
-            new_ant = Collector::data_validation(data);
+            new_ant = Collector::data_validation(data, nutrition);
             if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;

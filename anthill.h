@@ -150,7 +150,8 @@ public:
      * 
      * @result if ant is valid, it is added to ants attribute of the anthill
      */
-    bool ant_validation(std::istringstream& data, cunsigned home);
+    bool ant_validation(std::istringstream& data, cunsigned home, 
+                        Nutrition* nutrition);
 
     /**
      * @brief Get the configfile data of the hill and its ants

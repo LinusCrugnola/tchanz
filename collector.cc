@@ -12,12 +12,15 @@
 
 #include "message.h"
 
-Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_state)
-    : Ant(position), age(age), food_state(food_state) {
+Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_state, 
+                     Nutrition* nutrition)
+    : Ant(position), age(age), food_state(food_state), nutrition(nutrition) {
     scl::square_add(position);
 }
 
 bool Collector::action(scl::csquare hill_pos){
+    //example print food data:
+    std::cout << this->nutrition->get_filedata() << std::endl;
     return true;
 }
 
@@ -31,7 +34,7 @@ bool Collector::draw(graphic::color color) {
     return error;
 }
 
-Ant* Collector::data_validation(std::istringstream& data) {
+Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) {
     Ant* collector = nullptr;
     scl::square position = {0, 0, sizeC, 1};
     unsigned age;
@@ -50,7 +53,7 @@ Ant* Collector::data_validation(std::istringstream& data) {
         return nullptr;
     }
 
-    collector = new Collector(position, age, food_state);
+    collector = new Collector(position, age, food_state, nutrition);
     return collector;
 }
 
