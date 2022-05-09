@@ -179,9 +179,10 @@ std::string Anthill::get_filedata(unsigned home) {
 }
 
 std::string Anthill::get_info(){
-    unsigned decimal_part = this->total_food*100 - int(this->total_food)*100;
-    return "Total Food: " + std::to_string(int(this->total_food)) + "." +
-           (decimal_part == 0 ? "00" : std::to_string(decimal_part)) + "\n\n" +
+    unsigned decimal_part = this->ants[0]->get_total_food()*100
+                          - int(this->ants[0]->get_total_food())*100;
+    return "Total Food: " + std::to_string(int(this->ants[0]->get_total_food())) + 
+           "." + (decimal_part == 0 ? "00" : std::to_string(decimal_part)) + "\n\n" +
            "nbC: " + std::to_string(this->nbC) + "\n" +
            "nbD: " + std::to_string(this->nbD) + "\n" +
            "nbP: " + std::to_string(this->nbP) + 

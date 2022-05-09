@@ -32,7 +32,7 @@ bool Generator::draw(graphic::color color) {
 
 Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
                                 scl::csquare anthill_position,
-                                const unsigned& home) {
+                                const unsigned& home, unsigned total_food) {
     Ant* generator = nullptr;
     scl::square position = {xg, yg, sizeG, 1};
 
