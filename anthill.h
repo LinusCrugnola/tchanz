@@ -37,7 +37,7 @@ private:
     /**
      * @brief total food stocked in the hill
      */
-    double total_food;
+    // TODO:delete: double total_food;
 
     /**
      * @brief number of collector, defensor and predator ants belonging to the hill
@@ -195,7 +195,6 @@ public:
      * @brief Construct a new Anthill object
      * 
      * @param position 2D coordinates (center) and side length
-     * @param total_food 
      * @param nbC number of collector ants
      * @param nbD number of defensor ants
      * @param nbP number of predator ants
@@ -203,8 +202,7 @@ public:
      * @param yg y coordinate of generator
      * @param home number of hill (starts at 0)
      */
-    Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-            cunsigned nbP);
+    Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP);
 
     /**
      * @brief Destroy the Anthill object

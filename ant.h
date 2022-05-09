@@ -54,6 +54,14 @@ public:
     virtual std::string get_filedata() = 0;
 
     /**
+     * @brief Get the total food
+     * @remark only implemented for generator ant, for other ants it returns 0
+     * 
+     * @return unsigned int 
+     */
+    virtual unsigned get_total_food() const { return 0; }
+
+    /**
      * @brief draw the ant on the gui canvas
      * 
      * @param color specifies the color of the ant (parent color)

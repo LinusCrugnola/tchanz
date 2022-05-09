@@ -13,10 +13,9 @@
 
 #include "message.h"
 
-Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
-                 cunsigned nbD, cunsigned nbP)
-    : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP), 
-      anthill_state(FREE), end_of_klan(false), highlight(false) {
+Anthill::Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP)
+    : position(position), nbC(nbC), nbD(nbD), nbP(nbP), anthill_state(FREE), 
+      end_of_klan(false), highlight(false) {
     this->color = scl::get_new_color();
 }
 
@@ -53,9 +52,10 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
         }
     }
 
-    anthill = new Anthill(position, total_food, nbC, nbD, nbP);
+    anthill = new Anthill(position, nbC, nbD, nbP);
 
-    Ant* new_generator = Generator::data_validation(xg, yg, position, home);
+    Ant* new_generator = Generator::data_validation(xg, yg, position, home, 
+                                                    total_food);
     if (new_generator != nullptr)
         anthill->ants.push_back(new_generator);
     else
@@ -158,7 +158,7 @@ std::string Anthill::get_filedata(unsigned home) {
     output +=  "\t" +  std::to_string(this->position.x) 
               + " " +  std::to_string(this->position.y) 
               + " " +  std::to_string(this->position.side) + " " + gen_dat
-              + " " +  std::to_string((int) this->total_food) 
+              + " " /*+  std::to_string((int) this->ants[0]->get_filedata()) TODO: */
               + " " +  std::to_string(this->nbC) + " " +  std::to_string(this->nbD)
               + " " +  std::to_string(this->nbP);
     output += " # anthill #" +  std::to_string(home) + "\n";

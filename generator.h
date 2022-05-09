@@ -57,7 +57,7 @@ public:
      * 
      * @return unsigned
      */
-    unsigned get_food(){return total_food;}
+    unsigned get_total_food() const override {return this->total_food;}
 
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 
