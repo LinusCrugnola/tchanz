@@ -158,7 +158,7 @@ std::string Anthill::get_filedata(unsigned home) {
     output +=  "\t" +  std::to_string(this->position.x) 
               + " " +  std::to_string(this->position.y) 
               + " " +  std::to_string(this->position.side) + " " + gen_dat
-              + " " /*+  std::to_string((int) this->ants[0]->get_filedata()) TODO: */
+              + " " +  std::to_string((int) this->ants[0]->get_total_food())
               + " " +  std::to_string(this->nbC) + " " +  std::to_string(this->nbD)
               + " " +  std::to_string(this->nbP);
     output += " # anthill #" +  std::to_string(home) + "\n";
