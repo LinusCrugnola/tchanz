@@ -17,6 +17,10 @@ Defensor::Defensor(scl::csquare position, unsigned age)
     scl::square_add(position);
 }
 
+bool Defensor::action(scl::csquare hill_pos){
+    return true;
+}
+
 bool Defensor::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::cross, color);
 }

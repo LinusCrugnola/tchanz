@@ -39,6 +39,14 @@ public:
     Ant(scl::csquare position);
 
     /**
+     * @brief action of the ant (move)
+     * 
+     * @param hill_pos position of the hill
+     * @return true if no errors
+     */
+    virtual bool action(scl::csquare hill_pos) = 0;
+
+    /**
      * @brief Get the configfile data of an ant object
      * 
      * @return std::string 

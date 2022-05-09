@@ -27,6 +27,14 @@ class Ant;
 class Generator : public Ant {
 public:
     /**
+     * @brief move the generator ant
+     * 
+     * @param hill_pos 
+     * @return true if no errors
+     */
+    virtual bool action(scl::csquare hill_pos) override;
+
+    /**
      * @brief draw the generator ant
      * 
      * @remark draws a filled square

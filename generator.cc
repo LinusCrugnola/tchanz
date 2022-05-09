@@ -17,6 +17,10 @@ Generator::Generator(scl::csquare position)
     scl::square_add(position);
 }
 
+bool Generator::action(scl::csquare hill_pos){
+    return true;
+}
+
 bool Generator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }

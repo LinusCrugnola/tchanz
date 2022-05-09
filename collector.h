@@ -39,6 +39,14 @@ private:
 
 public:
     /**
+     * @brief move the collector ant
+     * 
+     * @param hill_pos 
+     * @return true if no errors
+     */
+    virtual bool action(scl::csquare hill_pos) override;
+
+    /**
      * @brief draw the collector ant
      * 
      * @remark draws a square with diagonals

@@ -16,6 +16,9 @@ Predator::Predator(scl::csquare position, unsigned age)
     : Ant(position), age(age) {
     scl::square_add(position);
 }
+bool Predator::action(scl::csquare hill_pos){
+    return true;
+}
 
 bool Predator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);

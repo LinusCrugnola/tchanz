@@ -33,6 +33,14 @@ private:
 
 public:
     /**
+     * @brief move the defensor ant
+     * 
+     * @param hill_pos 
+     * @return true if no errors
+     */
+    virtual bool action(scl::csquare hill_pos) override;
+
+    /**
      * @brief draw the defensor ant
      * 
      * @remark draws a square with a cross inside

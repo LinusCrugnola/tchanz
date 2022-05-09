@@ -17,6 +17,10 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
     scl::square_add(position);
 }
 
+bool Collector::action(scl::csquare hill_pos){
+    return true;
+}
+
 bool Collector::draw(graphic::color color) {
     bool error = false;
     error = scl::square_draw(this->position, scl::diagonal, color);

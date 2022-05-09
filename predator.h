@@ -34,6 +34,14 @@ private:
 
 public:
     /**
+     * @brief move the predator ant
+     * 
+     * @param hill_pos 
+     * @return true if no errors
+     */
+    virtual bool action(scl::csquare hill_pos) override;
+
+    /**
      * @brief draw the predator ant
      * 
      * @remark draws a small square 
