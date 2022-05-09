@@ -18,6 +18,11 @@ Generator::Generator(scl::csquare position)
 }
 
 bool Generator::action(scl::csquare hill_pos){
+    //check position
+    if(scl::square_contains(hill_pos, this->position)){
+        this->end_of_life = true;
+        return false;
+    }
     return true;
 }
 

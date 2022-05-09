@@ -25,6 +25,13 @@ class Ant;
  * @note Each anthill has a Generator that stays inside of the hill
  */
 class Generator : public Ant {
+private:
+    /**
+     * @brief total food of the clan
+     * 
+     * TODO: change this from hill
+     */
+    double total_food;
 public:
     /**
      * @brief move the generator ant
@@ -44,6 +51,13 @@ public:
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
+
+    /**
+     * @brief Get the total food
+     * 
+     * @return unsigned
+     */
+    unsigned get_food(){return total_food;}
 
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 
