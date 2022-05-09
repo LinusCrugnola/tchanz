@@ -75,15 +75,21 @@ bool Simulation::update(){
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
         hill->generator_action();
-        if(!hill->anthill_dead()){
+        if(!hill->is_dead()){
             hill->ants_action();
         }
     }
     for(auto& hill : this->anthill){
-        // if end of klan
+        if(hill->is_dead()){
+            hill->~Anthill();
+            hill = nullptr;
+        }
         // kill ants
         // kill hills
     }
+    // erase all dead anthills
+    this->anthill.erase(std::remove(this->anthill.begin(), this->anthill.end(), 
+                                    nullptr), this->anthill.end());
     return true;
 }
 

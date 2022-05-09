@@ -109,7 +109,7 @@ public:
      * 
      * @return true if anthill is dead
      */
-    bool anthill_dead() const {return end_of_klan;}
+    bool is_dead() const {return end_of_klan;}
 
     /**
      * @brief highlight anthill (fill with transparent color)
