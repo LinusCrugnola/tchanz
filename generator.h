@@ -28,8 +28,6 @@ class Generator : public Ant {
 private:
     /**
      * @brief total food of the clan
-     * 
-     * TODO: change this from hill
      */
     double total_food;
 public:
