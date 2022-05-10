@@ -30,6 +30,10 @@ bool Generator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }
 
+void Generator::add_food(unsigned food) {
+    this->total_food += food;
+}
+
 Generator* Generator::data_validation(scl::coord xg, scl::coord yg,
                                       scl::csquare anthill_position,
                                       const unsigned& home, unsigned total_food) {

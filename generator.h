@@ -58,6 +58,13 @@ public:
     unsigned get_total_food() const override {return this->total_food;}
 
     /**
+     * @brief add new food to total_food
+     * 
+     * @param food number of new food items
+     */
+    void add_food(unsigned food);
+
+    /**
      * @brief validates that an ants position is inside the hill and it doesn't 
      * intersect with another entity
      * 
