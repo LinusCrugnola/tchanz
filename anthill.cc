@@ -65,14 +65,14 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
     return anthill;
 }
 
-unsigned Anthill::anthill_get_ants() const {
+unsigned Anthill::get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-bool Anthill::generator_action(std::default_random_engine* engine) {
+bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* food) {
     // updatde food and ants in generator:
     this->generator->add_food(get_new_food());
-    this->generator->set_total_ants(anthill_get_ants());
+    this->generator->set_total_ants(get_ants());
 
     if(!this->generator->action(this->position))
         this->end_of_klan = true;
@@ -83,7 +83,7 @@ bool Anthill::generator_action(std::default_random_engine* engine) {
                                       this->generator->get_total_food()*birth_rate));
         if(b(*engine)){
             //create
-            this->create_ant();
+            this->create_ant(food);
         }
     }
     return true; 
@@ -108,7 +108,8 @@ unsigned Anthill::get_new_food() const {
     return new_nutrition;
 }
 
-bool Anthill::create_ant(){
+bool Anthill::create_ant(Nutrition* food){
+    scl::square pos = scl::get_free3x3(this->position);
     double prop_coll, prop_def;
     if(this->anthill_state == FREE){
         prop_coll = prop_free_collector;
@@ -118,17 +119,17 @@ bool Anthill::create_ant(){
         prop_coll = prop_constrained_collector;
         prop_def = prop_constrained_defensor;
     }
-    if(((double) this->nbC / this->anthill_get_ants()) < prop_coll){
+    if(((double) this->nbC / this->get_ants()) < prop_coll && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC, 
-                          new Collector(position, 0, EMPTY, nullptr)); //TODO: give nutrition
+                          new Collector(position, 0, EMPTY, food));
         return true;
     }
-    else if(((double) this->nbD / this->anthill_get_ants()) < prop_def){
+    else if(((double) this->nbD / this->get_ants()) < prop_def && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
                           new Defensor(position, 0));
         return true;
     }
-    else{
+    else if(pos.side == 1){
         this->ants.push_back(new Predator(position, 0));
         return true;
     }
@@ -226,7 +227,7 @@ std::string Anthill::get_filedata(unsigned home) {
         if(i == nbC+1) output += "\n\t# defensors:\n";
         output += this->ants[i]->get_filedata();
     }
-    for(unsigned i=nbD+nbC+1; i<=this->anthill_get_ants()-1; i++){
+    for(unsigned i=nbD+nbC+1; i<=this->get_ants()-1; i++){
         if(i == nbD+nbC+1) output += "\n\t# predators:\n";
         output += this->ants[i]->get_filedata();
     }

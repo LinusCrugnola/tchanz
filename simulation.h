@@ -106,6 +106,8 @@ public:
 
     /**
      * @brief Store the actual state of the simulation in a configfile
+     * 
+     * @param filename name of the file writing to
      */
     void write_configfile(const std::string& filename);
 
@@ -122,9 +124,7 @@ public:
     unsigned get_dimension();
 
     /**
-     * @brief Default simulation constructor
-     * 
-     * @param engine pointer to the random engine
+     * @brief Construct the Simulation object
      */
     Simulation();
 

@@ -79,6 +79,7 @@ private:
      * 
      * @param position new position
      * @param hills the other hills existing
+     * 
      * @return true if the position could be changed
      */
     bool update_position(scl::csquare new_position, std::vector<Anthill*>& hills);
@@ -94,9 +95,12 @@ public:
     /**
      * @brief actions the generator ant
      * 
+     * @param engine random engine for probability calc
+     * @param food pointer on food object
+     * 
      * @return true if generator died
      */
-    bool generator_action(std::default_random_engine* engine);
+    bool generator_action(std::default_random_engine* engine, Nutrition* food);
 
     /**
      * @brief actions the other ants (not generator)
@@ -113,11 +117,14 @@ public:
     unsigned get_new_food() const;
 
     /**
-     * @brief Create a new ant
+     * @brief Create a new ant if there is space in the anthill
+     * @remark creation probabilities in @file constants.h
+     * 
+     * @param food pointer on the nutrition object
      * 
      * @return true if ant could be created
      */
-    bool create_ant();
+    bool create_ant(Nutrition* food);
 
     /**
      * @brief check if anthill is dead
@@ -168,7 +175,7 @@ public:
     /**
      * @brief This function returns the number of ants in anthill
      */
-    unsigned anthill_get_ants() const;
+    unsigned get_ants() const;
 
     /**
      * @brief Function which verifies if an ant fits in the grid and doesn't overlap
@@ -176,6 +183,7 @@ public:
      * 
      * @param data input stream
      * @param home number of current hill (starts at 0)
+     * @param nutrition pointer on food object
      * 
      * @result if ant is valid, it is added to ants attribute of the anthill
      */
@@ -184,6 +192,8 @@ public:
 
     /**
      * @brief Get the configfile data of the hill and its ants
+     * 
+     * @param home index of the home anthill
      * 
      * @return std::string 
      */
@@ -213,9 +223,6 @@ public:
      * @param nbC number of collector ants
      * @param nbD number of defensor ants
      * @param nbP number of predator ants
-     * @param xg x coordinate of generator
-     * @param yg y coordinate of generator
-     * @param home number of hill (starts at 0)
      */
     Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP);
 

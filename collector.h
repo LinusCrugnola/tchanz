@@ -75,6 +75,7 @@ public:
      * intersect with another entity
      * 
      * @param input data stream
+     * @param nutrition pointer on the food object
      * 
      * @return pointer to new ant object, null if position is invalid
      */
@@ -93,6 +94,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
+     * @param nutrition pointer on the nutrition object
      */
     Collector(scl::csquare position, unsigned age, Etat_collector food, 
               Nutrition* nutrition);

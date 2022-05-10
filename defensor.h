@@ -55,7 +55,9 @@ public:
      * @brief validates that an ants position is inside the hill and it doesn't 
      * intersect with another entity
      * 
-     * @param input data stream, position and number of anthill
+     * @param data position and number of anthill (stream)
+     * @param anthill_position position of the hill
+     * @param home index of the home anthill
      * 
      * @return pointer to new ant object, null if position is invalid
      */

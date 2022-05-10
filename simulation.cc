@@ -76,7 +76,7 @@ bool Simulation::update(){
     create_nutrition();
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
-        hill->generator_action(&this->rand_engine);
+        hill->generator_action(&this->rand_engine, &this->food);
         if(!hill->is_dead()){
             hill->ants_action();
         }
@@ -185,7 +185,7 @@ bool Simulation::handle_line(const std::string& line) {
             new_hill = Anthill::anthill_validation(data,this->anthill,i);
             if(new_hill != nullptr){
                 this->anthill.push_back(new_hill);
-                total_ants = this->anthill[i]->Anthill::anthill_get_ants()-1;
+                total_ants = this->anthill[i]->Anthill::get_ants()-1;
                 j = 0;
                 i += 1;
                 if (total_ants == 0) state = i >= total ? finale : anthill;

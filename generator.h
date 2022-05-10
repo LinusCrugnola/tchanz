@@ -84,6 +84,7 @@ public:
      * @param yg y cooridinate of generator
      * @param anthill_position position of the parent anthill
      * @param home number of parent anthill (starts at 0)
+     * @param total_food initial quantity of foods stored in hill
      * 
      * @return pointer to new ant object, null if position is invalid
      */
@@ -102,6 +103,7 @@ public:
      * @brief Construct a new Generator object
      * 
      * @param position 2D coordinates (center) and side length
+     * @param total_food initial quantity of food stored in hill
      */
     Generator(scl::csquare position, double total_food);
 };
