@@ -69,7 +69,7 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-bool Anthill::generator_action() {
+bool Anthill::generator_action(std::default_random_engine* engine) {
     // updatde food and ants in generator:
     this->generator->add_food(get_new_food());
     this->generator->set_total_ants(anthill_get_ants());
@@ -79,7 +79,12 @@ bool Anthill::generator_action() {
     
     // generate ants:
     if(!this->end_of_klan){
-        
+        std::bernoulli_distribution b(std::min(1.0, 
+                                      this->generator->get_total_food()*birth_rate));
+        if(b(*engine)){
+            //create
+            this->create_ant();
+        }
     }
     return true; 
 }
@@ -101,6 +106,33 @@ unsigned Anthill::get_new_food() const {
         }
     }
     return new_nutrition;
+}
+
+bool Anthill::create_ant(){
+    double prop_coll, prop_def;
+    if(this->anthill_state == FREE){
+        prop_coll = prop_free_collector;
+        prop_def = prop_free_defensor;
+    }
+    else{
+        prop_coll = prop_constrained_collector;
+        prop_def = prop_constrained_defensor;
+    }
+    if(((double) this->nbC / this->anthill_get_ants()) < prop_coll){
+        this->ants.insert(this->ants.begin() + this->nbC, 
+                          new Collector(position, 0, EMPTY, nullptr)); //TODO: give nutrition
+        return true;
+    }
+    else if(((double) this->nbD / this->anthill_get_ants()) < prop_def){
+        this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
+                          new Defensor(position, 0));
+        return true;
+    }
+    else{
+        this->ants.push_back(new Predator(position, 0));
+        return true;
+    }
+    return false;
 }
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 

@@ -76,7 +76,7 @@ bool Simulation::update(){
     create_nutrition();
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
-        hill->generator_action();
+        hill->generator_action(&this->rand_engine);
         if(!hill->is_dead()){
             hill->ants_action();
         }

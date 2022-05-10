@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <random>
 
 #include "ant.h"
 #include "generator.h"
@@ -95,7 +96,7 @@ public:
      * 
      * @return true if generator died
      */
-    bool generator_action();
+    bool generator_action(std::default_random_engine* engine);
 
     /**
      * @brief actions the other ants (not generator)
@@ -110,6 +111,13 @@ public:
      * @return unsigned nuber of new foods
      */
     unsigned get_new_food() const;
+
+    /**
+     * @brief Create a new ant
+     * 
+     * @return true if ant could be created
+     */
+    bool create_ant();
 
     /**
      * @brief check if anthill is dead
