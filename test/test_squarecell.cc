@@ -130,4 +130,84 @@ void test_squarecell(){
     cout << scl::square_touch({6,4,3,1},{8,1,3,1}) << endl;
     cout << scl::square_touch({6,4,3,1},{9,1,3,1}) << endl;
     cout << scl::square_touch({6,4,3,1},{10,1,3,1}) << endl;
+    //Test get_3x3:
+    cout << "---" << endl;
+    //empty grid
+    scl::square s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({100,100,9,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+
+    s = scl::get_free3x3({10,10,5,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    scl::square_add(s);
+
+    s = scl::get_free3x3({10,10,5,0});
+    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
 }

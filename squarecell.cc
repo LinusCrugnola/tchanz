@@ -171,6 +171,23 @@ bool scl::square_touch(scl::csquare s1, scl::csquare s2) {
     else return false;
 }
 
+scl::square scl::get_free3x3(csquare space) {
+    if(space.centered) return {0, 0, 0, 0};
+    for(unsigned i = space.y + space.side - 3; i >= space.y + 2; i--){
+        for(unsigned j = space.x + 2; j < space.y + space.side - 2; j++){
+            if(!scl::square_superposition({j, i, 3, 1}))
+                return {j, i, 3, 1};
+        }
+    }
+    for(unsigned i = space.y + space.side - 2; i >= space.y + 1; i--){
+        for(unsigned j = space.x + 1; j < space.y + space.side - 1; j++){
+            if(!scl::square_superposition({j, i, 1, 1}))
+                return {j, i, 1, 1};
+        }
+    }
+    return {0, 0, 0, 0};
+}
+
 bool scl::square_add(scl::csquare square) {
     if (!scl::square_validation(square)) return false;
     if (square.centered) {
