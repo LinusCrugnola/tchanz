@@ -64,6 +64,11 @@ private:
     bool highlight;
 
     /**
+     * @brief generator ant of the hill
+     */
+    Generator* generator;
+
+    /**
      * @brief vector of ants that belong to hill
      */
     std::vector<Ant*> ants;

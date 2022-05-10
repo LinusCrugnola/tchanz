@@ -15,7 +15,7 @@
 
 Anthill::Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP)
     : position(position), nbC(nbC), nbD(nbD), nbP(nbP), anthill_state(FREE), 
-      end_of_klan(false), highlight(false) {
+      end_of_klan(false), highlight(false), generator(nullptr) {
     this->color = scl::get_new_color();
 }
 
@@ -54,10 +54,10 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
 
     anthill = new Anthill(position, nbC, nbD, nbP);
 
-    Ant* new_generator = Generator::data_validation(xg, yg, position, home, 
-                                                    total_food);
-    if (new_generator != nullptr)
-        anthill->ants.push_back(new_generator);
+    Generator* generator = Generator::data_validation(xg, yg, position, home, 
+                                                      total_food);
+    if(generator != nullptr)
+        anthill->generator = generator;
     else
         return nullptr;
 
@@ -69,7 +69,7 @@ unsigned Anthill::anthill_get_ants() const {
 }
 
 bool Anthill::generator_action() const {
-    this->ants[0]->action(this->position);
+    this->generator->action(this->position);
     return true; 
 }
 
@@ -153,12 +153,12 @@ void Anthill::delete_highlight() {
 
 std::string Anthill::get_filedata(unsigned home) {
     std::string output = {};
-    std::string gen_dat = this->ants[0]->get_filedata();
+    std::string gen_dat = this->generator->get_filedata();
     // add anthill data
     output +=  "\t" +  std::to_string(this->position.x) 
               + " " +  std::to_string(this->position.y) 
               + " " +  std::to_string(this->position.side) + " " + gen_dat
-              + " " +  std::to_string((int) this->ants[0]->get_total_food())
+              + " " +  std::to_string((int) this->generator->get_total_food())
               + " " +  std::to_string(this->nbC) + " " +  std::to_string(this->nbD)
               + " " +  std::to_string(this->nbP);
     output += " # anthill #" +  std::to_string(home) + "\n";
@@ -179,9 +179,9 @@ std::string Anthill::get_filedata(unsigned home) {
 }
 
 std::string Anthill::get_info(){
-    unsigned decimal_part = this->ants[0]->get_total_food()*100
-                          - int(this->ants[0]->get_total_food())*100;
-    return "Total Food: " + std::to_string(int(this->ants[0]->get_total_food())) + 
+    unsigned decimal_part = this->generator->get_total_food()*100
+                          - int(this->generator->get_total_food())*100;
+    return "Total Food: " + std::to_string(int(this->generator->get_total_food())) + 
            "." + (decimal_part == 0 ? "00" : std::to_string(decimal_part)) + "\n\n" +
            "nbC: " + std::to_string(this->nbC) + "\n" +
            "nbD: " + std::to_string(this->nbD) + "\n" +

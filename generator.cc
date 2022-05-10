@@ -30,10 +30,9 @@ bool Generator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }
 
-Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
-                                scl::csquare anthill_position,
-                                const unsigned& home, unsigned total_food) {
-    Ant* generator = nullptr;
+Generator* Generator::data_validation(scl::coord xg, scl::coord yg,
+                                      scl::csquare anthill_position,
+                                      const unsigned& home, unsigned total_food) {
     scl::square position = {xg, yg, sizeG, 1};
 
     if (!scl::square_validation(position)) return nullptr;
@@ -50,7 +49,7 @@ Ant* Generator::data_validation(scl::coord xg, scl::coord yg,
         return nullptr;
     }
 
-    generator = new Generator(position, total_food);
+    Generator* generator = new Generator(position, total_food);
     return generator;
 }
 

@@ -68,9 +68,9 @@ public:
      * 
      * @return pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(scl::coord xg, scl::coord yg, scl::csquare 
-                                anthill_position, const unsigned& home, 
-                                unsigned total_food);
+    static Generator* data_validation(scl::coord xg, scl::coord yg, scl::csquare 
+                                      anthill_position, const unsigned& home, 
+                                      unsigned total_food);
 
     /**
      * @brief get the configfile data of a generator
