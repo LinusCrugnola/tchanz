@@ -1,18 +1,18 @@
 #include <iostream>
-#include <gtkmm/application.h>
-#include <gtkmm/window.h>
+//#include <gtkmm/application.h>
+//#include <gtkmm/window.h>
 
-#include "gui.h"
-#include "graphic.h"
-#include "simulation.h"
+//#include "gui.h"
+//#include "graphic.h"
+//#include "simulation.h"
 #include "test/testfunctions.h"
 
 
 int main(int argc, char** argv){
     std::cout << "\n------------------------- Start tests ------------------------------" << std::endl;
-    // std::cout << "\n------------------------- Test squarecell ------------------------------" << std::endl;
-    // test_squarecell();
-    test_simulation();
+    std::cout << "\n------------------------- Test squarecell ------------------------------" << std::endl;
+    test_squarecell();
+    //test_simulation();
     // test_nutrition();
     // std::cout << "\n------------------------- Test GUI ------------------------------" << std::endl;
 

@@ -105,6 +105,13 @@ namespace scl {
     bool square_contains(csquare s1, csquare s2);
 
     /**
+     * @brief Test if the squares touch each other (no space between)
+     * 
+     * @return true if the squares touch 
+     */
+    bool square_touch(csquare s1, csquare s2);
+
+    /**
      * @brief Add a square to the grid 
      * 
      * @return false if a square is invalid or if there's a superposition 

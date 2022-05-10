@@ -15,6 +15,9 @@
 #include "simulation.h"
 #include "gui.h"
 
+#include "squarecell.h"
+using namespace std;
+
 /**
  * @brief Main module of Tchanz project (highest priority)
  */
