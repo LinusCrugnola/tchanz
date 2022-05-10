@@ -30,6 +30,11 @@ private:
      * @brief total food of the clan
      */
     double total_food;
+
+    /**
+     * @brief total ants present in hill
+     */
+    unsigned total_ants;
 public:
     /**
      * @brief move the generator ant
@@ -63,6 +68,13 @@ public:
      * @param food number of new food items
      */
     void add_food(unsigned food);
+
+    /**
+     * @brief Set the total amount of ants
+     * 
+     * @param total
+     */
+    void set_total_ants(unsigned total);
 
     /**
      * @brief validates that an ants position is inside the hill and it doesn't 
