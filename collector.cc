@@ -34,6 +34,8 @@ bool Collector::draw(graphic::color color) {
     return error;
 }
 
+bool Collector::loaded() const { return this->food_state == LOADED ? true : false; }
+
 Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) {
     Ant* collector = nullptr;
     scl::square position = {0, 0, sizeC, 1};

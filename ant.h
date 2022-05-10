@@ -54,6 +54,13 @@ public:
     virtual bool action(scl::csquare hill_pos) = 0;
 
     /**
+     * @brief returns if the ant carries a food item
+     * 
+     * @return bool
+     */
+    virtual bool loaded() const { return false; }
+
+    /**
      * @brief Get the configfile data of an ant object
      * 
      * @return std::string 

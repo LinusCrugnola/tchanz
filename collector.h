@@ -62,6 +62,13 @@ public:
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
+
+    /**
+     * @brief return if the collector is loaded
+     * 
+     * @return bool 
+     */
+    virtual bool loaded() const override;
     
     /**
      * @brief validates that an ants position is inside the grid and it doesn't 
