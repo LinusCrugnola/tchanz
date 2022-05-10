@@ -45,7 +45,7 @@ $(TST_DIR)/obj/%.o: $(TST_DIR)/%.cc
 	$(CXX) $(CXXOBJFLAGS) $< -o $@ $(LINKING)
 
 # compile root files with main()
-$(TARGET_OBJ) : projet.cc
+$(TARGET_OBJ) : projet.cpp
 	$(CXX) $(CXXOBJFLAGS) $< -o $@ $(LINKING)
 
 $(TARGET_TST_OBJ) : test.cpp
