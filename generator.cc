@@ -23,6 +23,7 @@ bool Generator::action(scl::csquare hill_pos){
         this->end_of_life = true;
         return false;
     }
+    
     return true;
 }
 
@@ -31,7 +32,7 @@ bool Generator::draw(graphic::color color) {
 }
 
 void Generator::add_food(unsigned food) {
-    this->total_food += food;
+    this->total_food += food * val_food;
 }
 
 Generator* Generator::data_validation(scl::coord xg, scl::coord yg,
