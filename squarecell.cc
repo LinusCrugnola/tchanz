@@ -165,11 +165,8 @@ bool scl::square_touch(scl::csquare s1, scl::csquare s2) {
     unsigned s2ymin = s2.centered ? s2.y-s2.side/2 : s2.y;
     unsigned s1ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side;
     unsigned s2ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s1.side;
-    if((s1xmax == s2xmin - 1 || s1xmin == s2xmax + 1) &&
-       (s1ymax >= s2ymin - 1 && s1ymin <= s2ymax - 1))
-        return true;
-    else if((s1ymax == s2ymin - 1 || s1ymin == s2ymax + 1) &&
-            (s1xmax >= s2xmin - 1 && s1xmin <= s2xmax + 1))
+    if(s2xmin <= s1xmax + 1 && s2xmax >= s1xmin - 1 &&
+       s2ymin <= s1ymax + 1 && s2ymax >= s1ymin - 1   )
         return true;
     else return false;
 }

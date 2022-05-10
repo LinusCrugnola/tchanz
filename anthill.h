@@ -105,11 +105,18 @@ public:
     bool ants_action() const;
 
     /**
+     * @brief unload all collectors that are in contact with the hill
+     * 
+     * @return unsigned nuber of new foods
+     */
+    unsigned get_new_food() const;
+
+    /**
      * @brief check if anthill is dead
      * 
      * @return true if anthill is dead
      */
-    bool is_dead() const {return end_of_klan;}
+    bool is_dead() const {return this->end_of_klan;}
 
     /**
      * @brief highlight anthill (fill with transparent color)

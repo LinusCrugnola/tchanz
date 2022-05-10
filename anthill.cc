@@ -24,6 +24,7 @@ bool Anthill::draw_hill() {
 }
 
 bool Anthill::draw_ants() {
+    this->generator->draw(this->color);
     for (const auto& ant : this->ants) {
         if (!ant->draw(this->color)) return false;
     }
@@ -69,15 +70,29 @@ unsigned Anthill::anthill_get_ants() const {
 }
 
 bool Anthill::generator_action() const {
+    //search collectors in contact:
+    this->generator->add_food(get_new_food());
     this->generator->action(this->position);
     return true; 
 }
 
-bool Anthill::ants_action() const{
+bool Anthill::ants_action() const {
     for(unsigned i = 0; i < this->ants.size(); i++){
         this->ants[i]->action(this->position);
     }
     return true;
+}
+
+unsigned Anthill::get_new_food() const {
+    unsigned new_nutrition = 0;
+    for(unsigned i = 0; i < this->nbC; i++){
+        if(scl::square_touch(this->position, this->ants[i]->get_position())){
+            if(this->ants[i]->loaded()){
+                new_nutrition++;
+            }
+        }
+    }
+    return new_nutrition;
 }
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 
@@ -234,6 +249,7 @@ bool Anthill::update_position(scl::csquare new_position, std::vector<Anthill*>& 
 
 Anthill::~Anthill() {
     // destroy all ants
+    delete this->generator;
     for (auto& ant : this->ants) {
         delete ant;
         ant = nullptr;
