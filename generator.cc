@@ -18,12 +18,16 @@ Generator::Generator(scl::csquare position, double total_food)
 }
 
 bool Generator::action(scl::csquare hill_pos){
-    //check position
+    // check position
     if(scl::square_contains(hill_pos, this->position)){
         this->end_of_life = true;
         return false;
     }
-    
+    // consume nutrition
+    if((this->total_ants * food_rate) >= total_food) 
+        return false;
+    else 
+        this->total_food -= this->total_ants * food_rate;
     return true;
 }
 

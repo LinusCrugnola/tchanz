@@ -95,7 +95,7 @@ public:
      * 
      * @return true if generator died
      */
-    bool generator_action() const;
+    bool generator_action();
 
     /**
      * @brief actions the other ants (not generator)

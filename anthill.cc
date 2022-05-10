@@ -69,10 +69,18 @@ unsigned Anthill::anthill_get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-bool Anthill::generator_action() const {
-    //search collectors in contact:
+bool Anthill::generator_action() {
+    // updatde food and ants in generator:
     this->generator->add_food(get_new_food());
-    this->generator->action(this->position);
+    this->generator->set_total_ants(anthill_get_ants());
+
+    if(!this->generator->action(this->position))
+        this->end_of_klan = true;
+    
+    // generate ants:
+    if(!this->end_of_klan){
+        
+    }
     return true; 
 }
 
