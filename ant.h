@@ -39,6 +39,13 @@ public:
     Ant(scl::csquare position);
 
     /**
+     * @brief Get the position of the ant
+     * 
+     * @return scl::square 
+     */
+    scl::square get_position() const { return this->position; }
+
+    /**
      * @brief action of the ant (move)
      * 
      * @param hill_pos position of the hill
