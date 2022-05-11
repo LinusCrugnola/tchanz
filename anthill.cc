@@ -122,15 +122,18 @@ bool Anthill::create_ant(Nutrition* food){
     if(((double) this->nbC / this->get_ants()) < prop_coll && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC, 
                           new Collector(pos, 0, EMPTY, food));
+        this->nbC++;
         return true;
     }
     else if(((double) this->nbD / this->get_ants()) < prop_def && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
                           new Defensor(pos, 0));
+        this->nbD++;
         return true;
     }
     else if(pos.side == 1){
         this->ants.push_back(new Predator(pos, 0));
+        this->nbP++;
         return true;
     }
     return false;
