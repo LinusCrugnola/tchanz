@@ -46,6 +46,13 @@ public:
     scl::square get_position() const { return this->position; }
 
     /**
+     * @brief check if ant is dead
+     * 
+     * @return true if ant is dead
+     */
+    bool is_dead() const { return this->end_of_life; }
+
+    /**
      * @brief action of the ant (move)
      * 
      * @param hill_pos position of the hill
