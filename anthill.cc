@@ -121,16 +121,16 @@ bool Anthill::create_ant(Nutrition* food){
     }
     if(((double) this->nbC / this->get_ants()) < prop_coll && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC, 
-                          new Collector(position, 0, EMPTY, food));
+                          new Collector(pos, 0, EMPTY, food));
         return true;
     }
     else if(((double) this->nbD / this->get_ants()) < prop_def && pos.side == 3){
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
-                          new Defensor(position, 0));
+                          new Defensor(pos, 0));
         return true;
     }
     else if(pos.side == 1){
-        this->ants.push_back(new Predator(position, 0));
+        this->ants.push_back(new Predator(pos, 0));
         return true;
     }
     return false;
@@ -289,6 +289,7 @@ bool Anthill::update_position(scl::csquare new_position, std::vector<Anthill*>& 
 }
 
 Anthill::~Anthill() {
+    std::cout << "Anthill died" << std::endl;
     // destroy all ants
     delete this->generator;
     for (auto& ant : this->ants) {

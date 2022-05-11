@@ -83,6 +83,7 @@ bool Simulation::update(){
     }
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
+            std::cout << "Kill hill" << std::endl; //TODO: remove
             hill->~Anthill();
             hill = nullptr;
         }
@@ -119,7 +120,7 @@ bool Simulation::draw_current_state(){
         if(!hill->draw_hill()) return false;
     }
     for(const auto& hill : this->anthill){
-        if(!hill->draw_ants()) return false;
+        if(!hill->draw_ants());
     }
     return true;
 }

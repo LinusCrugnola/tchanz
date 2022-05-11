@@ -19,7 +19,7 @@ Generator::Generator(scl::csquare position, double total_food)
 
 bool Generator::action(scl::csquare hill_pos){
     // check position
-    if(scl::square_contains(hill_pos, this->position)){
+    if(!scl::square_contains(hill_pos, this->position)){
         this->end_of_life = true;
         return false;
     }
@@ -44,9 +44,13 @@ void Generator::move(scl::csquare hill_pos) {
         new_pos.y++;
     else if (new_pos.y > yc)
         new_pos.y--;
-    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos) &&
-       scl::square_contains(hill_pos, new_pos))
+    scl::square_delete(this->position);
+    if(scl::square_validation(new_pos, scl::NOERR) && 
+       !scl::square_superposition(new_pos) &&
+       scl::square_contains(hill_pos, new_pos)){
         this->position = new_pos;
+    }
+    scl::square_add(this->position);
 }
 
 void Generator::set_total_ants(unsigned total) {
