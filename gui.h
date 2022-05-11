@@ -174,7 +174,7 @@ private:
      * 
      * @param reverse if true, display the previous hill
      */
-    void display_next_hill(bool reverse);
+    void display_next_hill(bool reverse, bool stay);
 
     /**
      * @brief reset the anthill info frame
