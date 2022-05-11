@@ -156,6 +156,50 @@ bool scl::square_contains(scl::csquare s1, scl::csquare s2) {
     return true;
 }
 
+bool scl::check_diagonal(scl::csqaure s1, scl::csquare s2)
+{
+    bool reachable = true;
+    //control of the same pair
+    if((s1.x%2 == 1) && (s2.y%2 == 1)) //coordinate of odd numbers
+    {   
+        if((s2.x%2 ==1) && (s2.y%2 == 1))
+        {
+            return reachable;
+        }
+        if((s2.x%2 == 0) && (s2.y%2 == 0))
+        {
+            return reachable;
+        }
+    }
+    else if ((s1.x%2 == 0) && (s1.y%2 == 0)) //coordinate of even numbers
+    {
+        if((s2.x%2 == 0) && (s2.y%2 == 0))
+        {
+            return reachable;
+        }
+        if((s2.x%2 == 1) && (s2.y%2 == 1))
+        {   
+            return reachable;
+        }
+    }
+    else if ((s1.x%2 == 0) && (s1.y%2 == 1)) // pair and odd numbers
+    {
+        if((s2.x%2 == 1) && (s2.y%2 == 0))
+        {
+            return reachable;
+        }
+    }
+    else if ((s1.x%2 == 1) && (s1.y%2 == 0)) // odd and pair numbers
+    {
+        if((s2.x%2 == 0) && (s2.y%2 == 1))
+        {
+            return reachable;
+        }
+    }
+    reachable = false;
+    return reachable;
+}
+
 bool scl::square_touch(scl::csquare s1, scl::csquare s2) {
     unsigned s1xmin = s1.centered ? s1.x-s1.side/2 : s1.x;
     unsigned s2xmin = s2.centered ? s2.x-s2.side/2 : s2.x;

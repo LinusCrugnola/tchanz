@@ -9,6 +9,7 @@
 #include "collector.h"
 
 #include <iostream>
+#include <math.h>
 
 #include "message.h"
 
@@ -61,4 +62,11 @@ std::string Collector::get_filedata(){
     return "\t" + std::to_string(this->position.x) + " " 
            + std::to_string(this->position.y) + " " + std::to_string(this->age) + " "
            + (this->food_state == LOADED ? "true" : "false") + "\n";
+}
+
+bool Collector::action(scl::csquare hill_pos)
+{
+    ++age;
+
+    
 }
