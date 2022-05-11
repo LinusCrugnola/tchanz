@@ -19,7 +19,7 @@
 12 124
 
 6 # nb anthill
-	100 100 19 103 103 99 3 2 1 # anthill #1
+	100 100 19 103 103 599 3 2 1 # anthill #1
 	
 	# collectors:
 	50 50 3 true
@@ -34,7 +34,7 @@
 	# predators:
 	6 80 4
 
-	0 0 12 3 3 100 2 1 1 # anthill #2
+	0 0 12 3 3 500 2 1 1 # anthill #2
 	
 	# collectors:
     6 56 2 true
@@ -46,7 +46,7 @@
 	# predators:
 	22 24 10
 
-	5 100 19 9 103 99 2 2 2 # anthill #3
+	5 100 19 9 103 599 2 2 2 # anthill #3
 	
 	# collectors:
 	5 88 3 true
@@ -60,7 +60,7 @@
 	35 80 4
     40 80 4
 
-    35 60 10 38 63 99 2 1 1 # anthill #4
+    35 60 10 38 63 599 2 1 1 # anthill #4
 	
 	# collectors:
 	43 60 3 true
@@ -72,7 +72,7 @@
 	# predators:
 	54 60 4
 
-    30 1 19 34 6 99 2 1 1 # anthill #5
+    30 1 19 34 6 599 2 1 1 # anthill #5
 	
 	# collectors:
 	46 5 3 true

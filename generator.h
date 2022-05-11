@@ -35,6 +35,15 @@ private:
      * @brief total ants present in hill
      */
     unsigned total_ants;
+
+    /**
+     * @brief move method of the generator
+     * @details moves to the middle of the hill if possible
+     * 
+     * @param hill_pos position of the anthill
+     */
+    void move(scl::csquare hill_pos);
+
 public:
     /**
      * @brief move the generator ant

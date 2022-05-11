@@ -31,6 +31,23 @@ bool Generator::action(scl::csquare hill_pos){
     return true;
 }
 
+void Generator::move(scl::csquare hill_pos) {
+    unsigned xc = hill_pos.x + hill_pos.side / 2;
+    unsigned yc = hill_pos.y +hill_pos.side / 2;
+    scl::square new_pos = this->position;
+    if (new_pos.x < xc)
+        new_pos.x++;
+    else if (new_pos.x > xc)
+        new_pos.x--;
+    if (new_pos.y < yc)
+        new_pos.y++;
+    else if (new_pos.y > yc)
+        new_pos.y--;
+    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos) &&
+       scl::square_contains(hill_pos, new_pos))
+        this->position = new_pos;
+}
+
 void Generator::set_total_ants(unsigned total) {
     this->total_ants = total;
 }

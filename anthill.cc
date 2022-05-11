@@ -74,6 +74,7 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
     this->generator->add_food(get_new_food());
     this->generator->set_total_ants(get_ants());
 
+    // consume food
     if(!this->generator->action(this->position))
         this->end_of_klan = true;
     
@@ -82,7 +83,6 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
         std::bernoulli_distribution b(std::min(1.0, 
                                       this->generator->get_total_food()*birth_rate));
         if(b(*engine)){
-            //create
             this->create_ant(food);
         }
     }
