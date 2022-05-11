@@ -86,7 +86,8 @@ public:
      * @param reset reset the info to initial state
      * @return anthill_info struct
      */
-    std::string get_next_anthill_info(bool reverse, bool reset = false);
+    std::string get_next_anthill_info(bool reverse, bool reset = false, 
+                                      bool hard = false);
 
     /**
      * @brief draw the current state of the simulation on the gui canvas

@@ -32,9 +32,10 @@ const std::string st_read =  "\n----------------- File Lecture -----------------
 const std::string st_clear = "\n----------------- Abort Lecture --------------------";
 const std::string st_init =  "\n----------------- Initialize Simulation ------------";
 
-std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
+std::string Simulation::get_next_anthill_info(bool reverse, bool reset, bool hard){
     static int index = -1;
     static bool last_highlighted = false;
+    if(hard) last_highlighted = false;
     if(last_highlighted){
         this->anthill[index]->delete_highlight();
         last_highlighted = false;
@@ -84,10 +85,11 @@ bool Simulation::update(){
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
             std::cout << "Kill hill" << std::endl; //TODO: remove
+            this->get_next_anthill_info(0,1,1);
             hill->~Anthill();
             hill = nullptr;
         }
-        hill->remove_dead_ants();
+        else hill->remove_dead_ants();
     }
     // erase all dead anthills
     this->anthill.erase(std::remove(this->anthill.begin(), this->anthill.end(), 

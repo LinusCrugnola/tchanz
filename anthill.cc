@@ -205,7 +205,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
 void Anthill::remove_dead_ants(){
     for(unsigned i = 0; i < this->ants.size(); i++){
         if(this->ants[i]->is_dead()){
-            this->ants[i]->~Ant();
+            delete this->ants[i];
             this->ants[i] = nullptr;
 
             if(i < nbC) this->nbC--;
