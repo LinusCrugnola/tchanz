@@ -28,8 +28,15 @@ private:
      * (fast existance verification)
      */
     std::vector<scl::square> foods;
-
 public:
+    /**
+     * @brief Get the nearest the nearest food element to a given collector
+     * 
+     * @param pos_collector 
+     * @return scl::square 
+     */
+    scl::square get_nearest(scl::csquare pos_collector);
+ 
     /**
      * @brief Verification if coordinates fit in the grid and if it has a distance
      * bigger than 1 from the border.

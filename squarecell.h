@@ -105,6 +105,18 @@ namespace scl {
     bool square_contains(csquare s1, csquare s2);
 
     /**
+     * @brief Test to see if two squares are on the same family of diagonals
+     * THESE TWO ENTITIES HAVE CENTERED COORDINATES
+     * THEY ARE CENTERED SQUARES!!
+     * 
+     * @param s1 
+     * @param s2 
+     * @return true 
+     * @return false 
+     */
+    bool check_diagonal(csquare s1, csquare s2);
+
+    /**
      * @brief Test if the squares touch each other (no space between)
      * 
      * @return true if the squares touch 
