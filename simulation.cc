@@ -87,8 +87,7 @@ bool Simulation::update(){
             hill->~Anthill();
             hill = nullptr;
         }
-        // kill ants
-        // kill hills
+        hill->remove_dead_ants();
     }
     // erase all dead anthills
     this->anthill.erase(std::remove(this->anthill.begin(), this->anthill.end(), 

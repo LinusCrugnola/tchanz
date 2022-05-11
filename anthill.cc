@@ -202,6 +202,21 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
     return true;
 }
 
+void Anthill::remove_dead_ants(){
+    for(unsigned i = 0; i < this->ants.size(); i++){
+        if(this->ants[i]->is_dead()){
+            this->ants[i]->~Ant();
+            this->ants[i] = nullptr;
+
+            if(i < nbC) this->nbC--;
+            else if(i < nbC + nbD) nbD--;
+            else nbP--;
+        }
+    }
+    this->ants.erase(std::remove(this->ants.begin(), this->ants.end(), nullptr), 
+                                 this->ants.end());
+}
+
 void Anthill::set_highlight() {
     this->highlight = true;
 }

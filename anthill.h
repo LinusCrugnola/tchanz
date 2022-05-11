@@ -159,6 +159,11 @@ public:
     bool draw_ants();
 
     /**
+     * @brief removes all dead ants from the hill
+     */
+    void remove_dead_ants();
+
+    /**
      * @brief Verification of an anthill's data. 
      * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
      * 
