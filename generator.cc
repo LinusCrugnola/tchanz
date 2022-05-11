@@ -23,6 +23,7 @@ bool Generator::action(scl::csquare hill_pos){
         this->end_of_life = true;
         return false;
     }
+    this->move(hill_pos);
     // consume nutrition
     if((this->total_ants * food_rate) >= total_food) 
         return false;
