@@ -18,6 +18,9 @@ Defensor::Defensor(scl::csquare position, unsigned age)
 }
 
 bool Defensor::action(scl::csquare hill_pos){
+    
+    this->age++;
+    if(age >= bug_life) this->end_of_life = true;
     return true;
 }
 
