@@ -39,7 +39,7 @@ bool Collector::draw(graphic::color color) {
 bool Collector::control_path(scl::csquare food_pos)
 {
     bool pass(true);
-    /*int vx(0), vy(0);
+    int vx(0), vy(0);
     int upper_superpositions(0), bottom_superpositions(0);
     scl::square pseudo_collector;
     vx = food_pos.x - position.x;
@@ -59,7 +59,7 @@ bool Collector::control_path(scl::csquare food_pos)
             upper_superpositions = upper_superpositions + 1;
         }
     }
-    for(int)*/
+    for(int)
 
 }
 
