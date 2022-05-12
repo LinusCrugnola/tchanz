@@ -43,6 +43,8 @@ private:
      */
     Nutrition* nutrition;
 
+    bool control_path(scl::csquare food_pos);
+
 public:
     /**
      * @brief move the collector ant
