@@ -86,6 +86,7 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
             this->create_ant(food);
         }
     }
+    //delete this->ants.back();
     return true; 
 }
 
@@ -264,12 +265,14 @@ std::string Anthill::get_info(){
 }
 
 bool Anthill::check_growth(std::vector<Anthill*>& hills){
-    if(this->anthill_state == CONSTRAINED) return false;
-    int new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
+    unsigned new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
+    if(this->anthill_state == CONSTRAINED && new_size + 2 >= this->position.side) return false;
+    else if(new_size < this->position.side){
+        this->anthill_state = FREE;
+    }
     //check top right corner expansion
     scl::square new_position = this->position;
-    //new_size = new_position.side - 1; //grow one field
     new_position.side = new_size + 2;
     if(this->update_position(new_position, hills)) return true;
     //check botton right corner expansion
