@@ -64,6 +64,7 @@ std::string Collector::get_filedata(){
            + (this->food_state == LOADED ? "true" : "false") + "\n";
 }
 
+
 bool Collector::action(scl::csquare hill_pos)
 {
     ++age;

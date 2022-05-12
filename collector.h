@@ -52,6 +52,8 @@ public:
      */
     virtual bool action(scl::csquare hill_pos) override;
 
+    void move_collector();
+
     /**
      * @brief draw the collector ant
      * 

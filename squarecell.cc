@@ -156,7 +156,7 @@ bool scl::square_contains(scl::csquare s1, scl::csquare s2) {
     return true;
 }
 
-bool scl::check_diagonal(scl::csqaure s1, scl::csquare s2)
+bool scl::check_diagonal(scl::csquare s1, scl::csquare s2)
 {
     bool reachable = true;
     //control of the same pair
