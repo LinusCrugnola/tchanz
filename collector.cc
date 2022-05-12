@@ -21,7 +21,8 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
 
 bool Collector::action(scl::csquare hill_pos){
     //example print food data:
-    std::cout << this->nutrition->get_filedata() << std::endl;
+    age++;
+    if(age >= bug_life) this->end_of_life = true;
     return true;
 }
 
@@ -33,6 +34,33 @@ bool Collector::draw(graphic::color color) {
                                   scl::rhomb, {1, 1, 1});
     }
     return error;
+}
+
+bool Collector::control_path(scl::csquare food_pos)
+{
+    bool pass(true);
+    int vx(0), vy(0);
+    int upper_superpositions(0), bottom_superpositions(0);
+    scl::square pseudo_collector;
+    vx = food_pos.x - position.x;
+    vy = food_pos.y - position.y;
+    scl::square pseudo_collector = position;
+    if(abs(vx) == abs(vy))
+    {
+        //the collector is on a direct diagonal, it's the only path it can take (abs(vx)+abs(vy))/2
+    }
+    //upper path
+    for(int i(1); i<=(abs(vx)+abs(vy))/2; i++)
+    {   
+        
+
+        if(scl::square_superposition(pseudo_collector))
+        {
+            upper_superpositions = upper_superpositions + 1;
+        }
+    }
+    for(int)
+
 }
 
 Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) {
@@ -62,12 +90,4 @@ std::string Collector::get_filedata(){
     return "\t" + std::to_string(this->position.x) + " " 
            + std::to_string(this->position.y) + " " + std::to_string(this->age) + " "
            + (this->food_state == LOADED ? "true" : "false") + "\n";
-}
-
-
-bool Collector::action(scl::csquare hill_pos)
-{
-    ++age;
-
-    
 }
