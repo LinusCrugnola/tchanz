@@ -42,7 +42,16 @@ private:
      * 
      * @param hill_pos position of the anthill
      */
-    void move(scl::csquare hill_pos);
+    bool move(scl::csquare hill_pos);
+
+    /**
+     * @brief verify if a position is valid
+     * 
+     * @param new_pos position to verify
+     * @param hill_pos position of the anthill
+     * @return true if position is valid
+     */
+    bool verify_position(scl::csquare new_pos, scl::csquare hill_pos);
 
 public:
     /**

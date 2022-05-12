@@ -19,11 +19,10 @@ Generator::Generator(scl::csquare position, double total_food)
 
 bool Generator::action(scl::csquare hill_pos){
     // check position
-    if(!scl::square_contains(hill_pos, this->position)){
+    if(!this->move(hill_pos)){
         this->end_of_life = true;
         return false;
     }
-    this->move(hill_pos);
     // consume nutrition
     if((this->total_ants * food_rate) >= total_food) 
         return false;
@@ -32,10 +31,11 @@ bool Generator::action(scl::csquare hill_pos){
     return true;
 }
 
-void Generator::move(scl::csquare hill_pos) {
+bool Generator::move(scl::csquare hill_pos) {
     unsigned xc = hill_pos.x + hill_pos.side / 2;
     unsigned yc = hill_pos.y +hill_pos.side / 2;
     scl::square new_pos = this->position;
+    bool success = false;
     if (new_pos.x < xc)
         new_pos.x++;
     else if (new_pos.x > xc)
@@ -44,13 +44,39 @@ void Generator::move(scl::csquare hill_pos) {
         new_pos.y++;
     else if (new_pos.y > yc)
         new_pos.y--;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    if(this->verify_position(this->position, hill_pos)) return true;
+    new_pos = this->position;
+    new_pos.x++;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    new_pos = this->position;
+    new_pos.x--;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    new_pos = this->position;
+    new_pos.y++;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    new_pos = this->position;
+    new_pos.y--;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    return false;
+}
+
+bool Generator::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
     scl::square_delete(this->position);
     if(scl::square_validation(new_pos, scl::NOERR) && 
        !scl::square_superposition(new_pos) &&
        scl::square_contains(hill_pos, new_pos)){
         this->position = new_pos;
+        scl::square_add(this->position);
+        return true;
     }
     scl::square_add(this->position);
+    return false;
 }
 
 void Generator::set_total_ants(unsigned total) {
