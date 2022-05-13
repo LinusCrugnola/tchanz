@@ -209,13 +209,27 @@ bool scl::square_touch(scl::csquare s1, scl::csquare s2) {
     unsigned s2ymin = s2.centered ? s2.y-s2.side/2 : s2.y;
     unsigned s1ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side;
     unsigned s2ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s1.side;
-    if((s1xmax == s2xmin - 1 || s1xmin == s2xmax + 1) &&
-       (s1ymax >= s2ymin - 1 && s1ymin <= s2ymax - 1))
-        return true;
-    else if((s1ymax == s2ymin - 1 || s1ymin == s2ymax + 1) &&
-            (s1xmax >= s2xmin - 1 && s1xmin <= s2xmax + 1))
+    if(s2xmin <= s1xmax + 1 && s2xmax >= s1xmin - 1 &&
+       s2ymin <= s1ymax + 1 && s2ymax >= s1ymin - 1   )
         return true;
     else return false;
+}
+
+scl::square scl::get_free3x3(csquare space) {
+    if(space.centered) return {0, 0, 0, 0};
+    for(unsigned i = space.y + space.side - 3; i >= space.y + 2; i--){
+        for(unsigned j = space.x + 2; j < space.x + space.side - 2; j++){
+            if(!scl::square_superposition({j, i, 3, 1}))
+                return {j, i, 3, 1};
+        }
+    }
+    for(unsigned i = space.y + space.side - 2; i >= space.y + 1; i--){
+        for(unsigned j = space.x + 1; j < space.y + space.side - 1; j++){
+            if(!scl::square_superposition({j, i, 1, 1}))
+                return {j, i, 1, 1};
+        }
+    }
+    return {0, 0, 0, 0};
 }
 
 bool scl::square_add(scl::csquare square) {

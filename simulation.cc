@@ -32,9 +32,10 @@ const std::string st_read =  "\n----------------- File Lecture -----------------
 const std::string st_clear = "\n----------------- Abort Lecture --------------------";
 const std::string st_init =  "\n----------------- Initialize Simulation ------------";
 
-std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
+std::string Simulation::get_next_anthill_info(bool reverse, bool reset, bool hard){
     static int index = -1;
     static bool last_highlighted = false;
+    if(hard) last_highlighted = false;
     if(last_highlighted){
         this->anthill[index]->delete_highlight();
         last_highlighted = false;
@@ -76,18 +77,19 @@ bool Simulation::update(){
     create_nutrition();
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
-        hill->generator_action();
+        hill->generator_action(&this->rand_engine, &this->food);
         if(!hill->is_dead()){
             hill->ants_action();
         }
     }
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
+            std::cout << "Kill hill" << std::endl; //TODO: remove
+            this->get_next_anthill_info(0,1,1);
             hill->~Anthill();
             hill = nullptr;
         }
-        // kill ants
-        // kill hills
+        else hill->remove_dead_ants();
     }
     // erase all dead anthills
     this->anthill.erase(std::remove(this->anthill.begin(), this->anthill.end(), 
@@ -119,7 +121,7 @@ bool Simulation::draw_current_state(){
         if(!hill->draw_hill()) return false;
     }
     for(const auto& hill : this->anthill){
-        if(!hill->draw_ants()) return false;
+        if(!hill->draw_ants());
     }
     return true;
 }
@@ -185,7 +187,7 @@ bool Simulation::handle_line(const std::string& line) {
             new_hill = Anthill::anthill_validation(data,this->anthill,i);
             if(new_hill != nullptr){
                 this->anthill.push_back(new_hill);
-                total_ants = this->anthill[i]->Anthill::anthill_get_ants()-1;
+                total_ants = this->anthill[i]->Anthill::get_ants()-1;
                 j = 0;
                 i += 1;
                 if (total_ants == 0) state = i >= total ? finale : anthill;

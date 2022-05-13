@@ -13,10 +13,9 @@
 
 #include "message.h"
 
-Anthill::Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, 
-                 cunsigned nbD, cunsigned nbP)
-    : position(position), total_food(total_food), nbC(nbC), nbD(nbD), nbP(nbP), 
-      anthill_state(FREE), end_of_klan(false), highlight(false) {
+Anthill::Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP)
+    : position(position), nbC(nbC), nbD(nbD), nbP(nbP), anthill_state(FREE), 
+      end_of_klan(false), highlight(false), generator(nullptr) {
     this->color = scl::get_new_color();
 }
 
@@ -25,6 +24,7 @@ bool Anthill::draw_hill() {
 }
 
 bool Anthill::draw_ants() {
+    this->generator->draw(this->color);
     for (const auto& ant : this->ants) {
         if (!ant->draw(this->color)) return false;
     }
@@ -53,31 +53,103 @@ Anthill* Anthill::anthill_validation(std::istringstream& data,
         }
     }
 
-    anthill = new Anthill(position, total_food, nbC, nbD, nbP);
+    anthill = new Anthill(position, nbC, nbD, nbP);
 
-    Ant* new_generator = Generator::data_validation(xg, yg, position, home);
-    if (new_generator != nullptr)
-        anthill->ants.push_back(new_generator);
+    Generator* generator = Generator::data_validation(xg, yg, position, home, 
+                                                      total_food);
+    if(generator != nullptr)
+        anthill->generator = generator;
     else
         return nullptr;
 
     return anthill;
 }
 
-unsigned Anthill::anthill_get_ants() const {
+unsigned Anthill::get_ants() const {
     return this->nbC + this->nbD + this->nbP + 1;
 }
 
-bool Anthill::generator_action() const {
-    this->ants[0]->action(this->position);
+bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* food) {
+    // updatde food and ants in generator:
+    this->generator->add_food(get_new_food());
+    this->generator->set_total_ants(get_ants());
+
+    // consume food
+    if(!this->generator->action(this->position))
+        this->end_of_klan = true;
+    
+    // generate ants:
+    if(!this->end_of_klan){
+        std::bernoulli_distribution b(std::min(1.0, 
+                                      this->generator->get_total_food()*birth_rate));
+        if(b(*engine)){
+            this->create_ant(food);
+        }
+    }
+    //delete this->ants.back();
     return true; 
 }
 
-bool Anthill::ants_action() const{
+bool Anthill::ants_action() const {
     for(unsigned i = 0; i < this->ants.size(); i++){
         this->ants[i]->action(this->position);
     }
     return true;
+}
+
+unsigned Anthill::get_new_food() const {
+    unsigned new_nutrition = 0;
+    for(unsigned i = 0; i < this->nbC; i++){
+        if(scl::square_touch(this->position, this->ants[i]->get_position())){
+            if(this->ants[i]->loaded()){
+                new_nutrition++;
+            }
+        }
+    }
+    return new_nutrition;
+}
+
+bool Anthill::create_ant(Nutrition* food){
+    static unsigned a = 0;
+    scl::square pos = scl::get_free3x3(this->position);
+    std::cout << "spawn at: " << pos.x << " " << pos.y << " " << pos.side << std::endl;
+    if(pos.x == 32 or pos.x == 37 or pos.x == 90){
+        a++;
+    }
+    double prop_coll, prop_def;
+    if(this->anthill_state == FREE){
+        prop_coll = prop_free_collector;
+        prop_def = prop_free_defensor;
+    }
+    else{
+        prop_coll = prop_constrained_collector;
+        prop_def = prop_constrained_defensor;
+    }
+    if(((double) this->nbC / this->get_ants()) < prop_coll){
+        if(pos.side != 3) return false;
+        std::cout << "spawn collector" << std::endl;
+        this->ants.insert(this->ants.begin() + this->nbC, 
+                          new Collector(pos, 0, EMPTY, food));
+        this->nbC++;
+        return true;
+    }
+    else if(((double) this->nbD / this->get_ants()) < prop_def){
+        if(pos.side != 3) return false;
+        std::cout << "spawn defensor" << std::endl;
+        this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
+                          new Defensor(pos, 0));
+        this->nbD++;
+        return true;
+    }
+    else{
+        pos.side = pos.side == 3 ? 1 : pos.side;
+        if(pos.side != 1) return false;
+        std::cout << "spawn predator" << std::endl;
+        this->ants.push_back(new Predator(pos, 0));
+        this->nbP++;
+        return true;
+    }
+    return false;
 }
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 
@@ -143,6 +215,21 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
     return true;
 }
 
+void Anthill::remove_dead_ants(){
+    for(unsigned i = 0; i < this->ants.size(); i++){
+        if(this->ants[i]->is_dead()){
+            delete this->ants[i];
+            this->ants[i] = nullptr;
+
+            if(i < nbC) this->nbC--;
+            else if(i < nbC + nbD) nbD--;
+            else nbP--;
+        }
+    }
+    this->ants.erase(std::remove(this->ants.begin(), this->ants.end(), nullptr), 
+                                 this->ants.end());
+}
+
 void Anthill::set_highlight() {
     this->highlight = true;
 }
@@ -153,12 +240,12 @@ void Anthill::delete_highlight() {
 
 std::string Anthill::get_filedata(unsigned home) {
     std::string output = {};
-    std::string gen_dat = this->ants[0]->get_filedata();
+    std::string gen_dat = this->generator->get_filedata();
     // add anthill data
     output +=  "\t" +  std::to_string(this->position.x) 
               + " " +  std::to_string(this->position.y) 
               + " " +  std::to_string(this->position.side) + " " + gen_dat
-              + " " +  std::to_string((int) this->total_food) 
+              + " " +  std::to_string((int) this->generator->get_total_food())
               + " " +  std::to_string(this->nbC) + " " +  std::to_string(this->nbD)
               + " " +  std::to_string(this->nbP);
     output += " # anthill #" +  std::to_string(home) + "\n";
@@ -171,7 +258,7 @@ std::string Anthill::get_filedata(unsigned home) {
         if(i == nbC+1) output += "\n\t# defensors:\n";
         output += this->ants[i]->get_filedata();
     }
-    for(unsigned i=nbD+nbC+1; i<=this->anthill_get_ants()-1; i++){
+    for(unsigned i=nbD+nbC+1; i<=this->get_ants()-1; i++){
         if(i == nbD+nbC+1) output += "\n\t# predators:\n";
         output += this->ants[i]->get_filedata();
     }
@@ -179,9 +266,9 @@ std::string Anthill::get_filedata(unsigned home) {
 }
 
 std::string Anthill::get_info(){
-    unsigned decimal_part = this->total_food*100 - int(this->total_food)*100;
-    return "Total Food: " + std::to_string(int(this->total_food)) + "." +
-           (decimal_part == 0 ? "00" : std::to_string(decimal_part)) + "\n\n" +
+    std::string food_count = std::to_string(this->generator->get_total_food());
+    unsigned pos = food_count.find(".");
+    return "Total Food: " + food_count.substr(0, pos + 3) + "\n\n" +
            "nbC: " + std::to_string(this->nbC) + "\n" +
            "nbD: " + std::to_string(this->nbD) + "\n" +
            "nbP: " + std::to_string(this->nbP) + 
@@ -189,12 +276,14 @@ std::string Anthill::get_info(){
 }
 
 bool Anthill::check_growth(std::vector<Anthill*>& hills){
-    if(this->anthill_state == CONSTRAINED) return false;
-    int new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
+    unsigned new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
+    if(this->anthill_state == CONSTRAINED && new_size + 2 >= this->position.side) return false;
+    else if(new_size < this->position.side){
+        this->anthill_state = FREE;
+    }
     //check top right corner expansion
     scl::square new_position = this->position;
-    //new_size = new_position.side - 1; //grow one field
     new_position.side = new_size + 2;
     if(this->update_position(new_position, hills)) return true;
     //check botton right corner expansion
@@ -232,7 +321,9 @@ bool Anthill::update_position(scl::csquare new_position, std::vector<Anthill*>& 
 }
 
 Anthill::~Anthill() {
+    std::cout << "Anthill died" << std::endl;
     // destroy all ants
+    delete this->generator;
     for (auto& ant : this->ants) {
         delete ant;
         ant = nullptr;

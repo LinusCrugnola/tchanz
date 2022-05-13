@@ -104,7 +104,10 @@ void Gui::set_simulation(Simulation* simulation) {
     this->simulation = simulation;
 }
 
-void Gui::display_next_hill(bool reverse = false) {
+void Gui::display_next_hill(bool reverse = false, bool stay = false) {
+    if(stay){
+        this->simulation->get_next_anthill_info(1);
+    }
     std::string info = this->simulation->get_next_anthill_info(reverse);
     this->anthill_info.set_text(info);
 }
@@ -244,6 +247,7 @@ void Gui::on_button_clicked_step() {
         
         // A call to make a single update of the simulation is expected here
         this->simulation->update();
+        display_next_hill(0,1);
         // Then a call to refresh the visualization (if any) would be done here
         this->canvas.queue_draw();
 	}    
@@ -295,6 +299,7 @@ bool Gui::on_timeout() {
 
     // A call to make a single update of the simulation is expected here
     this->simulation->update();
+    display_next_hill(0,1);
     // Then a call to refresh the visualization (if any) would be done here
     this->canvas.queue_draw();
 

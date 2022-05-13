@@ -66,12 +66,20 @@ public:
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
+
+    /**
+     * @brief return if the collector is loaded
+     * 
+     * @return bool 
+     */
+    virtual bool loaded() const override;
     
     /**
      * @brief validates that an ants position is inside the grid and it doesn't 
      * intersect with another entity
      * 
      * @param input data stream
+     * @param nutrition pointer on the food object
      * 
      * @return pointer to new ant object, null if position is invalid
      */
@@ -90,6 +98,7 @@ public:
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
+     * @param nutrition pointer on the nutrition object
      */
     Collector(scl::csquare position, unsigned age, Etat_collector food, 
               Nutrition* nutrition);

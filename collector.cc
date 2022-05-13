@@ -27,13 +27,13 @@ bool Collector::action(scl::csquare hill_pos){
 }
 
 bool Collector::draw(graphic::color color) {
-    bool error = false;
-    error = scl::square_draw(this->position, scl::diagonal, color);
+    bool no_error = true;
+    no_error = scl::square_draw(this->position, scl::diagonal, color);
     if (this->food_state == LOADED) {
-        error |= scl::square_draw({this->position.x, this->position.y, 1, 1}, 
-                                  scl::rhomb, {1, 1, 1});
+        scl::square_draw({this->position.x, this->position.y, 1, 1}, 
+                          scl::rhomb, {1, 1, 1});
     }
-    return error;
+    return no_error;
 }
 
 bool Collector::control_path(scl::csquare food_pos)
@@ -62,6 +62,8 @@ bool Collector::control_path(scl::csquare food_pos)
     for(int)*/
 
 }
+
+bool Collector::loaded() const { return this->food_state == LOADED ? true : false; }
 
 Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) {
     Ant* collector = nullptr;

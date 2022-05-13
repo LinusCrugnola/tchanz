@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <random>
 
 #include "ant.h"
 #include "generator.h"
@@ -33,11 +34,6 @@ private:
      * @brief position of the hill (square)
      */
     scl::square position;
-
-    /**
-     * @brief total food stocked in the hill
-     */
-    double total_food;
 
     /**
      * @brief number of collector, defensor and predator ants belonging to the hill
@@ -69,6 +65,11 @@ private:
     bool highlight;
 
     /**
+     * @brief generator ant of the hill
+     */
+    Generator* generator;
+
+    /**
      * @brief vector of ants that belong to hill
      */
     std::vector<Ant*> ants;
@@ -78,6 +79,7 @@ private:
      * 
      * @param position new position
      * @param hills the other hills existing
+     * 
      * @return true if the position could be changed
      */
     bool update_position(scl::csquare new_position, std::vector<Anthill*>& hills);
@@ -93,9 +95,12 @@ public:
     /**
      * @brief actions the generator ant
      * 
+     * @param engine random engine for probability calc
+     * @param food pointer on food object
+     * 
      * @return true if generator died
      */
-    bool generator_action() const;
+    bool generator_action(std::default_random_engine* engine, Nutrition* food);
 
     /**
      * @brief actions the other ants (not generator)
@@ -105,11 +110,28 @@ public:
     bool ants_action() const;
 
     /**
+     * @brief unload all collectors that are in contact with the hill
+     * 
+     * @return unsigned nuber of new foods
+     */
+    unsigned get_new_food() const;
+
+    /**
+     * @brief Create a new ant if there is space in the anthill
+     * @remark creation probabilities in @file constants.h
+     * 
+     * @param food pointer on the nutrition object
+     * 
+     * @return true if ant could be created
+     */
+    bool create_ant(Nutrition* food);
+
+    /**
      * @brief check if anthill is dead
      * 
      * @return true if anthill is dead
      */
-    bool is_dead() const {return end_of_klan;}
+    bool is_dead() const {return this->end_of_klan;}
 
     /**
      * @brief highlight anthill (fill with transparent color)
@@ -137,6 +159,11 @@ public:
     bool draw_ants();
 
     /**
+     * @brief removes all dead ants from the hill
+     */
+    void remove_dead_ants();
+
+    /**
      * @brief Verification of an anthill's data. 
      * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
      * 
@@ -153,7 +180,7 @@ public:
     /**
      * @brief This function returns the number of ants in anthill
      */
-    unsigned anthill_get_ants() const;
+    unsigned get_ants() const;
 
     /**
      * @brief Function which verifies if an ant fits in the grid and doesn't overlap
@@ -161,6 +188,7 @@ public:
      * 
      * @param data input stream
      * @param home number of current hill (starts at 0)
+     * @param nutrition pointer on food object
      * 
      * @result if ant is valid, it is added to ants attribute of the anthill
      */
@@ -169,6 +197,8 @@ public:
 
     /**
      * @brief Get the configfile data of the hill and its ants
+     * 
+     * @param home index of the home anthill
      * 
      * @return std::string 
      */
@@ -195,16 +225,11 @@ public:
      * @brief Construct a new Anthill object
      * 
      * @param position 2D coordinates (center) and side length
-     * @param total_food 
      * @param nbC number of collector ants
      * @param nbD number of defensor ants
      * @param nbP number of predator ants
-     * @param xg x coordinate of generator
-     * @param yg y coordinate of generator
-     * @param home number of hill (starts at 0)
      */
-    Anthill(scl::csquare position, cunsigned total_food, cunsigned nbC, cunsigned nbD,
-            cunsigned nbP);
+    Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP);
 
     /**
      * @brief Destroy the Anthill object

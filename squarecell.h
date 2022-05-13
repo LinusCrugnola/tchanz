@@ -124,6 +124,16 @@ namespace scl {
     bool square_touch(csquare s1, csquare s2);
 
     /**
+     * @brief Get a free 3x3 or 1x1 centered square inside a given non-centered square 
+     * 
+     * @param space given square to search
+     * 
+     * @return scl::square free  3x3 square or 1x1 square or {0,0,0,0} 
+     * if none available
+     */
+    scl::square get_free3x3(csquare space);
+
+    /**
      * @brief Add a square to the grid 
      * 
      * @return false if a square is invalid or if there's a superposition 

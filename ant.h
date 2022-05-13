@@ -39,12 +39,33 @@ public:
     Ant(scl::csquare position);
 
     /**
+     * @brief Get the position of the ant
+     * 
+     * @return scl::square 
+     */
+    scl::square get_position() const { return this->position; }
+
+    /**
+     * @brief check if ant is dead
+     * 
+     * @return true if ant is dead
+     */
+    bool is_dead() const { return this->end_of_life; }
+
+    /**
      * @brief action of the ant (move)
      * 
      * @param hill_pos position of the hill
      * @return true if no errors
      */
     virtual bool action(scl::csquare hill_pos) = 0;
+
+    /**
+     * @brief returns if the ant carries a food item
+     * 
+     * @return bool
+     */
+    virtual bool loaded() const { return false; }
 
     /**
      * @brief Get the configfile data of an ant object
