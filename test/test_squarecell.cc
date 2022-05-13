@@ -218,5 +218,5 @@ void test_squarecell(){
     scl::square_add({46,5,3,1});
     scl::print_grid();
     scl::square s = scl::get_free3x3({30,1,16,0});
-    cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
+    cout << s << endl;
 }

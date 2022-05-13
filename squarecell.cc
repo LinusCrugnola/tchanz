@@ -22,6 +22,26 @@ namespace {
                                                                       false));
 }
 
+scl::square operator+(scl::square& s, scl::cvector vec){
+    int new_x = s.x + vec.dx;
+    int new_y = s.y + vec.dy;
+    if(new_x > 0 && new_y > 0){
+        std::cout << "square domain violation" << std::endl;
+        return s;
+    }
+    else{
+        s.x = new_x;
+        s.y = new_y;
+        return s;
+    }
+}
+
+std::ostream& scl::operator<<(std::ostream& os, scl::csquare s){
+    os << "(" << s.x << "," << s.y << "), " << s.side << (s.centered ? ", c" : "");
+    return os;
+}
+
+
 bool scl::square_validation(csquare square, bool print) {
     using namespace error_squarecell;
     if (square.x < 0 || square.x > (scl::g_max-1)) {

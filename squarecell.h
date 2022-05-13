@@ -10,6 +10,7 @@
 #define SQUARECELL_H
 
 #include "graphic.h"
+#include <iostream>
 
 /**
  * @brief Squarecell library namespace: scl
@@ -26,6 +27,16 @@ namespace scl {
      */
     constexpr bool NOERR = false;
 
+    /**
+     * @brief General type vector that gives a direction
+     * 
+     * @param dx change of x direction
+     * @param dy change of y direciton
+     */
+    struct vector {
+        int dx;
+        int dy;
+    };
 
     /**
      * @brief General type square
@@ -59,11 +70,21 @@ namespace scl {
      */
     typedef const square& csquare;
 
+    /**
+     * @brief define a constant reference on vector
+     */
+    typedef const vector& cvector;
 
     /**
      * @brief define reference on coordinate
      */
     typedef const unsigned& coord;
+
+    /**
+     * @brief Operators on squares & vectors:
+     */
+    square operator+(square& s, cvector vec);
+    std::ostream& operator<<(std::ostream& os, csquare dt);
 
     /**
      * @brief Validation of a square checks if square is inside of the grid borders
