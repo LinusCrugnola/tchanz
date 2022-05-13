@@ -41,6 +41,17 @@ std::ostream& scl::operator<<(std::ostream& os, scl::csquare s){
     return os;
 }
 
+std::ostream& scl::operator<<(std::ostream& os, scl::cvector v){
+    os << "(" << v.dx << "," << v.dy << ")";
+    return os;
+}
+
+void scl::vector::rotate(){
+    int x = this->dx;
+    this->dx = this->dy;
+    this->dy = (x * (-1));
+}
+
 
 bool scl::square_validation(csquare square, bool print) {
     using namespace error_squarecell;

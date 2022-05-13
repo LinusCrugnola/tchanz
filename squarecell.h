@@ -36,6 +36,11 @@ namespace scl {
     struct vector {
         int dx;
         int dy;
+
+        /**
+         * @brief function to rotate the vector to the right
+         */
+        void rotate();
     };
 
     /**
@@ -85,6 +90,7 @@ namespace scl {
      */
     square operator+(square& s, cvector vec);
     std::ostream& operator<<(std::ostream& os, csquare dt);
+    std::ostream& operator<<(std::ostream& os, cvector v);
 
     /**
      * @brief Validation of a square checks if square is inside of the grid borders

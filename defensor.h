@@ -32,6 +32,13 @@ private:
     unsigned age;
 
     /**
+     * @brief vector to memorize the direction in which the defensor walks
+     * 
+     * @remark default is up
+     */
+    scl::vector direction = {0, 1};
+
+    /**
      * @brief verifies if a new position is valid and changes the position if true
      * 
      * @param new_pos new position

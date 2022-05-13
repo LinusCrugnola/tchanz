@@ -21,7 +21,7 @@ bool Defensor::action(scl::csquare hill_pos){
     scl::square new_pos = this->position;
     bool success = false;
     //try to go up:
-    new_pos.y++;
+    new_pos = new_pos + direction;
     success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try right

@@ -223,5 +223,14 @@ void test_squarecell(){
     scl::vector v = {1,1};
     s = s + v;
 
+    v.rotate();
+    cout << v << endl;
+    v.rotate();
+    cout << v << endl;
+    v.rotate();
+    cout << v << endl;
+    v.rotate();
+    cout << v << endl;
+
     cout << s << endl;
 }
