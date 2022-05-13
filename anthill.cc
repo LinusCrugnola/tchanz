@@ -110,7 +110,12 @@ unsigned Anthill::get_new_food() const {
 }
 
 bool Anthill::create_ant(Nutrition* food){
+    static unsigned a = 0;
     scl::square pos = scl::get_free3x3(this->position);
+    std::cout << "spawn at: " << pos.x << " " << pos.y << " " << pos.side << std::endl;
+    if(pos.x == 32 or pos.x == 37 or pos.x == 90){
+        a++;
+    }
     double prop_coll, prop_def;
     if(this->anthill_state == FREE){
         prop_coll = prop_free_collector;
@@ -120,19 +125,26 @@ bool Anthill::create_ant(Nutrition* food){
         prop_coll = prop_constrained_collector;
         prop_def = prop_constrained_defensor;
     }
-    if(((double) this->nbC / this->get_ants()) < prop_coll && pos.side == 3){
+    if(((double) this->nbC / this->get_ants()) < prop_coll){
+        if(pos.side != 3) return false;
+        std::cout << "spawn collector" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC, 
                           new Collector(pos, 0, EMPTY, food));
         this->nbC++;
         return true;
     }
-    else if(((double) this->nbD / this->get_ants()) < prop_def && pos.side == 3){
+    else if(((double) this->nbD / this->get_ants()) < prop_def){
+        if(pos.side != 3) return false;
+        std::cout << "spawn defensor" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
                           new Defensor(pos, 0));
         this->nbD++;
         return true;
     }
-    else if(pos.side == 1){
+    else{
+        pos.side = pos.side == 3 ? 1 : pos.side;
+        if(pos.side != 1) return false;
+        std::cout << "spawn predator" << std::endl;
         this->ants.push_back(new Predator(pos, 0));
         this->nbP++;
         return true;
