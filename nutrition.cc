@@ -81,12 +81,12 @@ scl::square Nutrition::get_nearest(scl::csquare pos_collector)
        if(check_diagonal(pos_collector,elem))
        {
            int vx(0), vy(0);
-           vx = elem.x - pos_collector.x; // add this->pos_collector.x ?
-           vy = elem.y - pos_collector.y; // add this->pos_collector.y ?
+           vx = elem.x - this->pos_collector.x; // add this->pos_collector.x ?
+           vy = elem.y - this->pos_collector.y; // add this->pos_collector.y ?
            distance = std::max(abs(vx),abs(vy));
            if(closest == 0)
            {
-               closest == distance;
+               closest = distance;
            }
            else if(distance < closest)
            {
