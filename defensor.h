@@ -47,6 +47,14 @@ private:
      */
     bool verify_position(scl::csquare new_pos, scl::csquare hill_pos);
 
+    /**
+     * @brief move the defensor ant
+     * 
+     * @param hill_pos position of anthill
+     * @return true if it could move without leaving the anthill
+     */
+    bool move(scl::csquare hill_pos);
+
 public:
     /**
      * @brief move the defensor ant
