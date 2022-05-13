@@ -18,11 +18,33 @@ Defensor::Defensor(scl::csquare position, unsigned age)
 }
 
 bool Defensor::action(scl::csquare hill_pos){
-    
+    scl::square new_pos = this->position;
+    bool success = false;
+    //try to go up:
+    new_pos.y++;
+    success |= this->verify_position(new_pos);
+    if(success) return true;
+    //try right
+    new_pos = this->position;
+    new_pos.x++;
+    success |= this->verify_position(new_pos);
+    if(success) return true;
+    //try down
+    new_pos = this->position;
+    new_pos.y--;
+    success |= this->verify_position(new_pos);
+    if(success) return true;
+    //try left
+    new_pos = this->position;
+    new_pos.x--;
+    success |= this->verify_position(new_pos);
+    if(success) return true;
     this->age++;
     if(age >= bug_life) this->end_of_life = true;
     return true;
 }
+
+bool verify_position(std::csquare new_pos)
 
 bool Defensor::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::cross, color);
