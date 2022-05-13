@@ -45,6 +45,10 @@ bool Defensor::action(scl::csquare hill_pos){
 }
 
 bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
+    if(scl::square_contains(hill_pos, this->position) && 
+       !scl::square_contains(hill_pos, new_pos)){
+        return true;
+    }
     scl::square_delete(this->position);
     if(scl::square_validation(new_pos, scl::NOERR) && 
        !scl::square_superposition(new_pos) &&
