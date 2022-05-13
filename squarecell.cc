@@ -22,10 +22,10 @@ namespace {
                                                                       false));
 }
 
-scl::square operator+(scl::square& s, scl::cvector vec){
+scl::square scl::operator+(scl::square& s, scl::cvector vec){
     int new_x = s.x + vec.dx;
     int new_y = s.y + vec.dy;
-    if(new_x > 0 && new_y > 0){
+    if(new_x < 0 && new_y < 0){
         std::cout << "square domain violation" << std::endl;
         return s;
     }

@@ -216,7 +216,12 @@ void test_squarecell(){
     scl::square_add({34,10,3,1});
     scl::square_add({42,5,3,1});
     scl::square_add({46,5,3,1});
-    scl::print_grid();
     scl::square s = scl::get_free3x3({30,1,16,0});
+
+    cout << s << endl;
+
+    scl::vector v = {1,1};
+    s = s + v;
+
     cout << s << endl;
 }
