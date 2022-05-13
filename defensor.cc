@@ -21,22 +21,25 @@ bool Defensor::action(scl::csquare hill_pos){
     scl::square new_pos = this->position;
     bool success = false;
     //try to go up:
-    new_pos = new_pos + direction;
+    new_pos = new_pos + this->direction;
     success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try right
     new_pos = this->position;
-    new_pos.x++;
+    this->direction.rotate();
+    new_pos = new_pos + this->direction;
     success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try down
     new_pos = this->position;
-    new_pos.y--;
+    this->direction.rotate();
+    new_pos = new_pos + this->direction;
     success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try left
     new_pos = this->position;
-    new_pos.x--;
+    this->direction.rotate();
+    new_pos = new_pos + this->direction;
     success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     this->age++;
