@@ -40,7 +40,7 @@ bool Collector::control_path(scl::csquare food_pos)
 {
     bool pass(true);
     int vx(0), vy(0);
-    int upper_superpositions(0), bottom_superpositions(0);
+    int path_1(0), path_2(0);
     scl::square pseudo_collector;
     vx = food_pos.x - position.x;
     vy = food_pos.y - position.y;
@@ -49,14 +49,13 @@ bool Collector::control_path(scl::csquare food_pos)
     {
         //the collector is on a direct diagonal, it's the only path it can take (abs(vx)+abs(vy))/2
     }
-    //upper path
+    //Path 1
     for(int i(1); i<=(abs(vx)+abs(vy))/2; i++)
     {   
-        
 
         if(scl::square_superposition(pseudo_collector))
         {
-            upper_superpositions = upper_superpositions + 1;
+            path_1 = path_1 + 1;
         }
     }
     for(int)
