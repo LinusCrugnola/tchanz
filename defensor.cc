@@ -22,29 +22,40 @@ bool Defensor::action(scl::csquare hill_pos){
     bool success = false;
     //try to go up:
     new_pos.y++;
-    success |= this->verify_position(new_pos);
+    success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try right
     new_pos = this->position;
     new_pos.x++;
-    success |= this->verify_position(new_pos);
+    success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try down
     new_pos = this->position;
     new_pos.y--;
-    success |= this->verify_position(new_pos);
+    success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     //try left
     new_pos = this->position;
     new_pos.x--;
-    success |= this->verify_position(new_pos);
+    success |= this->verify_position(new_pos, hill_pos);
     if(success) return true;
     this->age++;
     if(age >= bug_life) this->end_of_life = true;
     return true;
 }
 
-bool verify_position(std::csquare new_pos)
+bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
+    scl::square_delete(this->position);
+    if(scl::square_validation(new_pos, scl::NOERR) && 
+       !scl::square_superposition(new_pos) &&
+       scl::square_contains(hill_pos, new_pos)){
+        this->position = new_pos;
+        scl::square_add(this->position);
+        return true;
+    }
+    scl::square_add(this->position);
+    return false;
+}
 
 bool Defensor::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::cross, color);

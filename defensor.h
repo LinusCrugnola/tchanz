@@ -31,6 +31,15 @@ private:
      */
     unsigned age;
 
+    /**
+     * @brief verifies if a new position is valid and changes the position if true
+     * 
+     * @param new_pos new position
+     * @param hill_pos position of the anthill
+     * @return true if position is valid
+     */
+    bool verify_position(scl::csquare new_pos, scl::csquare hill_pos);
+
 public:
     /**
      * @brief move the defensor ant
