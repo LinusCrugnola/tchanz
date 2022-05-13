@@ -78,7 +78,7 @@ public:
      * 
      * @return unsigned
      */
-    unsigned get_total_food() const override {return this->total_food;}
+    double get_total_food() const {return this->total_food;}
 
     /**
      * @brief add new food to total_food
