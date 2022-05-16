@@ -32,17 +32,18 @@ const std::string st_read =  "\n----------------- File Lecture -----------------
 const std::string st_clear = "\n----------------- Abort Lecture --------------------";
 const std::string st_init =  "\n----------------- Initialize Simulation ------------";
 
-std::string Simulation::get_next_anthill_info(bool reverse, bool reset, bool hard){
+std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     static int index = -1;
     static bool last_highlighted = false;
-    if(hard) last_highlighted = false;
+    if(reset){
+        last_highlighted = false;
+        this->clear_highlights();
+        index = -1;
+        return "None selected          ";
+    }
     if(last_highlighted){
         this->anthill[index]->delete_highlight();
         last_highlighted = false;
-    }
-    if(reset){
-        index = -1;
-        return "None selected          ";
     }
     unsigned anthill_size = this->anthill.size();
     if(anthill_size == 0){
@@ -73,6 +74,12 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset, bool har
     return "id: " + std::to_string(index) + "\n" + this->anthill[index]->get_info();
 }
 
+void Simulation::clear_highlights(){
+    for(auto& hill : this->anthill){
+        hill->delete_highlight();
+    }
+}
+
 bool Simulation::update(){
     create_nutrition();
     for(auto& hill : this->anthill){
@@ -85,7 +92,7 @@ bool Simulation::update(){
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
             std::cout << "Kill hill" << std::endl; //TODO: remove
-            this->get_next_anthill_info(0,1,1);
+            this->get_next_anthill_info(0,1);
             hill->~Anthill();
             hill = nullptr;
         }

@@ -64,6 +64,11 @@ private:
      */
     void create_nutrition();
 
+    /**
+     * @brief set highlight to false in all hills
+     */
+    void clear_highlights();
+
 public:
     /**
      * @brief udpates the simulation (1x)
@@ -84,10 +89,9 @@ public:
      * 
      * @param reverse order of access
      * @param reset reset the info to initial state
-     * @return anthill_info struct
+     * @return std::string anthill info to display
      */
-    std::string get_next_anthill_info(bool reverse, bool reset = false, 
-                                      bool hard = false);
+    std::string get_next_anthill_info(bool reverse, bool reset = false);
 
     /**
      * @brief draw the current state of the simulation on the gui canvas
