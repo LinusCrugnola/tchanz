@@ -9,8 +9,9 @@
 #ifndef SQUARECELL_H
 #define SQUARECELL_H
 
-#include "graphic.h"
 #include <iostream>
+
+#include "graphic.h"
 
 /**
  * @brief Squarecell library namespace: scl
@@ -38,9 +39,9 @@ namespace scl {
         int dy;
 
         /**
-         * @brief function to rotate the vector to the right
+         * @brief function to rotate the vector 90° to the right
          */
-        void rotate();
+        void rotate90();
     };
 
     /**

@@ -18,33 +18,42 @@ Defensor::Defensor(scl::csquare position, unsigned age)
 }
 
 bool Defensor::action(scl::csquare hill_pos){
-    scl::square new_pos = this->position;
-    bool success = false;
-    //try to go up:
-    new_pos = new_pos + direction;
-    success |= this->verify_position(new_pos, hill_pos);
-    if(success) return true;
-    //try right
-    new_pos = this->position;
-    new_pos.x++;
-    success |= this->verify_position(new_pos, hill_pos);
-    if(success) return true;
-    //try down
-    new_pos = this->position;
-    new_pos.y--;
-    success |= this->verify_position(new_pos, hill_pos);
-    if(success) return true;
-    //try left
-    new_pos = this->position;
-    new_pos.x--;
-    success |= this->verify_position(new_pos, hill_pos);
-    if(success) return true;
+    if(!this->move(hill_pos)) this->end_of_life = true;
     this->age++;
     if(age >= bug_life) this->end_of_life = true;
     return true;
 }
 
+bool Defensor::move(scl::csquare hill_pos){
+    scl::square new_pos = this->position;
+    bool success = false;
+    //try to go up:
+    new_pos = new_pos + this->direction;
+    success |= this->verify_position(new_pos, hill_pos);
+    if(success) return true;
+    for(unsigned i = 0; i < 3; i++){
+        new_pos = this->position;
+        this->direction.rotate90();
+        new_pos = new_pos + this->direction;
+        success |= this->verify_position(new_pos, hill_pos);
+        if(success) return true;
+    }
+    return success;
+}
+
 bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
+    if(!scl::square_contains(hill_pos, this->position)){
+        scl::square new_pos = this->position;
+        scl::vector back = this->direction;
+        back.rotate90();
+        back.rotate90();
+        new_pos = new_pos + back;
+        if(scl::square_contains(hill_pos, new_pos)){
+            this->position = new_pos;
+            return true;
+        }
+        return false;
+    }
     if(scl::square_contains(hill_pos, this->position) && 
        !scl::square_contains(hill_pos, new_pos)){
         return true;

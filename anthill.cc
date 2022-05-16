@@ -278,10 +278,10 @@ std::string Anthill::get_info(){
 bool Anthill::check_growth(std::vector<Anthill*>& hills){
     unsigned new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
-    if(this->anthill_state == CONSTRAINED && new_size + 2 >= this->position.side) return false;
-    else if(new_size < this->position.side){
+    if(new_size < this->position.side){
         this->anthill_state = FREE;
     }
+    else if(this->anthill_state == CONSTRAINED) return false;
     //check top right corner expansion
     scl::square new_position = this->position;
     new_position.side = new_size + 2;
