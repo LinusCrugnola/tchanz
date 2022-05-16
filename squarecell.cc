@@ -36,6 +36,10 @@ scl::square scl::operator+(scl::square& s, scl::cvector vec){
     }
 }
 
+scl::square scl::square::operator+=(scl::cvector vec){
+    return ((*this) + vec);
+}
+
 std::ostream& scl::operator<<(std::ostream& os, scl::csquare s){
     os << "(" << s.x << "," << s.y << "), " << s.side << (s.centered ? ", c" : "");
     return os;

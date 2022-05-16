@@ -58,6 +58,8 @@ namespace scl {
         unsigned y;
         unsigned side;
         bool centered;
+
+        square operator+=(const vector& vec);
     };
 
     /**
