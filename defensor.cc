@@ -47,7 +47,7 @@ bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
         scl::vector back = this->direction;
         back.rotate90();
         back.rotate90();
-        new_pos = new_pos + back;
+        new_pos += back;
         if(scl::square_contains(hill_pos, new_pos)){
             this->position = new_pos;
             return true;
