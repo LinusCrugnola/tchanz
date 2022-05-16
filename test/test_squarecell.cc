@@ -233,4 +233,8 @@ void test_squarecell(){
     cout << v << endl;
 
     cout << s << endl;
+
+    scl::square lol = {0,0,1,1};
+    cout << lol+v << endl;
+    cout << lol+v << endl;
 }
