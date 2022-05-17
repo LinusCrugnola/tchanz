@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <math.h>
 
 #include "error_squarecell.h"
 
@@ -54,6 +55,10 @@ void scl::vector::rotate90(){
     int x = this->dx;
     this->dx = this->dy;
     this->dy = (x * (-1));
+}
+
+double scl::distance(scl::csquare s1, scl::csquare s2){
+    return sqrt(pow(((double) s1.x - s2.x), 2) + pow(((double) s1.y - s2.y), 2));
 }
 
 bool scl::square_validation(csquare square, bool print) {

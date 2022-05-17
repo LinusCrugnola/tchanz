@@ -237,4 +237,6 @@ void test_squarecell(){
     scl::square lol = {0,0,1,1};
     cout << lol+v << endl;
     cout << lol+v << endl;
+
+    cout << scl::distance({3,3,1,1}, {5,5,1,1}) << endl;
 }

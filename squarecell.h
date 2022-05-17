@@ -96,6 +96,15 @@ namespace scl {
     std::ostream& operator<<(std::ostream& os, cvector v);
 
     /**
+     * @brief get the distance between two squares
+     * 
+     * @param s1 
+     * @param s2 
+     * @return double distance
+     */
+    double distance(csquare s1, csquare s2);
+
+    /**
      * @brief Validation of a square checks if square is inside of the grid borders
      * 
      * @return true if square is valild
