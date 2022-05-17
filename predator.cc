@@ -19,7 +19,7 @@ Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
 bool Predator::action(scl::csquare hill_pos, bool free){
     this->kill_touching();
     scl::square target = this->set_target(hill_pos, free);
-    if(target != this->position){
+    if(target.x != this->position.x && target.y != this->position.y){
         this->move(target);
     }
     return true;
