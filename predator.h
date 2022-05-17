@@ -36,7 +36,21 @@ private:
      * @brief kill all ants that touch the predator
      */
     void kill_touching();
+
+    /**
+     * @brief Set the target for the predator ant
+     * 
+     * @param hill_pos position of the anthill
+     * @param free state of the anthill
+     * @return scl::square target position
+     */
     scl::square set_target(scl::square hill_pos, bool free);
+
+    /**
+     * @brief move the predator ant in the direction of the target
+     * 
+     * @param target scl::square
+     */
     void move(scl::csquare target);
 
 public:
