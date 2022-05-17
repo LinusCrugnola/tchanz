@@ -100,8 +100,9 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
+     * @param hill_index index of the parent anthill
      */
-    Defensor(scl::csquare position, unsigned age);
+    Defensor(scl::csquare position, unsigned age, unsigned hill_index);
 };
 
 #endif /* DEFENSOR_H */

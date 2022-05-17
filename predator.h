@@ -56,11 +56,12 @@ public:
      * @brief validates that an ants position is inside the grid and it doesn't 
      * intersect with another entity
      * 
-     * @param input data stream
+     * @param data input stream
+     * @param hill_index index of the parent anthill
      * 
      * @return pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(std::istringstream& data);
+    static Ant* data_validation(std::istringstream& data, unsigned hill_index);
 
     /**
      * @brief get the configfile data of a predator
@@ -74,8 +75,9 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      * @param age initial age of the ant
+     * @param hill_index index of the parent anthill
      */
-    Predator(scl::csquare position, unsigned age);
+    Predator(scl::csquare position, unsigned age, unsigned hill_index);
 };
 
 #endif /* PREDATOR_H */

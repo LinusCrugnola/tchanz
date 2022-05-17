@@ -10,14 +10,34 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "constantes.h"
 #include "message.h"
 #include "squarecell.h"
 
-Ant::Ant(scl::csquare position)
-    : position(position), end_of_life(false) {
+/**
+ * @brief table to store all predatable ants (known by predator)
+ * 
+ * @details contains all collector and predator ants of a hill with the index that the 
+ * hill obtains at creation
+ */
+namespace{
+    std::vector<std::vector<Ant*>> predatables;
+}
+
+Ant::Ant(scl::csquare position, unsigned hill_index, bool predatable = false)
+    : position(position), end_of_life(false), hill_index(hill_index) {
     scl::square_add(position);
+    if(predatable){
+        if(hill_index >= predatables.size()){
+            //std::vector<Ant*> new_fam = {this}; 
+            predatables.push_back({this});
+        }
+        else{
+            predatables[hill_index].push_back(this);
+        }
+    }
 };
 
 Ant::~Ant() {

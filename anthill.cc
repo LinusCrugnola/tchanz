@@ -13,9 +13,12 @@
 
 #include "message.h"
 
+unsigned Anthill::anthill_count = 0;
+
 Anthill::Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP)
     : position(position), nbC(nbC), nbD(nbD), nbP(nbP), anthill_state(FREE), 
-      end_of_klan(false), highlight(false), generator(nullptr) {
+      end_of_klan(false), highlight(false), generator(nullptr), 
+      index(++Anthill::anthill_count){
     this->color = scl::get_new_color();
 }
 
@@ -129,7 +132,7 @@ bool Anthill::create_ant(Nutrition* food){
         if(pos.side != 3) return false;
         std::cout << "spawn collector" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC, 
-                          new Collector(pos, 0, EMPTY, food));
+                          new Collector(pos, 0, EMPTY, food, index));
         this->nbC++;
         return true;
     }
@@ -137,7 +140,7 @@ bool Anthill::create_ant(Nutrition* food){
         if(pos.side != 3) return false;
         std::cout << "spawn defensor" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
-                          new Defensor(pos, 0));
+                          new Defensor(pos, 0, index));
         this->nbD++;
         return true;
     }
@@ -145,7 +148,7 @@ bool Anthill::create_ant(Nutrition* food){
         pos.side = pos.side == 3 ? 1 : pos.side;
         if(pos.side != 1) return false;
         std::cout << "spawn predator" << std::endl;
-        this->ants.push_back(new Predator(pos, 0));
+        this->ants.push_back(new Predator(pos, 0, index));
         this->nbP++;
         return true;
     }
@@ -170,7 +173,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
 
     switch (state) {
         case collector:
-            new_ant = Collector::data_validation(data, nutrition);
+            new_ant = Collector::data_validation(data, nutrition, home);
             if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;
@@ -181,7 +184,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
             }
             break;
         case defensor:
-            new_ant = Defensor::data_validation(data, this->position,home);
+            new_ant = Defensor::data_validation(data, this->position, home);
             if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;
@@ -192,7 +195,7 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
             }
             break;
         case predator:
-            new_ant = Predator::data_validation(data);
+            new_ant = Predator::data_validation(data, home);
             if (new_ant != nullptr) this->ants.push_back(new_ant);
             else success = false;
             i += 1;

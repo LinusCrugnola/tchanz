@@ -12,8 +12,8 @@
 
 #include "message.h"
 
-Predator::Predator(scl::csquare position, unsigned age)
-    : Ant(position), age(age) {
+Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
+    : Ant(position, hill_index, true), age(age) {
     scl::square_add(position);
 }
 bool Predator::action(scl::csquare hill_pos){
@@ -24,7 +24,7 @@ bool Predator::draw(graphic::color color) {
     return scl::square_draw(this->position, scl::uniform, color);
 }
 
-Ant* Predator::data_validation(std::istringstream& data) {
+Ant* Predator::data_validation(std::istringstream& data, unsigned hill_index) {
     Ant* predator = nullptr;
     scl::square position = {0, 0, sizeP, 1};
     unsigned age;
@@ -38,7 +38,7 @@ Ant* Predator::data_validation(std::istringstream& data) {
         return nullptr;
     }
 
-    predator = new Predator(position, age);
+    predator = new Predator(position, age, hill_index);
     return predator;
 }
 

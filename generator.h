@@ -122,8 +122,9 @@ public:
      * 
      * @param position 2D coordinates (center) and side length
      * @param total_food initial quantity of food stored in hill
+     * @param hill_index index of the parent anthill
      */
-    Generator(scl::csquare position, double total_food);
+    Generator(scl::csquare position, double total_food, unsigned hill_index);
 };
 
 #endif /* GENERATOR_H */

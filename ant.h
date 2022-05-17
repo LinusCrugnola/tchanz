@@ -30,13 +30,17 @@ protected:
      */
     bool end_of_life;
 
+    unsigned hill_index;
+
 public:
     /**
      * @brief Construct a new Ant object
      * 
      * @param position 2D coordinates (center) and side length
+     * @param hill_index index of the parent anthill
+     * @param predatable indicates if ant can be targeted by a predator ant
      */
-    Ant(scl::csquare position);
+    Ant(scl::csquare position, unsigned hill_index, bool predatable);
 
     /**
      * @brief Get the position of the ant

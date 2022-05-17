@@ -15,7 +15,8 @@
 
 Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_state, 
                      Nutrition* nutrition, unsigned hill_index)
-    : Ant(position, hill_index, true), age(age), food_state(food_state), nutrition(nutrition) {
+    : Ant(position, hill_index, true), age(age), food_state(food_state), 
+      nutrition(nutrition) {
     scl::square_add(position);
 }
 
@@ -64,7 +65,8 @@ bool Collector::draw(graphic::color color) {
 
 bool Collector::loaded() const { return this->food_state == LOADED ? true : false; }
 
-Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) {
+Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition,  
+                                unsigned hill_index) {
     Ant* collector = nullptr;
     scl::square position = {0, 0, sizeC, 1};
     unsigned age;
@@ -83,7 +85,7 @@ Ant* Collector::data_validation(std::istringstream& data, Nutrition* nutrition) 
         return nullptr;
     }
 
-    collector = new Collector(position, age, food_state, nutrition);
+    collector = new Collector(position, age, food_state, nutrition, hill_index);
     return collector;
 }
 

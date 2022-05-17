@@ -75,6 +75,12 @@ private:
     std::vector<Ant*> ants;
 
     /**
+     * @brief index of the anthill
+     */
+    static unsigned anthill_count;
+    unsigned index;
+
+    /**
      * @brief set a new anthill position
      * 
      * @param position new position

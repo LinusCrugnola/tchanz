@@ -12,8 +12,8 @@
 
 #include "message.h"
 
-Defensor::Defensor(scl::csquare position, unsigned age)
-    : Ant(position), age(age) {
+Defensor::Defensor(scl::csquare position, unsigned age, unsigned hill_index)
+    : Ant(position, hill_index, false), age(age) {
     scl::square_add(position);
 }
 
@@ -97,7 +97,7 @@ Ant* Defensor::data_validation(std::istringstream& data,
         return nullptr;
     }
 
-    defensor = new Defensor(position, age);
+    defensor = new Defensor(position, age, home);
     return defensor;
 }
 

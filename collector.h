@@ -80,10 +80,12 @@ public:
      * 
      * @param input data stream
      * @param nutrition pointer on the food object
+     * @param hill_index index of the parent anthill
      * 
      * @return pointer to new ant object, null if position is invalid
      */
-    static Ant* data_validation(std::istringstream& data, Nutrition* nutrition);
+    static Ant* data_validation(std::istringstream& data, Nutrition* nutrition, 
+                                unsigned hill_index);
 
     /**
      * @brief get the configfile data of a collector
@@ -99,9 +101,10 @@ public:
      * @param age initial age of the ant
      * @param food a collector can initially be empty or loaded
      * @param nutrition pointer on the nutrition object
+     * @param hill_index index of the parent anthill
      */
     Collector(scl::csquare position, unsigned age, Etat_collector food, 
-              Nutrition* nutrition);
+              Nutrition* nutrition, unsigned hill_index);
 };
 
 #endif /* COLLECTOR_H */

@@ -12,8 +12,8 @@
 
 #include "message.h"
 
-Generator::Generator(scl::csquare position, double total_food)
-    : Ant(position), total_food(total_food) {
+Generator::Generator(scl::csquare position, double total_food, unsigned hill_index)
+    : Ant(position, hill_index, false), total_food(total_food) {
     scl::square_add(position);
 }
 
@@ -110,7 +110,7 @@ Generator* Generator::data_validation(scl::coord xg, scl::coord yg,
         return nullptr;
     }
 
-    Generator* generator = new Generator(position, total_food);
+    Generator* generator = new Generator(position, total_food, home);
     return generator;
 }
 
