@@ -71,32 +71,32 @@ std::string Nutrition::get_filedata() {
     return output;
 }
 
-scl::square Nutrition::get_nearest(scl::csquare pos_collector)
-{
-    unsigned int distance(0);
-    unsigned int closest(0);
-    scl::square food_target;
-    for (const auto& elem : this->foods)
-    {
-       if(check_diagonal(pos_collector,elem))
-       {
-           int vx(0), vy(0);
-           vx = elem.x - this->pos_collector.x; // add this->pos_collector.x ?
-           vy = elem.y - this->pos_collector.y; // add this->pos_collector.y ?
-           distance = std::max(abs(vx),abs(vy));
-           if(closest == 0)
-           {
-               closest = distance;
-           }
-           else if(distance < closest)
-           {
-               closest = distance;
-               food_target = elem;
-           }
-       }
-    }
-    return food_target;
-}
+// scl::square Nutrition::get_nearest(scl::csquare pos_collector)
+// {
+//     unsigned int distance(0);
+//     unsigned int closest(0);
+//     scl::square food_target;
+//     for (const auto& elem : this->foods)
+//     {
+//        if(check_diagonal(pos_collector,elem))
+//        {
+//            int vx(0), vy(0);
+//            vx = elem.x - pos_collector.x; // add this->pos_collector.x ?
+//            vy = elem.y - pos_collector.y; // add this->pos_collector.y ?
+//            distance = std::max(abs(vx),abs(vy));
+//            if(closest == 0)
+//            {
+//                closest = distance;
+//            }
+//            else if(distance < closest)
+//            {
+//                closest = distance;
+//                food_target = elem;
+//            }
+//        }
+//     }
+//     return food_target;
+// }
 
 void Nutrition::clear() {
     for (auto elem : foods) {

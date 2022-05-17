@@ -43,7 +43,7 @@ private:
      */
     Nutrition* nutrition;
 
-    bool control_path(scl::csquare food_pos);
+    //bool control_path(scl::csquare food_pos);
 
 public:
     /**
