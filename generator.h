@@ -60,7 +60,7 @@ public:
      * @param hill_pos 
      * @return true if no errors
      */
-    virtual bool action(scl::csquare hill_pos) override;
+    virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the generator ant

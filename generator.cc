@@ -17,7 +17,7 @@ Generator::Generator(scl::csquare position, double total_food, unsigned hill_ind
     scl::square_add(position);
 }
 
-bool Generator::action(scl::csquare hill_pos){
+bool Generator::action(scl::csquare hill_pos, bool free){
     // check position
     if(!this->move(hill_pos)){
         this->end_of_life = true;

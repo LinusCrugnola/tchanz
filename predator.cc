@@ -16,8 +16,12 @@ Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
     : Ant(position, hill_index, true), age(age) {
     scl::square_add(position);
 }
-bool Predator::action(scl::csquare hill_pos){
+bool Predator::action(scl::csquare hill_pos, bool free){
     this->kill_touching();
+    scl::square target = this->set_target(hill_pos, free);
+    if(target != this->position){
+        this->move(target);
+    }
     return true;
 }
 
@@ -30,6 +34,39 @@ void Predator::kill_touching(){
             }
         }
     }
+}
+
+scl::square Predator::set_target(scl::square hill_pos, bool free){
+    double distance = 1000;
+    scl::square target;
+    bool found_inside = false;
+    for(auto& predatable : this->predatables){
+        for(auto& pred : predatable){
+            if(this->hill_index == pred->get_hill()) break;
+            if(scl::distance(pred->get_position(), this->position) < distance){
+                distance = scl::distance(pred->get_position(), this->position);
+                target = pred->get_position();
+                if(scl::square_contains(hill_pos, target)) found_inside = true;
+            }
+        }
+    }
+    if(free && found_inside) return target;
+    else if(/*!free*/ true) return target; //TODO: change
+    else return this->position;
+}
+
+void Predator::move(scl::csquare target){
+    scl::vector direction = {(int) target.x - (int) this->position.x, 
+                             (int) target.y - (int) this->position.y};
+    if(abs(direction.dx) >= abs(direction.dy)){
+        direction.dx = direction.dx * 2 / abs(direction.dx);
+        direction.dy = direction.dy / abs(direction.dy);
+    }
+    else{
+        direction.dy = direction.dy * 2 / abs(direction.dy);
+        direction.dx = direction.dx / abs(direction.dx);
+    }
+    this->position += direction;
 }
 
 bool Predator::draw(graphic::color color) {

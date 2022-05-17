@@ -32,11 +32,12 @@ private:
      */
     unsigned age;
 
-    scl::square target;
-
+    /**
+     * @brief kill all ants that touch the predator
+     */
     void kill_touching();
-    void set_target();
-    void move();
+    scl::square set_target(scl::square hill_pos, bool free);
+    void move(scl::csquare target);
 
 public:
     /**
@@ -45,7 +46,7 @@ public:
      * @param hill_pos 
      * @return true if no errors
      */
-    virtual bool action(scl::csquare hill_pos) override;
+    virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the predator ant

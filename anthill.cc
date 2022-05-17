@@ -78,7 +78,7 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
     this->generator->set_total_ants(get_ants());
 
     // consume food
-    if(!this->generator->action(this->position))
+    if(!this->generator->action(this->position, false))
         this->end_of_klan = true;
     
     // generate ants:
@@ -94,8 +94,9 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
 }
 
 bool Anthill::ants_action() const {
+    bool free = this->anthill_state == FREE ? true : false;
     for(unsigned i = 0; i < this->ants.size(); i++){
-        this->ants[i]->action(this->position);
+        this->ants[i]->action(this->position, free);
     }
     return true;
 }

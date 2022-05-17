@@ -20,7 +20,7 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
     scl::square_add(position);
 }
 
-bool Collector::action(scl::csquare hill_pos){
+bool Collector::action(scl::csquare hill_pos, bool free){
     //example print food data:
     age++;
     if(age >= bug_life) this->end_of_life = true;

@@ -80,7 +80,7 @@ public:
      * @param hill_pos position of the hill
      * @return true if no errors
      */
-    virtual bool action(scl::csquare hill_pos) = 0;
+    virtual bool action(scl::csquare hill_pos, bool free) = 0;
 
     /**
      * @brief returns if the ant carries a food item

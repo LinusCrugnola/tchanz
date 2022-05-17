@@ -92,6 +92,7 @@ namespace scl {
      * @brief Operators on squares & vectors:
      */
     square operator+(square& s, cvector vec);
+    bool operator==(csquare s1, csquare s2);
     std::ostream& operator<<(std::ostream& os, csquare dt);
     std::ostream& operator<<(std::ostream& os, cvector v);
 
