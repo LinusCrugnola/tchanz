@@ -17,7 +17,19 @@ Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
     scl::square_add(position);
 }
 bool Predator::action(scl::csquare hill_pos){
+    this->kill_touching();
     return true;
+}
+
+void Predator::kill_touching(){
+    for(auto& predatable : this->predatables){
+        for(auto& pred : predatable){
+            if(this->hill_index == pred->get_hill()) break;
+            if(scl::square_touch(pred->get_position(), this->position)){
+                pred->kill();
+            }
+        }
+    }
 }
 
 bool Predator::draw(graphic::color color) {

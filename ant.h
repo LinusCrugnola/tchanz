@@ -10,6 +10,7 @@
 #define ANT_H
 
 #include <sstream>
+#include <vector>
 
 #include "constantes.h"
 #include "squarecell.h"
@@ -35,6 +36,8 @@ protected:
      */
     unsigned hill_index;
 
+    static std::vector<std::vector<Ant*>> predatables;
+
 public:
     /**
      * @brief Construct a new Ant object
@@ -51,6 +54,13 @@ public:
      * @return scl::square 
      */
     scl::square get_position() const { return this->position; }
+
+    /**
+     * @brief Get the hill index of the ant
+     * 
+     * @return unsinged 
+     */
+    unsigned get_hill() const { return this->hill_index; }
 
     /**
      * @brief check if ant is dead

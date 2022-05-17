@@ -32,6 +32,12 @@ private:
      */
     unsigned age;
 
+    scl::square target;
+
+    void kill_touching();
+    void set_target();
+    void move();
+
 public:
     /**
      * @brief move the predator ant

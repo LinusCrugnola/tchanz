@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "constantes.h"
 #include "message.h"
@@ -22,20 +21,22 @@
  * @details contains all collector and predator ants of a hill with the index that the 
  * hill obtains at creation
  */
-namespace{
-    std::vector<std::vector<Ant*>> predatables;
-}
+// namespace{
+//     std::vector<std::vector<Ant*>> predatables;
+// }
+
+std::vector<std::vector<Ant*>> Ant::predatables = {{}};
 
 Ant::Ant(scl::csquare position, unsigned hill_index, bool predatable = false)
     : position(position), end_of_life(false), hill_index(hill_index) {
     scl::square_add(position);
     if(predatable){
-        if(hill_index >= predatables.size()){
+        if(hill_index >= this->predatables.size()){
             //std::vector<Ant*> new_fam = {this}; 
-            predatables.push_back({this});
+            this->predatables.push_back({this});
         }
         else{
-            predatables[hill_index].push_back(this);
+            this->predatables[hill_index].push_back(this);
         }
     }
 }
