@@ -22,15 +22,18 @@ bool Predator::action(scl::csquare hill_pos, bool free){
     if(target.x != this->position.x && target.y != this->position.y){
         this->move(target);
     }
+    this->kill_touching();
     return true;
 }
 
 void Predator::kill_touching(){
     for(auto& predatable : this->predatables){
         for(auto& pred : predatable){
+            if(pred == nullptr) continue;
             if(this->hill_index == pred->get_hill()) break;
             if(scl::square_touch(pred->get_position(), this->position)){
                 pred->kill();
+                pred = nullptr;
             }
         }
     }
@@ -42,6 +45,7 @@ scl::square Predator::set_target(scl::square hill_pos, bool free){
     bool found_inside = false;
     for(auto& predatable : this->predatables){
         for(auto& pred : predatable){
+            if(pred == nullptr) continue;
             if(this->hill_index == pred->get_hill()) break;
             if(scl::distance(pred->get_position(), this->position) < distance){
                 distance = scl::distance(pred->get_position(), this->position);
@@ -66,7 +70,14 @@ void Predator::move(scl::csquare target){
         direction.dy = direction.dy * 2 / abs(direction.dy);
         direction.dx = direction.dx / abs(direction.dx);
     }
-    this->position += direction;
+    scl::square new_pos = this->position + direction;
+    scl::square_delete(target);
+    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos)){
+        scl::square_delete(this->position);
+        this->position = new_pos;
+        scl::square_add(this->position);
+    }
+    scl::square_add(target);
 }
 
 bool Predator::draw(graphic::color color) {

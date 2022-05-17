@@ -32,7 +32,6 @@ Ant::Ant(scl::csquare position, unsigned hill_index, bool predatable = false)
     scl::square_add(position);
     if(predatable){
         if(hill_index >= this->predatables.size()){
-            //std::vector<Ant*> new_fam = {this}; 
             this->predatables.push_back({this});
         }
         else{
