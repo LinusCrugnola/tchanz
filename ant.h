@@ -30,6 +30,9 @@ protected:
      */
     bool end_of_life;
 
+    /**
+     * @brief index of the parent anthill
+     */
     unsigned hill_index;
 
 public:
@@ -55,6 +58,11 @@ public:
      * @return true if ant is dead
      */
     bool is_dead() const { return this->end_of_life; }
+
+    /**
+     * @brief set end_of life to true
+     */
+    void kill();
 
     /**
      * @brief action of the ant (move)

@@ -38,7 +38,11 @@ Ant::Ant(scl::csquare position, unsigned hill_index, bool predatable = false)
             predatables[hill_index].push_back(this);
         }
     }
-};
+}
+
+void Ant::kill(){
+    this->end_of_life = true;
+}
 
 Ant::~Ant() {
     scl::square_delete(this->position);
