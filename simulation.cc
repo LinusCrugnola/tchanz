@@ -39,7 +39,7 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
         last_highlighted = false;
         this->clear_highlights();
         index = -1;
-        return "None selected          ";
+        return "None selected          \n";
     }
     if(last_highlighted){
         this->anthill[index]->delete_highlight();
@@ -47,7 +47,7 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
     }
     unsigned anthill_size = this->anthill.size();
     if(anthill_size == 0){
-        return "None selected          ";
+        return "None selected          \n";
     }
     else if(reverse){
         if(index == -1){
@@ -59,13 +59,13 @@ std::string Simulation::get_next_anthill_info(bool reverse, bool reset){
         }
         if(index == 0){
             index = -1;
-            return "None selected          ";
+            return "None selected          \n";
         }
     }
     else{
         if(index+1 >= (int) anthill_size){
             index = -1;
-            return "None selected          ";
+            return "None selected          \n";
         }
     }
     index = reverse ? index - 1 : index + 1;

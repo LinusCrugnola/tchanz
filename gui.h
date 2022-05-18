@@ -149,6 +149,11 @@ protected:
     void on_button_clicked_previous();
 
     /**
+     * @brief slider signal handler
+     */
+    void on_slider();
+
+    /**
      * @brief canvas object
      */
     Canvas canvas;
@@ -157,11 +162,14 @@ protected:
      * @brief Elements of Navbar
      */
     Gtk::Box H_box;
-    Gtk::Box V_box, canvas_box, navbar, anthill_info_box, sim_info_box;
-    Gtk::Frame general_frame, info_frame, anthill_info_frame, sim_info_frame;
+    Gtk::Box V_box, canvas_box, navbar, anthill_info_box, sim_info_box, speed_box;
+    Gtk::Frame general_frame, info_frame, anthill_info_frame, sim_info_frame, 
+    speed_frame;
     Gtk::Label nbF_info, anthill_info, sim_info;
     Gtk::Button exit, open, save, start, step,
                 previous, next;
+    Glib::RefPtr<Gtk::Adjustment> adjustment;
+    Gtk::Scale sim_speed;
 
 private:
     /**
@@ -205,7 +213,7 @@ private:
     /**
      * @brief defines the timer tick in ms
      */
-    const int timeout_value;
+    int timeout_value;
 
     /**
      * @brief indicates if timer is running

@@ -26,11 +26,16 @@ Gui::Gui()
       navbar(Gtk::ORIENTATION_VERTICAL),
       anthill_info_box(Gtk::ORIENTATION_VERTICAL),
       sim_info_box(Gtk::ORIENTATION_VERTICAL),
+      speed_box(Gtk::ORIENTATION_VERTICAL),
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
-      sim_info_frame("Simulation"), nbF_info("Nb food:   nbF"), 
-      anthill_info("None selected          "), sim_info("Count: 0"),
+      sim_info_frame("Simulation"), speed_frame("speed x  "), 
+      nbF_info("Nb food:   nbF"), 
+      anthill_info("None selected          \n"), sim_info("Count: 0\n"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
-      previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
+      previous("previous"), next("next"), 
+      adjustment(Gtk::Adjustment::create(5.0, 1.0, 11.0, 1.0, 1.0, 1.0)),
+      sim_speed(adjustment, Gtk::ORIENTATION_HORIZONTAL),
+      simulation(nullptr), timer_val(0), 
       start_state(b_start), timeout_value(10), timer_disconnect(false)
     {
     set_title("Tchanz");
@@ -50,18 +55,19 @@ Gui::Gui()
     general_frame.add(navbar);
 
     navbar.pack_start(exit);
-    exit.set_size_request(0, 60);
+    exit.set_size_request(0, 40);
     navbar.pack_start(open);
-    open.set_size_request(0, 60);
+    open.set_size_request(0, 40);
     navbar.pack_start(save);
-    save.set_size_request(0, 60);
+    save.set_size_request(0, 40);
     navbar.pack_start(start);
-    start.set_size_request(0, 60);
+    start.set_size_request(0, 40);
     navbar.pack_start(step);
-    step.set_size_request(0, 60);
+    step.set_size_request(0, 40);
 
     info_frame.add(nbF_info);
-    sim_info_frame.add(sim_info);
+    sim_info_frame.add(sim_info_box);
+    speed_frame.add(speed_box);
 
     anthill_info_frame.add(anthill_info_box);
 
@@ -70,6 +76,8 @@ Gui::Gui()
     anthill_info_box.pack_start(anthill_info);
 
     sim_info_box.pack_start(sim_info);
+    sim_info_box.pack_start(speed_frame);    
+    speed_box.pack_start(sim_speed);
 
     exit.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_exit));
     open.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_open));
@@ -80,6 +88,7 @@ Gui::Gui()
     next.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_next));
     previous.signal_clicked().connect(sigc::mem_fun(*this,
                                                     &Gui::on_button_clicked_previous));
+    sim_speed.signal_value_changed().connect(sigc::mem_fun(*this, &Gui::on_slider));
 
     show_all_children();
 }
@@ -121,6 +130,16 @@ void Gui::display_next_hill(bool reverse = false, bool stay = false) {
 void Gui::reset_anthill_info() {
     std::string info = this->simulation->get_next_anthill_info(0, 1);
     this->anthill_info.set_text(info);
+}
+
+void Gui::on_slider(){
+    if(start_state == b_stop){
+        this->sim_speed.set_value(((double) this->timeout_value - 670)/(-66));
+    }
+    else{
+        this->timeout_value = (-66 * this->sim_speed.get_value()) + 670;
+        std::cout << "timeout value: " << this->timeout_value << std::endl;
+    }
 }
 
 Canvas::Canvas(Gui* parent)
@@ -189,7 +208,8 @@ void Gui::on_button_clicked_open() {
             this->simulation->read_configfile(filename);
             this->reset_anthill_info();
             this->timer_val = 0;
-            this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
+            this->sim_info.set_text("Count:  " + std::to_string(this->timer_val) 
+                                    + "\n");
             this->canvas.queue_draw();
             break;
         }
@@ -250,7 +270,7 @@ void Gui::on_button_clicked_step() {
         timer_disconnect = false;
         timer_disconnect = true;
         timer_val++;
-        this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
+        this->sim_info.set_text("Count:  " + std::to_string(this->timer_val) + "\n");
         //std::cout << "This is simulation update number : " << timer_val << std::endl;
         
         // A call to make a single update of the simulation is expected here
@@ -302,7 +322,7 @@ bool Gui::on_timeout() {
         return false;
     }
 
-    this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
+    this->sim_info.set_text("Count:  " + std::to_string(this->timer_val) + "\n");
     //std::cout << "This is simulation update number : " << timer_val << std::endl;
     ++timer_val;
 
