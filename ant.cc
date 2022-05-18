@@ -37,11 +37,13 @@ void Ant::kill(){
 Ant::~Ant() {
     scl::square_delete(this->position);
     size_t index = 0;
+    bool found = false;
     for(size_t i = 0; i < predatables[hill_index].size(); i++){
         if(this->position == predatables[hill_index][i]->get_position()){
             index = i;
+            found = true;
             break;
         }
     }
-    predatables[hill_index].erase(predatables[hill_index].begin() + index);
+    if(found) predatables[hill_index].erase(predatables[hill_index].begin() + index);
 }

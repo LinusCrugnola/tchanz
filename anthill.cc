@@ -103,7 +103,7 @@ bool Anthill::ants_action() const {
 
 unsigned Anthill::get_new_food() const {
     unsigned new_nutrition = 0;
-    for(unsigned i = 0; i < this->nbC; i++){
+    for(unsigned i = 0; i < this->nbC && i < this->ants.size() ; i++){
         if(scl::square_touch(this->position, this->ants[i]->get_position())){
             if(this->ants[i]->loaded()){
                 new_nutrition++;
