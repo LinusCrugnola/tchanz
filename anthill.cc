@@ -114,12 +114,8 @@ unsigned Anthill::get_new_food() const {
 }
 
 bool Anthill::create_ant(Nutrition* food){
-    static unsigned a = 0;
     scl::square pos = scl::get_free3x3(this->position);
     std::cout << "spawn at: " << pos.x << " " << pos.y << " " << pos.side << std::endl;
-    if(pos.x == 32 or pos.x == 37 or pos.x == 90){
-        a++;
-    }
     double prop_coll, prop_def;
     if(this->anthill_state == FREE){
         prop_coll = prop_free_collector;
@@ -217,14 +213,16 @@ bool Anthill::ant_validation(std::istringstream& data, cunsigned home,
 }
 
 void Anthill::remove_dead_ants(){
+    unsigned temp_nbC = this->nbC;
+    unsigned temp_nbD = this->nbD;
     for(unsigned i = 0; i < this->ants.size(); i++){
         if(this->ants[i]->is_dead()){
             delete this->ants[i];
             this->ants[i] = nullptr;
 
-            if(i < nbC) this->nbC--;
-            else if(i < nbC + nbD) nbD--;
-            else nbP--;
+            if(i < temp_nbC) this->nbC--;
+            else if(i < temp_nbC + temp_nbD) this->nbD--;
+            else this->nbP--;
         }
     }
     this->ants.erase(std::remove(this->ants.begin(), this->ants.end(), nullptr), 

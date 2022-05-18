@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/projet",
             "args": ["./testfiles/t01.txt"],
-            "stopAtEntry": true,
+            "stopAtEntry": ,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
