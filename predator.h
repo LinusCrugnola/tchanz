@@ -38,6 +38,11 @@ private:
     void kill_touching();
 
     /**
+     * @brief true if collector is heading to his home anthill
+     */
+    bool heading_home;
+
+    /**
      * @brief Set the target for the predator ant
      * 
      * @param hill_pos position of the anthill

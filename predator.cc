@@ -13,16 +13,16 @@
 #include "message.h"
 
 Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
-    : Ant(position, hill_index, true), age(age) {
+    : Ant(position, hill_index, true), age(age), heading_home(true){
     scl::square_add(position);
 }
 bool Predator::action(scl::csquare hill_pos, bool free){
     this->kill_touching();
     scl::square target = this->set_target(hill_pos, free);
-    if(target.x != this->position.x && target.y != this->position.y){
+    if(target.x != this->position.x || target.y != this->position.y){
         this->move(target);
+        this->kill_touching();
     }
-    this->kill_touching();
     return true;
 }
 
@@ -33,7 +33,6 @@ void Predator::kill_touching(){
             if(this->hill_index == pred->get_hill()) break;
             if(scl::square_touch(pred->get_position(), this->position)){
                 pred->kill();
-                pred = nullptr;
             }
         }
     }
@@ -41,22 +40,40 @@ void Predator::kill_touching(){
 
 scl::square Predator::set_target(scl::square hill_pos, bool free){
     double distance = 1000;
-    scl::square target;
-    bool found_inside = false;
-    for(auto& predatable : this->predatables){
-        for(auto& pred : predatable){
-            if(pred == nullptr) continue;
-            if(this->hill_index == pred->get_hill()) break;
-            if(scl::distance(pred->get_position(), this->position) < distance){
-                distance = scl::distance(pred->get_position(), this->position);
-                target = pred->get_position();
-                if(scl::square_contains(hill_pos, target)) found_inside = true;
+    unsigned xc = hill_pos.x + hill_pos.side/2;
+    unsigned yc = hill_pos.y + hill_pos.side/2;
+    scl::square target = {xc, yc, 1, 1};
+    bool changed = false;
+    if(free){    
+        for(auto& predatable : this->predatables){
+            for(auto& pred : predatable){
+                if(pred == nullptr) continue;
+                if(this->hill_index == pred->get_hill()) break;
+                if(scl::distance(pred->get_position(), this->position) < distance &&
+                   scl::square_contains(hill_pos, pred->get_position())){
+                    distance = scl::distance(pred->get_position(), this->position);
+                    target = pred->get_position();
+                    changed = true;
+                }
             }
         }
+        this->heading_home = changed ? false : true;
+        return target;
     }
-    if(free && found_inside) return target;
-    else if(/*!free*/ true) return target; //TODO: change
-    else return this->position;
+    else{
+        for(auto& predatable : this->predatables){
+            for(auto& pred : predatable){
+                if(pred == nullptr) continue;
+                if(this->hill_index == pred->get_hill()) break;
+                if(scl::distance(pred->get_position(), this->position) < distance){
+                    distance = scl::distance(pred->get_position(), this->position);
+                    target = pred->get_position();
+                }
+            }
+        }
+        this->heading_home = false;
+        return target;
+    }
 }
 
 void Predator::move(scl::csquare target){
@@ -70,14 +87,16 @@ void Predator::move(scl::csquare target){
         direction.dy = direction.dy * 2 / abs(direction.dy);
         direction.dx = direction.dx / abs(direction.dx);
     }
-    scl::square new_pos = this->position + direction;
-    scl::square_delete(target);
-    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos)){
+    scl::square new_pos = this->position;
+    new_pos += direction;
+    if(!heading_home) scl::square_delete(target);
+    if(scl::square_validation(new_pos, scl::NOERR) && 
+       !scl::square_superposition(new_pos)){
         scl::square_delete(this->position);
         this->position = new_pos;
         scl::square_add(this->position);
     }
-    scl::square_add(target);
+    if(!heading_home) scl::square_add(target);
 }
 
 bool Predator::draw(graphic::color color) {
