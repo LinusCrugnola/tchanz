@@ -18,7 +18,7 @@ unsigned Anthill::anthill_count = 0;
 Anthill::Anthill(scl::csquare position, cunsigned nbC, cunsigned nbD, cunsigned nbP)
     : position(position), nbC(nbC), nbD(nbD), nbP(nbP), anthill_state(FREE), 
       end_of_klan(false), highlight(false), generator(nullptr), 
-      index(++Anthill::anthill_count){
+      index(Anthill::anthill_count++){
     this->color = scl::get_new_color();
 }
 
@@ -131,7 +131,6 @@ bool Anthill::create_ant(Nutrition* food){
     }
     if(((double) this->nbC / this->get_ants()) < prop_coll){
         if(pos.side != 3) return false;
-        std::cout << "spawn collector" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC, 
                           new Collector(pos, 0, EMPTY, food, index));
         this->nbC++;
@@ -139,7 +138,6 @@ bool Anthill::create_ant(Nutrition* food){
     }
     else if(((double) this->nbD / this->get_ants()) < prop_def){
         if(pos.side != 3) return false;
-        std::cout << "spawn defensor" << std::endl;
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
                           new Defensor(pos, 0, index));
         this->nbD++;
@@ -148,7 +146,6 @@ bool Anthill::create_ant(Nutrition* food){
     else{
         pos.side = pos.side == 3 ? 1 : pos.side;
         if(pos.side != 1) return false;
-        std::cout << "spawn predator" << std::endl;
         this->ants.push_back(new Predator(pos, 0, index));
         this->nbP++;
         return true;

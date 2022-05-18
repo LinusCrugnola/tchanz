@@ -36,6 +36,10 @@ protected:
      */
     unsigned hill_index;
 
+    /**
+     * @brief Register with al predatable ants, they inscribe themself at birth
+     * and delete themselves when they die
+     */
     static std::vector<std::vector<Ant*>> predatables;
 
 public:

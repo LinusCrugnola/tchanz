@@ -15,16 +15,6 @@
 #include "message.h"
 #include "squarecell.h"
 
-/**
- * @brief table to store all predatable ants (known by predator)
- * 
- * @details contains all collector and predator ants of a hill with the index that the 
- * hill obtains at creation
- */
-// namespace{
-//     std::vector<std::vector<Ant*>> predatables;
-// }
-
 std::vector<std::vector<Ant*>> Ant::predatables = {{}};
 
 Ant::Ant(scl::csquare position, unsigned hill_index, bool predatable = false)
@@ -46,4 +36,12 @@ void Ant::kill(){
 
 Ant::~Ant() {
     scl::square_delete(this->position);
+    size_t index = 0;
+    for(size_t i = 0; i < predatables[hill_index].size(); i++){
+        if(this->position == predatables[hill_index][i]->get_position()){
+            index = i;
+            break;
+        }
+    }
+    predatables[hill_index].erase(predatables[hill_index].begin() + index);
 }
