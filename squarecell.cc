@@ -46,6 +46,16 @@ std::ostream& scl::operator<<(std::ostream& os, scl::csquare s){
     return os;
 }
 
+bool scl::square::operator==(const scl::square& s){
+    return (this->x == s.x) && (this->y == s.y) && 
+           (this->side == s.side) && (this->centered == s.centered);
+}
+
+bool scl::square::operator!=(const scl::square& s){
+    return !((this->x == s.x) && (this->y == s.y) && 
+           (this->side == s.side) && (this->centered == s.centered));
+}
+
 std::ostream& scl::operator<<(std::ostream& os, scl::cvector v){
     os << "(" << v.dx << "," << v.dy << ")";
     return os;
