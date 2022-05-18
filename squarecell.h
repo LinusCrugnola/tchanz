@@ -60,6 +60,8 @@ namespace scl {
         bool centered;
 
         square operator+=(const vector& vec);
+        bool operator==(const square& s);
+        bool operator!=(const square& s);
     };
 
     /**

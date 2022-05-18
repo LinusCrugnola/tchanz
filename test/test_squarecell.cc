@@ -238,5 +238,11 @@ void test_squarecell(){
     cout << lol+v << endl;
     cout << lol+v << endl;
 
-    cout << scl::distance({3,3,1,1}, {5,5,1,1}) << endl;
+    scl::square s1 = {1,1,2,1};
+
+    cout <<  (s1 == s1) << endl;
+    cout << (s2 == s2) << endl;
+    cout << (s1 == s2) << endl;
+    cout << (s1 != s2) << endl;
+    cout << (s1 != s1) << endl;
 }
