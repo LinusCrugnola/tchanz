@@ -16,6 +16,7 @@ Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
     : Ant(position, hill_index, true), age(age), heading_home(true){
     scl::square_add(position);
 }
+
 bool Predator::action(scl::csquare hill_pos, bool free){
     this->kill_touching();
     scl::square target = this->set_target(hill_pos, free);
