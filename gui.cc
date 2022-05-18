@@ -25,8 +25,10 @@ Gui::Gui()
       canvas_box(Gtk::ORIENTATION_VERTICAL),
       navbar(Gtk::ORIENTATION_VERTICAL),
       anthill_info_box(Gtk::ORIENTATION_VERTICAL),
+      sim_info_box(Gtk::ORIENTATION_VERTICAL),
       general_frame("General"), info_frame("Info"), anthill_info_frame("Anthill info"),
-      nbF_info("Nb food:   nbF"), anthill_info("None selected          "),
+      sim_info_frame("Simulation"), nbF_info("Nb food:   nbF"), 
+      anthill_info("None selected          "), sim_info("Count: 0"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), simulation(nullptr), timer_val(0), 
       start_state(b_start), timeout_value(10), timer_disconnect(false)
@@ -43,6 +45,7 @@ Gui::Gui()
     V_box.pack_start(general_frame, false, false);
     V_box.pack_start(info_frame, false, false);
     V_box.pack_start(anthill_info_frame, false, false);
+    V_box.pack_start(sim_info_frame, false, false);
 
     general_frame.add(navbar);
 
@@ -58,12 +61,15 @@ Gui::Gui()
     step.set_size_request(0, 60);
 
     info_frame.add(nbF_info);
+    sim_info_frame.add(sim_info);
 
     anthill_info_frame.add(anthill_info_box);
 
     anthill_info_box.pack_start(previous);
     anthill_info_box.pack_start(next);
     anthill_info_box.pack_start(anthill_info);
+
+    sim_info_box.pack_start(sim_info);
 
     exit.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_exit));
     open.signal_clicked().connect(sigc::mem_fun(*this, &Gui::on_button_clicked_open));
@@ -183,6 +189,7 @@ void Gui::on_button_clicked_open() {
             this->simulation->read_configfile(filename);
             this->reset_anthill_info();
             this->timer_val = 0;
+            this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
             this->canvas.queue_draw();
             break;
         }
@@ -243,7 +250,8 @@ void Gui::on_button_clicked_step() {
         timer_disconnect = false;
         timer_disconnect = true;
         timer_val++;
-        std::cout << "This is simulation update number : " << timer_val << std::endl;
+        this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
+        //std::cout << "This is simulation update number : " << timer_val << std::endl;
         
         // A call to make a single update of the simulation is expected here
         this->simulation->update();
@@ -294,7 +302,8 @@ bool Gui::on_timeout() {
         return false;
     }
 
-    std::cout << "This is simulation update number : " << timer_val << std::endl;
+    this->sim_info.set_text("Count: " + std::to_string(this->timer_val));
+    //std::cout << "This is simulation update number : " << timer_val << std::endl;
     ++timer_val;
 
     // A call to make a single update of the simulation is expected here

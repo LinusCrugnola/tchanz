@@ -157,9 +157,9 @@ protected:
      * @brief Elements of Navbar
      */
     Gtk::Box H_box;
-    Gtk::Box V_box, canvas_box, navbar, anthill_info_box;
-    Gtk::Frame general_frame, info_frame, anthill_info_frame;
-    Gtk::Label nbF_info, anthill_info;
+    Gtk::Box V_box, canvas_box, navbar, anthill_info_box, sim_info_box;
+    Gtk::Frame general_frame, info_frame, anthill_info_frame, sim_info_frame;
+    Gtk::Label nbF_info, anthill_info, sim_info;
     Gtk::Button exit, open, save, start, step,
                 previous, next;
 
