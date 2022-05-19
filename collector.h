@@ -55,6 +55,14 @@ private:
     unsigned count_superpos(scl::vector prim, unsigned steps1, 
                             scl::vector sec, unsigned steps2);
 
+    /**
+     * @brief verify if the given move can be done
+     * 
+     * @param step the step to verify
+     * @return true if valid & move
+     */
+    bool verify_position(scl::cvector step);
+
 public:
     /**
      * @brief move the collector ant

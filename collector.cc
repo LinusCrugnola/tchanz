@@ -29,13 +29,32 @@ bool Collector::action(scl::csquare hill_pos, bool free){
     scl::square target = this->nutrition->get_nearest(this->position);
     int vx = target.x - this->position.x;
     int vy = target.y - this->position.y;
-    if(abs(vx) == abs(vy)){
+    unsigned avx = abs(vx);
+    unsigned avy = abs(vy);
+    if(avx == avy){
         //only one direction
-        scl::vector direction = {vx/abs(vx), vy/abs(vy)};
+        target = this->position + {vx/avx, vy/avy};
     }
-    else if(abs(vx) > abs(vy)){
+    else if(avx > avy){
+        direction1 = {vx/avx, vy/avy}
+        unsigned s1 = count_superpos({vx/avx, vy/avy}, avx - avy, 
+                                     {vx/avx, -vy/avy}, avy - avx);
+        unsigned s2 = count_superpos({vx/avx, -vy/avy}, avy - avx, 
+                                     {vx/avx, vy/avy}, avx - avy);
+        target = this->position + (s1 > s2 ? {vx/avx, vy/avy} : {vx/avx, -vy/avy});
+        //TODO: case equals
+    }
+    else{
+        unsigned s1 = count_superpos({vy/avy, vx/avy}, avy - avx, 
+                                     {vy/avy, -vx/avx}, avx - avy);
+        unsigned s2 = count_superpos({vy/avy, -vx/avx}, avx - avy, 
+                                     {vy/avy, vx/avy}, avy - avx);
+        target = this->position + (s1 > s2 ? {vx/avx, vy/avy} : {vx/avx, -vy/avy});
+        //TODO: case equals
+    }
 
-    }
+    verify_position(scl::cvector next_move);
+
     return true;
 }
 
@@ -52,6 +71,19 @@ unsigned Collector::count_superpos(scl::vector prim, unsigned steps1,
         if(scl::square_superposition(mock)) count++;
     }
     return count;
+}
+
+bool Collector::verify_position(scl::cvector step){
+    scl::square_delete(this->position);
+    scl::square new_position = this->position + step;
+    if(scl::square_validation(new_position) && 
+       !scl::square_superposition(new_position)){
+        this->position = new_position;
+        scl::square_add(this->position);
+        return true;
+    }
+    scl::square_add(this->position);
+    return false;
 }
 
 bool Collector::draw(graphic::color color) {
