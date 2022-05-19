@@ -21,11 +21,38 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
 }
 
 bool Collector::action(scl::csquare hill_pos, bool free){
-    //example print food data:
-    std::cout << this->nutrition->get_nearest(this->position) << std::endl;
     age++;
-    if(age >= bug_life) this->end_of_life = true;
+    if(age >= bug_life){ 
+        this->end_of_life = true;
+        return true;
+    }
+    scl::square target = this->nutrition->get_nearest(this->position);
+    int vx = target.x - this->position.x;
+    int vy = target.y - this->position.y;
+    if(abs(vx) == abs(vy)){
+        //only one direction
+        scl::vector direction = {vx/abs(vx), vy/abs(vy)};
+    }
+    else if(abs(vx) > abs(vy)){
+        unsigned super1 = count_superpos(abs(vx)-abs(vy), {vx/abs(vx), vy/abs(vy)},
+                                         abs(vy)-abs(vx), {vx/abs(vx), -vy/abs(vy)});
+    }
     return true;
+}
+
+unsigned Collector::count_superpos(scl::vector prim, unsigned steps1, 
+                            scl::vector sec, unsigned steps2){
+    scl::square mock = this->position;
+    unsigned count = 0;
+    for(unsigned i = 0; i < steps1; i++){
+        mock += prim;
+        if(scl::square_superposition(mock)) count++;
+    }
+    for(unsigned i = 0; i < steps2; i++){
+        mock += sec;
+        if(scl::square_superposition(mock)) count++;
+    }
+    return count;
 }
 
 bool Collector::draw(graphic::color color) {

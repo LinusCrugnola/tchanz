@@ -43,7 +43,17 @@ private:
      */
     Nutrition* nutrition;
 
-    //bool control_path(scl::csquare food_pos);
+    /**
+     * @brief count the superpositions on a given path with
+     * 
+     * @param prim first direction
+     * @param steps1 number of steps following prim
+     * @param sec second direction
+     * @param steps2 number of steps following sec
+     * @return unsigned number of superpositions
+     */
+    unsigned count_superpos(scl::vector prim, unsigned steps1, 
+                            scl::vector sec, unsigned steps2);
 
 public:
     /**
