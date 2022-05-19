@@ -18,6 +18,11 @@ Predator::Predator(scl::csquare position, unsigned age, unsigned hill_index)
 }
 
 bool Predator::action(scl::csquare hill_pos, bool free){
+    age++;
+    if(age >= bug_life){ 
+        this->end_of_life = true;
+        return true;
+    }
     this->kill_touching();
     scl::square target = this->set_target(hill_pos, free);
     if(target.x != this->position.x || target.y != this->position.y){
