@@ -138,7 +138,6 @@ void Gui::on_slider(){
     }
     else{
         this->timeout_value = (-66 * this->sim_speed.get_value()) + 670;
-        std::cout << "timeout value: " << this->timeout_value << std::endl;
     }
 }
 
