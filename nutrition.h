@@ -30,10 +30,10 @@ private:
     std::vector<scl::square> foods;
 public:
     /**
-     * @brief Get the nearest the nearest food element to a given collector
+     * @brief Get the nearest food element
      * 
-     * @param pos_collector 
-     * @return scl::square 
+     * @param pos_collector position of the collector ant
+     * @return scl::square position of the nearest food element
      */
     scl::square get_nearest(scl::csquare pos_collector);
  

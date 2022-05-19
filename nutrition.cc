@@ -73,22 +73,16 @@ std::string Nutrition::get_filedata() {
 
 scl::square Nutrition::get_nearest(scl::csquare pos_collector)
 {
-    unsigned int distance(1000);
-    unsigned int closest(0);
+    unsigned closest = 1000;
     scl::square food_target = pos_collector;
     for (const auto& elem : this->foods)
     {
        if(check_diagonal(pos_collector, elem))
        {
-           int vx(0), vy(0);
-           vx = elem.x - pos_collector.x; // add this->pos_collector.x ?
-           vy = elem.y - pos_collector.y; // add this->pos_collector.y ?
-           distance = std::max(abs(vx),abs(vy));
-           if(closest == 0)
-           {
-               closest = distance;
-           }
-           else if(distance < closest)
+           int vx = elem.x - pos_collector.x;
+           int vy = elem.y - pos_collector.y;
+           unsigned distance = std::max(std::abs(vx),std::abs(vy));
+           if(distance < closest)
            {
                closest = distance;
                food_target = elem;
