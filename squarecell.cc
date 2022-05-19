@@ -209,7 +209,7 @@ bool scl::check_diagonal(scl::csquare s1, scl::csquare s2)
 {
     bool reachable = true;
     //control of the same pair
-    if((s1.x%2 == 1) && (s2.y%2 == 1)) //coordinate of odd numbers
+    if((s1.x%2 == 1) && (s1.y%2 == 1)) //coordinate of odd numbers
     {   
         if((s2.x%2 ==1) && (s2.y%2 == 1))
         {
