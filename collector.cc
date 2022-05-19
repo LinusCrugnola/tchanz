@@ -22,6 +22,7 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
 
 bool Collector::action(scl::csquare hill_pos, bool free){
     //example print food data:
+    std::cout << this->nutrition->get_nearest(this->position) << std::endl;
     age++;
     if(age >= bug_life) this->end_of_life = true;
     return true;
@@ -37,31 +38,30 @@ bool Collector::draw(graphic::color color) {
     return no_error;
 }
 
-// bool Collector::control_path(scl::csquare food_pos)
-// {
-//     bool pass(true);
-//     int vx(0), vy(0);
-//     int path_1(0), path_2(0);
-//     scl::square pseudo_collector;
-//     vx = food_pos.x - position.x;
-//     vy = food_pos.y - position.y;
-//     scl::square pseudo_collector = position;
-//     if(abs(vx) == abs(vy))
-//     {
-//         //the collector is on a direct diagonal, it's the only path it can take (abs(vx)+abs(vy))/2
-//     }
-//     //Path 1
-//     for(int i(1); i<=(abs(vx)+abs(vy))/2; i++)
-//     {   
+/*bool Collector::control_path(scl::csquare food_pos)
+{
+    bool pass(true);
+    int vx(0), vy(0);
+    int path_1(0), path_2(0);
+    scl::square pseudo_collector;
+    vx = food_pos.x - position.x;
+    vy = food_pos.y - position.y;
+    scl::square pseudo_collector = position;
+    if(abs(vx) == abs(vy))
+    {
+        //the collector is on a direct diagonal, it's the only path it can take (abs(vx)+abs(vy))/2
+    }
+    //Path 1
+    for(int i(1); i<=(abs(vx)+abs(vy))/2; i++)
+    {   
 
-//         if(scl::square_superposition(pseudo_collector))
-//         {
-//             path_1 = path_1 + 1;
-//         }
-//     }
-//     for(int)
-
-// }
+        if(scl::square_superposition(pseudo_collector))
+        {
+            path_1 = path_1 + 1;
+        }
+    }
+    for(int)
+}*/
 
 bool Collector::loaded() const { return this->food_state == LOADED ? true : false; }
 

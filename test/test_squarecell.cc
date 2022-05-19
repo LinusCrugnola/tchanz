@@ -212,37 +212,49 @@ void test_squarecell(){
     // cout << s.x << " " << s.y << " " << s.side << " " << s.centered << endl;
 
 
-    scl::square_add({34,6,5,1});
-    scl::square_add({34,10,3,1});
-    scl::square_add({42,5,3,1});
-    scl::square_add({46,5,3,1});
-    scl::square s = scl::get_free3x3({30,1,16,0});
+    // scl::square_add({34,6,5,1});
+    // scl::square_add({34,10,3,1});
+    // scl::square_add({42,5,3,1});
+    // scl::square_add({46,5,3,1});
+    // scl::square s = scl::get_free3x3({30,1,16,0});
 
-    cout << s << endl;
+    // cout << s << endl;
 
-    scl::vector v = {1,1};
-    s = s + v;
+    // scl::vector v = {1,1};
+    // s = s + v;
 
-    v.rotate90();
-    cout << v << endl;
-    v.rotate90();
-    cout << v << endl;
-    v.rotate90();
-    cout << v << endl;
-    v.rotate90();
-    cout << v << endl;
+    // v.rotate90();
+    // cout << v << endl;
+    // v.rotate90();
+    // cout << v << endl;
+    // v.rotate90();
+    // cout << v << endl;
+    // v.rotate90();
+    // cout << v << endl;
 
-    cout << s << endl;
+    // cout << s << endl;
 
-    scl::square lol = {0,0,1,1};
-    cout << lol+v << endl;
-    cout << lol+v << endl;
+    // scl::square lol = {0,0,1,1};
+    // cout << lol+v << endl;
+    // cout << lol+v << endl;
 
-    scl::square s1 = {1,1,2,1};
+    // scl::square s1 = {1,1,2,1};
 
-    cout <<  (s1 == s1) << endl;
-    cout << (s2 == s2) << endl;
-    cout << (s1 == s2) << endl;
-    cout << (s1 != s2) << endl;
-    cout << (s1 != s1) << endl;
+    // cout <<  (s1 == s1) << endl;
+    // cout << (s2 == s2) << endl;
+    // cout << (s1 == s2) << endl;
+    // cout << (s1 != s2) << endl;
+    // cout << (s1 != s1) << endl;
+
+scl::vector ve = {1,0};
+scl::square sq = {1,5,1,1};
+
+for(int i=0; i<4; i++){
+    for(int j=0; j<4; j++){
+        cout << scl::check_diagonal({3,3,1,1}, sq) << endl;
+        sq += ve;
+    }
+    ve.rotate90();
+}
+
 }
