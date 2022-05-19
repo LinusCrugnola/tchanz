@@ -34,8 +34,7 @@ bool Collector::action(scl::csquare hill_pos, bool free){
         scl::vector direction = {vx/abs(vx), vy/abs(vy)};
     }
     else if(abs(vx) > abs(vy)){
-        unsigned super1 = count_superpos(abs(vx)-abs(vy), {vx/abs(vx), vy/abs(vy)},
-                                         abs(vy)-abs(vx), {vx/abs(vx), -vy/abs(vy)});
+
     }
     return true;
 }
