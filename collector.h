@@ -94,6 +94,12 @@ private:
      */
     bool leave_home(scl::csquare hill_pos);
 
+    /**
+     * @brief try to move in every direction
+     * @remark if ant is blocked it does this
+     */
+    bool move_unblock();
+
 public:
     /**
      * @brief move the collector ant

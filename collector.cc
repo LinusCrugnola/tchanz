@@ -43,20 +43,27 @@ bool Collector::action(scl::csquare hill_pos, bool free){
                               hill_pos.y + hill_pos.side/2, 1, 1};
     }
 
-    if(target == this->position) this->leave_home(hill_pos);
+    if(target == this->position && scl::square_contains(hill_pos, this->position))    
+        if(!this->leave_home(hill_pos))
+            no_move_count++;
 
     scl::path path = this->get_path(target);
     scl::vector step = this->get_step(path);
     if(!this->verify_position(step)){
         no_move_count++;
-        //add some shit
     }
+
     if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
         this->nutrition->delete_element(target);
         this->food_state = LOADED;
     }
     else if(this->food_state == LOADED && scl::square_touch(this->position, hill_pos)){
         this->food_state = EMPTY;
+    }
+
+    if(no_move_count >= 4){
+        this->move_unblock();
+        no_move_count = 0;
     }
 
     return true;
@@ -100,7 +107,7 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     unsigned count = 0;
     for(int i = 0; i < path.steps1; i++){
         if(no_modif){
-            no_modif = scl::square_validation(mock + path.dir1);
+            no_modif = scl::square_validation(mock + path.dir1, scl::NOERR);
         }
         else deviation++;
         mock += (no_modif ? path.dir1 : path.dir2);
@@ -167,7 +174,7 @@ bool Collector::leave_home(scl::csquare hill_pos){
     else if(this->position.x < hill_pos.x + hill_pos.side/2){
         direction.dx = -1;
     }
-    else direction.dx = this->position.x < scl::g_max/2 ? 1 ; -1;
+    else direction.dx = this->position.x < scl::g_max/2 ? 1 : -1;
 
     if(this->position.y > hill_pos.y + hill_pos.side/2){
         direction.dy = 1;
@@ -175,9 +182,27 @@ bool Collector::leave_home(scl::csquare hill_pos){
     else if(this->position.y < hill_pos.y + hill_pos.side/2){
         direction.dy = -1;
     }
-    else direction.dy = this->position.y < scl::g_max/2 ? 1 ; -1;
+    else direction.dy = this->position.y < scl::g_max/2 ? 1 : -1;
 
     return this->verify_position(direction);    
+}
+
+bool Collector::move_unblock(){
+    scl::vector direction = {1,1};
+    bool success = false;
+
+    success |= this->verify_position(direction);
+    if(success) return true;
+    direction.rotate90();
+    success |= this->verify_position(direction);
+    if(success) return true;
+    direction.rotate90();
+    success |= this->verify_position(direction);
+    if(success) return true;
+    direction.rotate90();
+    success |= this->verify_position(direction);
+    if(success) return true;
+    return false;
 }
 
 bool Collector::draw(graphic::color color) {
