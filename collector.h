@@ -46,14 +46,10 @@ private:
     /**
      * @brief count the superpositions on a given path with
      * 
-     * @param prim first direction
-     * @param steps1 number of steps following prim
-     * @param sec second direction
-     * @param steps2 number of steps following sec
+     * @param path to step through
      * @return unsigned number of superpositions
      */
-    unsigned count_superpos(scl::vector prim, unsigned steps1, 
-                            scl::vector sec, unsigned steps2);
+    unsigned count_superpos(scl::path path);
 
     /**
      * @brief verify if the given move can be done
@@ -65,11 +61,20 @@ private:
 
     /**
      * @brief Get the next step for a given target
+     * @remark compares the two permutations of path
      * 
-     * @param target 
+     * @param path to the target
      * @return scl::vector next step
      */
-    scl::vector get_step(scl::csquare target);
+    scl::vector get_step(scl::path path);
+
+    /**
+     * @brief Get the best path to the target
+     * 
+     * @param target food object
+     * @return scl::path 
+     */
+    scl::path get_path(scl::csquare target);
 
 public:
     /**

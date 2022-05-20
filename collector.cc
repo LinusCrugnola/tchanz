@@ -36,15 +36,10 @@ bool Collector::action(scl::csquare hill_pos, bool free){
 
     scl::square target = this->nutrition->get_nearest(this->position);
 
-    scl::vector step = get_step(target);
-
-    verify_position(step);
-
     return true;
 }
 
-unsigned Collector::count_superpos(scl::vector prim, unsigned steps1, 
-                            scl::vector sec, unsigned steps2){
+unsigned Collector::count_superpos(scl::path path){
     scl::square mock = this->position;
     unsigned count = 0;
     for(unsigned i = 0; i < steps1; i++){
@@ -58,30 +53,11 @@ unsigned Collector::count_superpos(scl::vector prim, unsigned steps1,
     return count;
 }
 
-scl::vector Collector::get_step(scl::csquare target){
+scl::vector Collector::get_step(scl::path path){
     int vx = target.x - this->position.x;
     int vy = target.y - this->position.y;
     unsigned avx = abs(vx);
     unsigned avy = abs(vy);
-    if(avx == avy) return {vx/avx, vy/avy};
-    else if(avx > avy){
-        unsigned s1 = count_superpos({vx/avx, vy/avy}, avx - avy, 
-                                     {vx/avx, -vy/avy}, avy - avx);
-        unsigned s2 = count_superpos({vx/avx, -vy/avy}, avy - avx, 
-                                     {vx/avx, vy/avy}, avx - avy);
-        if(s1 > s2) return {vx/avx, vy/avy};
-        else if(s1 < s2) return {vx/avx, -vy/avy};
-        //TODO: case equals
-    }
-    else{
-        unsigned s1 = count_superpos({vy/avy, vx/avy}, avy - avx, 
-                                     {vy/avy, -vx/avx}, avx - avy);
-        unsigned s2 = count_superpos({vy/avy, -vx/avx}, avx - avy, 
-                                     {vy/avy, vx/avy}, avy - avx);
-        if(s1 > s2) return {vx/avx, vy/avy};
-        else if(s1 < s2) return {vx/avx, -vy/avy};
-        //TODO: case equals
-    }
 }
 
 bool Collector::verify_position(scl::cvector step){
