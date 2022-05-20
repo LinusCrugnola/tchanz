@@ -53,6 +53,15 @@ private:
     unsigned count_superpos(scl::path path, unsigned& deviation);
 
     /**
+     * @brief Get the step count first superposition
+     * 
+     * @param path to step through
+     * @param deviation to inscribed deviation
+     * @return unsigned step count
+     */
+    unsigned get_first_superpos(scl::path path, unsigned deviation);
+
+    /**
      * @brief verify if the given move can be done
      * 
      * @param step the step to verify

@@ -57,6 +57,16 @@ scl::vector Collector::get_step(scl::path path){
     unsigned deviation1 = 0, deviation2 = 0;
     unsigned count1 = this->count_superpos(path, deviation1);
     unsigned count2 = this->count_superpos(scl::permute(path), deviation2);
+    if(count1 < count2){
+        return (deviation1 == path.steps1 ? path.dir2 : path.dir1);
+    }
+    else if(count1 > count2){
+        return (deviation2 == path.steps2 ? path.dir1 : path.dir2);
+    }
+    else{
+        count1 = this->get_first_superpos(path, deviation1);
+        count2 = this->get_first_superpos(scl::permute(path), deviation2);
+    }
 }
 
 unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
@@ -81,6 +91,32 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
         }
         mock += path.dir2;
         if(scl::square_superposition(mock)) count++;
+    }
+    return count;
+}
+
+unsigned Collector::get_first_superpos(scl::path path, unsigned deviation){
+    scl::square mock = this->position;
+    unsigned count = 0;
+    for(unsigned i = 0; i < path.steps1 - deviation; i++){
+        mock += path.dir1;
+        if(scl::square_superposition(mock)) return count;
+        count++;
+    }
+    for(unsigned i = 0; i < deviation; i++){
+        mock += path.dir2;
+        if(scl::square_superposition(mock)) return count;
+        count++;
+    }
+    for(unsigned i = 0; i < deviation; i++){
+        mock += path.dir1;
+        if(scl::square_superposition(mock)) return count;
+        count++;
+    }
+    for(unsigned i = 0; i < path.steps1 - deviation; i++){
+        mock += path.dir2;
+        if(scl::square_superposition(mock)) return count;
+        count++;
     }
     return count;
 }
