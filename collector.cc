@@ -36,6 +36,10 @@ bool Collector::action(scl::csquare hill_pos, bool free){
 
     scl::square target = this->nutrition->get_nearest(this->position);
 
+    scl::path path = this->get_path(target);
+    
+
+
     return true;
 }
 
@@ -49,22 +53,36 @@ scl::path Collector::get_path(scl::csquare target){
     else return {{1,  vy/avy}, (avy - vx)/2, {-1,  vy/avy}, (avy + vx)/2};
 }
 
-unsigned Collector::count_superpos(scl::path path){
-    /*scl::square mock = this->position;
-    unsigned count = 0;
-    for(unsigned i = 0; i < steps1; i++){
-        mock += prim;
-        if(scl::square_superposition(mock)) count++;
-    }
-    for(unsigned i = 0; i < steps2; i++){
-        mock += sec;
-        if(scl::square_superposition(mock)) count++;
-    }
-    return count;*/
+scl::vector Collector::get_step(scl::path path){
+    unsigned deviation1 = 0, deviation2 = 0;
+    unsigned count1 = this->count_superpos(path, deviation1);
+    unsigned count2 = this->count_superpos(scl::permute(path), deviation2);
 }
 
-scl::vector Collector::get_step(scl::path path){
-
+unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
+    scl::square mock = this->position;
+    bool no_modif = true;
+    unsigned count = 0;
+    for(unsigned i = 0; i < path.steps1; i++){
+        if(no_modif){
+            no_modif = scl::square_validation(mock + path.dir1);
+        }
+        else deviation++;
+        mock += (no_modif ? path.dir1 : path.dir2);
+        if(scl::square_superposition(mock)) count++;
+    }
+    unsigned steps_back = deviation;
+    for(unsigned i = 0; i < path.steps2; i++){
+        if(steps_back > 0){
+            mock += path.dir1;
+            if(scl::square_superposition(mock)) count++;
+            steps_back--;
+            continue;
+        }
+        mock += path.dir2;
+        if(scl::square_superposition(mock)) count++;
+    }
+    return count;
 }
 
 bool Collector::verify_position(scl::cvector step){

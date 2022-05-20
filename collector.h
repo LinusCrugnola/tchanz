@@ -47,9 +47,10 @@ private:
      * @brief count the superpositions on a given path with
      * 
      * @param path to step through
+     * @param deviation @ref to inscribe an eventual deviation of the path
      * @return unsigned number of superpositions
      */
-    unsigned count_superpos(scl::path path);
+    unsigned count_superpos(scl::path path, unsigned& deviation);
 
     /**
      * @brief verify if the given move can be done
