@@ -34,11 +34,23 @@ bool Collector::action(scl::csquare hill_pos, bool free){
         return true;
     }
 
-    scl::square target = this->nutrition->get_nearest(this->position);
-
-    scl::path path = this->get_path(target);
-    
-
+    static no_move_count = 0;
+    if(this->food_state = EMPTY){
+        scl::square target = this->nutrition->get_nearest(this->position);
+        scl::path path = this->get_path(target);
+        scl::vector step = this->get_step(path);
+        if(!this->verify_position(step)){
+            no_move_count++;
+            //add some shit
+        }
+        if(scl::square_superposition(this->position, target)){
+            this->nutrition->delete_element(target);
+            this->food_state = LOADED;
+        }
+    }
+    else{
+        //return home
+    }
 
     return true;
 }

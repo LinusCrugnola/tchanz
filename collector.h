@@ -95,8 +95,6 @@ public:
      */
     virtual bool action(scl::csquare hill_pos, bool free) override;
 
-    bool control_path(scl::csquare food_pos);
-
     /**
      * @brief draw the collector ant
      * 
