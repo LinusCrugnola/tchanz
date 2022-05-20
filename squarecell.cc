@@ -71,6 +71,15 @@ double scl::distance(scl::csquare s1, scl::csquare s2){
     return sqrt(pow(((double) s1.x - s2.x), 2) + pow(((double) s1.y - s2.y), 2));
 }
 
+scl::path scl::permute(const scl::path& path){
+    scl::path new_path;
+    new_path.dir1 = path.dir2;
+    new_path.dir2 = path.dir1;
+    new_path.steps1 = path.steps2;
+    new_path.steps2 = path.steps1;
+    return new_path;
+}
+
 bool scl::square_validation(csquare square, bool print) {
     using namespace error_squarecell;
     if (square.x < 0 || square.x > (scl::g_max-1)) {

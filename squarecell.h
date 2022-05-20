@@ -65,6 +65,24 @@ namespace scl {
     };
 
     /**
+     * @brief General type path containing two vertices that are permutable
+     */
+    struct path {
+        vector dir1;
+        unsigned steps1;
+        vector dir2;
+        unsigned steps2;
+    };
+
+    /**
+     * @brief permute a given path (invert vertices)
+     * 
+     * @param path 
+     * @return path new path
+     */
+    path permute(const path& path);
+
+    /**
      * @brief Define drawing types for squares
      * 
      * @details empty:    empty square (only border line)
