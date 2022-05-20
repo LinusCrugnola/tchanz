@@ -20,40 +20,25 @@ Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_st
     scl::square_add(position);
 }
 
+Collector::~Collector(){
+    scl::square_delete(this->position);
+    if(this->food_state == LOADED){
+        this->nutrition->add_element(this->position.x, this->position.y);
+    }
+}
+
 bool Collector::action(scl::csquare hill_pos, bool free){
     age++;
     if(age >= bug_life){ 
         this->end_of_life = true;
         return true;
     }
-    scl::square target = this->nutrition->get_nearest(this->position);
-    int vx = target.x - this->position.x;
-    int vy = target.y - this->position.y;
-    unsigned avx = abs(vx);
-    unsigned avy = abs(vy);
-    if(avx == avy){
-        //only one direction
-        target = this->position + {vx/avx, vy/avy};
-    }
-    else if(avx > avy){
-        direction1 = {vx/avx, vy/avy}
-        unsigned s1 = count_superpos({vx/avx, vy/avy}, avx - avy, 
-                                     {vx/avx, -vy/avy}, avy - avx);
-        unsigned s2 = count_superpos({vx/avx, -vy/avy}, avy - avx, 
-                                     {vx/avx, vy/avy}, avx - avy);
-        target = this->position + (s1 > s2 ? {vx/avx, vy/avy} : {vx/avx, -vy/avy});
-        //TODO: case equals
-    }
-    else{
-        unsigned s1 = count_superpos({vy/avy, vx/avy}, avy - avx, 
-                                     {vy/avy, -vx/avx}, avx - avy);
-        unsigned s2 = count_superpos({vy/avy, -vx/avx}, avx - avy, 
-                                     {vy/avy, vx/avy}, avy - avx);
-        target = this->position + (s1 > s2 ? {vx/avx, vy/avy} : {vx/avx, -vy/avy});
-        //TODO: case equals
-    }
 
-    verify_position(scl::cvector next_move);
+    scl::square target = this->nutrition->get_nearest(this->position);
+
+    scl::vector step = get_step(target);
+
+    verify_position(step);
 
     return true;
 }
@@ -71,6 +56,32 @@ unsigned Collector::count_superpos(scl::vector prim, unsigned steps1,
         if(scl::square_superposition(mock)) count++;
     }
     return count;
+}
+
+scl::vector Collector::get_step(scl::csquare target){
+    int vx = target.x - this->position.x;
+    int vy = target.y - this->position.y;
+    unsigned avx = abs(vx);
+    unsigned avy = abs(vy);
+    if(avx == avy) return {vx/avx, vy/avy};
+    else if(avx > avy){
+        unsigned s1 = count_superpos({vx/avx, vy/avy}, avx - avy, 
+                                     {vx/avx, -vy/avy}, avy - avx);
+        unsigned s2 = count_superpos({vx/avx, -vy/avy}, avy - avx, 
+                                     {vx/avx, vy/avy}, avx - avy);
+        if(s1 > s2) return {vx/avx, vy/avy};
+        else if(s1 < s2) return {vx/avx, -vy/avy};
+        //TODO: case equals
+    }
+    else{
+        unsigned s1 = count_superpos({vy/avy, vx/avy}, avy - avx, 
+                                     {vy/avy, -vx/avx}, avx - avy);
+        unsigned s2 = count_superpos({vy/avy, -vx/avx}, avx - avy, 
+                                     {vy/avy, vx/avy}, avy - avx);
+        if(s1 > s2) return {vx/avx, vy/avy};
+        else if(s1 < s2) return {vx/avx, -vy/avy};
+        //TODO: case equals
+    }
 }
 
 bool Collector::verify_position(scl::cvector step){
@@ -95,31 +106,6 @@ bool Collector::draw(graphic::color color) {
     }
     return no_error;
 }
-
-/*bool Collector::control_path(scl::csquare food_pos)
-{
-    bool pass(true);
-    int vx(0), vy(0);
-    int path_1(0), path_2(0);
-    scl::square pseudo_collector;
-    vx = food_pos.x - position.x;
-    vy = food_pos.y - position.y;
-    scl::square pseudo_collector = position;
-    if(abs(vx) == abs(vy))
-    {
-        //the collector is on a direct diagonal, it's the only path it can take (abs(vx)+abs(vy))/2
-    }
-    //Path 1
-    for(int i(1); i<=(abs(vx)+abs(vy))/2; i++)
-    {   
-
-        if(scl::square_superposition(pseudo_collector))
-        {
-            path_1 = path_1 + 1;
-        }
-    }
-    for(int)
-}*/
 
 bool Collector::loaded() const { return this->food_state == LOADED ? true : false; }
 

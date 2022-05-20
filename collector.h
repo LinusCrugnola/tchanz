@@ -63,6 +63,14 @@ private:
      */
     bool verify_position(scl::cvector step);
 
+    /**
+     * @brief Get the next step for a given target
+     * 
+     * @param target 
+     * @return scl::vector next step
+     */
+    scl::vector get_step(scl::csquare target);
+
 public:
     /**
      * @brief move the collector ant
@@ -123,6 +131,12 @@ public:
      */
     Collector(scl::csquare position, unsigned age, Etat_collector food, 
               Nutrition* nutrition, unsigned hill_index);
+
+    /**
+     * @brief Destroy the Collector object
+     * @remark drops the food item if loaded
+     */
+    ~Collector() override;
 };
 
 #endif /* COLLECTOR_H */
