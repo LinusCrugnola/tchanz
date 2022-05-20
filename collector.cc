@@ -39,8 +39,18 @@ bool Collector::action(scl::csquare hill_pos, bool free){
     return true;
 }
 
+scl::path Collector::get_path(scl::csquare target){
+    int vx = target.x - this->position.x;
+    int vy = target.y - this->position.y;
+    int avx = abs(vx);
+    int avy = abs(vy);
+    if(avx == avy) return {{ vx/avx,  vy/avy}, avx, {0,0}, 0};
+    if(avx > avy) return {{ vx/avx, 1}, (avx + vy)/2, { vx/avx, -1}, (avx - vy)/2};
+    else return {{1,  vy/avy}, (avy - vx)/2, {-1,  vy/avy}, (avy + vx)/2};
+}
+
 unsigned Collector::count_superpos(scl::path path){
-    scl::square mock = this->position;
+    /*scl::square mock = this->position;
     unsigned count = 0;
     for(unsigned i = 0; i < steps1; i++){
         mock += prim;
@@ -50,14 +60,11 @@ unsigned Collector::count_superpos(scl::path path){
         mock += sec;
         if(scl::square_superposition(mock)) count++;
     }
-    return count;
+    return count;*/
 }
 
 scl::vector Collector::get_step(scl::path path){
-    int vx = target.x - this->position.x;
-    int vy = target.y - this->position.y;
-    unsigned avx = abs(vx);
-    unsigned avy = abs(vy);
+
 }
 
 bool Collector::verify_position(scl::cvector step){

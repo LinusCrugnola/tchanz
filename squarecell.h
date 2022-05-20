@@ -69,9 +69,9 @@ namespace scl {
      */
     struct path {
         vector dir1;
-        unsigned steps1;
+        int steps1;
         vector dir2;
-        unsigned steps2;
+        int steps2;
     };
 
     /**
