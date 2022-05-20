@@ -34,22 +34,29 @@ bool Collector::action(scl::csquare hill_pos, bool free){
         return true;
     }
 
-    static no_move_count = 0;
-    if(this->food_state = EMPTY){
-        scl::square target = this->nutrition->get_nearest(this->position);
-        scl::path path = this->get_path(target);
-        scl::vector step = this->get_step(path);
-        if(!this->verify_position(step)){
-            no_move_count++;
-            //add some shit
-        }
-        if(scl::square_superposition(this->position, target)){
-            this->nutrition->delete_element(target);
-            this->food_state = LOADED;
-        }
-    }
+    static unsigned no_move_count = 0;
+    scl::square target;
+    if(this->food_state == EMPTY)
+        target = this->nutrition->get_nearest(this->position);
     else{
-        //return home
+        target = {hill_pos.x + hill_pos.side/2, 
+                              hill_pos.y + hill_pos.side/2, 1, 1};
+    }
+
+    if(target == this->position) this->leave_home(hill_pos);
+
+    scl::path path = this->get_path(target);
+    scl::vector step = this->get_step(path);
+    if(!this->verify_position(step)){
+        no_move_count++;
+        //add some shit
+    }
+    if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
+        this->nutrition->delete_element(target);
+        this->food_state = LOADED;
+    }
+    else if(this->food_state == LOADED && scl::square_touch(this->position, hill_pos)){
+        this->food_state = EMPTY;
     }
 
     return true;
@@ -70,19 +77,19 @@ scl::vector Collector::get_step(scl::path path){
     unsigned count1 = this->count_superpos(path, deviation1);
     unsigned count2 = this->count_superpos(scl::permute(path), deviation2);
     if(count1 < count2){
-        return (deviation1 == path.steps1 ? path.dir2 : path.dir1);
+        return ((int)deviation1 == path.steps1 ? path.dir2 : path.dir1);
     }
     else if(count1 > count2){
-        return (deviation2 == path.steps2 ? path.dir1 : path.dir2);
+        return ((int)deviation2 == path.steps2 ? path.dir1 : path.dir2);
     }
     else{
         count1 = this->get_first_superpos(path, deviation1);
         count2 = this->get_first_superpos(scl::permute(path), deviation2);
         if(count1 > count2){
-            return (deviation1 == path.steps1 ? path.dir2 : path.dir1);
+            return ((int)deviation1 == path.steps1 ? path.dir2 : path.dir1);
         }
         else{
-            return (deviation2 == path.steps2 ? path.dir1 : path.dir2);
+            return ((int)deviation2 == path.steps2 ? path.dir1 : path.dir2);
         }
     }
 }
@@ -91,7 +98,7 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     scl::square mock = this->position;
     bool no_modif = true;
     unsigned count = 0;
-    for(unsigned i = 0; i < path.steps1; i++){
+    for(int i = 0; i < path.steps1; i++){
         if(no_modif){
             no_modif = scl::square_validation(mock + path.dir1);
         }
@@ -100,7 +107,7 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
         if(scl::square_superposition(mock)) count++;
     }
     unsigned steps_back = deviation;
-    for(unsigned i = 0; i < path.steps2; i++){
+    for(int i = 0; i < path.steps2; i++){
         if(steps_back > 0){
             mock += path.dir1;
             if(scl::square_superposition(mock)) count++;
@@ -150,6 +157,27 @@ bool Collector::verify_position(scl::cvector step){
     }
     scl::square_add(this->position);
     return false;
+}
+
+bool Collector::leave_home(scl::csquare hill_pos){
+    scl::vector direction;
+    if(this->position.x > hill_pos.x + hill_pos.side/2){
+        direction.dx = 1;
+    }
+    else if(this->position.x < hill_pos.x + hill_pos.side/2){
+        direction.dx = -1;
+    }
+    else direction.dx = this->position.x < scl::g_max/2 ? 1 ; -1;
+
+    if(this->position.y > hill_pos.y + hill_pos.side/2){
+        direction.dy = 1;
+    }
+    else if(this->position.y < hill_pos.y + hill_pos.side/2){
+        direction.dy = -1;
+    }
+    else direction.dy = this->position.y < scl::g_max/2 ? 1 ; -1;
+
+    return this->verify_position(direction);    
 }
 
 bool Collector::draw(graphic::color color) {

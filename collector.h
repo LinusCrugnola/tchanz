@@ -86,6 +86,14 @@ private:
      */
     scl::path get_path(scl::csquare target);
 
+    /**
+     * @brief leave the anthill on the fastest possible way
+     * @remark if ambiguity leave in the direction of the center of the map
+     * 
+     * @param hill_pos position of the home
+     */
+    bool leave_home(scl::csquare hill_pos);
+
 public:
     /**
      * @brief move the collector ant
