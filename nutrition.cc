@@ -49,6 +49,21 @@ bool Nutrition::add_element(unsigned x, unsigned y){
     return true;
 }
 
+bool Nutrition::delete_element(scl::csquare position){
+    unsigned index = 0;
+    bool found = false;
+    for(size_t i = 0; i < this->foods.size(); i++){
+        if(this->foods[i] == position){
+            index = i;
+            found = true;
+            break;
+        }
+    }
+    if(!found) return false;
+    this->foods.erase(this->foods.begin()+index);
+    return true;
+}
+
 unsigned Nutrition::get_nbF(){
     return this->foods.size();
 }

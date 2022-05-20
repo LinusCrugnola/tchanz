@@ -56,6 +56,14 @@ public:
     bool add_element(unsigned x, unsigned y);
 
     /**
+     * @brief delete a food element
+     * 
+     * @param position of the element
+     * @return true if element could be deleted
+     */
+    bool delete_element(scl::csquare position);
+
+    /**
      * @brief Get the total amount of food
      * 
      * @return unsigned int
