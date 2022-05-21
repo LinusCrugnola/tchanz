@@ -16,7 +16,7 @@
 Collector::Collector(scl::csquare position, unsigned age, Etat_collector food_state, 
                      Nutrition* nutrition, unsigned hill_index)
     : Ant(position, hill_index, true), age(age), food_state(food_state), 
-      nutrition(nutrition) {
+      unload_next_move(false), nutrition(nutrition) {
     scl::square_add(position);
 }
 
@@ -28,24 +28,29 @@ Collector::~Collector(){
 }
 
 bool Collector::action(scl::csquare hill_pos, bool free){
+    static unsigned no_move_count = 0;
+    if(unload_next_move){
+        this->food_state = EMPTY;
+        this->unload_next_move = false;
+    }
     age++;
     if(age >= bug_life){ 
         this->end_of_life = true;
         return true;
     }
-
-    static unsigned no_move_count = 0;
     scl::square target;
     if(this->food_state == EMPTY)
         target = this->nutrition->get_nearest(this->position);
-    else{
+    else{ //loaded
         target = {hill_pos.x + hill_pos.side/2, 
                               hill_pos.y + hill_pos.side/2, 1, 1};
+        if(!scl::check_diagonal(target, this->position)) target.x++;
     }
-
     if(target == this->position){    
-        if(scl::square_contains(hill_pos, this->position)&&!this->leave_home(hill_pos))
-            no_move_count++;
+        if(scl::square_contains(hill_pos, this->position)){
+            if(!this->leave_home(hill_pos))
+            return true;
+        }
         else return true;
     }
     scl::path path = this->get_path(target);
@@ -53,20 +58,17 @@ bool Collector::action(scl::csquare hill_pos, bool free){
     if(!this->verify_position(step, target)){
         no_move_count++;
     }
-
+    std::cout << scl::square_touch(hill_pos, this->position) << std::endl;
     if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
         if(this->nutrition->delete_element(target))
             this->food_state = LOADED;
     }
-    else if(this->food_state == LOADED && scl::square_touch(hill_pos, this->position)){
-        this->food_state = EMPTY;
-    }
-
+    else if(this->food_state == LOADED && scl::square_touch(hill_pos, this->position))
+        this->unload_next_move = true;
     if(no_move_count >= 4){
         this->move_unblock();
         no_move_count = 0;
     }
-
     return true;
 }
 
@@ -107,30 +109,30 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     scl::square mock = this->position;
     bool no_modif = true;
     unsigned count = 0;
-    std::cout << "-------------" << std::endl;
-    std::cout << mock << std::endl;
+    //std::cout << "-------------" << std::endl;
+    //std::cout << mock << std::endl;
     for(int i = 0; i < path.steps1; i++){
         if(no_modif){
             scl::square test_square = mock;
             no_modif = scl::square_validation(test_square + path.dir1, scl::NOERR);
-            std::cout << test_square << std::endl;
+            //std::cout << test_square << std::endl;
         }
         else deviation++;
         mock += (no_modif ? path.dir1 : path.dir2);
-        std::cout << mock << std::endl;
+        //std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     unsigned steps_back = deviation;
     for(int i = 0; i < path.steps2; i++){
         if(steps_back > 0){
             mock += path.dir1;
-            std::cout << mock << std::endl;
+            //std::cout << mock << std::endl;
             if(scl::square_superposition(mock)) count++;
             steps_back--;
             continue;
         }
         mock += path.dir2;
-        std::cout << mock << std::endl;
+        //std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     return count;
@@ -165,10 +167,10 @@ unsigned Collector::get_first_superpos(scl::path path, unsigned deviation){
 bool Collector::verify_position(scl::cvector step, scl::csquare target){
     scl::square_delete(this->position);
     scl::square_delete(target);
-    scl::square new_position = this->position + step;
-    if(scl::square_validation(new_position) && 
-       !scl::square_superposition(new_position)){
-        this->position = new_position;
+    scl::square new_pos = this->position;
+    new_pos += step;
+    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos)){
+        this->position = new_pos;
         scl::square_add(target);
         scl::square_add(this->position);
         return true;
@@ -201,6 +203,7 @@ bool Collector::leave_home(scl::csquare hill_pos){
 
 bool Collector::move_unblock(){
     scl::vector direction = {1,1};
+
     bool success = false;
 
     success |= this->verify_position(direction, this->position);

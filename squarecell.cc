@@ -224,14 +224,16 @@ bool scl::check_diagonal(scl::csquare s1, scl::csquare s2)
 bool scl::square_touch(scl::csquare s1, scl::csquare s2) {
     unsigned s1xmin = s1.centered ? s1.x-s1.side/2 : s1.x;
     unsigned s2xmin = s2.centered ? s2.x-s2.side/2 : s2.x;
-    unsigned s1xmax = s1.centered ? s1.x+s1.side/2 : s1.x+s1.side;
-    unsigned s2xmax = s2.centered ? s2.x+s2.side/2 : s2.x+s1.side;
+    unsigned s1xmax = s1.centered ? s1.x+s1.side/2 : s1.x+s1.side-1;
+    unsigned s2xmax = s2.centered ? s2.x+s2.side/2 : s2.x+s1.side-1;
     unsigned s1ymin = s1.centered ? s1.y-s1.side/2 : s1.y;
     unsigned s2ymin = s2.centered ? s2.y-s2.side/2 : s2.y;
-    unsigned s1ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side;
-    unsigned s2ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s1.side;
-    if(s2xmin <= s1xmax + 1 && s2xmax >= s1xmin - 1 &&
-       s2ymin <= s1ymax + 1 && s2ymax >= s1ymin - 1   )
+    unsigned s1ymax = s1.centered ? s1.y+s1.side/2 : s1.y+s1.side-1;
+    unsigned s2ymax = s2.centered ? s2.y+s2.side/2 : s2.y+s1.side-1;
+    std::cout << (s2xmin <= s1xmax + 1) << ((int) s2xmax >= (int) s1xmin - 1) <<
+       (s2ymin <= s1ymax + 1) << ((int) s2ymax >= (int) s1ymin - 1) << std::endl;
+    if(s2xmin <= s1xmax + 1 && (int) s2xmax >= (int) s1xmin - 1 &&
+       s2ymin <= s1ymax + 1 && (int) s2ymax >= (int) s1ymin - 1)
         return true;
     else return false;
 }

@@ -39,6 +39,12 @@ private:
     Etat_collector food_state;
 
     /**
+     * @brief determines if the collector can drop his nutrition on the next 
+     * move (touched anthill)
+     */
+    bool unload_next_move;
+
+    /**
      * @brief pointer on the nutrition object stored in simulation
      */
     Nutrition* nutrition;
