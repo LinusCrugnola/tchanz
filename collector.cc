@@ -160,7 +160,8 @@ bool Collector::verify_position(scl::cvector step, scl::csquare target){
     scl::square_delete(target);
     scl::square new_pos = this->position;
     new_pos += step;
-    if(scl::square_validation(new_pos) && !scl::square_superposition(new_pos)){
+    if(scl::square_validation(new_pos, scl::NOERR) 
+       && !scl::square_superposition(new_pos)){
         this->position = new_pos;
         scl::square_add(target);
         scl::square_add(this->position);

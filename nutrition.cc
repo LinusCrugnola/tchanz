@@ -41,7 +41,8 @@ bool Nutrition::add_element(std::istringstream& data) {
 bool Nutrition::add_element(unsigned x, unsigned y){
     scl::square position = {x, y, 1, 1};
 
-    if(!scl::square_validation(position) || scl::square_superposition(position))
+    if(!scl::square_validation(position, scl::NOERR) || 
+        scl::square_superposition(position))
         return false;
 
     scl::square_add(position);

@@ -284,7 +284,6 @@ bool Anthill::update_position(scl::csquare new_position, std::vector<Anthill*>& 
 }
 
 Anthill::~Anthill() {
-    std::cout << "Anthill died" << std::endl;
     // destroy all ants
     delete this->generator;
     for (auto& ant : this->ants) {
