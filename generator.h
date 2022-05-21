@@ -57,24 +57,23 @@ public:
     /**
      * @brief move the generator ant
      * 
-     * @param hill_pos 
+     * @param hill_pos position of the hill
+     * @param free indicates if the hill can grow
      * @return true if no errors
      */
     virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the generator ant
-     * 
      * @remark draws a filled square
      * 
      * @param color specifies the color of the ant (parent color)
-     * 
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
 
     /**
-     * @brief Get the total food
+     * @brief Get the total amount of food 
      * 
      * @return unsigned
      */
@@ -95,8 +94,7 @@ public:
     void set_total_ants(unsigned total);
 
     /**
-     * @brief validates that an ants position is inside the hill and it doesn't 
-     * intersect with another entity
+     * @brief validates the configfile data and construct the ant if valid
      * 
      * @param xg x coordinate of generator
      * @param yg y cooridinate of generator
