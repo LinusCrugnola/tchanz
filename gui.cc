@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     gui.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             90%
-*           Linus Crugnola <linus.crugnola@epfl.ch>     10%
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             80%
+*           Linus Crugnola <linus.crugnola@epfl.ch>     20%
 * @version  1.0
 * @date     29.04.2022
 *******************************************************************************/

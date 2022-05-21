@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     anthill.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             90 %
-*           Linus Crugnola <linus.crugnola@epfl.ch>     10 %
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             60 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     40 %
 * @version  1.0
 * @date     01.04.2022
 *******************************************************************************/

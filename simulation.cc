@@ -1,7 +1,7 @@
 /******************************************************************************!
 * @file     simulation.cc
-* @author   Léo Brückl <leo.bruckl@epfl.ch>             30 %
-*           Linus Crugnola <linus.crugnola@epfl.ch>     70 %
+* @author   Léo Brückl <leo.bruckl@epfl.ch>             20 %
+*           Linus Crugnola <linus.crugnola@epfl.ch>     80 %
 * @version  1.0
 * @date     01.04.2022
 *******************************************************************************/
