@@ -104,7 +104,6 @@ bool scl::square_validation(csquare square, bool print) {
             if(print) std::cout << print_outside(square.y, square.side, scl::g_max-1);
             return false;
         }
-        std::cout << ((int) square.x )-square.side/2 << std::endl;
     }
     else {
         if ((square.x+square.side-1) > scl::g_max-1) {

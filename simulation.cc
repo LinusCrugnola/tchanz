@@ -262,12 +262,12 @@ std::string Simulation::get_fileheader(){
 }
 
 void Simulation::clear(){
-    this->food.clear();
     for(auto elem : this->anthill){
         delete elem;
         elem = nullptr;
     }
     this->anthill.clear();
+    this->food.clear();
 }
 
 unsigned Simulation::get_dimension(){

@@ -151,65 +151,29 @@ bool Anthill::create_ant(Nutrition* food){
 
 bool Anthill::ant_validation(std::istringstream& data, cunsigned home, 
                              Nutrition* nutrition) {
-    enum Ant_states { collector, defensor, predator, finale };
-    static unsigned i = 0, total = 0;
-    static Ant_states state = collector;
-    if (state == collector && total == 0) {
-        total = this->nbC;
-    }
-    if (this->nbC == 0 && state == collector) {
-        state = this->nbD == 0 ? predator : defensor;
-        total = this->nbD == 0 ? this->nbP : this->nbD;
-    }
+    static unsigned i = 0, total = this->get_ants() - 1;
+    if(i == 0)
+        total = this->get_ants() - 1;
+    bool reset = false;
     Ant* new_ant = nullptr;
-
-    bool success = true;
-
-    switch (state) {
-        case collector:
-            new_ant = Collector::data_validation(data, nutrition, home);
-            if (new_ant != nullptr) this->ants.push_back(new_ant);
-            else success = false;
-            i += 1;
-            if (i >= total) {
-                state = defensor;
-                i = 0;
-                total = this->nbD;
-            }
-            break;
-        case defensor:
-            new_ant = Defensor::data_validation(data, this->position, home);
-            if (new_ant != nullptr) this->ants.push_back(new_ant);
-            else success = false;
-            i += 1;
-            if (i >= total) {
-                state = predator;
-                i = 0;
-                total = this->nbP;
-            }
-            break;
-        case predator:
-            new_ant = Predator::data_validation(data, home);
-            if (new_ant != nullptr) this->ants.push_back(new_ant);
-            else success = false;
-            i += 1;
-            if (i >= total) {
-                state = finale;
-            }
-            break;
-        case finale:
-            state = collector;
-            total = 0;
-            i = 0;
-            break;
+    if(i < this->nbC)
+        new_ant = Collector::data_validation(data, nutrition, home);
+    else if(i < this->nbC + this->nbD)
+        new_ant = Defensor::data_validation(data, this->position, home);
+    else if(i < total)
+        new_ant = Predator::data_validation(data, home);
+    else 
+        reset = true;
+    if(new_ant != nullptr){
+        this->ants.push_back(new_ant);
+        i++;
+        return true;
     }
-    if (!success) {
-        state = collector;
-        total = 0;
+    else{
         i = 0;
-        return false;
+        total = 0;
     }
-    return true;
+    return reset;
 }
 
 void Anthill::remove_dead_ants(){
