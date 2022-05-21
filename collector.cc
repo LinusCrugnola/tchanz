@@ -58,7 +58,6 @@ bool Collector::action(scl::csquare hill_pos, bool free){
     if(!this->verify_position(step, target)){
         no_move_count++;
     }
-    std::cout << scl::square_touch(hill_pos, this->position) << std::endl;
     if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
         if(this->nutrition->delete_element(target))
             this->food_state = LOADED;
