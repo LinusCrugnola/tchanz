@@ -62,18 +62,17 @@ public:
     /**
      * @brief move the predator ant
      * 
-     * @param hill_pos 
+     * @param hill_pos position of the hill
+     * @param free indicates if hill can grow
      * @return true if no errors
      */
     virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the predator ant
-     * 
      * @remark draws a small square 
      * 
      * @param color specifies the color of the ant (parent color)
-     * 
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
