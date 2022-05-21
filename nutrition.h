@@ -23,11 +23,9 @@ class Nutrition {
 private:
     /**
      * @brief Vector of Food_data to store the nutrition elements
-     * 
-     * @remark TEMPORARY, for rendu 3 this could be changed to a unordered map 
-     * (fast existance verification)
      */
     std::vector<scl::square> foods;
+
 public:
     /**
      * @brief Get the nearest food element
