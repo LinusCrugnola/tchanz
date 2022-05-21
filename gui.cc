@@ -33,10 +33,10 @@ Gui::Gui()
       anthill_info("None selected          \n"), sim_info("Count: 0\n"),
       exit("exit"), open("open"), save("save"), start("start"), step("step"),
       previous("previous"), next("next"), 
-      adjustment(Gtk::Adjustment::create(5.0, 1.0, 11.0, 1.0, 1.0, 1.0)),
+      adjustment(Gtk::Adjustment::create(7.0, 1.0, 11.0, 1.0, 1.0, 1.0)),
       sim_speed(adjustment, Gtk::ORIENTATION_HORIZONTAL),
       simulation(nullptr), timer_val(0), 
-      start_state(b_start), timeout_value(10), timer_disconnect(false)
+      start_state(b_start), timeout_value(208), timer_disconnect(false)
     {
     set_title("Tchanz");
     set_border_width(5);
