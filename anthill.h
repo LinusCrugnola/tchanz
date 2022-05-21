@@ -48,9 +48,7 @@ private:
     /**
      * @brief state of the hill
      * 
-     * @details free if the hill can grow in all directions, constrained if growth only in 
-     * one direction.
-     * 
+     * @details FREE if the hill can grow, CONSTRAINED if the hill cann't grow
      */
     Etat_fourmiliere anthill_state;
 
@@ -60,7 +58,7 @@ private:
     bool end_of_klan;
 
     /**
-     * @brief indicates if the hill is highlighted
+     * @brief indicates if the hill is highlight
      */
     bool highlight;
 
@@ -70,18 +68,18 @@ private:
     Generator* generator;
 
     /**
-     * @brief vector of ants that belong to hill
+     * @brief vector of ants that belong to the hill
      */
     std::vector<Ant*> ants;
 
     /**
-     * @brief index of the anthill
+     * @brief index of the anthill (each hill has an unique index)
      */
     static unsigned anthill_count;
     unsigned index;
 
     /**
-     * @brief set a new anthill position
+     * @brief set a new anthill position if the amount of ants changed
      * 
      * @param position new position
      * @param hills the other hills existing
@@ -109,7 +107,7 @@ public:
     bool generator_action(std::default_random_engine* engine, Nutrition* food);
 
     /**
-     * @brief actions the other ants (not generator)
+     * @brief executes Ant::action of the other ants of the hill
      * 
      * @return true if no errors
      */
@@ -146,7 +144,6 @@ public:
 
     /**
      * @brief delete the highlight on anthill
-     * 
      */
     void delete_highlight();
 
@@ -171,7 +168,7 @@ public:
 
     /**
      * @brief Verification of an anthill's data. 
-     * Test if hill fits in the grid AND doesnt overlaps with an existing anthill
+     * Test if hill fits in the grid AND doesnt overlap with an existing anthill
      * 
      * @param data input stream
      * @param hills_existing anthills that already exist 
@@ -184,7 +181,9 @@ public:
                                        cunsigned home);
 
     /**
-     * @brief This function returns the number of ants in anthill
+     * @brief get the number of ants in anthill
+     * 
+     * @return unsigned
      */
     unsigned get_ants() const;
 
