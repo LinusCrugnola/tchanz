@@ -71,7 +71,8 @@ private:
      * @brief verify if the given move can be done
      * 
      * @param step the step to verify
-     * @return true if valid & move
+     * @param target food item the collector is heading to
+     * @return true if valid & move could be done
      */
     bool verify_position(scl::cvector step, scl::csquare target);
 
@@ -110,18 +111,17 @@ public:
     /**
      * @brief move the collector ant
      * 
-     * @param hill_pos 
+     * @param hill_pos position of the anthill
+     * @param free indicates if the anthill can grow
      * @return true if no errors
      */
     virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the collector ant
-     * 
      * @remark draws a square with diagonals
      * 
      * @param color specifies the color of the ant (parent color)
-     * 
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
@@ -134,13 +134,11 @@ public:
     virtual bool loaded() const override;
     
     /**
-     * @brief validates that an ants position is inside the grid and it doesn't 
-     * intersect with another entity
+     * @brief validate configfile data and construct ant if valid
      * 
      * @param input data stream
      * @param nutrition pointer on the food object
      * @param hill_index index of the parent anthill
-     * 
      * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data, Nutrition* nutrition, 
