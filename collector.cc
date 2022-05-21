@@ -108,28 +108,22 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     scl::square mock = this->position;
     bool no_modif = true;
     unsigned count = 0;
-    std::cout << "-------------" << std::endl;
-    std::cout << mock << std::endl;
     for(int i = 0; i < path.steps1; i++){
         if(no_modif){
             scl::square test_square = mock;
             no_modif = scl::square_validation(test_square + path.dir1, scl::NOERR);
             if(!no_modif) deviation++;
-            std::cout << "no_modif: " << no_modif << std::endl;
         }
         else deviation++;
         mock += (no_modif ? path.dir1 : path.dir2);
-        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     for(unsigned i = 0; i < deviation; i++){
         mock += path.dir1;
-        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     for(unsigned i = 0; i < path.steps2 - deviation; i++){
         mock += path.dir2;
-        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     return count;

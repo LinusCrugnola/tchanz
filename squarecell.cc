@@ -94,16 +94,17 @@ bool scl::square_validation(csquare square, bool print) {
         if (square.side % 2 == 0) {
             return false;
         }
-        else if ((square.x-square.side/2) < 0 || 
+        else if((square.x-square.side/2) < 0 || square.x-square.side/2 > scl::g_max ||
                  (square.x+square.side/2) > scl::g_max-1) {
             if(print) std::cout << print_outside(square.x, square.side, scl::g_max-1);
             return false;
         }
-        else if ((square.y-square.side/2) < 0 || 
+        else if((square.y-square.side/2) < 0 || square.y-square.side/2 > scl::g_max ||
                  (square.y+square.side/2) > scl::g_max-1) {
             if(print) std::cout << print_outside(square.y, square.side, scl::g_max-1);
             return false;
         }
+        std::cout << ((int) square.x )-square.side/2 << std::endl;
     }
     else {
         if ((square.x+square.side-1) > scl::g_max-1) {
