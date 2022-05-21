@@ -270,12 +270,9 @@ void Gui::on_button_clicked_step() {
         timer_disconnect = true;
         timer_val++;
         this->sim_info.set_text("Count:  " + std::to_string(this->timer_val) + "\n");
-        //std::cout << "This is simulation update number : " << timer_val << std::endl;
         
-        // A call to make a single update of the simulation is expected here
         this->simulation->update();
         display_next_hill(0,1);
-        // Then a call to refresh the visualization (if any) would be done here
         this->canvas.queue_draw();
 	}    
 }
@@ -322,13 +319,10 @@ bool Gui::on_timeout() {
     }
 
     this->sim_info.set_text("Count:  " + std::to_string(this->timer_val) + "\n");
-    //std::cout << "This is simulation update number : " << timer_val << std::endl;
     ++timer_val;
 
-    // A call to make a single update of the simulation is expected here
     this->simulation->update();
     display_next_hill(0,1);
-    // Then a call to refresh the visualization (if any) would be done here
     this->canvas.queue_draw();
 
     return true;
