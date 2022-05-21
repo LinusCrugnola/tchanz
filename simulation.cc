@@ -148,7 +148,7 @@ bool Simulation::read_configfile(const std::string& filename) {
                 return false;
             }
         }
-        //realnce pour reset
+        //recall for reset
         Simulation::handle_line("");
         std::cout << message::success();
         std::cout << st_init << std::endl;
