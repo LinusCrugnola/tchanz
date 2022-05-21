@@ -115,7 +115,6 @@ unsigned Anthill::get_new_food() const {
 
 bool Anthill::create_ant(Nutrition* food){
     scl::square pos = scl::get_free3x3(this->position);
-    std::cout << "spawn at: " << pos.x << " " << pos.y << " " << pos.side << std::endl;
     double prop_coll, prop_def;
     if(this->anthill_state == FREE){
         prop_coll = prop_free_collector;
