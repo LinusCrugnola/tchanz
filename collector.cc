@@ -78,7 +78,7 @@ scl::path Collector::get_path(scl::csquare target){
     int avy = abs(vy);
     if(avx == avy) return {{ vx/avx,  vy/avy}, avx, {0,0}, 0};
     if(avx > avy) return {{ vx/avx, 1}, (avx + vy)/2, { vx/avx, -1}, (avx - vy)/2};
-    else return {{1,  vy/avy}, (avy - vx)/2, {-1,  vy/avy}, (avy + vx)/2};
+    else return {{1,  vy/avy}, (avy + vx)/2, {-1,  vy/avy}, (avy - vx)/2};
 }
 
 scl::vector Collector::get_step(scl::path path){
@@ -108,30 +108,28 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     scl::square mock = this->position;
     bool no_modif = true;
     unsigned count = 0;
-    //std::cout << "-------------" << std::endl;
-    //std::cout << mock << std::endl;
+    std::cout << "-------------" << std::endl;
+    std::cout << mock << std::endl;
     for(int i = 0; i < path.steps1; i++){
         if(no_modif){
             scl::square test_square = mock;
             no_modif = scl::square_validation(test_square + path.dir1, scl::NOERR);
-            //std::cout << test_square << std::endl;
+            if(!no_modif) deviation++;
+            std::cout << "no_modif: " << no_modif << std::endl;
         }
         else deviation++;
         mock += (no_modif ? path.dir1 : path.dir2);
-        //std::cout << mock << std::endl;
+        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
-    unsigned steps_back = deviation;
-    for(int i = 0; i < path.steps2; i++){
-        if(steps_back > 0){
-            mock += path.dir1;
-            //std::cout << mock << std::endl;
-            if(scl::square_superposition(mock)) count++;
-            steps_back--;
-            continue;
-        }
+    for(unsigned i = 0; i < deviation; i++){
+        mock += path.dir1;
+        std::cout << mock << std::endl;
+        if(scl::square_superposition(mock)) count++;
+    }
+    for(unsigned i = 0; i < path.steps2 - deviation; i++){
         mock += path.dir2;
-        //std::cout << mock << std::endl;
+        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     return count;
