@@ -37,7 +37,7 @@ protected:
     unsigned hill_index;
 
     /**
-     * @brief Register with al predatable ants, they inscribe themself at birth
+     * @brief Table with al predatable ants, they inscribe themself at birth
      * and delete themselves when they die
      */
     static std::vector<std::vector<Ant*>> predatables;
@@ -55,7 +55,7 @@ public:
     /**
      * @brief Get the position of the ant
      * 
-     * @return scl::square 
+     * @return scl::square position
      */
     scl::square get_position() const { return this->position; }
 
@@ -79,7 +79,7 @@ public:
     void kill();
 
     /**
-     * @brief action of the ant (move)
+     * @brief action of the ant
      * 
      * @param hill_pos position of the hill
      * @return true if no errors
@@ -87,9 +87,9 @@ public:
     virtual bool action(scl::csquare hill_pos, bool free) = 0;
 
     /**
-     * @brief returns if the ant carries a food item
+     * @brief get if the ant carries a food item
      * 
-     * @return bool
+     * @return bool true if ant carries food
      */
     virtual bool loaded() const { return false; }
 
