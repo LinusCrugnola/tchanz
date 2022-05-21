@@ -29,7 +29,6 @@ namespace graphic{
 
     /**
      * @brief Gets the next color from the hidden color list
-     * 
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
@@ -48,7 +47,6 @@ namespace graphic{
 
     /**
      * @brief draw an empty square (border only)
-     * 
      * @remark style of anthill
      * 
      * @param x x coordinate of square origin
@@ -65,7 +63,6 @@ namespace graphic{
 
     /**
      * @brief draw a square with inscribed rhomb (no borders)
-     * 
      * @remark style of food
      * 
      * @param x x coordinate of square origin
@@ -80,7 +77,6 @@ namespace graphic{
 
     /**
      * @brief draw a filled square
-     * 
      * @remark style of generator ant
      * 
      * @param x x coordinate of square origin
@@ -96,7 +92,6 @@ namespace graphic{
 
     /**
      * @brief draw a square and its diagonals (X)
-     * 
      * @remark style of the collector ant
      * 
      * @param x x coordinate of square origin
@@ -112,7 +107,6 @@ namespace graphic{
 
     /**
      * @brief draw a square with inscribed cross (#)
-     * 
      * @remark style of the defensor ant
      * 
      * @param x x coordinate of square origin
