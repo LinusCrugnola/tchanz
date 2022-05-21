@@ -29,7 +29,7 @@ namespace scl {
     constexpr bool NOERR = false;
 
     /**
-     * @brief General type vector that gives a direction
+     * @brief General type: two dimension vector
      * 
      * @param dx change of x direction
      * @param dy change of y direciton
@@ -45,7 +45,7 @@ namespace scl {
     };
 
     /**
-     * @brief General type square
+     * @brief General type: square
      * 
      * @param x coordinate of point
      * @param y coordinate of point
@@ -59,13 +59,21 @@ namespace scl {
         unsigned side;
         bool centered;
 
+        /**
+         * @brief overloaded square operators
+         */
         square operator+=(const vector& vec);
         bool operator==(const square& s);
         bool operator!=(const square& s);
     };
 
     /**
-     * @brief General type path containing two vertices that are permutable
+     * @brief General type: path
+     * 
+     * @param dir vertice of the path
+     * @param steps length of the vertices
+     * 
+     * @note path can be permuted
      */
     struct path {
         vector dir1;
@@ -78,7 +86,7 @@ namespace scl {
      * @brief permute a given path (invert vertices)
      * 
      * @param path 
-     * @return path new path
+     * @return new path
      */
     path permute(const path& path);
 
@@ -109,7 +117,7 @@ namespace scl {
     typedef const unsigned& coord;
 
     /**
-     * @brief Operators on squares & vectors:
+     * @brief overload perators for squares & vectors:
      */
     square operator+(square& s, cvector vec);
     bool operator==(csquare s1, csquare s2);
@@ -166,13 +174,10 @@ namespace scl {
 
     /**
      * @brief Test to see if two squares are on the same family of diagonals
-     * THESE TWO ENTITIES HAVE CENTERED COORDINATES
-     * THEY ARE CENTERED SQUARES!!
      * 
-     * @param s1 
-     * @param s2 
-     * @return true 
-     * @return false 
+     * @param s1 centered square
+     * @param s2 centered square
+     * @return true if same family of diagonals
      */
     bool check_diagonal(csquare s1, csquare s2);
 
@@ -210,8 +215,9 @@ namespace scl {
     /**
      * @brief Draws a square with a chosen drawtype
      * 
-     * @param square 
-     * @param type 
+     * @param square to draw
+     * @param type drawtype of the square
+     * @param color of the drawing
      * @param highlight square is filled with transparent color (default false)
      * 
      * @return bool true if no errors while drawing
@@ -221,7 +227,6 @@ namespace scl {
 
     /**
      * @brief Gets the next color from the graphic module
-     * 
      * @note the order of the colors is: red, green, blue, yellow, magenta, cyan
      *       after cyan, it restarts with red.
      * 
