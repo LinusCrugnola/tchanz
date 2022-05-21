@@ -91,7 +91,6 @@ bool Simulation::update(){
     }
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
-            std::cout << "Kill hill" << std::endl; //TODO: remove
             this->get_next_anthill_info(0,1);
             hill->~Anthill();
             hill = nullptr;
