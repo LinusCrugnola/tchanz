@@ -33,8 +33,7 @@ private:
 
     /**
      * @brief vector to memorize the direction in which the defensor walks
-     * 
-     * @remark default is up
+     * @remark default is up because ants spawn first in top right corner
      */
     scl::vector direction = {0, 1};
 
@@ -59,30 +58,27 @@ public:
     /**
      * @brief move the defensor ant
      * 
-     * @param hill_pos 
+     * @param hill_pos position of the hill
+     * @param free indicates if the hill can grow
      * @return true if no errors
      */
     virtual bool action(scl::csquare hill_pos, bool free) override;
 
     /**
      * @brief draw the defensor ant
-     * 
      * @remark draws a square with a cross inside
      * 
      * @param color specifies the color of the ant (parent color)
-     * 
      * @return true if no errors
      */
     virtual bool draw(graphic::color color) override;
 
     /**
-     * @brief validates that an ants position is inside the hill and it doesn't 
-     * intersect with another entity
+     * @brief validate the configfile data and return ant if valid
      * 
      * @param data position and number of anthill (stream)
      * @param anthill_position position of the hill
      * @param home index of the home anthill
-     * 
      * @return pointer to new ant object, null if position is invalid
      */
     static Ant* data_validation(std::istringstream& data, scl::csquare 
