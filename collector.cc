@@ -43,21 +43,22 @@ bool Collector::action(scl::csquare hill_pos, bool free){
                               hill_pos.y + hill_pos.side/2, 1, 1};
     }
 
-    if(target == this->position && scl::square_contains(hill_pos, this->position))    
-        if(!this->leave_home(hill_pos))
+    if(target == this->position){    
+        if(scl::square_contains(hill_pos, this->position)&&!this->leave_home(hill_pos))
             no_move_count++;
-
+        else return true;
+    }
     scl::path path = this->get_path(target);
     scl::vector step = this->get_step(path);
-    if(!this->verify_position(step)){
+    if(!this->verify_position(step, target)){
         no_move_count++;
     }
 
     if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
-        this->nutrition->delete_element(target);
-        this->food_state = LOADED;
+        if(this->nutrition->delete_element(target))
+            this->food_state = LOADED;
     }
-    else if(this->food_state == LOADED && scl::square_touch(this->position, hill_pos)){
+    else if(this->food_state == LOADED && scl::square_touch(hill_pos, this->position)){
         this->food_state = EMPTY;
     }
 
@@ -80,6 +81,7 @@ scl::path Collector::get_path(scl::csquare target){
 }
 
 scl::vector Collector::get_step(scl::path path){
+    if(path.steps2 == 0) return path.dir1;
     unsigned deviation1 = 0, deviation2 = 0;
     unsigned count1 = this->count_superpos(path, deviation1);
     unsigned count2 = this->count_superpos(scl::permute(path), deviation2);
@@ -105,23 +107,30 @@ unsigned Collector::count_superpos(scl::path path, unsigned& deviation){
     scl::square mock = this->position;
     bool no_modif = true;
     unsigned count = 0;
+    std::cout << "-------------" << std::endl;
+    std::cout << mock << std::endl;
     for(int i = 0; i < path.steps1; i++){
         if(no_modif){
-            no_modif = scl::square_validation(mock + path.dir1, scl::NOERR);
+            scl::square test_square = mock;
+            no_modif = scl::square_validation(test_square + path.dir1, scl::NOERR);
+            std::cout << test_square << std::endl;
         }
         else deviation++;
         mock += (no_modif ? path.dir1 : path.dir2);
+        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     unsigned steps_back = deviation;
     for(int i = 0; i < path.steps2; i++){
         if(steps_back > 0){
             mock += path.dir1;
+            std::cout << mock << std::endl;
             if(scl::square_superposition(mock)) count++;
             steps_back--;
             continue;
         }
         mock += path.dir2;
+        std::cout << mock << std::endl;
         if(scl::square_superposition(mock)) count++;
     }
     return count;
@@ -153,15 +162,18 @@ unsigned Collector::get_first_superpos(scl::path path, unsigned deviation){
     return count;
 }
 
-bool Collector::verify_position(scl::cvector step){
+bool Collector::verify_position(scl::cvector step, scl::csquare target){
     scl::square_delete(this->position);
+    scl::square_delete(target);
     scl::square new_position = this->position + step;
     if(scl::square_validation(new_position) && 
        !scl::square_superposition(new_position)){
         this->position = new_position;
+        scl::square_add(target);
         scl::square_add(this->position);
         return true;
     }
+    scl::square_add(target);
     scl::square_add(this->position);
     return false;
 }
@@ -184,23 +196,23 @@ bool Collector::leave_home(scl::csquare hill_pos){
     }
     else direction.dy = this->position.y < scl::g_max/2 ? 1 : -1;
 
-    return this->verify_position(direction);    
+    return this->verify_position(direction, this->position);    
 }
 
 bool Collector::move_unblock(){
     scl::vector direction = {1,1};
     bool success = false;
 
-    success |= this->verify_position(direction);
+    success |= this->verify_position(direction, this->position);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction);
+    success |= this->verify_position(direction, this->position);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction);
+    success |= this->verify_position(direction, this->position);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction);
+    success |= this->verify_position(direction, this->position);
     if(success) return true;
     return false;
 }

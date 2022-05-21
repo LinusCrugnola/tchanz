@@ -67,7 +67,7 @@ private:
      * @param step the step to verify
      * @return true if valid & move
      */
-    bool verify_position(scl::cvector step);
+    bool verify_position(scl::cvector step, scl::csquare target);
 
     /**
      * @brief Get the next step for a given target
