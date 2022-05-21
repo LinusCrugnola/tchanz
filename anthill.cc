@@ -89,7 +89,6 @@ bool Anthill::generator_action(std::default_random_engine* engine, Nutrition* fo
             this->create_ant(food);
         }
     }
-    //delete this->ants.back();
     return true; 
 }
 
