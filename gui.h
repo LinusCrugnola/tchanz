@@ -181,6 +181,7 @@ private:
      * @brief display the information of the next anthill
      * 
      * @param reverse if true, display the previous hill
+     * @param stay to get the info of the same hill as before
      */
     void display_next_hill(bool reverse, bool stay);
 
