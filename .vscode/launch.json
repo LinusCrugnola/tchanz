@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/projet",
-            "args": ["./testfiles/R3_tests/f06.txt"],
+            "args": ["./testfiles/R3_tests/c04.txt"],
             "stopAtEntry": ,
             "cwd": "${fileDirname}",
             "environment": [],

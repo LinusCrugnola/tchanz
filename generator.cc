@@ -15,6 +15,7 @@
 Generator::Generator(scl::csquare position, double total_food, unsigned hill_index)
     : Ant(position, hill_index, false), total_food(total_food) {
     scl::square_add(position);
+    this->predatables.push_back({});
 }
 
 bool Generator::action(scl::csquare hill_pos, bool free){
