@@ -54,6 +54,11 @@ private:
      */
     bool move(scl::csquare hill_pos);
 
+    /**
+     * @brief kill collectors that are in contact with the defensor ant
+     */
+    void kill_collector();
+
 public:
     /**
      * @brief move the defensor ant

@@ -23,7 +23,9 @@ bool Defensor::action(scl::csquare hill_pos, bool free){
         this->end_of_life = true;
         return true;
     }
+    this->kill_collector();
     if(!this->move(hill_pos)) this->end_of_life = true;
+    this->kill_collector();
     return true;
 }
 
@@ -71,6 +73,19 @@ bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
     }
     scl::square_add(this->position);
     return false;
+}
+
+void Defensor::kill_collector(){
+    for(auto& hill : predatables){
+        for(auto& coll : hill){
+            if(coll->get_hill() == this->hill_index) break;
+            scl::square pos = coll->get_position();
+            if(pos.side != 3) continue;
+            if(scl::square_touch(this->position, pos)){
+                coll->kill();
+            }
+        }
+    }
 }
 
 bool Defensor::draw(graphic::color color) {
