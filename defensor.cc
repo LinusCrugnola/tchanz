@@ -53,8 +53,11 @@ bool Defensor::verify_position(scl::csquare new_pos, scl::csquare hill_pos){
         back.rotate90();
         back.rotate90();
         new_pos += back;
-        if(scl::square_contains(hill_pos, new_pos)){
+        if(scl::square_contains(hill_pos, new_pos) &&
+           !scl::square_superposition(new_pos)){
+            scl::square_delete(this->position);
             this->position = new_pos;
+            scl::square_add(this->position);
             return true;
         }
         return false;
