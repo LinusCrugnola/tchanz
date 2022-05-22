@@ -96,9 +96,9 @@ void Predator::move(scl::csquare target){
     scl::square new_pos = this->position;
     new_pos += direction;
     if(!heading_home) scl::square_delete(target);
+    scl::square_delete(this->position);
     if(scl::square_validation(new_pos, scl::NOERR) && 
        !scl::square_superposition(new_pos)){
-        scl::square_delete(this->position);
         this->position = new_pos;
         scl::square_add(this->position);
     }
