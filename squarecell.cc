@@ -334,6 +334,14 @@ graphic::color scl::get_new_color(bool reset){
     return graphic::get_new_color(reset);
 }
 
+void scl::clear_grid(){
+    for (unsigned i = 0; i < scl::g_max; i++) {
+        for (unsigned j = 0; j < scl::g_max; j++) {
+            grid[j][i] = false;
+        }
+    }
+}
+
 // print function (Debug):
 void scl::print_grid() {
     for (unsigned i = 0; i < scl::g_max; i++) {

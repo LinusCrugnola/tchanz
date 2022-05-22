@@ -237,6 +237,11 @@ namespace scl {
     graphic::color get_new_color(bool reset = 0);
 
     /**
+     * @brief deletes all items in the grid
+     */
+    void clear_grid();
+
+    /**
      * @brief Functions to debug the module
      */
     void print_grid();

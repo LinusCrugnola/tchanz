@@ -267,6 +267,7 @@ void Simulation::clear(){
     }
     this->anthill.clear();
     this->food.clear();
+    scl::clear_grid();
 }
 
 unsigned Simulation::get_dimension(){
