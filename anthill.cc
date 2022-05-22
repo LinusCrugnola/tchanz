@@ -123,7 +123,7 @@ bool Anthill::create_ant(Nutrition* food){
         prop_coll = prop_constrained_collector;
         prop_def = prop_constrained_defensor;
     }
-    if(((double) this->nbC / (this->get_ants()-1)) < prop_coll){
+    if(get_ants() == 1 || ((double) this->nbC / (this->get_ants()-1)) < prop_coll){
         if(pos.side != 3) return false;
         this->ants.insert(this->ants.begin() + this->nbC, 
                           new Collector(pos, 0, EMPTY, food, index));
