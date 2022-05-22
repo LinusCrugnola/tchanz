@@ -55,7 +55,7 @@ bool Collector::action(scl::csquare hill_pos, bool free){
     }
     scl::path path = this->get_path(target);
     scl::vector step = this->get_step(path);
-    if(!this->verify_position(step, target)){
+    if(!this->verify_position(step, target, true)){
         no_move_count++;
     }
     if(this->food_state == EMPTY && scl::square_superposition(this->position, target)){
@@ -155,19 +155,19 @@ unsigned Collector::get_first_superpos(scl::path path, unsigned deviation){
     return count;
 }
 
-bool Collector::verify_position(scl::cvector step, scl::csquare target){
+bool Collector::verify_position(scl::cvector step, scl::csquare target, bool chasing){
     scl::square_delete(this->position);
-    scl::square_delete(target);
+    if(chasing && food_state == EMPTY) scl::square_delete(target);
     scl::square new_pos = this->position;
     new_pos += step;
     if(scl::square_validation(new_pos, scl::NOERR) 
        && !scl::square_superposition(new_pos)){
         this->position = new_pos;
-        scl::square_add(target);
+        if(chasing && food_state == EMPTY) scl::square_add(target);
         scl::square_add(this->position);
         return true;
     }
-    scl::square_add(target);
+    if(chasing && food_state == EMPTY) scl::square_add(target);
     scl::square_add(this->position);
     return false;
 }
@@ -190,7 +190,7 @@ bool Collector::leave_home(scl::csquare hill_pos){
     }
     else direction.dy = this->position.y < scl::g_max/2 ? 1 : -1;
 
-    return this->verify_position(direction, this->position);    
+    return this->verify_position(direction, this->position, false);    
 }
 
 bool Collector::move_unblock(){
@@ -198,16 +198,16 @@ bool Collector::move_unblock(){
 
     bool success = false;
 
-    success |= this->verify_position(direction, this->position);
+    success |= this->verify_position(direction, this->position, false);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction, this->position);
+    success |= this->verify_position(direction, this->position, false);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction, this->position);
+    success |= this->verify_position(direction, this->position, false);
     if(success) return true;
     direction.rotate90();
-    success |= this->verify_position(direction, this->position);
+    success |= this->verify_position(direction, this->position, false);
     if(success) return true;
     return false;
 }

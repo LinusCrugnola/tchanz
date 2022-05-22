@@ -72,9 +72,10 @@ private:
      * 
      * @param step the step to verify
      * @param target food item the collector is heading to
+     * @param chasing determines if the collector is chasing a foood item
      * @return true if valid & move could be done
      */
-    bool verify_position(scl::cvector step, scl::csquare target);
+    bool verify_position(scl::cvector step, scl::csquare target, bool chasing);
 
     /**
      * @brief Get the next step for a given target
