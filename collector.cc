@@ -95,7 +95,7 @@ scl::vector Collector::get_step(scl::path path){
     else{
         count1 = this->get_first_superpos(path, deviation1);
         count2 = this->get_first_superpos(scl::permute(path), deviation2);
-        if(count1 > count2){
+        if(count1 >= count2){
             return ((int)deviation1 == path.steps1 ? path.dir2 : path.dir1);
         }
         else{
