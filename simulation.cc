@@ -82,8 +82,11 @@ void Simulation::clear_highlights(){
 
 bool Simulation::update(){
     create_nutrition();
+    unsigned i = 0;
     std::cout << "nutri" << std::endl;
     for(auto& hill : this->anthill){
+        std::cout << "hill" << i << std::endl;
+        i++;
         hill->check_growth(anthill);
         hill->generator_action(&this->rand_engine, &this->food);
         if(!hill->is_dead()){
@@ -91,10 +94,7 @@ bool Simulation::update(){
         }
     }
     std::cout << "hills" << std::endl;
-    unsigned i = 0;
     for(auto& hill : this->anthill){
-        std::cout << "hill" << i << std::endl;
-        i++;
         if(hill->is_dead()){
             this->get_next_anthill_info(0,1);
             hill->~Anthill();
