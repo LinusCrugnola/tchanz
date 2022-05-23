@@ -77,6 +77,8 @@ scl::path Collector::get_path(scl::csquare target){
     int vy = target.y - this->position.y;
     int avx = abs(vx);
     int avy = abs(vy);
+    avx = avx == 0 ? 100000 : avx;
+    avy = avy == 0 ? 100000 : avy
     if(avx == avy) return {{ vx/avx,  vy/avy}, avx, {0,0}, 0};
     if(avx > avy) return {{ vx/avx, 1}, (avx + vy)/2, { vx/avx, -1}, (avx - vy)/2};
     else return {{1,  vy/avy}, (avy + vx)/2, {-1,  vy/avy}, (avy - vx)/2};
