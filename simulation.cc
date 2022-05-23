@@ -82,6 +82,7 @@ void Simulation::clear_highlights(){
 
 bool Simulation::update(){
     create_nutrition();
+    std::cout << "nutri" << std::endl;
     for(auto& hill : this->anthill){
         hill->check_growth(anthill);
         hill->generator_action(&this->rand_engine, &this->food);
@@ -89,6 +90,7 @@ bool Simulation::update(){
             hill->ants_action();
         }
     }
+    std::cout << "hills" << std::endl;
     for(auto& hill : this->anthill){
         if(hill->is_dead()){
             this->get_next_anthill_info(0,1);
@@ -97,6 +99,7 @@ bool Simulation::update(){
         }
         else hill->remove_dead_ants();
     }
+    std::cout << "ants dead" << std::endl;
     // erase all dead anthills
     this->anthill.erase(std::remove(this->anthill.begin(), this->anthill.end(), 
                                     nullptr), this->anthill.end());
