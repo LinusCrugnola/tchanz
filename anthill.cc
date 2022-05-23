@@ -123,6 +123,8 @@ bool Anthill::create_ant(Nutrition* food){
         prop_coll = prop_constrained_collector;
         prop_def = prop_constrained_defensor;
     }
+    std::cout << (double) this->nbC / (this->get_ants()-1) << std::endl;
+    std::cout << (double) this->nbC/ (this->get_ants()-1) << std::endl;
     if(get_ants() == 1 || ((double) this->nbC / (this->get_ants()-1)) < prop_coll){
         if(pos.side != 3) return false;
         this->ants.insert(this->ants.begin() + this->nbC, 
@@ -130,7 +132,7 @@ bool Anthill::create_ant(Nutrition* food){
         this->nbC++;
         return true;
     }
-    else if(get_ants() > 1 && ((double) this->nbD / (this->get_ants()-1)) < prop_def){
+    else if(this->get_ants() == 1 || ((double) this->nbD / (this->get_ants()-1)) < prop_def){
         if(pos.side != 3) return false;
         this->ants.insert(this->ants.begin() + this->nbC + this->nbD,
                           new Defensor(pos, 0, index));
