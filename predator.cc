@@ -82,9 +82,10 @@ scl::square Predator::set_target(scl::square hill_pos, bool free){
     }
 }
 
-void Predator::move(scl::csquare target){
+bool Predator::move(scl::csquare target){
     scl::vector direction = {(int) target.x - (int) this->position.x, 
                              (int) target.y - (int) this->position.y};
+    if(direction.dx == 0 || direction.dy == 0) return false;
     if(abs(direction.dx) >= abs(direction.dy)){
         direction.dx = direction.dx * 2 / abs(direction.dx);
         direction.dy = direction.dy / abs(direction.dy);
@@ -103,6 +104,7 @@ void Predator::move(scl::csquare target){
         scl::square_add(this->position);
     }
     if(!heading_home) scl::square_add(target);
+    return true;
 }
 
 bool Predator::draw(graphic::color color) {

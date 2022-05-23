@@ -56,7 +56,7 @@ private:
      * 
      * @param target scl::square
      */
-    void move(scl::csquare target);
+    bool move(scl::csquare target);
 
 public:
     /**
