@@ -35,7 +35,7 @@ private:
      * @brief vector to memorize the direction in which the defensor walks
      * @remark default is up because ants spawn first in top right corner
      */
-    scl::vector direction = {0, 1};
+    scl::vector direction = {-1, 0};
 
     /**
      * @brief verifies if a new position is valid and changes the position if true

@@ -47,8 +47,9 @@ bool Collector::action(scl::csquare hill_pos, bool free){
         if(!scl::check_diagonal(target, this->position)) target.x++;
     }
     if(target == this->position){    
-        if(scl::square_contains(hill_pos, this->position)){
+        if(scl::square_touch(hill_pos, this->position)){
             if(!this->leave_home(hill_pos))
+                no_move_count++;
             return true;
         }
         else return true;
