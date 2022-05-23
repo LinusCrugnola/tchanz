@@ -91,7 +91,10 @@ bool Simulation::update(){
         }
     }
     std::cout << "hills" << std::endl;
+    unsigned i = 0;
     for(auto& hill : this->anthill){
+        std::cout << "hill" << i << std::endl;
+        i++;
         if(hill->is_dead()){
             this->get_next_anthill_info(0,1);
             hill->~Anthill();
