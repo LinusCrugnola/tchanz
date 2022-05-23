@@ -240,10 +240,6 @@ bool Anthill::check_growth(std::vector<Anthill*>& hills){
     unsigned new_size = sqrt(4 * (pow(sizeG, 2) + pow(sizeC, 2)*this->nbC 
                           + pow(sizeD, 2)*this->nbD + pow(sizeP, 2)*this->nbP));
     this->anthill_state = FREE;
-    if(new_size < this->position.side){
-        this->anthill_state = FREE;
-    }
-    else if(this->anthill_state == CONSTRAINED) return false;
     //check top right corner expansion
     scl::square new_position = this->position;
     new_position.side = new_size + 2;
